@@ -10,20 +10,23 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="css/form.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" ></script>
 </head>
 <body>
+<input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
 <div class="form">
     <div class="form-box login">
         <h2>Login</h2>
-        <form action="#">
+        <form action="login" method="get">
             <div class="input-box">
                 <span class="icon"><ion-icon name="mail-open"></ion-icon></span>
-                <input type="email" required>
+                <input type="email" name="email" required>
                 <label>Email</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                <input type="password" required>
+                <input type="password" name="password" required>
                 <label>Password</label>
             </div>
             <div class="remenber-forgot">
@@ -43,5 +46,12 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="script/form.js"></script>
+
+<script type="text/javascript">
+    var status = document.getElementById("status").value();
+    if (status == "failed") {
+       swal ()
+    }
+</script>
 </body>
 </html>
