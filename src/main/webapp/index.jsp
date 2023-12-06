@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style_new.css">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.5.1/css/all.min.css">
     <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
           rel="stylesheet">
@@ -44,11 +45,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="movies.html">Phim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Lịch chiếu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Rạp chiếu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">Thông tin</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Contact_Us.html">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="movies.jsp">Phim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="showtimes.jsp">Lịch chiếu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="theaters.jsp">Rạp chiếu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.jsp">Thông tin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
                 </ul>
 
                 <div class="search-right">
@@ -205,6 +206,8 @@
         </div>
     </div>
 </section>
+
+<%--Section PHIM ĐANG CHIẾU --%>
 <section class="w3l-grids">
     <div class="grids-main py-5">
         <div class="container py-lg-3">
@@ -299,6 +302,7 @@
         </div>
     </div>
 </section>
+<%--Section PHIM SẮP CHIẾU --%>
 <section class="w3l-grids">
     <div class="grids-main py-5">
         <div class="container py-lg-3">
@@ -463,8 +467,7 @@
 
     </div>
 </section>
-
-<!--mid-slider -->
+<%--Section chứa Slider hiển thị các bộ phim đang hot gần đây --%>
 <section class="w3l-mid-slider position-relative">
     <div class="companies20-content">
         <div class="owl-mid owl-carousel owl-theme">
@@ -519,6 +522,159 @@
         </div>
     </div>
 </section>
+
+<%--Section hiển thị lịch chiếu phim --%>
+<section class="showtimes-section">
+    <div class="showtimes-title"> LỊCH CHIẾU PHIM </div>
+    <div class="border-div-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <input id="search-theater" class="form-control" type="text" placeholder="Tìm theo tên rạp" aria-label="search">
+                    <div id="showtimes-list-theater"></div>
+                </div>
+                <div class="col-5">
+                    <div id="showtimes-show"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%-- Section : Hiển thị bình luận nổi bật --%>
+<section class="comments-section">
+    <div class="comments-title">BÌNH LUẬN NỔI BẬT</div>
+    <div class="border-div-2">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-end">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%-- Section : Hiển thị danh sách các rạp chiếu phim --%>
+<section class="theaters-section">
+    <div class="theaters-title">DANH SÁCH RẠP CHIẾU PHIM</div>
+    <div class="border-div-2">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <h5 class="card-header">Featured</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <h5 class="card-header">Featured</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- footer-66 -->
 <footer class="w3l-footer">
     <section class="footer-inner-main">
@@ -644,6 +800,7 @@
 
     </section>
 </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
