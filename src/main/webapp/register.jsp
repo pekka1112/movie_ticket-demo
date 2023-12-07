@@ -10,8 +10,8 @@
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="css/form.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
@@ -43,28 +43,28 @@
                 <label><input type="checkbox">I agree to the terms & conditions</label>
 
             </div>
-            <button type="submit" class="btn" >Register</button>
+            <button type="submit" class="btn">Register</button>
             <div class="login-register">
                 <p>Already have an account?
-                    <a href="login.jsp" class="login-link" >Login</a>
+                    <a href="login.jsp" class="login-link">Login</a>
                 </p>
             </div>
 
         </form>
     </div>
 </div>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 
 <script type="text/javascript">
 
-        var status = document.getElementById("status");
-
+        var status = document.getElementById("status").value;
+        // console.log(status);
+    document.addEventListener("DOMContentLoaded", function () {
         if (status === "success") {
             swal("Congrats", "Account Created Successfully", "success");
         }
+    });
 
 </script>
 </html>

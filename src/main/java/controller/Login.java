@@ -1,6 +1,7 @@
 package controller;
 
 import database.UserDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,13 +23,15 @@ public class Login extends HttpServlet {
         String password = req.getParameter("password");
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
+        HttpSession session = req.getSession();
+        RequestDispatcher requestDispatcher = null;
         if (user != null){
-            HttpSession session =req.getSession();
-            session.setAttribute("user", user);
-            resp.sendRedirect("customerHome.jsp");
+            session.setAttribute("name", user.getUserName());
+            requestDispatcher = req.getRequestDispatcher("index.jsp");
         }else {
-            req.setAttribute("status", "failed");
+           req.setAttribute("status", "failed");
+           requestDispatcher = req.getRequestDispatcher("login.jsp");
         }
-
+        requestDispatcher.forward(req, resp);
     }
 }
