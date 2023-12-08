@@ -9,35 +9,41 @@
 <html>
 <head>
     <title>Register</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="css/form.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 </head>
 <body>
 <input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
 <div class="form register">
     <div class="form-box register">
         <h2>Register</h2>
-        <form action="register" method="get">
+        <form id="form" action="register" method="get">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person"></ion-icon></span>
-                <input type="text" name="userName" required>
+                <input type="text" id="userName" name="userName" required>
                 <label>Username</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="mail-open"></ion-icon></span>
-                <input type="email" name="email" required>
+                <input type="email" id="email" name="email" required>
                 <label>Email</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                <input type="password" name="password" required>
+                <input type="password" id="password" name="password" required>
                 <label>Password</label>
+                <small>error message</small>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                <input type="password" name="retypePassword" required>
+                <input type="password" id="retypePassword" name="retypePassword" required>
                 <label>Retype Password</label>
+                <small>error message</small>
             </div>
             <div class="remenber-forgot">
                 <label><input type="checkbox">I agree to the terms & conditions</label>
@@ -55,16 +61,8 @@
 </div>
 
 </body>
+<script src="js/register.js"></script>
 
-<script type="text/javascript">
 
-        var status = document.getElementById("status").value;
-        // console.log(status);
-    document.addEventListener("DOMContentLoaded", function () {
-        if (status === "success") {
-            swal("Congrats", "Account Created Successfully", "success");
-        }
-    });
 
-</script>
 </html>
