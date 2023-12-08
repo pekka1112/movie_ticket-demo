@@ -1,4 +1,4 @@
-package com.example.movie_ticket_website;
+package controller;
 
 import java.io.*;
 
