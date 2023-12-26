@@ -14,7 +14,7 @@ public class UserDAO {
         boolean checkEmail = false;
         try {
             connection = JDBCUtil.getConnection();
-            String checkEmailQuery = "select email from user where email = ?";
+            String checkEmailQuery = "select email from userlogin where email = ?";
             PreparedStatement pr = connection.prepareStatement(checkEmailQuery);
             pr.setString(1, email);
             ResultSet rs = pr.executeQuery();
@@ -34,7 +34,7 @@ public class UserDAO {
         Connection connection = null;
         try {
             connection = JDBCUtil.getConnection();
-            String query = "select * from user where email = ? and password = ?";
+            String query = "select * from userlogin where email = ? and password = ?";
             PreparedStatement pr = connection.prepareStatement(query);
             pr.setString(1, email);
             pr.setString(2, password);
@@ -68,7 +68,7 @@ public class UserDAO {
                 ResultSet rsId = idPr.executeQuery();
                 if (rsId.next()){
                     int maxId = rsId.getInt("maxId");
-                    String insertQuery = "insert into user values (?, ?, ? , ?, ?) ";
+                    String insertQuery = "insert into userlogin values (?, ?, ? , ?, ?) ";
                     PreparedStatement insertPr = connection.prepareStatement(insertQuery);
                     insertPr.setInt(1, maxId+1);
                     insertPr.setString(2, userName);
@@ -97,7 +97,7 @@ public class UserDAO {
         ArrayList<User>  userList = new ArrayList<>();
         try {
             connection = JDBCUtil.getConnection();
-            String query = "select * from user";
+            String query = "select * from userlogin";
             PreparedStatement pr = connection.prepareStatement(query);
             ResultSet rs = pr.executeQuery();
             while (rs.next()){
@@ -121,5 +121,36 @@ public class UserDAO {
             JDBCUtil.closeConnection(connection);
         }
         return userList;
+    }
+    public ArrayList<User> getAllAdimin(){
+        Connection connection = null;
+        ArrayList<User> user = new ArrayList<>();
+        ArrayList<User> listAdmin = new ArrayList<>();
+        try{
+            connection = JDBCUtil.getConnection();
+            String query = "select * from userlogin";
+            PreparedStatement pr = connection.prepareStatement(query);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()){
+                User us = new User();
+                us.setUserId(rs.getInt("userId"));
+                us.setUserName(rs.getString("userName"));
+                us.setEmail(rs.getString("email"));
+                us.setPassword(rs.getString("password"));
+                us.setAdmin(rs.getBoolean("isAdmin"));
+                user.add(us);
+            }
+            for(User user1: user){
+                if (user1.isAdmin()){
+                    listAdmin.add(user1);
+                }
+            }
+
+        }catch (SQLException e){
+            throw  new RuntimeException();
+        }finally {
+            JDBCUtil.closeConnection(connection);
+        }
+    return listAdmin;
     }
 }
