@@ -3,6 +3,27 @@
  * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+var mySwiper = new Swiper ('.swiper-container', {
+    // Các Parameters
+    direction: 'vertical',
+    loop: true,
+
+    // Nếu cần pagination
+    pagination: {
+        el: '.swiper-pagination',
+    },
+
+    // Nếu cần navigation
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
+    // Nếu cần scrollbar
+    scrollbar: {
+        el: '.swiper-scrollbar',
+    },
+})
 !(function (t, e) {
     "object" == typeof exports && "undefined" != typeof module ?
         e(exports, require("jquery"), require("popper.js")) :
