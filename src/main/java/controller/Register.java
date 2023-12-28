@@ -1,20 +1,15 @@
 package controller;
 
-import database.JDBCUtil;
-import database.UserDAO;
+import database.UserLoginDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.User;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 @WebServlet(name = "Register", value = "/register")
 public class Register extends HttpServlet {
@@ -30,7 +25,7 @@ public class Register extends HttpServlet {
         Connection connection = null;
         RequestDispatcher requestDispatcher =  null;
 
-            UserDAO userDAO = new UserDAO();
+            UserLoginDAO userDAO = new UserLoginDAO();
             boolean check = userDAO.registerUser(userName, email, password);
             requestDispatcher = req.getRequestDispatcher("register.jsp");
 

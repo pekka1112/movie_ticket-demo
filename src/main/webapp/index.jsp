@@ -5,11 +5,11 @@
   Time: 12:53 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%
-    if (session.getAttribute("name") == null){
-        response.sendRedirect("login.jsp");
-    }
-%>
+<%--<%--%>
+<%--    if (session.getAttribute("name") == null){--%>
+<%--        response.sendRedirect("login.jsp");--%>
+<%--    }--%>
+<%--%>--%>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
@@ -60,13 +60,15 @@
 
                 <div class="search-right">
                     <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Tìm phim
-                        <i class="fa-solid fa-magnifying-glass"></i></a>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
                     <!-- search popup -->
                     <div id="search" class="pop-overlay">
                         <div class="popup">
-                            <form action="#" method="post" class="search-box">
+                            <form action="home-page" method="get" class="search-box">
+                                <input type="hidden" name="action" value="search-bar">
                                 <input type="search" placeholder="Search your Keyword" name="search"
-                                       required="required" autofocus="">
+                                       required="required" autofocus="" style="color: black">
                                 <button type="submit" class="btn"><span class="fa fa-search"
                                                                         aria-hidden="true"></span></button>
                             </form>

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import model.User;
 
-public class UserDAO {
+public class UserLoginDAO {
     public boolean checkEmailExits(String email) {
         Connection connection = null;
         boolean checkEmail = false;

@@ -1,6 +1,6 @@
 package controller;
 
-import database.UserDAO;
+import database.UserLoginDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,7 +21,7 @@ public class Login extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        UserDAO userDAO = new UserDAO();
+        UserLoginDAO userDAO = new UserLoginDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
         HttpSession session = req.getSession();
         RequestDispatcher requestDispatcher = null;

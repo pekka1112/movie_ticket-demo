@@ -12,7 +12,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('../img/bg4.jpg') no-repeat;
+    background: url('../../img/pxfuel.jpg') no-repeat !important;
     background-size: cover;
     background-position: center;
 }

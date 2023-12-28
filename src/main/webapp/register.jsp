@@ -11,13 +11,13 @@
     <title>Register</title>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="assets/css/form.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
-<body>
+<body style="background: url('img/pxfuel.jpg') no-repeat;"  >
 <input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
 <div class="form register">
     <div class="form-box register">
@@ -61,7 +61,7 @@
 </div>
 
 </body>
-<script src="js/register.js"></script>
+<script src="assets/js/register.js"></script>
 
 
 
