@@ -1,14 +1,14 @@
 package model;
 
 public class User {
-    int userId;
+    String userId;
     String userName;
     String email;
     String password;
     boolean isAdmin;
 
     public User(){};
-    public User(int userId, String userName, String email, String password, boolean isAdmin){
+    public User(String userId, String userName, String email, String password, boolean isAdmin){
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -16,11 +16,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

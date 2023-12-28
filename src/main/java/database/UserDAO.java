@@ -34,17 +34,17 @@ public class UserDAO {
         Connection connection = null;
         try {
             connection = JDBCUtil.getConnection();
-            String query = "select * from userlogin where email = ? and password = ?";
+            String query = "select * from userlogin where email = ? and userPassword = ?";
             PreparedStatement pr = connection.prepareStatement(query);
             pr.setString(1, email);
             pr.setString(2, password);
             ResultSet rs = pr.executeQuery();
             if (rs.next()) {
                 User user = new User();
-                user.setUserId(rs.getInt("userId"));
+                user.setUserId(rs.getString("userId"));
                 user.setUserName(rs.getString("userName"));
                 user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
+                user.setPassword(rs.getString("userPassword"));
                 user.setAdmin(rs.getBoolean("isAdmin"));
                 return user;
             }
@@ -91,7 +91,7 @@ public class UserDAO {
             }
         }
     }
-    public ArrayList<User> getAllUser(){
+    public static ArrayList<User> getAllUser(){
         Connection connection = null;
         ArrayList<User> list = new ArrayList<>();
         ArrayList<User>  userList = new ArrayList<>();
@@ -102,7 +102,7 @@ public class UserDAO {
             ResultSet rs = pr.executeQuery();
             while (rs.next()){
                 User user = new User();
-                user.setUserId(rs.getInt("userId"));
+                user.setUserId(rs.getString("userId"));
                 user.setUserName(rs.getString("userName"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
@@ -133,7 +133,7 @@ public class UserDAO {
             ResultSet rs = pr.executeQuery();
             while (rs.next()){
                 User us = new User();
-                us.setUserId(rs.getInt("userId"));
+                us.setUserId(rs.getString("userId"));
                 us.setUserName(rs.getString("userName"));
                 us.setEmail(rs.getString("email"));
                 us.setPassword(rs.getString("password"));
@@ -153,4 +153,6 @@ public class UserDAO {
         }
     return listAdmin;
     }
+
+
 }

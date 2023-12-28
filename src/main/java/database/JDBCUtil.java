@@ -28,7 +28,7 @@ public class JDBCUtil {
 //
 //        return c;
 //    }
-private static String url = "jdbc:mysql://localhost:3306/movie_ticket?useUnicode=true&characterEncoding=utf8";
+private static String url = "jdbc:mysql://localhost:3306/movie_ticket";
     private static String username = "root";
     private static String password = "";
     public static Connection getConnection() {
@@ -61,6 +61,10 @@ private static String url = "jdbc:mysql://localhost:3306/movie_ticket?useUnicode
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        JDBCUtil.getConnection();
     }
 }
 
