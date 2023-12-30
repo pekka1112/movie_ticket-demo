@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Lịch Chiếu </title>
+    <title>Lịch Chiếu</title>
     <link rel="icon" type="image/x-icon" href="assets/images/x-icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/moviedetail.css">
+    <link rel="stylesheet" href="assets/css/movie_detail.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/style_new.css">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.5.1/css/all.min.css">
@@ -49,7 +49,7 @@
                                 <span class="sub-text">Comedy</span>
                                 <h3>Jumanji: The Next Level</h3>
                                 <p>2019 ‧ Comedy/Action ‧ 2h 3m</p>
-                                <a class="watch" href="movies.html"><span class="fa fa-play"
+                                <a class="watch" href="movies.jsp"><span class="fa fa-play"
                                                                           aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
@@ -65,7 +65,7 @@
                                 <span class="sub-text">Adventure</span>
                                 <h3>Dolittle</h3>
                                 <p>2020 ‧ Family/Adventure ‧ 1h 41m</p>
-                                <a class="watch" href="movies.html"><span class="fa fa-play"
+                                <a class="watch" href="movies.jsp"><span class="fa fa-play"
                                                                           aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
@@ -81,7 +81,7 @@
                                 <span class="sub-text">Action</span>
                                 <h3>Bad Boys for Life</h3>
                                 <p>2020 ‧ Comedy/Action ‧ 2h 4m</p>
-                                <a class="watch" href="movies.html"><span class="fa fa-play"
+                                <a class="watch" href="movies.jsp"><span class="fa fa-play"
                                                                           aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
@@ -140,7 +140,7 @@
 </section>
 
 <jsp:include page="user-view/footer.jsp"></jsp:include>
-
+<script src="assets/js/header_active-btn-clicked.js"> </script>
 <script>
     $(document).ready(function () {
         $('.owl-one').owlCarousel({

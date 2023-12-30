@@ -27,88 +27,7 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
-    <header id="site-header" class="w3l-header fixed-top">
-  <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
-    <div class="container">
-      <a class="navbar-brand" href="index.jsp">
-        <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET" style="height:35px;"/>
-        PZO TICKET
-      </a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-              aria-label="Toggle navigation">
-        <span class="fa icon-expand fa-bars"></span>
-        <span class="fa icon-close fa-times"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item "><a class="nav-link" href="index.jsp">Trang chủ</a></li>
-          <li class="nav-item active"><a class="nav-link" href="movies.jsp">Phim</a></li>
-          <li class="nav-item"><a class="nav-link" href="showtimes.jsp">Lịch chiếu</a></li>
-          <li class="nav-item"><a class="nav-link" href="theaters.jsp">Rạp chiếu</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.jsp">Thông tin</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
-        </ul>
-
-        <div class="search-right">
-          <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Tìm phim
-            <i class="fa-solid fa-magnifying-glass"></i></a>
-          <!-- search popup -->
-          <div id="search" class="pop-overlay">
-            <div class="popup">
-              <form action="#" method="post" class="search-box">
-                <input type="search" placeholder="Search your Keyword" name="search"
-                       required="required" autofocus="">
-                <button type="submit" class="btn"><span class="fa fa-search"
-                                                        aria-hidden="true"></span></button>
-              </form>
-              <div class="browse-items">
-                <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
-                <ul class="search-items">
-                  <li><a href="movies.html">Action</a></li>
-                  <li><a href="movies.html">Drama</a></li>
-                  <li><a href="movies.html">Family</a></li>
-                  <li><a href="movies.html">Thriller</a></li>
-                  <li><a href="movies.html">Commedy</a></li>
-                  <li><a href="movies.html">Romantic</a></li>
-                  <li><a href="movies.html">Tv-Series</a></li>
-                  <li><a href="movies.html">Horror</a></li>
-                  <li><a href="movies.html">Action</a></li>
-                  <li><a href="movies.html">Drama</a></li>
-                  <li><a href="movies.html">Family</a></li>
-                  <li><a href="movies.html">Thriller</a></li>
-                  <li><a href="movies.html">Commedy</a></li>
-                  <li><a href="movies.html">Romantic</a></li>
-                  <li><a href="movies.html">Tv-Series</a></li>
-                  <li><a href="movies.html">Horror</a></li>
-                </ul>
-              </div>
-            </div>
-            <a class="close" href="#close">×</a>
-          </div>
-
-        </div>
-        <div class="Login_SignUp" id="login"
-             style="font-size: 2rem ; display: inline-block; position: relative;">
-          <a class="nav-link" href="sign_in.html"><i class="fa fa-user-circle-o"></i></a>
-        </div>
-      </div>
-      <div class="mobile-position">
-        <nav class="navigation">
-          <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-              <input type="checkbox" id="checkbox">
-              <div class="mode-container">
-                <i class="gg-sun"></i>
-                <i class="gg-moon"></i>
-              </div>
-            </label>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </nav>
-</header>
+    <jsp:include page="user-view/header.jsp"></jsp:include>
 
     <div class="w3l-breadcrumbs">
       <nav id="breadcrumbs" class="breadcrumbs">
@@ -258,7 +177,7 @@
                 <figure>
                   <img class="img-fluid" src="assets/images/commando3.png" alt="">
                 </figure>
-                <a href=".Commando3" data-toggle="modal">
+                <a href="movieDetail.jsp" data-toggle="modal">
                   <div class="box-content">
                     <h3 class="title">Commando-3</h3>
                     <h4> <span class="post"><span class="fa fa-clock-o"> </span> 1 Hr 40min
@@ -1869,131 +1788,12 @@
         </div>
       </div>
     </section>
-    <footer class="w3l-footer">
-      <section class="footer-inner-main">
-        <div class="footer-hny-grids py-5">
-          <div class="container py-lg-4">
-            <div class="text-txt">
-              <div class="right-side">
-                <div class="row footer-about">
-                  <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner1.jpg"
-                                               alt=""></a>
-                  </div>
-                  <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner2.jpg"
-                                               alt=""></a>
-                  </div>
-                  <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner3.jpg"
-                                               alt=""></a>
-                  </div>
-                  <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner4.jpg"
-                                               alt=""></a>
-                  </div>
-                </div>
-                <div class="row footer-links">
 
+    <jsp:include page="user-view/footer.jsp"></jsp:include>
 
-                  <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                    <h6>Movies</h6>
-                    <ul>
-                      <li><a href="#">Movies</a></li>
-                      <li><a href="#">Videos</a></li>
-                      <li><a href="#">English Movies</a></li>
-                      <li><a href="#">Tailor</a></li>
-                      <li><a href="#">Upcoming Movies</a></li>
-                      <li><a href="Contact_Us.html">Contact Us</a></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                    <h6>Information</h6>
-                    <ul>
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="about.html">About</a></li>
-                      <li><a href="#">Tv Series</a></li>
-                      <li><a href="#">Blogs</a></li>
-                      <li><a href="sign_in.html">Login</a></li>
-                      <li><a href="Contact_Us.html">Contact</a></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                    <h6>Locations</h6>
-                    <ul>
-                      <li><a href="movies.html">Asia</a></li>
-                      <li><a href="movies.html">France</a></li>
-                      <li><a href="movies.html">Taiwan</a></li>
-                      <li><a href="movies.html">United States</a></li>
-                      <li><a href="movies.html">Korea</a></li>
-                      <li><a href="movies.html">United Kingdom</a></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                    <h6>Newsletter</h6>
-                    <form action="#" class="subscribe mb-3" method="post">
-                      <input type="email" name="email" placeholder="Your Email Address" required="">
-                      <button><span class="fa fa-envelope-o"></span></button>
-                    </form>
-                    <p>Enter your email and receive the latest news, updates and special offers from us.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="below-section">
-          <div class="container">
-            <div class="copyright-footer">
-              <div class="columns text-lg-left">
-                <p>&copy; 2021 MyShowz. All rights reserved</p>
-              </div>
-
-              <ul class="social text-lg-right">
-                <li><a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                </li>
-                <li><a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
-                </li>
-                <li><a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                </li>
-                <li><a href="#google"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                </li>
-
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- move top -->
-        <button onclick="topFunction()" id="movetop" title="Go to top">
-          <span class="fa fa-arrow-up" aria-hidden="true"></span>
-        </button>
-        <script>
-          // When the user scrolls down 20px from the top of the document, show the button
-          window.onscroll = function () {
-            scrollFunction()
-          };
-
-          function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-              document.getElementById("movetop").style.display = "block";
-            } else {
-              document.getElementById("movetop").style.display = "none";
-            }
-          }
-
-          // When the user clicks on the button, scroll to the top of the document
-          function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-          }
-        </script>
-        <!-- /move top -->
-
-      </section>
-    </footer>
     <script src="assets/js/theme-change.js"></script>
+
+<%--    <script src="assets/js/header_active-btn-clicked.js"></script>--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>

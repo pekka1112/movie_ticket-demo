@@ -21,7 +21,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="movies.jsp">Phim</a></li>
                     <li class="nav-item"><a class="nav-link" href="showtimes.jsp">Lịch chiếu</a></li>
                     <li class="nav-item"><a class="nav-link" href="theaters.jsp">Rạp chiếu</a></li>
@@ -90,3 +90,14 @@
         </div>
     </nav>
 </header>
+<script>
+    var btns = document.getElementsByClassName("nav-item");
+    console.log(btns);
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function() {
+            console.log(this.className);
+            console.log("check");
+            this.className += " active";
+        });
+    }
+</script>
