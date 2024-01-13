@@ -16,28 +16,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>MovieBooking - PZO</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/x-icon.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style_new.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-free-6.5.1/css/all.min.css">
-    <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-          integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-          integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <jsp:include page="../layout-view/head_libraries.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/user-view/header.jsp"></jsp:include>
+    <jsp:include page="../layout-view/header.jsp"></jsp:include>
 
+<%-- Section Trailer Phim--%>
 <section class="w3l-main-slider position-relative" id="home">
     <div class="companies20-content">
         <div class="owl-one owl-carousel owl-theme">
@@ -57,7 +42,7 @@
                                     <h6>Xem Trailer</h6>
                                 </a>
                                 <div id="small-dialog1" class="zoom-anim-dialog mfp-hide">
-                                    <iframe src="${newestMovie.linkMovieTrailer}" allow="autoplay; fullscreen" allowfullscreen=""></iframe>
+                                    <iframe width="832" height="349" src="${newestMovie.linkMovieTrailer}" title="${newestMovie.movieName} - OFFICIAL TRAILER" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
@@ -78,23 +63,20 @@
                         <h3 class="hny-title">PHIM ĐANG CHIẾU</h3>
                     </div>
                     <div class="headerhny-right text-lg-right">
-                        <h4><a class="show-title" href="movies.html">XEM TẤT CẢ</a></h4>
+                        <h4><a class="show-title" href="../movies.jsp">XEM TẤT CẢ</a></h4>
                     </div>
                 </div>
             </div>
             <div class="w3l-populohny-grids">
                 <div class="item vhny-grid">
                     <div class="box16">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/wednesday.jpeg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
                                 <h3 class="title">A Wednesday</h3>
-                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 1 Hr 4min
-
-										</span>
-
+                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 1 Hr 4min </span>
                                     <span class="post fa fa-heart text-right"></span>
                                 </h4>
                             </div>
@@ -104,9 +86,9 @@
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/commando2.jpeg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
                                 <h3 class="title">Commando-3</h3>
@@ -123,9 +105,9 @@
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/gujju2.jpeg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
                                 <h3 class="title">Gujjubhai Most Wanted</h3>
@@ -142,9 +124,9 @@
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/avtar-2.jpeg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
                                 <h3 class="title">Avatar</h3>
@@ -173,16 +155,16 @@
                         <h3 class="hny-title">PHIM SẮP CHIẾU</h3>
                     </div>
                     <div class="headerhny-right text-lg-right">
-                        <h4><a class="show-title" href="movies.html">XEM TẤT CẢ</a></h4>
+                        <h4><a class="show-title" href="../movies.jsp">XEM TẤT CẢ</a></h4>
                     </div>
                 </div>
             </div>
             <div class="owl-three owl-carousel owl-theme">
                 <div class="item vhny-grid">
                     <div class="box16 mb-0">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/n1.jpg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
                                 <h4> <span class="post"><span class="fa fa-clock-o"> </span> 2 Hr 4min
@@ -195,18 +177,18 @@
                             <span class="fa fa-play video-icon" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <h3><a class="title-gd" href="movies.html">No Time to Die</a></h3>
+                    <h3><a class="title-gd" href="../movies.jsp">No Time to Die</a></h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                     <div class="button-center text-center mt-4">
-                        <a href="movies.html" class="btn watch-button">Watch now</a>
+                        <a href="../movies.jsp" class="btn watch-button">Watch now</a>
                     </div>
 
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16 mb-0">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/n2.jpg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
 
@@ -220,17 +202,17 @@
                             <span class="fa fa-play video-icon" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <h3><a class="title-gd" href="movies.html">Mulan</a></h3>
+                    <h3><a class="title-gd" href="../movies.jsp">Mulan</a></h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                     <div class="button-center text-center mt-4">
-                        <a href="movies.html" class="btn watch-button">Watch now</a>
+                        <a href="../movies.jsp" class="btn watch-button">Watch now</a>
                     </div>
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16 mb-0">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/n3.jpg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
 
@@ -244,17 +226,17 @@
                             <span class="fa fa-play video-icon" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <h3><a class="title-gd" href="movies.html">Free Guy</a></h3>
+                    <h3><a class="title-gd" href="../movies.jsp">Free Guy</a></h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                     <div class="button-center text-center mt-4">
-                        <a href="movies.html" class="btn watch-button">Watch now</a>
+                        <a href="../movies.jsp" class="btn watch-button">Watch now</a>
                     </div>
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16 mb-0">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/n4.jpg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
 
@@ -268,18 +250,18 @@
                             <span class="fa fa-play video-icon" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <h3><a class="title-gd" href="movies.html">My Spy</a></h3>
+                    <h3><a class="title-gd" href="../movies.jsp">My Spy</a></h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                     <div class="button-center text-center mt-4">
-                        <a href="movies.html" class="btn watch-button">Watch now</a>
+                        <a href="../movies.jsp" class="btn watch-button">Watch now</a>
                     </div>
 
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16 mb-0">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/n5.jpg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
 
@@ -293,17 +275,17 @@
                             <span class="fa fa-play video-icon" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <h3><a class="title-gd" href="movies.html">Scoob</a></h3>
+                    <h3><a class="title-gd" href="../movies.jsp">Scoob</a></h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                     <div class="button-center text-center mt-4">
-                        <a href="movies.html" class="btn watch-button">Watch now</a>
+                        <a href="../movies.jsp" class="btn watch-button">Watch now</a>
                     </div>
                 </div>
                 <div class="item vhny-grid">
                     <div class="box16 mb-0">
-                        <a href="movies.html">
+                        <a href="../movies.jsp">
                             <figure>
-                                <img class="img-fluid" src="assets/images/n6.jpg" alt="">
+                                <img class="img-fluid" src="#" alt="">
                             </figure>
                             <div class="box-content">
 
@@ -317,10 +299,10 @@
                             <span class="fa fa-play video-icon" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <h3><a class="title-gd" href="movies.html">Downhill</a></h3>
+                    <h3><a class="title-gd" href="../movies.jsp">Downhill</a></h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                     <div class="button-center text-center mt-4">
-                        <a href="movies.html" class="btn watch-button">Watch now</a>
+                        <a href="../movies.jsp" class="btn watch-button">Watch now</a>
                     </div>
                 </div>
             </div>
@@ -340,8 +322,8 @@
                                 <span class="sub-text">Comedy</span>
                                 <h3>Jumanji: The Next Level</h3>
                                 <p>2019 ‧ Comedy/Action ‧ 2h 3m</p>
-                                <a class="watch" href="movies.html"><span class="fa fa-play"
-                                                                          aria-hidden="true"></span>
+                                <a class="watch" href="../movies.jsp"><span class="fa fa-play"
+                                                                            aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
                         </div>
@@ -356,8 +338,8 @@
                                 <span class="sub-text">Adventure</span>
                                 <h3>Dolittle</h3>
                                 <p>2020 ‧ Family/Adventure ‧ 1h 41m</p>
-                                <a class="watch" href="movies.html"><span class="fa fa-play"
-                                                                          aria-hidden="true"></span>
+                                <a class="watch" href="../movies.jsp"><span class="fa fa-play"
+                                                                            aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
                         </div>
@@ -372,8 +354,8 @@
                                 <span class="sub-text">Action</span>
                                 <h3>Bad Boys for Life</h3>
                                 <p>2020 ‧ Comedy/Action ‧ 2h 4m</p>
-                                <a class="watch" href="movies.html"><span class="fa fa-play"
-                                                                          aria-hidden="true"></span>
+                                <a class="watch" href="../movies.jsp"><span class="fa fa-play"
+                                                                            aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
                         </div>
@@ -536,23 +518,10 @@
     </div>
 </section>
 
-<jsp:include page="/user-view/footer.jsp" ></jsp:include>
+    <jsp:include page="../layout-view/footer.jsp" ></jsp:include>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <jsp:include page="../layout-view/script-libraries.jsp" ></jsp:include>
+
 </body>
 
 </html>
@@ -682,7 +651,7 @@
     })
 </script>
 <!-- script for owlcarousel -->
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function () {
         $('.popup-with-zoom-anim').magnificPopup({

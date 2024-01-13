@@ -50,7 +50,7 @@
                                 <h3>Jumanji: The Next Level</h3>
                                 <p>2019 ‧ Comedy/Action ‧ 2h 3m</p>
                                 <a class="watch" href="movies.jsp"><span class="fa fa-play"
-                                                                          aria-hidden="true"></span>
+                                                                         aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                 <h3>Dolittle</h3>
                                 <p>2020 ‧ Family/Adventure ‧ 1h 41m</p>
                                 <a class="watch" href="movies.jsp"><span class="fa fa-play"
-                                                                          aria-hidden="true"></span>
+                                                                         aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                 <h3>Bad Boys for Life</h3>
                                 <p>2020 ‧ Comedy/Action ‧ 2h 4m</p>
                                 <a class="watch" href="movies.jsp"><span class="fa fa-play"
-                                                                          aria-hidden="true"></span>
+                                                                         aria-hidden="true"></span>
                                     Watch Trailer</a>
                             </div>
                         </div>

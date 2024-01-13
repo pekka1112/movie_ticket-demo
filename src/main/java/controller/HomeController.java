@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Movie;
+import model.MovieMediaLink;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static MovieDAO movieDAO;
-    public static List<Movie> list;
+    public static List<MovieMediaLink> list;
     public HomeController() {
 
     }
@@ -49,7 +50,7 @@ public class HomeController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         movieDAO = new MovieDAO();
-        list = movieDAO.getNewestFilms(4);
+        list = movieDAO.getNewestFilms(5);
         req.setAttribute("top4NewestMovies",list);
         RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
         if (rd != null) {

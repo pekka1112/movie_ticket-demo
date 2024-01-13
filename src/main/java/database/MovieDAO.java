@@ -44,12 +44,12 @@ public class MovieDAO implements DAOInterface<Movie> {
         return 0;
     }
 
-    public  static List<Movie> getNewestFilms(int num) {
+    public  static List<MovieMediaLink> getNewestFilms(int num) {
         Connection c = JDBCUtil.getConnection();
         String sql = "SELECT  * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID\n" +
                      "ORDER BY releaseDate desc LIMIT ?;" ;
         try {
-            List<Movie> list = new ArrayList<>();
+            List<MovieMediaLink> list = new ArrayList<>();
             PreparedStatement statement = c.prepareStatement(sql);
             statement.setInt(1, num);
             ResultSet rs = statement.executeQuery();
@@ -79,9 +79,13 @@ public class MovieDAO implements DAOInterface<Movie> {
 
     public static void main(String[] args) {
         System.out.println(getNewestFilms(4).get(0).getMovieName());
-        System.out.println(getNewestFilms(4).get(1).getMovieName());
         System.out.println(getNewestFilms(4).get(2).getMovieName());
         System.out.println(getNewestFilms(4).get(3).getMovieName());
+        System.out.println(getNewestFilms(4).get(0).getLinkMovieTrailer());
+        System.out.println(getNewestFilms(4).get(1).getLinkMovieTrailer());
+        System.out.println(getNewestFilms(4).get(2).getLinkMovieTrailer());
+        System.out.println(getNewestFilms(4).get(3).getLinkMovieTrailer());
+
     }
 
 }
