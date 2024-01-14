@@ -76,6 +76,81 @@ public class MovieDAO implements DAOInterface<Movie> {
             return null;
         }
     }
+    public static List<MovieMediaLink> getPublishedMoive(int isPublished, int numMovie) {
+        Connection c = JDBCUtil.getConnection();
+        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID\n" +
+                "WHERE m.isPublished = ? LIMIT ?" ;
+
+        try {
+            List<MovieMediaLink> list = new ArrayList<>();
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setInt(1, isPublished);
+            s.setInt(2, numMovie);
+            ResultSet rs = s.executeQuery();
+            while(rs.next()) {
+                MovieMediaLink movie = new MovieMediaLink();
+                movie.setMovieID(rs.getString("movieID"));
+                movie.setMovieName(rs.getString("movieName"));
+                movie.setMovieCategory(rs.getString("movieCategory"));
+                movie.setReleaseDate(rs.getString("releaseDate"));
+                movie.setDirector(rs.getString("director"));
+                movie.setDuration(rs.getString("duration"));
+                movie.setCountry(rs.getString("country"));
+                movie.setMovieDescription(rs.getString("movieDescription"));
+                movie.setMovieContent(rs.getString("movieContent"));
+                movie.setIsPublished(rs.getInt("isPublished"));
+                movie.setMovieScore(rs.getDouble("movieScore"));
+                movie.setLinkMovieTrailer(rs.getString("linkMovieTrailer"));
+                movie.setLinkMovieImage(rs.getString("linkMovieImage"));
+                list.add(movie);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<MovieMediaLink> getMostPopularMoive (int numMovie) {
+        Connection c = JDBCUtil.getConnection();
+        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID WHERE m.movieID IN\n" +
+                " ( SELECT m.movieID FROM movie m JOIN showtime st ON m.movieID = st.movieID  \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t JOIN ticket t ON t.showtimeID = st.showtimeID \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t JOIN transactionticket tt ON tt.ticketID = t.ticketID\n" +
+                "\tGROUP BY m.movieID\n" +
+                "\tHAVING COUNT(m.movieID) >= ALL (SELECT COUNT(m.movieID) AS c FROM movie m JOIN showtime st ON m.movieID = st.movieID  \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  JOIN ticket t ON t.showtimeID = st.showtimeID \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  JOIN transactionticket tt ON tt.ticketID = t.ticketID\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t  GROUP BY m.movieID, m.movieName ) ) LIMIT ?" ;
+
+        try {
+            List<MovieMediaLink> list = new ArrayList<>();
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setInt(1, numMovie);
+            ResultSet rs = s.executeQuery();
+            while(rs.next()) {
+                MovieMediaLink movie = new MovieMediaLink();
+                movie.setMovieID(rs.getString("movieID"));
+                movie.setMovieName(rs.getString("movieName"));
+                movie.setMovieCategory(rs.getString("movieCategory"));
+                movie.setReleaseDate(rs.getString("releaseDate"));
+                movie.setDirector(rs.getString("director"));
+                movie.setDuration(rs.getString("duration"));
+                movie.setCountry(rs.getString("country"));
+                movie.setMovieDescription(rs.getString("movieDescription"));
+                movie.setMovieContent(rs.getString("movieContent"));
+                movie.setIsPublished(rs.getInt("isPublished"));
+                movie.setMovieScore(rs.getDouble("movieScore"));
+                movie.setLinkMovieTrailer(rs.getString("linkMovieTrailer"));
+                movie.setLinkMovieImage(rs.getString("linkMovieImage"));
+                list.add(movie);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println(getNewestFilms(4).get(0).getMovieName());

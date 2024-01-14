@@ -1,0 +1,40 @@
+.row_cinemaName {
+    text-align: center;
+    color : #0c5460;
+    background-color: #c94c7a;
+    font-family: 'Open Sans', sans-serif;
+    margin : 10px -140px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    border: 1px groove black ;
+    width: 420px;
+}
+#showtimes-list_cinema {
+    border: 2px groove ;
+    border-radius: 10px;
+    padding : 0px 50px 80px 150px ;
+    margin-right: 0px;
+}
+#showtimes-rightBox {
+    border: 2px groove black ;
+    border-radius: 10px;
+}
+#showtimes-rightBox .showtimes-cinema_title {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #0f6674;
+    margin: 10px 5px;
+    border: 1px groove black ;
+    border-radius: 10px;
+}
+.showtimes-calenderBox {
+    text-align: center;
+    /*border: 2px groove whitesmoke;*/
+}
+.showtimes-calenderItem {
+    border: 2px groove black;
+    margin: 10px 10px;
+    color : #0c5460;
+    background-color: #c94c7a;
+    font-family: 'Open Sans', sans-serif;
+}

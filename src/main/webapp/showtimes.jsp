@@ -174,6 +174,7 @@
             </div>
         </div>
     </section>
+
     <%-- Showtimes Section--%>
     <section class="showtimes-section">
         <div class="showtimes-title" style="padding : 20px 0px 30px 0px;"> LỊCH CHIẾU PHIM </div>

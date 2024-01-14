@@ -562,7 +562,7 @@ mark,
 
 .img-fluid {
     max-width: 100%;
-    height: auto;
+    height: 450px;
 }
 
 .img-thumbnail {
@@ -14864,7 +14864,6 @@ header.nav-fixed {
 }
 
 .w3l-main-slider .banner-view {
-    background: url(../movie-image/aquaman-vuong-quoc-that-lac.jpg) no-repeat center;
     background-size: cover;
     min-height: 500px;
     position: relative;
@@ -14892,21 +14891,6 @@ header.nav-fixed {
     -o-border-radius: 6px;
     -ms-border-radius: 6px;
     -moz-border-radius: 6px;
-}
-
-.w3l-main-slider .banner-top1 {
-    background: url(../images/banner2.jpg) no-repeat center;
-    background-size: cover;
-}
-
-.w3l-main-slider .banner-top2 {
-    background: url(../images/banner3.jpg) no-repeat center;
-    background-size: cover;
-}
-
-.w3l-main-slider .banner-top3 {
-    background: url(../images/banner4.jpg) no-repeat center;
-    background-size: cover;
 }
 
 .w3l-main-slider .banner-info {

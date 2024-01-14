@@ -28,7 +28,7 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
-<jsp:include page="user-view/header.jsp"></jsp:include>
+<jsp:include page="layout-view/header.jsp"></jsp:include>
 <%-- BREADCRUMBS --%>
 <div class="w3l-breadcrumbs">
     <nav id="breadcrumbs" class="breadcrumbs">
