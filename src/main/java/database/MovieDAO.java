@@ -5,6 +5,7 @@ import model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,37 @@ public class MovieDAO implements DAOInterface<Movie> {
     @Override
     public int update(Movie obj) {
         return 0;
+    }
+
+    public static List<MovieMediaLink> getAllMovie() {
+        Connection c = JDBCUtil.getConnection();
+        String sql = "SELECT  * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID " ;
+        try {
+            List<MovieMediaLink> list = new ArrayList<>();
+            Statement statement = c.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                MovieMediaLink movie = new MovieMediaLink();
+                movie.setMovieID(rs.getString("movieID"));
+                movie.setMovieName(rs.getString("movieName"));
+                movie.setMovieCategory(rs.getString("movieCategory"));
+                movie.setReleaseDate(rs.getString("releaseDate"));
+                movie.setDirector(rs.getString("director"));
+                movie.setDuration(rs.getString("duration"));
+                movie.setCountry(rs.getString("country"));
+                movie.setMovieDescription(rs.getString("movieDescription"));
+                movie.setMovieContent(rs.getString("movieContent"));
+                movie.setIsPublished(rs.getInt("isPublished"));
+                movie.setMovieScore(rs.getDouble("movieScore"));
+                movie.setLinkMovieTrailer(rs.getString("linkMovieTrailer"));
+                movie.setLinkMovieImage(rs.getString("linkMovieImage"));
+                list.add(movie);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public  static List<MovieMediaLink> getNewestFilms(int num) {
@@ -105,6 +137,37 @@ public class MovieDAO implements DAOInterface<Movie> {
                 list.add(movie);
             }
             return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static MovieMediaLink getMovieByID(String mid) {
+        Connection c = JDBCUtil.getConnection();
+        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID\n" +
+                "WHERE m.movieID = ?" ;
+
+        try {
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setString(1, mid);
+            ResultSet rs = s.executeQuery();
+            MovieMediaLink movie = new MovieMediaLink();
+            while(rs.next()) {
+                movie.setMovieID(rs.getString("movieID"));
+                movie.setMovieName(rs.getString("movieName"));
+                movie.setMovieCategory(rs.getString("movieCategory"));
+                movie.setReleaseDate(rs.getString("releaseDate"));
+                movie.setDirector(rs.getString("director"));
+                movie.setDuration(rs.getString("duration"));
+                movie.setCountry(rs.getString("country"));
+                movie.setMovieDescription(rs.getString("movieDescription"));
+                movie.setMovieContent(rs.getString("movieContent"));
+                movie.setIsPublished(rs.getInt("isPublished"));
+                movie.setMovieScore(rs.getDouble("movieScore"));
+                movie.setLinkMovieTrailer(rs.getString("linkMovieTrailer"));
+                movie.setLinkMovieImage(rs.getString("linkMovieImage"));
+            }
+            return movie;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

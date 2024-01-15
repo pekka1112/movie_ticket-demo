@@ -30,8 +30,7 @@
             <c:forEach items="${top4NewestMovies}" var="newestMovie" >
                 <div class="item">
                     <li>
-                        <div class="slider-info banner-view"
-                             style="background: url(../Movie_Ticket_Website/assets/movie-image/${newestMovie.linkMovieImage}) no-repeat center; background-size: cover;">
+                        <div class="slider-info banner-view"  style="background: url(../Movie_Ticket_Website/assets/movie-image/${newestMovie.linkMovieImage}) no-repeat center; background-size: cover; " >
                             <div class="banner-info">
                                 <h3>${newestMovie.movieName}</h3>
                                 <p><span>${newestMovie.movieContent}</span></p>
@@ -83,16 +82,15 @@
                                     <span class="fa fa-play-circle video-icon" aria-hidden="true"></span>
                                 </a>
                             </div>
-                            <h3><a class="title-gd" href="../Movie_Ticket_Website/movies.jsp"> ${m.movieName} </a> </h3>
+                            <h3><a class="title-gd" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a> </h3>
                             <p> ${m.movieDescription} </p>
                             <div class="button-center text-center mt-4">
-                                <a href="../Movie_Ticket_Website/movies.jsp" class="btn watch-button">Watch now</a>
+                                <a href="#" class="btn watch-button">Đặt vé <ngay></ngay></a>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -224,36 +222,16 @@
     <div class="border-div-2">
         <div class="container">
             <div class="row align-items">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                <c:forEach items="${comments}" var="c" >
+                    <div class="col">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">${c.movieName}</h5>
+                                <p class="card-text">Ẩn Danh : " ${c.commentText} " </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>
@@ -261,9 +239,11 @@
 
 <%-- Section : Hiển thị danh sách các rạp chiếu phim --%>
 <section class="theaters-section">
+    <div >
+        <h3 class="hny-title" style="color: #c94c7a; text-align: center" >RẠP CHIẾU NỔI BẬT</h3>
+    </div>
     <div class="w3l-title-grids">
-        <div class="headerhny-left">
-            <h3 class="hny-title" style="color: #c94c7a">RẠP CHIẾU NỔI BẬT</h3>
+        <div class="headerhny-left text-lg-left">
         </div>
         <div class="headerhny-right text-lg-right">
             <h4><a class="show-title" href="../Movie_Ticket_Website/theaters.jsp">XEM TẤT CẢ</a></h4>
@@ -271,14 +251,15 @@
     </div>
     <div class="border-div-2">
         <div class="row">
+            <%-- hien thi 2 rap chieu phim noi bat nhat --%>
             <c:forEach items="${top2Cinema}" var="c2" >
                 <div class="col-sm-6">
                     <div class="card">
                         <h5 class="card-header" style="color: #0c5460; font-size: 15px">${c2.cinemaName}</h5>
                         <div class="card-body">
-                            <h5 class="card-title" >${c2.cinemaName}</h5>
-                            <p class="card-text">${c2.location}</p>
-                            <a href="#" class="btn btn-primary">Xem Chi Tiết</a>
+                            <h5 class="card-title" style="font-size: 20px">${c2.cinemaName}</h5>
+                            <p class="card-text">${c2.location}</p><br>
+                            <a href="../Movie_Ticket_Website/theaters.jsp" class="btn btn-primary">Xem Chi Tiết</a>
                         </div>
                     </div>
                 </div>
@@ -286,209 +267,18 @@
         </div>
     </div>
 </section>
+
     <jsp:include page="../layout-view/footer.jsp" ></jsp:include>
     <jsp:include page="../layout-view/script-libraries.jsp" ></jsp:include>
+    <jsp:include page="../layout-view/js-function-slider.jsp" ></jsp:include>
+
 </body>
 
 </html>
 <!-- responsive tabs -->
 <script src="assets/js/jquery-1.9.1.min.js"></script>
 <script src="assets/js/easyResponsiveTabs.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        //Horizontal Tab
-        $('#parentHorizontalTab').easyResponsiveTabs({
-            type: 'default', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            tabidentify: 'hor_1', // The tab groups identifier
-            activate: function (event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
-        });
-    });
-</script>
 <!--/theme-change-->
 <script src="assets/js/theme-change.js"></script>
 <script src="assets/js/owl.carousel.js"></script>
-<!-- script for banner slider-->
-<script>
-    $(document).ready(function () {
-        $('.owl-one').owlCarousel({
-            stagePadding: 280,
-            loop: true,
-            margin: 20,
-            nav: true,
-            responsiveClass: true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplaySpeed: 1000,
-            autoplayHoverPause: false,
-            responsive: {
-                0: {
-                    items: 1,
-                    stagePadding: 40,
-                    nav: false
-                },
-                480: {
-                    items: 1,
-                    stagePadding: 60,
-                    nav: true
-                },
-                667: {
-                    items: 1,
-                    stagePadding: 80,
-                    nav: true
-                },
-                1000: {
-                    items: 1,
-                    nav: true
-                }
-            }
-        })
-    })
-</script>
-<script>
-    $(document).ready(function () {
-        $('.owl-three').owlCarousel({
-            loop: true,
-            margin: 20,
-            nav: false,
-            responsiveClass: true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplaySpeed: 1000,
-            autoplayHoverPause: false,
-            responsive: {
-                0: {
-                    items: 2,
-                    nav: false
-                },
-                480: {
-                    items: 2,
-                    nav: true
-                },
-                667: {
-                    items: 3,
-                    nav: true
-                },
-                1000: {
-                    items: 5,
-                    nav: true
-                }
-            }
-        })
-    })
-</script>
-<script>
-    $(document).ready(function () {
-        $('.owl-mid').owlCarousel({
-            loop: true,
-            margin: 0,
-            nav: false,
-            responsiveClass: true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplaySpeed: 1000,
-            autoplayHoverPause: false,
-            responsive: {
-                0: {
-                    items: 1,
-                    nav: false
-                },
-                480: {
-                    items: 1,
-                    nav: false
-                },
-                667: {
-                    items: 1,
-                    nav: true
-                },
-                1000: {
-                    items: 1,
-                    nav: true
-                }
-            }
-        })
-    })
-</script>
-<!-- script for owlcarousel -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-
-            fixedContentPos: false,
-            fixedBgPos: true,
-
-            overflowY: 'auto',
-
-            closeBtnInside: true,
-            preloader: false,
-
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
-
-        $('.popup-with-move-anim').magnificPopup({
-            type: 'inline',
-
-            fixedContentPos: false,
-            fixedBgPos: true,
-
-            overflowY: 'auto',
-
-            closeBtnInside: true,
-            preloader: false,
-
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-slide-bottom'
-        });
-    });
-</script>
-<!-- disable body scroll which navbar is in active -->
-<script>
-    $(function () {
-        $('.navbar-toggler').click(function () {
-            $('body').toggleClass('noscroll');
-        })
-    });
-</script>
-<!-- disable body scroll which navbar is in active -->
-
-<!--/MENU-JS-->
-<script>
-    $(window).on("scroll", function () {
-        var scroll = $(window).scrollTop();
-
-        if (scroll >= 80) {
-            $("#site-header").addClass("nav-fixed");
-        } else {
-            $("#site-header").removeClass("nav-fixed");
-        }
-    });
-
-    //Main navigation Active Class Add Remove
-    $(".navbar-toggler").on("click", function () {
-        $("header").toggleClass("active");
-    });
-    $(document).on("ready", function () {
-        if ($(window).width() > 991) {
-            $("header").removeClass("active");
-        }
-        $(window).on("resize", function () {
-            if ($(window).width() > 991) {
-                $("header").removeClass("active");
-            }
-        });
-    });
-</script>
-
 <script src="assets/js/main.js"></script>

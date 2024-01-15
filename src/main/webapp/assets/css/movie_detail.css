@@ -13,14 +13,9 @@
     height: 450px;
     width: 300px;
 }
-/*#film-detail__context {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    text-align: center;*/
-/*    justify-content: left;*/
-/*    height: 500px;*/
-/*    padding: 25px 10px;*/
-/*}*/
+
 .file-detail__txt {
+    margin:  5px 0px;
     text-align: justify;
+    color : whitesmoke;
 }

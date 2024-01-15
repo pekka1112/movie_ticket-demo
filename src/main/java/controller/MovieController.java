@@ -15,23 +15,21 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.List;
 
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home-servlet"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "MovieServlet", urlPatterns = {"/movie-servlet"})
+public class MovieController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static MovieDAO movieDAO;
     public static CinemaDAO cinemaDAO;
     public static UserCommentDAO userCommentDAO;
-    public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies;
+    public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies, allMovies;
     public static List<Cinema>  allCinema, top2Cinema;
     public static List<UserCommentDetail> comments ;
-    public HomeController() {
-
-    }
+    public MovieController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        if(action.equals("direct")) {
-            redirectToHomePage(req,resp);
+        if(action.equals("init")) {
+            initData(req,resp);
         } else if(action.equals("show-cinemaShowtime")) {
             showCinemaDetail(req,resp);
         } else if (action.equals("show-cinemaDetail")) {
@@ -47,17 +45,18 @@ public class HomeController extends HttpServlet {
     private static void searchBarAction(HttpServletRequest req, HttpServletResponse resp){
         resp.setContentType("text/html");
     }
-    private static void redirectToHomePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static void initData(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         movieDAO = new MovieDAO();
         cinemaDAO = new CinemaDAO();
         userCommentDAO = new UserCommentDAO();
-        newestMovies = movieDAO.getNewestFilms(5);
+        newestMovies = movieDAO.getNewestFilms(8);
         publishedMovies = movieDAO.getPublishedMoive(1,5);
         unPublishedMovies = movieDAO.getPublishedMoive(0,4);
-        popularMovies = movieDAO.getMostPopularMoive(3);
+        popularMovies = movieDAO.getMostPopularMoive(4);
+        allMovies = movieDAO.getAllMovie();
         allCinema = cinemaDAO.getAllCinema();
         top2Cinema = cinemaDAO.getMostPopularCinema();
         comments = userCommentDAO.getPopularComment(3);
@@ -66,9 +65,10 @@ public class HomeController extends HttpServlet {
         req.setAttribute("unPublishedMovies", unPublishedMovies);
         req.setAttribute("popularMovies", popularMovies);
         req.setAttribute("allCinema", allCinema);
+        req.setAttribute("allMovies", allMovies);
         req.setAttribute("top2Cinema",top2Cinema);
         req.setAttribute("comments",comments);
-        RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/movies.jsp");
         if (rd != null) {
             rd.forward(req, resp);
         } else {
