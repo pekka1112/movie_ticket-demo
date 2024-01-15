@@ -22,8 +22,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="movie-servlet?action=init">Phim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="showtimes.jsp">Lịch chiếu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="theaters.jsp">Rạp chiếu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="showtimes-servlet?action=init">Lịch chiếu</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.jsp">Thông tin</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
                 </ul>

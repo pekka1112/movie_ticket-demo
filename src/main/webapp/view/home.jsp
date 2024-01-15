@@ -18,7 +18,7 @@
 <head>
     <title>MovieBooking - PZO</title>
     <jsp:include page="../layout-view/head_libraries.jsp"></jsp:include>
-    <link rel="stylesheet" href="assets/css/showtimes.css">
+
 </head>
 <body>
     <jsp:include page="../layout-view/header.jsp"></jsp:include>
@@ -85,7 +85,7 @@
                             <h3><a class="title-gd" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a> </h3>
                             <p> ${m.movieDescription} </p>
                             <div class="button-center text-center mt-4">
-                                <a href="#" class="btn watch-button">Đặt vé <ngay></ngay></a>
+                                <a href="#" class="btn watch-button">Đặt vé ngay</a>
                             </div>
                         </div>
                     </c:forEach>
@@ -158,7 +158,7 @@
 </section><br>
 
 <%--Section hiển thị lịch chiếu phim --%>
-    <section class="showtimes-section">
+<section class="showtimes-section">
         <div class="showtimes-title" style="padding : 20px 0px 30px 0px;"> LỊCH CHIẾU PHIM </div>
         <div class="border-div-1">
             <div class="container">
