@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rrioz
-  Date: 12/14/2023
-  Time: 4:01 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -37,7 +31,7 @@
                 <div class="film-detail__txt" id="filmName-detail"><i class="fa-solid fa-film"></i> ${movie.movieName}</div>
                 <div class="film-detail__txt" id="filmDes-detail"> ' ${movie.movieDescription} ' </div>
                 <div class="film-detail__txt" id="filmDirector-detail">Từ đạo diễn ${movie.director} - ${movie.country}</div>
-                <div class="film-detail__txt" id="filmDuration-detail">Thời lượng - <i class="fa-solid fa-clock"></i> : ${movie.duration} h</div>
+                <div class="film-detail__txt" id="filmDuration-detail">Thời lượng - <i class="fa-solid fa-clock"></i> : ${movie.duration}</div>
                 <div class="film-detail__txt" id="filmScore-detail"><i class="fa-solid fa-star"></i> ${movie.movieScore}</div>
                 <div class="film-detail__txt" id="filmDate-detail">Ngày ra rạp : ${movie.releaseDate}</div>
                 <div class="film-detail__txt" >Nội dung : </div>

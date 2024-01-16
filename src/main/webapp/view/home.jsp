@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rrioz
-  Date: 12/3/2023
-  Time: 12:53 AM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%--<%--%>
 <%--    if (session.getAttribute("name") == null){--%>
 <%--        response.sendRedirect("login.jsp");--%>
