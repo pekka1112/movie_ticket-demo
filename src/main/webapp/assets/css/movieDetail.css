@@ -1,0 +1,77 @@
+.film-detail {
+    height: 500px;
+    background-color: cornflowerblue;
+}
+#film-detail__poster {
+    display: flex;
+    text-align: right;
+    justify-content: left;
+    height: 500px;
+    padding: 25px 10px;
+}
+#poster {
+    height: 450px;
+    width: 300px;
+}
+#film-detailBackground  {
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 100%;
+    height: 100%;
+    background: rgba(50, 57, 66, 0.7);
+}
+.film-detail__txt {
+    margin:  5px 0px;
+    text-align: justify;
+    color : whitesmoke;
+    font-style: italic;
+}
+#filmCategory-detail {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    background: #9d9d28;
+    border-radius : 5px ;
+    margin: 10px 450px 0px 0px;
+    padding-left: 10px;
+}
+#filmName-detail {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 45px;
+    font-weight: bolder;
+    color: #d76e97;
+}
+#filmDirector-detail #filmDuration-detail{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+#filmDes-detail {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: lighter;
+    color: white;
+}
+#filmScore-detail {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+    background: #9d9d28;
+    border-radius : 5px ;
+    margin: 10px 650px 0px 0px;
+    padding-left: 10px;
+}
+#filmDate-detail {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    color: white;
+}
+#filmDescription-detail {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: lighter;
+    color: white;
+}
