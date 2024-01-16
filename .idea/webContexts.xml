@@ -6,8 +6,11 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/quanlinguoidung.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin2/adminhome.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin2" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin2/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin2" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/adminhome.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customerHome.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/quanlinguoidung.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/quanliphim.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>
   </component>

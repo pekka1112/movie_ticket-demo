@@ -24,19 +24,21 @@ public class LoginController extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
         HttpSession session = req.getSession();
-
+        RequestDispatcher requestDispatcher = null;
         if (user != null){
-            if (user.isAdmin()){
-                session.setAttribute("admin", user);
-               resp.sendRedirect("./admin/adminhome.jsp");
-            }else {
-                session.setAttribute("user", user);
-                resp.sendRedirect("index.jsp");
-            }
+           session.setAttribute("user",user);
+           if(user.isAdmin()){
+               req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
+               return;
+           }
+           else{
+               req.getRequestDispatcher("index.jsp").forward(req,resp);
+               return;
+           }
 
         }else{
            req.setAttribute("status", "failed");
-           resp.sendRedirect("login.jsp");
+            req.getRequestDispatcher("login.jsp").forward(req,resp);
 
         }
 
