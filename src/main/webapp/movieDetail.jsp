@@ -28,7 +28,7 @@
             </div>
             <div class="col-8" id="film-detail__context" style="; margin: 25px 0px ; padding-left: 0px" >
                 <div class="film-detail__txt" id="filmCategory-detail">Thể loại : ${movie.movieCategory}</div>
-                <div class="film-detail__txt" id="filmName-detail"><i class="fa-solid fa-film"></i> ${movie.movieName}</div>
+                <div class="film-detail__txt" id="filmName-detail" style="font-style: italic ;font-family: 'SansSerif', sans-serif;"><i class="fa-solid fa-film"></i> ${movie.movieName}</div>
                 <div class="film-detail__txt" id="filmDes-detail"> ' ${movie.movieDescription} ' </div>
                 <div class="film-detail__txt" id="filmDirector-detail">Từ đạo diễn ${movie.director} - ${movie.country}</div>
                 <div class="film-detail__txt" id="filmDuration-detail">Thời lượng - <i class="fa-solid fa-clock"></i> : ${movie.duration}</div>
@@ -38,7 +38,7 @@
                 <div class="film-detail__txt" id="filmDescription-detail">${movie.movieContent}</div>
                 <%-- btn để thực hiện đặt vé cho bộ phim đang hiển thị                --%>
                 <div class="button-center text-center mt-4" style="margin-top: 0px">
-                    <a href="#" class="btn watch-button" style="color: white;  font-size: 25px">Đặt vé ngay</a>
+                    <a href="bookingTicket-servlet?action=init" class="btn watch-button" style="color: white;  font-size: 25px">Đặt vé ngay</a>
                 </div> <br>
             </div>
         </div>

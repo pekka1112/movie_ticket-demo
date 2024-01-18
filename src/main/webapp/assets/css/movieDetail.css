@@ -29,7 +29,7 @@
 }
 #filmCategory-detail {
     color: white;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background: #9d9d28;
     border-radius : 5px ;
     margin: 10px 450px 0px 0px;
@@ -39,6 +39,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 45px;
     font-weight: bolder;
+    font-style: italic;
     color: #d76e97;
 }
 #filmDirector-detail #filmDuration-detail{

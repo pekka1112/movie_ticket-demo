@@ -28,7 +28,7 @@
                             <div class="banner-info">
                                 <h3>${newestMovie.movieName}</h3>
                                 <p><span>${newestMovie.movieContent}</span></p>
-                                <a href="#small-dialog" class="popup-with-zoom-anim play-view1">
+                                    <a href="#small-dialog" class="popup-with-zoom-anim play-view1">
 									<span class="video-play-icon">
 										<span class="fa fa-play"></span>
 									</span>
@@ -56,7 +56,7 @@
                             <h3 class="hny-title">PHIM ĐANG CHIẾU</h3>
                         </div>
                         <div class="headerhny-right text-lg-right">
-                            <h4><a class="show-title" href="../Movie_Ticket_Website/movies.jsp">XEM TẤT CẢ</a></h4>
+                            <h4><a class="show-title" href="movie-servlet?action=init">XEM TẤT CẢ</a></h4>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     <c:forEach items="${publishedMovies}" var="m" >
                         <div class="item vhny-grid">
                             <div class="box16 mb-0">
-                                <a href="../Movie_Ticket_Website/movies.jsp">
+                                <a href="movieDetail-servlet?action=init&movieID=${m.movieID}">
                                     <figure>
                                         <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style=" height:  300px">
                                     </figure>
@@ -79,7 +79,7 @@
                             <h3><a class="title-gd" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a> </h3>
                             <p> ${m.movieDescription} </p>
                             <div class="button-center text-center mt-4">
-                                <a href="#" class="btn watch-button">Đặt vé ngay</a>
+                                <a href="bookingTicket-servlet?action=init" class="btn watch-button">Đặt vé ngay</a>
                             </div>
                         </div>
                     </c:forEach>
@@ -98,7 +98,7 @@
                         <h3 class="hny-title">PHIM SẮP CHIẾU</h3>
                     </div>
                     <div class="headerhny-right text-lg-right">
-                        <h4><a class="show-title" href="../Movie_Ticket_Website/movies.jsp">XEM TẤT CẢ</a></h4>
+                        <h4><a class="show-title" href="movie-servlet?action=init">XEM TẤT CẢ</a></h4>
                     </div>
                 </div>
             </div>
@@ -106,12 +106,12 @@
                 <c:forEach items="${unPublishedMovies}" var="m" >
                     <div class="item vhny-grid">
                         <div class="box16">
-                                <a href="../movies.jsp">
+                                <a href="movieDetail-servlet?action=init&movieID=${m.movieID}">
                                     <figure>
                                         <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style=" height:  350px">
                                     </figure>
                                     <div class="box-content">
-                                        <h2 class="title" style="" >${m.movieName}</h2>
+                                        <h2 class="title" style="font-weight: bolder" >${m.movieName}</h2>
                                         <h4> <span class="post"><span class="fa fa-clock-o"> </span> ${m.duration} </span>
                                             <span class="post fa fa-heart text-right"></span>
                                         </h4>
@@ -140,7 +140,7 @@
                                     <span class="sub-text"> ${m.movieCategory} </span>
                                     <h3> ${m.movieName}</h3>
                                     <p>${m.releaseDate} ‧ ${m.country} ‧ ${m.duration}</p>
-                                    <a class="watch" href="../Movie_Ticket_Website/movies.jsp"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
+                                    <a class="watch" href="${m.linkMovieTrailer}" target="_blank" ><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
                                 </div>
                             </div>
                         </div>

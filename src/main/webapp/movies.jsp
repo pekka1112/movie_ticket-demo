@@ -30,7 +30,7 @@
                       <span class="sub-text"> ${m.movieCategory} </span>
                       <h3> ${m.movieName}</h3>
                       <p>${m.releaseDate} ‧ ${m.country} ‧ ${m.duration}</p>
-                      <a class="watch" href="../Movie_Ticket_Website/movies.jsp"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
+                      <a class="watch" href="${m.linkMovieTrailer}" target="_blank"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
                     </div>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
                   <figure>
                     <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style="height: 350px">
                   </figure>
-                  <a href="movieDetail.jsp" data-toggle="modal">
+                  <a href="movieDetail-servlet?action=init" data-toggle="modal">
                     <div class="box-content">
                       <h3 class="title">${m.movieName}</h3>
                       <h4> <span class="post"><span class="fa fa-clock-o"> </span>Thời lượng : ${m.duration}</span>
@@ -88,7 +88,7 @@
                   <figure>
                     <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style="height: 350px">
                   </figure>
-                  <a href="movieDetail.jsp" data-toggle="modal">
+                  <a href="movieDetail-servlet?action=init" data-toggle="modal">
                     <div class="box-content">
                       <h3 class="title">${m.movieName}</h3>
                       <h4> <span class="post"><span class="fa fa-clock-o"> </span>Thời lượng : ${m.duration}</span>
@@ -114,7 +114,7 @@
                   <figure>
                     <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style="height: 350px">
                   </figure>
-                  <a href="movieDetail.jsp" data-toggle="modal">
+                  <a href="movieDetail-servlet?action=init" data-toggle="modal">
                     <div class="box-content">
                       <h3 class="title">${m.movieName}</h3>
                       <h4> <span class="post"><span class="fa fa-clock-o"> </span>Thời lượng : ${m.duration}</span>
@@ -153,14 +153,17 @@
                       <div class="col-lg-4 new-relise-gd mt-lg-0 mt-0">
                         <div class="slider-info">
                           <div class="img-circle">
-                            <a href="movies.html">
+                            <a href="#small-dialog" class="popup-with-zoom-anim play-view1">
                               <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style="height: 200px">
                               <div class="overlay-icon"><span class="fa fa-play video-icon" aria-hidden="true"></span></div>
                             </a>
+                            <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+                              <iframe width="832" height="349" src="${m.linkMovieTrailer}" title="${m.movieName} - OFFICIAL TRAILER" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
                           </div>
                           <div class="message">
                             <p style="font-weight: lighter">Một bộ phim của ${m.director} - ${m.country}</p>
-                            <a class="author-book-title" href="movies.html">${m.movieName}</a>
+                            <a class="author-book-title" href="movieDetail-servlet?action=init">${m.movieName}</a>
                             <h4> <span class="post"><span class="fa fa-clock-o"> </span>${m.duration}</span>
                                  <span class="post fa fa-heart text-right"></span>
                             </h4>

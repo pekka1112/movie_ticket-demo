@@ -1,26 +1,32 @@
 package model;
 
 public class User {
-    int userId;
+    String userId;
     String userName;
     String email;
     String password;
+    boolean isActive;
     boolean isAdmin;
 
-    public User(){};
-    public User(int userId, String userName, String email, String password, boolean isAdmin){
+    public User() {
+    }
+
+
+
+    public User(String userId, String userName, String email, String password, boolean isActive, boolean isAdmin) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.isActive = isActive;
         this.isAdmin = isAdmin;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -48,11 +54,31 @@ public class User {
         this.password = password;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public boolean isAdmin() {
         return isAdmin;
     }
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", isActive='" + isActive + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
     }
 }
