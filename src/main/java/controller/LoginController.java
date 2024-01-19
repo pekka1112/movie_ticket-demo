@@ -12,7 +12,7 @@ import model.User;
 
 import java.io.IOException;
 
-@WebServlet(name = "Login" , value = "/login")
+@WebServlet(name = "login" , value = "/login")
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,13 +34,13 @@ public class LoginController extends HttpServlet {
                return;
            }
            else{
-               req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
+               req.getRequestDispatcher("index.jsp").forward(req,resp);
                return;
            }
 
         }else{
             System.out.println("user null");
-           req.setAttribute("status", "failed");
+            req.setAttribute("status", "failed");
             req.getRequestDispatcher("login.jsp").forward(req,resp);
 
         }
