@@ -1,6 +1,6 @@
 /* SHOWTIMES CSS */
 .showtimes-section {
-    padding : 10px 60px;
+    padding : 20px 60px;
 }
 .showtimes-title {
     text-align: center;
@@ -89,6 +89,6 @@
 #showtimes-list_theaters {
     border: 2px groove ;
     border-radius: 10px;
-    padding : 0px 200px 450px 150px ;
+    padding : 0px 110px 450px 150px ;
     margin-right: 0px;
 }
