@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.*;
 
 import java.io.IOException;
-import java.sql.ResultSet;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "HomeServlet", urlPatterns = {"/home-servlet"})
@@ -33,9 +33,13 @@ public class HomeController extends HttpServlet {
         if(action.equals("direct")) {
             redirectToHomePage(req,resp);
         } else if(action.equals("show-cinemaShowtime")) {
-            showCinemaDetail(req,resp);
+            showCinemaName(req,resp);
         } else if (action.equals("show-cinemaDetail")) {
-            searchCinemaAction(req,resp);
+            showCinemaDetail(req,resp);
+        } else if (action.equals("showCinemaNameAjax")) {
+            showCinemaNameAjax(req,resp);
+        } else if (action.equals("showShowTime")) {
+            showShowTime(req,resp);
         }
     }
 
@@ -75,7 +79,35 @@ public class HomeController extends HttpServlet {
             System.out.println("RequestDispatcher is null");
         }
     }
-    private static void searchCinemaAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static void showShowTime(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        movieDAO = new MovieDAO();
+        cinemaDAO = new CinemaDAO();
+        userCommentDAO = new UserCommentDAO();
+        newestMovies = movieDAO.getNewestFilms(5);
+        publishedMovies = movieDAO.getPublishedMoive(1,5);
+        unPublishedMovies = movieDAO.getPublishedMoive(0,4);
+        popularMovies = movieDAO.getMostPopularMoive(3);
+        allCinema = cinemaDAO.getAllCinema();
+        top2Cinema = cinemaDAO.getMostPopularCinema();
+        comments = userCommentDAO.getPopularComment(3);
+        req.setAttribute("top4NewestMovies", newestMovies);
+        req.setAttribute("publishedMovies", publishedMovies);
+        req.setAttribute("unPublishedMovies", unPublishedMovies);
+        req.setAttribute("popularMovies", popularMovies);
+        req.setAttribute("allCinema", allCinema);
+        req.setAttribute("top2Cinema",top2Cinema);
+        req.setAttribute("comments",comments);
+        RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
+    }
+    private static void showCinemaDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
@@ -89,7 +121,8 @@ public class HomeController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    } private static void showCinemaDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
+    private static void showCinemaName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
@@ -116,6 +149,22 @@ public class HomeController extends HttpServlet {
 
             req.setAttribute("cinemaDetail",cinemaDetail);
             req.getRequestDispatcher("/view/home.jsp").forward(req,resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private static void showCinemaNameAjax(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        try {
+            String cid = req.getParameter("cid");
+            System.out.println(cid);
+            Cinema cinemaDetail = cinemaDAO.getCinemaByID(cid);
+            req.setAttribute("cinemaDetail",cinemaDetail);
+            PrintWriter out = resp.getWriter();
+            out.println("<h2 style=\"font-size: 25px;padding-bottom: 5px\"><i class=\"fa-solid fa-film\"> </i> " + cinemaDetail.getCinemaName() + "  </h2>\n" +
+                    "                                <h4 style=\"font-size: 17px; font-weight: lighter;padding-bottom: 10px\">  " + cinemaDetail.getLocation() + "</h4>");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -13,7 +13,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/style_new.css">
-<link rel="stylesheet" href="assets/css/showtimes.css">
+<link rel="stylesheet" href="assets/css/showTime.css">
 <link rel="stylesheet" href="assets/fonts/fontawesome-free-6.5.1/css/all.min.css">
 <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
       rel="stylesheet">

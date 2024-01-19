@@ -7,12 +7,12 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
 <html lang="en">
 <head>
     <title>MovieBooking - PZO</title>
     <jsp:include page="../layout-view/head_libraries.jsp"></jsp:include>
-
 </head>
 <body>
     <jsp:include page="../layout-view/header.jsp"></jsp:include>
@@ -160,7 +160,7 @@
                     <div class="col-5">
                         <%-- truyen du lieu - ten rap chieu phim can tim den HomeController servlet --%>
                         <form action="home-servlet" method="post">
-                            <input type="hidden" name="action" value="show-cinemaDetail">
+                            <input type="hidden" name="action" value="cinemaSearch">
                             <input class="form-control" type="text" name="cinemaName" placeholder="Tìm theo tên rạp" aria-label="search">
                         </form> <br>
                         <div id= "showtimes-list_cinema">
@@ -168,7 +168,8 @@
                             <c:forEach items="${allCinema}" var="cinema" >
                                 <div class="row_cinemaName">
                                     <i class="fa-solid fa-film"> </i>
-                                    <a href="home-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke">${cinema.cinemaName}</a>
+                                    <a href="home-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
+<%--                                    <a style="color: whitesmoke"  onclick="showCinemaName(${cinema.cinemaName})">${cinema.cinemaName}</a>--%>
                                 </div>
                             </c:forEach>
                         </div>
@@ -176,22 +177,25 @@
                     <div class="col-7">
                         <div id="showtimes-rightBox">
                             <%-- hien thi noi dung cinema lay duoc tu home-servlet --%>
-                            <div class="showtimes-cinema_title">
-                                <h2 style="font-size: 25px"><i class="fa-solid fa-film"> </i> ${cinemaDetail.cinemaName}</h2>
-                                <h4 style="font-size: 18px; font-weight: lighter"> ${cinemaDetail.location}</h4>
+                            <div class="showtimes-cinema_title" id="cinemaTitle">
+                                <h2 style="font-size: 25px;padding-bottom: 5px"><i class="fa-solid fa-film"> </i> ${cinemaDetail.cinemaName}</h2>
+                                <h4 style="font-size: 17px; font-weight: lighter;padding-bottom: 10px"> ${cinemaDetail.location}</h4>
                             </div>
                             <div class="showtimes-calendar">
                                 <div class="showtimes-btn_group">
-                                    <%-- hien thi 7 ngay tinh tu hom nay de dat ve --%>
+                                    <%-- hien thi 7 ngay tinh tu HOM NAY de dat ve --%>
                                     <div class="showtimes-calenderBox" style="text-align: center">
-                                        <c:forEach var="i" begin="1" end="7" >
-                                            <%-- hien thi 7 ngay bat dau tu ngay chieu phim dang duoc chon --%>
-                                            <a style="margin: 10px 10px; border: 1px groove black; border-radius: 5px; font-family: 'Open Sans', sans-serif; color: floralwhite; background: #c94c7a">Day ${i} ${cinemaDetail}</a>
+                                        <%--  dùng javaBean để lấy ngày tháng và hiển thị ngày hôm nay--%>
+                                        <jsp:useBean id="date" class="beans.DateBean" scope="session"/>
+                                        <a class="showtimes-dateItem" href="home-servlet?action=showShowTime?date=${date.currentDate}?cid=${cinemaDetail.cinemaID}"><fmt:formatDate value="${date.currentDate}" pattern="dd/MM"/></a>
+                                        <c:forEach var="i" begin="1" end="6" >
+                                            <%-- hien thi 6 ngay bat dau tu ngay chieu phim dang duoc chon --%>
+                                            <a class="showtimes-dateItem" href="home-servlet?action=showShowTime?date=${date.currentDate}?cid=${cinemaDetail.cinemaID}"><fmt:formatDate value="${date.addDate(i)}" pattern="dd/MM"/></a>
                                         </c:forEach>
                                     </div>
                                 </div> <br>
                                 <div class="showtimes-show">
-                                    <c:forEach var="i" begin="1" end="5" >
+                                    <c:forEach var="i" begin="1" end="3" >
                                         <%-- hien thi cac phim trong ngay duoc chon --%>
                                         <div class="card">
                                             <div class="card-body">
@@ -265,11 +269,36 @@
     <jsp:include page="../layout-view/footer.jsp" ></jsp:include>
     <jsp:include page="../layout-view/script-libraries.jsp" ></jsp:include>
     <jsp:include page="../layout-view/js-function-slider.jsp" ></jsp:include>
-
 </body>
 
 </html>
+<%-- Ajax Show CinemaName--%>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>--%>
+<script>
+    function showCinemaName(cName) {
+        console.log('AJAX');
+        $.ajax({
+            url: "/movie_ticket-demo-PEKKA/showCinemaNameAjaxf",
+            type : "get",
+            data : {
+                cid : cName
+            },
+            success : function (data) {
+                var row = document.getElementById("cinemaTitle");
+                row.innerHTML = data;
+            }
+        });
+    }
+</script>
+<%-- scroll đến 1 vị trí nào đó của trang JSP --%>
+<script>
+    function reloadAndScrollToDiv(targetDiv) {
+        var targetDiv = document.getElementById(targetDiv);
+        targetDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 <!-- responsive tabs -->
+<%--<script src="assets/js/jquery-3.7.1.min.js"></script>--%>
 <script src="assets/js/jquery-1.9.1.min.js"></script>
 <script src="assets/js/easyResponsiveTabs.js"></script>
 <!--/theme-change-->
