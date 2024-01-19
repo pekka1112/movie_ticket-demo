@@ -12,7 +12,7 @@ import model.User;
 
 import java.io.IOException;
 
-@WebServlet(name = "Login" , value = "/login")
+@WebServlet(name = "login" , value = "/login")
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,6 +21,7 @@ public class LoginController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        System.out.println(email + password);
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
         HttpSession session = req.getSession();
@@ -28,6 +29,7 @@ public class LoginController extends HttpServlet {
         if (user != null){
            session.setAttribute("user",user);
            if(user.isAdmin()){
+               System.out.println("admin");
                req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
                return;
            }
@@ -37,7 +39,8 @@ public class LoginController extends HttpServlet {
            }
 
         }else{
-           req.setAttribute("status", "failed");
+            System.out.println("user null");
+            req.setAttribute("status", "failed");
             req.getRequestDispatcher("login.jsp").forward(req,resp);
 
         }
