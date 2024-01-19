@@ -1,0 +1,134 @@
+#payment_div>* {
+    box-sizing: border-box;
+}
+
+.payment-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+.col-25 {
+    -ms-flex: 25%;
+    flex: 25%;
+}
+
+.col-50 {
+    -ms-flex: 50%;
+    flex: 50%;
+}
+
+.col-75 {
+    -ms-flex: 75%;
+    flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+    padding: 0 16px;
+}
+
+.payment-container {
+    background-color: var(--theme-bg);
+    padding: 5px 20px 15px 20px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+}
+
+#payment-h3 {
+    margin-top: 10px;
+    color: var(--theme-rose);
+    text-align: center;
+}
+
+.payment-row.payment {
+    margin-top: 25px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.col-50.payment {
+    float: right;
+    padding-left: 70px;
+}
+
+.method {
+    display: flex;
+    flex-direction: column;
+    width: 382px;
+    height: 122px;
+    padding-top: 20px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 18px;
+    background-color: rgb(249, 249, 249);
+    justify-content: center;
+    align-items: center;
+}
+
+.card-logos {
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.radio-input {
+    margin-top: 20px;
+    color: #000;
+}
+
+input[type='radio'] {
+    display: inline-block;
+}
+
+input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: var(--theme-para);
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+    color: var(--theme-title);
+    float: left;
+}
+
+.icon-container {
+    font-size: 24px;
+}
+
+.btn {
+    color: var(--theme-white);
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+}
+a {
+    color: #2196F3;
+}
+span.price {
+    float: right;
+    color: grey;
+}
+
+@media (max-width: 800px) {
+    .payment-row {
+        flex-direction: column;
+    }
+    .col-25 {
+        margin-bottom: 20px;
+    }
+}
