@@ -5,21 +5,16 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
     <title>ADMIN HOME</title>
 
     <!-- Fontfaces CSS-->
     <link href="admin/css/font-face.css" rel="stylesheet" media="all">
-    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+<%--    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
+<%--    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">--%>
     <link href="admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
     <!-- Bootstrap CSS-->
     <link href="admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
@@ -350,12 +345,81 @@
                                 <td class="align-middle">Sắp chiếu</td>
                                 <%}%>
                                 <td class="align-middle"><%=film.getMovieScore()%></td>
-<%--                                <td class="align-middle"><button data-id ="<%=film.getMovieID()%>" data-toggle="modal" data-target="#myModalFilm" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen"></i></button></td>--%>
+                                <td class="align-middle"><button  data-id ="<%=film.getMovieID()%>" data-toggle="modal" data-target="#myModalOdd" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen"></i></button></td>
                                 <td class="align-middle"><button  data-id ="<%=film.getMovieID()%>" data-toggle="modal" data-target="#deleteFilm" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                             </tr>
                             <%}%>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="add-film" style="margin-left: 5px">
+                        <!-- Đặt nội dung form ở đây -->
+                        <div style="margin: 20px 0px 20px 0px">
+                            <h4>Thêm Phim Mới</h4>
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label >Tên </label>
+                                <input type="text"  class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label >Thể loại</label>
+                                <input type="text"  class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label >Ngày phát hành</label>
+                                <input type="text"  class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label >Tác giả</label>
+                                <input type="text"  class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label >Thời gian</label>
+                                <input type="text"  class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label >Quốc gia</label>
+                                <input type="text"  class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label >Mô tả</label>
+                                <div>
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >Nội dung</label>
+                                <div>
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >Trạng thái</label>
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault11">
+                                        <label class="form-check-label" for="flexRadioDefault11">
+                                            Đã chiếu
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault22" checked>
+                                        <label class="form-check-label" for="flexRadioDefault22">
+                                            Chưa chiếu
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >Đánh giá</label>
+                                <input type="number"  class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                <button type="button" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -367,7 +431,7 @@
 
 </div>
 <%--Modal để sửa--%>
-<div class="modal" id="myModalFilm">
+<div class="modal" id="myModalOdd">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -382,33 +446,70 @@
                 <!-- Đặt nội dung form ở đây -->
                 <form>
                     <div class="form-group">
-                        <label for="name">Tên ảnh</label>
-                        <input type="email" class="form-control" id="name" placeholder="Tên ảnh">
+                        <label >Tên </label>
+                        <input type="text"  class="form-control" >
                     </div>
                     <div class="form-group">
-                        <label for="image">Ảnh</label>
-                        <input class="form-control" id="image"  accept="image/*"/>
+                        <label >Thể loại</label>
+                        <input type="text"  class="form-control" >
                     </div>
                     <div class="form-group">
-                        <label for="priceOdd">Giá</label>
-                        <input type="file" class="form-control" id="priceOdd"  accept="image/*"/>
+                        <label >Ngày phát hành</label>
+                        <input type="text"  class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="discountOdd">Giảm giá</label>
-                        <input class="form-control" id="discountOdd"  accept="image/*"/>
+                        <label >Tác giả</label>
+                        <input type="text"  class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="descriptionOdd">Mô tả sản phẩm</label>
-                        <input class="form-control" id="descriptionOdd"  accept="image/*"/>
+                        <label >Thời gian</label>
+                        <input type="text"  class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label >Quốc gia</label>
+                        <input type="text"  class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label >Mô tả</label>
+                        <div>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label >Nội dung</label>
+                        <div>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label >Trạng thái</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Đã chiếu
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Chưa chiếu
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label >Đánh giá</label>
+                        <input type="number"  class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary">Lưu</button>
                     </div>
                 </form>
             </div>
 
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Lưu</button>
-            </div>
+
 
         </div>
     </div>
@@ -435,7 +536,7 @@
 </div>
 
 
-<script src="./admin/js/Dialog.js"></script>
+<script src="./admin/js/Dialog.js"></>
 <script>
     Dialog('#deleteFilm','#btn-delete-film','quanliphim','movieID', 'delete')
 </script>
