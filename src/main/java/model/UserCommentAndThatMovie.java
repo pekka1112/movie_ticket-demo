@@ -1,10 +1,9 @@
 package model;
 
-public class UserCommentDetail extends UserComment{
+public class UserCommentAndThatMovie extends UserComment{
     private String movieID;
-    private String movieName;
     private String linkMovieImage;
-    public UserCommentDetail() {
+    public UserCommentAndThatMovie() {
         super();
     }
 
@@ -24,13 +23,5 @@ public class UserCommentDetail extends UserComment{
 
     public void setLinkMovieImage(String linkMovieImage) {
         this.linkMovieImage = linkMovieImage;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
     }
 }

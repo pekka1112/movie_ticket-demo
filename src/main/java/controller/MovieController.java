@@ -13,6 +13,7 @@ import model.*;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "MovieServlet", urlPatterns = {"/movie-servlet"})
@@ -21,7 +22,8 @@ public class MovieController extends HttpServlet {
     public static MovieDAO movieDAO;
     public static CinemaDAO cinemaDAO;
     public static UserCommentDAO userCommentDAO;
-    public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies, allMovies;
+    public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies, allMovies ;
+    public static List<MovieMediaLink> movieFilteredByCategory, movieFilteredByCountry, movieFilteredByYear, movieFilteredByName ;
     public static List<Cinema>  allCinema, top2Cinema;
     public static List<UserCommentDetail> comments ;
     public MovieController() {}
@@ -34,6 +36,14 @@ public class MovieController extends HttpServlet {
             showCinemaDetail(req,resp);
         } else if (action.equals("show-cinemaDetail")) {
             searchCinemaAction(req,resp);
+        } else if (action.equals("filterCategory")) {
+            filterCategory(req,resp);
+        } else if (action.equals("filterCountry")) {
+            filterCountry(req,resp);
+        } else if (action.equals("filterYear")) {
+            filterYear(req,resp);
+        } else if (action.equals("findByMovieName")) {
+            findByMovieName(req,resp);
         }
     }
 
@@ -68,6 +78,239 @@ public class MovieController extends HttpServlet {
         req.setAttribute("allMovies", allMovies);
         req.setAttribute("top2Cinema",top2Cinema);
         req.setAttribute("comments",comments);
+
+        // process : init categoryList
+        List<String> categoryList = new ArrayList<>();
+        categoryList = movieDAO.getAllMovieCatelogy();
+        req.setAttribute("categoryList",categoryList);
+
+        // process : init countryList
+        List<String> countryList = new ArrayList<>();
+        countryList = movieDAO.getAllMovieCountry();
+        req.setAttribute("countryList",countryList);
+
+        // process : init yearList
+        List<String> yearList = new ArrayList<>();
+        yearList = movieDAO.getAllMovieYear();
+        req.setAttribute("yearList",yearList);
+
+        // process : isShowAllCinema
+        req.setAttribute("isShowAllCinema",true);
+
+        RequestDispatcher rd = req.getRequestDispatcher("/movies.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
+    }
+
+    private static void filterCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        movieDAO = new MovieDAO();
+        cinemaDAO = new CinemaDAO();
+        userCommentDAO = new UserCommentDAO();
+        newestMovies = movieDAO.getNewestFilms(8);
+        publishedMovies = movieDAO.getPublishedMoive(1,5);
+        unPublishedMovies = movieDAO.getPublishedMoive(0,4);
+        popularMovies = movieDAO.getMostPopularMoive(4);
+        allMovies = movieDAO.getAllMovie();
+        allCinema = cinemaDAO.getAllCinema();
+        top2Cinema = cinemaDAO.getMostPopularCinema();
+        comments = userCommentDAO.getPopularComment(3);
+        req.setAttribute("top4NewestMovies", newestMovies);
+        req.setAttribute("publishedMovies", publishedMovies);
+        req.setAttribute("unPublishedMovies", unPublishedMovies);
+        req.setAttribute("popularMovies", popularMovies);
+        req.setAttribute("allCinema", allCinema);
+        req.setAttribute("allMovies", allMovies);
+        req.setAttribute("top2Cinema",top2Cinema);
+        req.setAttribute("comments",comments);
+
+        // process : init categoryList
+        List<String> categoryList = new ArrayList<>();
+        categoryList = movieDAO.getAllMovieCatelogy();
+        req.setAttribute("categoryList",categoryList);
+
+        // process : init countryList
+        List<String> countryList = new ArrayList<>();
+        countryList = movieDAO.getAllMovieCountry();
+        req.setAttribute("countryList",countryList);
+
+        // process : init yearList
+        List<String> yearList = new ArrayList<>();
+        yearList = movieDAO.getAllMovieYear();
+        req.setAttribute("yearList",yearList);
+
+        // main process : movieFilteredByCategory
+        String category = req.getParameter("category");
+        movieFilteredByCategory = movieDAO.getMovieByCategory(category);
+        int size = movieFilteredByCategory.size();
+        req.setAttribute("movieFilteredByCategorySize",size);
+        req.setAttribute("movieFilteredByCategory",movieFilteredByCategory);
+
+        RequestDispatcher rd = req.getRequestDispatcher("/movies.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
+    }
+    private static void filterCountry(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        movieDAO = new MovieDAO();
+        cinemaDAO = new CinemaDAO();
+        userCommentDAO = new UserCommentDAO();
+        newestMovies = movieDAO.getNewestFilms(8);
+        publishedMovies = movieDAO.getPublishedMoive(1,5);
+        unPublishedMovies = movieDAO.getPublishedMoive(0,4);
+        popularMovies = movieDAO.getMostPopularMoive(4);
+        allMovies = movieDAO.getAllMovie();
+        allCinema = cinemaDAO.getAllCinema();
+        top2Cinema = cinemaDAO.getMostPopularCinema();
+        comments = userCommentDAO.getPopularComment(3);
+        req.setAttribute("top4NewestMovies", newestMovies);
+        req.setAttribute("publishedMovies", publishedMovies);
+        req.setAttribute("unPublishedMovies", unPublishedMovies);
+        req.setAttribute("popularMovies", popularMovies);
+        req.setAttribute("allCinema", allCinema);
+        req.setAttribute("allMovies", allMovies);
+        req.setAttribute("top2Cinema",top2Cinema);
+        req.setAttribute("comments",comments);
+
+        // process : init categoryList
+        List<String> categoryList = new ArrayList<>();
+        categoryList = movieDAO.getAllMovieCatelogy();
+        req.setAttribute("categoryList",categoryList);
+
+        // process : init countryList
+        List<String> countryList = new ArrayList<>();
+        countryList = movieDAO.getAllMovieCountry();
+        req.setAttribute("countryList",countryList);
+
+        // process : init yearList
+        List<String> yearList = new ArrayList<>();
+        yearList = movieDAO.getAllMovieYear();
+        req.setAttribute("yearList",yearList);
+
+        // main process : movieFilteredByCountry
+        String country = req.getParameter("country");
+        movieFilteredByCountry = movieDAO.getMovieByCountry(country);
+        int size = movieFilteredByCountry.size();
+        req.setAttribute("movieFilteredByCountrySize",size);
+        req.setAttribute("movieFilteredByCountry",movieFilteredByCountry);
+
+        RequestDispatcher rd = req.getRequestDispatcher("/movies.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
+    }
+    private static void filterYear(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        movieDAO = new MovieDAO();
+        cinemaDAO = new CinemaDAO();
+        userCommentDAO = new UserCommentDAO();
+        newestMovies = movieDAO.getNewestFilms(8);
+        publishedMovies = movieDAO.getPublishedMoive(1,5);
+        unPublishedMovies = movieDAO.getPublishedMoive(0,4);
+        popularMovies = movieDAO.getMostPopularMoive(4);
+        allMovies = movieDAO.getAllMovie();
+        allCinema = cinemaDAO.getAllCinema();
+        top2Cinema = cinemaDAO.getMostPopularCinema();
+        comments = userCommentDAO.getPopularComment(3);
+        req.setAttribute("top4NewestMovies", newestMovies);
+        req.setAttribute("publishedMovies", publishedMovies);
+        req.setAttribute("unPublishedMovies", unPublishedMovies);
+        req.setAttribute("popularMovies", popularMovies);
+        req.setAttribute("allCinema", allCinema);
+        req.setAttribute("allMovies", allMovies);
+        req.setAttribute("top2Cinema",top2Cinema);
+        req.setAttribute("comments",comments);
+
+        // process : init categoryList
+        List<String> categoryList = new ArrayList<>();
+        categoryList = movieDAO.getAllMovieCatelogy();
+        req.setAttribute("categoryList",categoryList);
+
+        // process : init countryList
+        List<String> countryList = new ArrayList<>();
+        countryList = movieDAO.getAllMovieCountry();
+        req.setAttribute("countryList",countryList);
+
+        // process : init yearList
+        List<String> yearList = new ArrayList<>();
+        yearList = movieDAO.getAllMovieYear();
+        req.setAttribute("yearList",yearList);
+
+        // main process : movieFilteredByCountry
+        String year = req.getParameter("year");
+        int yearInt = Integer.parseInt(year);
+        movieFilteredByYear = movieDAO.getMovieByYear(yearInt);
+        int size = movieFilteredByYear.size();
+        req.setAttribute("movieFilteredByYearSize",size);
+        req.setAttribute("movieFilteredByYear",movieFilteredByYear);
+
+        RequestDispatcher rd = req.getRequestDispatcher("/movies.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
+    }
+    private static void findByMovieName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        movieDAO = new MovieDAO();
+        cinemaDAO = new CinemaDAO();
+        userCommentDAO = new UserCommentDAO();
+        newestMovies = movieDAO.getNewestFilms(8);
+        publishedMovies = movieDAO.getPublishedMoive(1,5);
+        unPublishedMovies = movieDAO.getPublishedMoive(0,4);
+        popularMovies = movieDAO.getMostPopularMoive(4);
+        allMovies = movieDAO.getAllMovie();
+        allCinema = cinemaDAO.getAllCinema();
+        top2Cinema = cinemaDAO.getMostPopularCinema();
+        comments = userCommentDAO.getPopularComment(3);
+        req.setAttribute("top4NewestMovies", newestMovies);
+        req.setAttribute("publishedMovies", publishedMovies);
+        req.setAttribute("unPublishedMovies", unPublishedMovies);
+        req.setAttribute("popularMovies", popularMovies);
+        req.setAttribute("allCinema", allCinema);
+        req.setAttribute("allMovies", allMovies);
+        req.setAttribute("top2Cinema",top2Cinema);
+        req.setAttribute("comments",comments);
+
+        // process : init categoryList
+        List<String> categoryList = new ArrayList<>();
+        categoryList = movieDAO.getAllMovieCatelogy();
+        req.setAttribute("categoryList",categoryList);
+
+        // process : init countryList
+        List<String> countryList = new ArrayList<>();
+        countryList = movieDAO.getAllMovieCountry();
+        req.setAttribute("countryList",countryList);
+
+        // process : init yearList
+        List<String> yearList = new ArrayList<>();
+        yearList = movieDAO.getAllMovieYear();
+        req.setAttribute("yearList",yearList);
+
+        // main process : movieFilteredByCountry
+        String movieName = req.getParameter("movieName");
+        movieFilteredByName = movieDAO.getMovieByName(movieName);
+        int size = movieFilteredByName.size();
+        req.setAttribute("movieFilteredByNameSize",size);
+        req.setAttribute("movieFilteredByName",movieFilteredByName);
+
         RequestDispatcher rd = req.getRequestDispatcher("/movies.jsp");
         if (rd != null) {
             rd.forward(req, resp);
