@@ -1,4 +1,7 @@
 <%@ page import="model.User" %>
+<%@ page import="model.Ticket" %>
+<%@ page import="java.util.List" %>
+<%@ page import="beans.ShoppingCart" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -6,7 +9,10 @@
     boolean isLogined = user == null ? false : true;
 %>
 <%
-    String curPage = (String) session.getAttribute("pageName");
+    ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
+    if(shoppingCart == null){
+        shoppingCart = new ShoppingCart();
+    }
 %>
 <header id="site-header" class="w3l-header fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
@@ -39,6 +45,13 @@
                     </ul>
                     </a>
                 </div>
+                <%--  shopping cart icon --%>
+                <div class="search-right">
+                    <a href="shoppingCart-servlet?action=view" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">
+                        <i class="fa-solid fa-cart-shopping "></i> ( <%= shoppingCart.getSize() %>)
+                    </a>
+                </div>
+                <%--  search movie btn --%>
                 <div class="search-right">
                     <a href="movie-servlet?action=init" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">
                         <i class="fa-solid fa-magnifying-glass"></i>

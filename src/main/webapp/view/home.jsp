@@ -1,4 +1,4 @@
-
+<%@ page import="beans.ShoppingCart" %>
 <%--<%--%>
 <%--    if (session.getAttribute("name") == null){--%>
 <%--        response.sendRedirect("login.jsp");--%>
@@ -14,8 +14,24 @@
     <title>MovieBooking - PZO</title>
     <jsp:include page="../layout-view/head_libraries.jsp"></jsp:include>
 </head>
+<%
+    ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
+    if(shoppingCart == null) {
+        shoppingCart = new ShoppingCart();
+    }
+%>
+<script>
+    function noteNonCinema() {
+        alert("Xin lỗi, HIỆN TẠI KHÔNG CÓ RẠP NÀO CHIẾU PHIM NÀY");
+    }
+</script>
+<c:if test="${status != null}">
+    <c:if test="${status}">
+        <script>noteNonCinema();</script>
+    </c:if>
+</c:if>
 <body>
-    <jsp:include page="../layout-view/header.jsp"></jsp:include>
+<jsp:include page="../layout-view/header.jsp"></jsp:include>
 
 <%-- Section Trailer Phim--%>
 <section class="w3l-main-slider position-relative" id="home">
@@ -48,7 +64,7 @@
 
 <%--Section PHIM ĐANG CHIẾU --%>
 <section class="w3l-grids">
-        <div class="grids-main py-5">
+        <div class="grids-main py-5" style="padding-bottom: 0px !important;">
             <div class="container py-lg-3">
                 <div class="headerhny-title">
                     <div class="w3l-title-grids">
@@ -76,10 +92,19 @@
                                     <span class="fa fa-play-circle video-icon" aria-hidden="true"></span>
                                 </a>
                             </div>
-                            <h3><a class="title-gd" style="height: 3rem" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a> </h3>
+                            <h3><a class="title-gd" style="height: 3rem; font-size: 15px" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a> </h3>
                             <p style="height: 2rem" > ${m.movieDescription} </p>
-                            <div class="button-center text-center mt-4">
-                                <a href="bookingTicket-servlet?action=init" class="btn watch-button">Đặt vé ngay</a>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="button-center text-center mt-4" style="text-align: center">
+                                        <a href="bookingTicket-servlet?action=init&movieID=${m.movieID}" class="btn watch-button" style="padding: 0px 0px !important;"><i class="fa fa-cart-plus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="button-right text-center mt-4" style="text-align: right">
+                                        <a href="bookingTicket-servlet?action=init" class="btn watch-button" style="padding: 0px 0px !important;">Đặt vé</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
@@ -90,7 +115,7 @@
 
 <%--Section PHIM SẮP CHIẾU --%>
 <section class="w3l-grids">
-    <div class="grids-main py-5">
+    <div class="grids-main py-5" style="padding-top: 0px !important;">
         <div class="container py-lg-3">
             <div class="headerhny-title">
                 <div class="w3l-title-grids">

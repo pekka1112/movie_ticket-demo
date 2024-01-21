@@ -93,6 +93,7 @@ public class HomeController extends HttpServlet {
         if(session.getAttribute("user") != null && session.getAttribute("userName") != null) {
             session.removeAttribute("user");
             session.removeAttribute("userName");
+            session.invalidate();
         }
         RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
         if (rd != null) {
@@ -128,6 +129,14 @@ public class HomeController extends HttpServlet {
         req.setAttribute("searchedResultCinemaList",null);
         req.setAttribute("isShowAllCinema",true);
         RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
+        String status = req.getParameter("status");
+        if(status != null) {
+            if(status.equals("non_cinema")){
+                req.setAttribute("status",true);
+            } else {
+                req.setAttribute("status",false);
+            }
+        }
         if (rd != null) {
             rd.forward(req, resp);
         } else {
@@ -162,7 +171,7 @@ public class HomeController extends HttpServlet {
         searchedResultCinemaList = cinemaDAO.getCinemaByName(cinemaSearchText);
         int searchedResultCinemaListSize = searchedResultCinemaList.size();
         req.setAttribute("searchedResultCinemaList", searchedResultCinemaList);
-        session.setAttribute("searchedResultCinemaList", searchedResultCinemaList);
+//        session.setAttribute("searchedResultCinemaList", searchedResultCinemaList);
         req.setAttribute("searchedResultCinemaListSize", searchedResultCinemaListSize);
         req.setAttribute("txtHistory", cinemaSearchText);
 

@@ -10,7 +10,7 @@
   let prevId = "1";
 
   window.onload = function () {
-    document.getElementById("screen-next-btn").disabled = true;
+    document.getElementById("screen-next-btn").disabled = false;
   }
 
   function timeFunction() {

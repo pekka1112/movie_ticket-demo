@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateBean implements Serializable {
-    private Date currentDate;
+    public Date currentDate;
 
     public DateBean() {
         currentDate = new Date();

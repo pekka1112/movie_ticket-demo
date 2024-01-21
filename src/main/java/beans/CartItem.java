@@ -1,20 +1,32 @@
 package beans;
 
+import model.Movie;
+import model.MovieMediaLink;
 import model.Ticket;
+import model.TicketData;
 
 public class CartItem {
-    private Ticket ticket;
+    private TicketData ticketData;
     private int quanlity;
+    private double price;
 
     public CartItem() {
     }
 
-    public Ticket getTicket() {
-        return ticket;
+    public TicketData getTicketData() {
+        return ticketData;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setTicketData(TicketData ticketData) {
+        this.ticketData = ticketData;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQuanlity() {

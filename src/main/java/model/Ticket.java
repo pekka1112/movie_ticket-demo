@@ -1,6 +1,7 @@
 package model;
 
 public class Ticket {
+
     private  String ticketID;
     private  String cinemaID;
     private  String showtimeID;

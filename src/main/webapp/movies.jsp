@@ -5,6 +5,7 @@
     <title>Movies</title>
     <jsp:include page="layout-view/head_libraries.jsp"></jsp:include>
     <link rel="stylesheet" href="assets/css/movie.css">
+
 </head>
 <body>
     <jsp:include page="layout-view/header.jsp"></jsp:include>
@@ -316,5 +317,6 @@
     <jsp:include page="layout-view/js-function-slider.jsp" ></jsp:include>
 
     <script src="assets/js/main.js"></script>
+
 </body>
 </html>
