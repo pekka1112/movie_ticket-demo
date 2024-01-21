@@ -33,6 +33,12 @@ public class ShowtimesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        HttpSession session = req.getSession();
+        if(session.getAttribute("pageName") != null ) {
+            session.removeAttribute("pageName");
+        } else {
+            session.setAttribute("pageName", "showtime");
+        }
         if(action.equals("init")) {
             redirectToHomePage(req,resp);
         } else if(action.equals("show-cinemaShowtime")) {

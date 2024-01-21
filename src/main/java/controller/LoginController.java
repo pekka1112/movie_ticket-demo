@@ -28,6 +28,7 @@ public class LoginController extends HttpServlet {
         RequestDispatcher requestDispatcher = null;
         if (user != null){
            session.setAttribute("user",user);
+           session.setAttribute("userName",user.getUserName());
            if(user.isAdmin()){
                System.out.println("admin");
                req.getRequestDispatcher("adminhome.jsp").forward(req,resp);

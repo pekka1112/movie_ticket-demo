@@ -14,6 +14,7 @@ import model.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,12 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        HttpSession session = req.getSession();
+        if(session.getAttribute("pageName") != null ) {
+            session.removeAttribute("pageName");
+        } else {
+            session.setAttribute("pageName", "homePage");
+        }
         if(action.equals("direct")) {
             redirectToHomePage(req,resp);
         } else if(action.equals("show-cinemaShowtime")) {
@@ -45,6 +52,8 @@ public class HomeController extends HttpServlet {
             showShowTime(req,resp);
         }else if (action.equals("cinemaSearch")) {
             cinemaSearchAction(req,resp);
+        } else if (action.equals("logout")) {
+            logout(req,resp);
         }
     }
 
@@ -53,8 +62,44 @@ public class HomeController extends HttpServlet {
         doGet(req, resp);
     }
 
-    private static void searchBarAction(HttpServletRequest req, HttpServletResponse resp){
+    private static void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        movieDAO = new MovieDAO();
+        cinemaDAO = new CinemaDAO();
+        userCommentDAO = new UserCommentDAO();
+        newestMovies = movieDAO.getNewestFilms(5);
+        publishedMovies = movieDAO.getPublishedMoive(1,5);
+        unPublishedMovies = movieDAO.getPublishedMoive(0,4);
+        popularMovies = movieDAO.getMostPopularMoive(3);
+        allCinema = cinemaDAO.getAllCinema();
+        top2Cinema = cinemaDAO.getMostPopularCinema();
+        comments = userCommentDAO.getPopularComment(3);
+        req.setAttribute("top4NewestMovies", newestMovies);
+        req.setAttribute("publishedMovies", publishedMovies);
+        req.setAttribute("unPublishedMovies", unPublishedMovies);
+        req.setAttribute("popularMovies", popularMovies);
+        req.setAttribute("top2Cinema",top2Cinema);
+        req.setAttribute("comments",comments);
+        // process : show all cinema
+        req.setAttribute("txtHistory", "");
+        cinemaSearchText = "";
+        req.setAttribute("allCinema", allCinema);
+        req.setAttribute("searchedResultCinemaList",null);
+        req.setAttribute("isShowAllCinema",true);
+        // process : logout
+        HttpSession session = req.getSession();
+        if(session.getAttribute("user") != null && session.getAttribute("userName") != null) {
+            session.removeAttribute("user");
+            session.removeAttribute("userName");
+        }
+        RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
     }
     private static void redirectToHomePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");

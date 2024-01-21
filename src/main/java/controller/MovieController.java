@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.*;
 
 import java.io.IOException;
@@ -30,6 +31,12 @@ public class MovieController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        HttpSession session = req.getSession();
+        if(session.getAttribute("pageName") != null ) {
+            session.removeAttribute("pageName");
+        } else {
+            session.setAttribute("pageName", "movie");
+        }
         if(action.equals("init")) {
             initData(req,resp);
         } else if(action.equals("show-cinemaShowtime")) {
