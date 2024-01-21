@@ -1,27 +1,22 @@
-<%@page import="model.User" %>
-<%@page import="java.util.List" %>
-<%@ page import="model.Ticket" %>
+<%@ page import="model.Film" %>
+<%@ page import="model.Comment" %>
+<%@ page import="database.TicketDetailDAO" %>
+<%@ page import="model.TicketDetail" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>ADMIN HOME</title>
+    <title>UPDATE FILM</title>
 
     <!-- Fontfaces CSS-->
     <link href="admin/css/font-face.css" rel="stylesheet" media="all">
-<%--    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
-<%--    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">--%>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <%--    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
+    <%--    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">--%>
     <link href="admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
     <!-- Bootstrap CSS-->
     <link href="admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
@@ -40,10 +35,11 @@
     <!-- new css -->
     <link rel="stylesheet" href="admin/css/style_admin.css">
 
+
 </head>
 
 <body class="animsition">
-<%List<Ticket> tickets = (List<Ticket>) request.getAttribute("tickets");%>
+<%--<%List<User> users = (List<User>) request.getAttribute("listUser");%>--%>
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
     <header class="header-mobile d-block d-lg-none">
@@ -67,26 +63,29 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <<li >
-                    <a class="js-arrow"  href="quanlinguoidung">
-                        <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
-                </li>
-                    <li >
+                    <li class="active has-sub">
+                        <a class="js-arrow" href="quanlinguoidung">
+                            <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
+                    </li>
+                    <li>
+
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li class="active has-sub">
+                    <li>
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
+
+
                 </ul>
             </div>
         </nav>
@@ -104,26 +103,29 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li >
+                    <li class="active has-sub">
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
                     <li>
+
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li class="active has-sub">
+                    <li>
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
+
+
                 </ul>
             </nav>
         </div>
@@ -308,79 +310,66 @@
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
-
             <div>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered text-center mb-0">
-                            <thead class="bg-secondary text-dark">
-                            <tr>
-                                <th>Id Vé</th>
-                                <th>ID Rạp chiếu phim</th>
-                                <th>ID thời gian chiếu</th>
-                                <th>Chi tiết</th>
-                                <th>Xóa</th>
-                            </tr>
-                            </thead>
-                            <tbody class="align-middle" id="renderdata-user">
-                            <%for(Ticket ticket : tickets){%>
-                            <tr>
-                                <td class="align-middle"><%=ticket.getTicketID()%></td>
-                                <td class="align-middle"><%=ticket.getCinemaID()%></td>
-                                <td class="align-middle"><%=ticket.getShowtimeID()%></td>
-                                <td class="align-middle">
-                                    <a href="detailticket?sid=<%=ticket.getTicketID()%>">
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="fa-solid fa-circle-info"></i>
-                                        </button>
-                                    </a>
-                                </td>
-                                <td class="align-middle">
-                                    <button data-id="<%=ticket.getTicketID()%>" data-toggle="modal"
-                                            data-target="#deleteTicket" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </td>
+                        <% TicketDetail ticketDetail = (TicketDetail) request.getAttribute("ticketDetail");%>
+                        <div class="modal-content">
 
-                            </tr><%}%>
-                            </tbody>
-                        </table>
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">thông tin chi tiết</h4>
+                                <button type="button" class="close" data-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <!-- Đặt nội dung form ở đây -->
+                                <form >
+
+                                    <div class="form-group">
+                                        <label>Id chi tiết</label>
+                                        <input type="text" class="form-control" name="commentID" value="<%=ticketDetail.getTicketDetailID()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="text" class="form-control" name="movieID" value="<%=ticketDetail.getPrice()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>ID ghế</label>
+                                        <input type="text" class="form-control" name="customerID" value="<%=ticketDetail.getSeatID()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>ID Phòng chiếu</label>
+                                        <input type="text" class="form-control" name="customerID" value="<%=ticketDetail.getCinemaRoomID()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>ID vé</label>
+                                        <input type="text" class="form-control" name="customerID" value="<%=ticketDetail.getTicketID()%>" readonly>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="quanlive">
+                                            <button type="button" class="btn btn-secondary" >Đóng</button>
+                                        </a>
+
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- END MAIN CONTENT-->
         <!-- END PAGE CONTAINER-->
     </div>
 
 </div>
-<%--Delete--%>
-<div id="deleteTicket" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Xóa phim</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa nó không ? </p>
-            </div>
-            <div class="modal-footer">
-                <button id="btn-delete-ticket" type="button" class="btn btn-danger">Xóa</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-
-<script src="./admin/js/Dialog.js"></script>
-<script>
-    Dialog('#deleteTicket', '#btn-delete-ticket', 'quanlive', 'ticketID', 'delete')
-</script>
 <!-- Jquery JS-->
 <script src="admin/vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->

@@ -78,12 +78,6 @@ public class UserDAO {
 
 
                 try {
-
-                    String Query = "select userID from userlogin";
-                    PreparedStatement pr = connection.prepareStatement(Query);
-                    ResultSet rs = pr.executeQuery();
-                    if (rs.next()) {
-
                         String insertQuery = "insert into userlogin values (?, ?, ? , ?, ?,?) ";
                         PreparedStatement insertPr = connection.prepareStatement(insertQuery);
                         insertPr.setString(1, "user" + (maxID+1));
@@ -98,9 +92,7 @@ public class UserDAO {
                         } else {
                             return false;
                         }
-                    } else {
-                        return false;
-                    }
+
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
 
@@ -233,7 +225,7 @@ public class UserDAO {
 //        System.out.println(userDAO.deleteUser("user6"));
 //        System.out.println(userDAO.blockUser("user7", "false"));
 
-//        System.out.println(userDAO.registerUser("vansang", "nguyenvansang1@email.com", "vansang"));
+        System.out.println(userDAO.registerUser("vansang", "nguyenvansang1@email.com", "vansang"));
 
     }
 

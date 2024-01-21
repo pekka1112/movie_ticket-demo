@@ -1,5 +1,6 @@
 <%@page import="model.Film" %>
 <%@page import="java.util.List" %>
+<%@ page import="database.FilmDAO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +12,8 @@
 
     <!-- Fontfaces CSS-->
     <link href="admin/css/font-face.css" rel="stylesheet" media="all">
-<%--    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
-<%--    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">--%>
+    <%--    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
+    <%--    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">--%>
     <link href="admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
@@ -37,6 +38,7 @@
 
 <body class="animsition">
 <%List<Film> films = (List<Film>) request.getAttribute("filmList");%>
+
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
     <header class="header-mobile d-block d-lg-none">
@@ -60,28 +62,26 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
+                    <li class="active has-sub">
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
-
                 </ul>
             </div>
         </nav>
@@ -99,29 +99,26 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
+                    <li class="active has-sub">
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
-
-
                 </ul>
             </nav>
         </div>
@@ -330,81 +327,103 @@
                             <tbody class="align-middle" id="renderdata-user">
                             <%for (Film film : films) {%>
                             <tr>
-                                <td class="align-middle"><%=film.getMovieID()%></td>
-                                <td class="align-middle"><%=film.getMovieName()%></td>
-                                <td class="align-middle"><%=film.getMovieCategory()%></td>
-                                <td class="align-middle"><%=film.getReleaseDate()%></td>
-                                <td class="align-middle"><%=film.getDirector()%></td>
-                                <td class="align-middle"><%=film.getDuration()%></td>
-                                <td class="align-middle"><%=film.getCountry()%></td>
-                                <td class="align-middle"><%=film.getMovieDescription()%></td>
-                                <td class="align-middle"><%=film.getMovieContent()%></td>
-                                <%if(film.isPublished()){%>
+                                <td class="align-middle"><%=film.getMovieID()%>
+                                </td>
+                                <td class="align-middle"><%=film.getMovieName()%>
+                                </td>
+                                <td class="align-middle"><%=film.getMovieCategory()%>
+                                </td>
+                                <td class="align-middle"><%=film.getReleaseDate()%>
+                                </td>
+                                <td class="align-middle"><%=film.getDirector()%>
+                                </td>
+                                <td class="align-middle"><%=film.getDuration()%>
+                                </td>
+                                <td class="align-middle"><%=film.getCountry()%>
+                                </td>
+                                <td class="align-middle"><%=film.getMovieDescription()%>
+                                </td>
+                                <td class="align-middle"><%=film.getMovieContent()%>
+                                </td>
+                                <%if (film.isPublished()) {%>
                                 <td class="align-middle">Đã chiếu</td>
-                                <%} else{%>
+                                <%} else {%>
                                 <td class="align-middle">Sắp chiếu</td>
                                 <%}%>
-                                <td class="align-middle"><%=film.getMovieScore()%></td>
-                                <td class="align-middle"><button  data-id ="<%=film.getMovieID()%>" data-toggle="modal" data-target="#myModalOdd" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen"></i></button></td>
-                                <td class="align-middle"><button  data-id ="<%=film.getMovieID()%>" data-toggle="modal" data-target="#deleteFilm" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle"><%=film.getMovieScore()%>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="updateFilm?sid=<%=film.getMovieID()%>">
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td class="align-middle">
+                                    <button data-id="<%=film.getMovieID()%>" data-toggle="modal"
+                                            data-target="#deleteFilm" class="btn btn-sm btn-primary"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
                             </tr>
                             <%}%>
                             </tbody>
                         </table>
                     </div>
-                    <div class="add-film" style="margin-left: 5px">
+                    <div class="add-film" style="margin-left: 20px">
                         <!-- Đặt nội dung form ở đây -->
                         <div style="margin: 20px 0px 20px 0px">
                             <h4>Thêm Phim Mới</h4>
                         </div>
-                        <form>
+                        <form action="quanliphim" method="post">
                             <div class="form-group">
-                                <label >Tên </label>
-                                <input type="text"  class="form-control" >
+                                <label>Tên </label>
+                                <input type="text" class="form-control" name="name">
                             </div>
                             <div class="form-group">
-                                <label >Thể loại</label>
-                                <input type="text"  class="form-control" >
+                                <label>Thể loại</label>
+                                <input type="text" class="form-control" name="category">
                             </div>
                             <div class="form-group">
-                                <label >Ngày phát hành</label>
-                                <input type="text"  class="form-control">
+                                <label>Ngày phát hành</label>
+                                <input type="text" class="form-control" name="releaseDate" placeholder="yyyy-MM-dd">
                             </div>
                             <div class="form-group">
-                                <label >Tác giả</label>
-                                <input type="text"  class="form-control">
+                                <label>Tác giả</label>
+                                <input type="text" class="form-control" name="director">
                             </div>
                             <div class="form-group">
-                                <label >Thời gian</label>
-                                <input type="text"  class="form-control" >
+                                <label>Thời gian</label>
+                                <input type="text" class="form-control" name="duration">
                             </div>
                             <div class="form-group">
-                                <label >Quốc gia</label>
-                                <input type="text"  class="form-control" >
+                                <label>Quốc gia</label>
+                                <input type="text" class="form-control" name="country">
                             </div>
                             <div class="form-group">
-                                <label >Mô tả</label>
+                                <label>Mô tả</label>
                                 <div>
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" name="description"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label >Nội dung</label>
+                                <label>Nội dung</label>
                                 <div>
-                                    <textarea class="form-control"></textarea>
+                                    <textarea class="form-control" name="content"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label >Trạng thái</label>
+                                <label>Trạng thái</label>
                                 <div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault11">
+                                        <input class="form-check-input" type="radio" name="isPublished" value="true"
+                                               id="flexRadioDefault11">
                                         <label class="form-check-label" for="flexRadioDefault11">
                                             Đã chiếu
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault22" checked>
+                                        <input class="form-check-input" type="radio" name="isPublished" value="false"
+                                               id="flexRadioDefault22" checked>
                                         <label class="form-check-label" for="flexRadioDefault22">
                                             Chưa chiếu
                                         </label>
@@ -412,12 +431,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label >Đánh giá</label>
-                                <input type="number"  class="form-control">
+                                <label>Đánh giá</label>
+                                <input type="text" class="form-control" name="score">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                <button type="button" class="btn btn-primary">Lưu</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
                             </div>
                         </form>
                     </div>
@@ -430,96 +449,14 @@
     </div>
 
 </div>
-<%--Modal để sửa--%>
-<div class="modal" id="myModalOdd">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Sửa thông tin</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <!-- Đặt nội dung form ở đây -->
-                <form>
-                    <div class="form-group">
-                        <label >Tên </label>
-                        <input type="text"  class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label >Thể loại</label>
-                        <input type="text"  class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label >Ngày phát hành</label>
-                        <input type="text"  class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label >Tác giả</label>
-                        <input type="text"  class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label >Thời gian</label>
-                        <input type="text"  class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label >Quốc gia</label>
-                        <input type="text"  class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label >Mô tả</label>
-                        <div>
-                            <textarea class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label >Nội dung</label>
-                        <div>
-                            <textarea class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label >Trạng thái</label>
-                        <div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Đã chiếu
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="isPublished" id="flexRadioDefault2" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Chưa chiếu
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label >Đánh giá</label>
-                        <input type="number"  class="form-control">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary">Lưu</button>
-                    </div>
-                </form>
-            </div>
 
 
-
-        </div>
-    </div>
-</div>
 <%--Delete--%>
 <div id="deleteFilm" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Xóa người dùng</h5>
+                <h5 class="modal-title">Xóa phim</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
@@ -536,9 +473,9 @@
 </div>
 
 
-<script src="./admin/js/Dialog.js"></>
+<script src="./admin/js/Dialog.js"></script>
 <script>
-    Dialog('#deleteFilm','#btn-delete-film','quanliphim','movieID', 'delete')
+    Dialog('#deleteFilm', '#btn-delete-film', 'quanliphim', 'movieID', 'delete')
 </script>
 <!-- Jquery JS-->
 <script src="admin/vendor/jquery-3.2.1.min.js"></script>

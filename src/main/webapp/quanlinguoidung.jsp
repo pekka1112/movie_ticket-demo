@@ -14,8 +14,8 @@
 
     <!-- Fontfaces CSS-->
     <link href="admin/css/font-face.css" rel="stylesheet" media="all">
-<%--    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
-<%--    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">--%>
+    <%--    <link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
+    <%--    <link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">--%>
     <link href="admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -71,24 +71,22 @@
                         <a class="js-arrow" href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
+                    <li >
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
-
                 </ul>
             </div>
         </nav>
@@ -107,28 +105,25 @@
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
                     <li class="active has-sub">
-                        <a class="js-arrow" href="quanlinguoidung">
+                        <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
+                    <li >
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
-
-
                 </ul>
             </nav>
         </div>
@@ -332,12 +327,27 @@
                             <tbody class="align-middle" id="renderdata-user">
                             <%for (User user : users) {%>
                             <tr>
-                                <td class="align-middle"><%=user.getUserId()%></td>
-                                <td class="align-middle"><%=user.getEmail()%></td>
-                                <td class="align-middle"><%=user.getUserName()%></td>
-                                <td class="align-middle"><button class="btn btn-sm btn-primary" ><%=user.isActive() ? "Đang hoạt động" : "Bị chặn"%></button></td>
-                                <td class="align-middle"> <button id="btnBlock" data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#blockUser" title= <%= user.isActive() ? "Chặn" : "Mở chặn" %> ><i class="fa-solid fa-ban"></i></button></td>
-                                <td class="align-middle"><button data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#deleteUser" title="Xóa"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle"><%=user.getUserId()%>
+                                </td>
+                                <td class="align-middle"><%=user.getEmail()%>
+                                </td>
+                                <td class="align-middle"><%=user.getUserName()%>
+                                </td>
+                                <td class="align-middle">
+                                    <button class="btn btn-sm btn-primary"><%=user.isActive() ? "Đang hoạt động" : "Bị chặn"%>
+                                    </button>
+                                </td>
+                                <td class="align-middle">
+                                    <button id="btnBlock" data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary"
+                                            data-toggle="modal" data-target="#blockUser"
+                                            title=<%= user.isActive() ? "Chặn" : "Mở chặn" %>><i
+                                            class="fa-solid fa-ban"></i></button>
+                                </td>
+                                <td class="align-middle">
+                                    <button data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary"
+                                            data-toggle="modal" data-target="#deleteUser" title="Xóa"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
 
                             </tr>
                             <%}%>

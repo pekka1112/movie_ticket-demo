@@ -59,23 +59,22 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
+                    <li >
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
@@ -99,29 +98,25 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
-                            <a href="quanliphim">
-                                <i class="fas fa-chart-bar"></i>Quản Lí Phim
-                            </a>
+                    <li >
+                        <a href="quanliphim">
+                            <i class="fas fa-chart-bar"></i>Quản Lí Phim
+                        </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
-
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlibinhluan">
-                        <i class="far fa-check-square"></i>Quản Lí Bình Luận
+                            <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
-
-
                 </ul>
             </nav>
         </div>
@@ -886,6 +881,7 @@
 
 <!-- Main JS-->
 <script src="admin/js/main.js"></script>
+
 
 </body>
 

@@ -1,5 +1,6 @@
 <%@page import="model.User" %>
 <%@page import="java.util.List" %>
+<%@ page import="model.Comment" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,7 @@
 </head>
 
 <body class="animsition">
-<%--<%List<User> users = (List<User>) request.getAttribute("listUser");%>--%>
+<% List<Comment> comments = (List<Comment>) request.getAttribute("commentList");%>
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
     <header class="header-mobile d-block d-lg-none">
@@ -61,29 +62,26 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li class="active has-sub">
-                        <a class="js-arrow" href="quanlinguoidung">
+                    <li >
+                        <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
+                    <li >
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li>
+                    <li class="active has-sub">
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
-
-
                 </ul>
             </div>
         </nav>
@@ -101,29 +99,26 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
-
+                    <li >
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li c>
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li>
+                    <li class="active has-sub">
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
-
-
                 </ul>
             </nav>
         </div>
@@ -314,28 +309,37 @@
                         <table class="table table-bordered text-center mb-0">
                             <thead class="bg-secondary text-dark">
                             <tr>
-                                <th>Id</th>
-                                <th>Email người dùng</th>
-                                <th>Tên người dùng</th>
-                                <th>Trạng thái hoạt động</th>
-                                <th>Chặn</th>
+                                <th>ID Bình luận</th>
+                                <th>ID Phim</th>
+                                <th>ID Người dùng</th>
+                                <th>Nội dung</th>
+                                <th>Sửa</th>
                                 <th>Xóa</th>
                             </tr>
                             </thead>
-                            <%--                                <tbody class="align-middle" id="renderdata-user">--%>
-                            <%--                                <%for(User user : users){%>--%>
-                            <%--                                <tr>--%>
-                            <%--                                    <td class="text-center"><%=user.getUserId()%></td>--%>
-                            <%--                                    <td class="align-middle"><%=user.getEmail()%></td>--%>
-                            <%--                                    <td class="align-middle">--%>
-                            <%--                                        <p class="text-center"><%=user.getUserName()%></p>--%>
-                            <%--                                    </td>--%>
-                            <%--                                    &lt;%&ndash;                                    <td class="align-middle"><button class="btn btn-sm btn-primary" ><%=user.isActive() ? "Đang hoạt động" : "Bị chặn"%></button></td>&ndash;%&gt;--%>
-                            <%--                                    &lt;%&ndash;                                    <td class="align-middle"> <button id="btnBlock" data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#blockUser" title= <%= user.isActive() ? "Chặn" : "Mở chặn" %> ><i class="fa-solid fa-ban"></i></button></td>&ndash;%&gt;--%>
-                            <%--                                    <td class="align-middle"><button data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#deleteUser" title="Xóa"><i class="fa fa-times"></i></button></td>--%>
-                            <%--                                </tr>--%>
-                            <%--                                <%}%>--%>
-                            <%--                                </tbody>--%>
+                            <tbody class="align-middle" id="renderdata-user">
+                                <%for(Comment comment : comments){%>
+                                    <tr>
+                                        <td class="align-middle"><%=comment.getCommentID()%></td>
+                                        <td class="align-middle"><%=comment.getMovieID()%></td>
+                                        <td class="align-middle"><%=comment.getCustomerID()%></td>
+                                        <td class="align-middle"><%=comment.getCommentText()%></td>
+                                        <td class="align-middle">
+                                            <a href="updateComment?sid=<%=comment.getCommentID()%>">
+                                                <button class="btn btn-sm btn-primary">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <button data-id="<%=comment.getCommentID()%>" data-toggle="modal"
+                                                        data-target="#deleteComment" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+
+                                    </tr><%}%>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -346,7 +350,32 @@
     </div>
 
 </div>
+<%--Delete--%>
+<div id="deleteComment" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa phim</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa nó không ? </p>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-comment" type="button" class="btn btn-danger">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<script src="./admin/js/Dialog.js"></script>
+<script>
+    Dialog('#deleteComment', '#btn-delete-comment', 'quanlibinhluan', 'commentID', 'delete')
+</script>
 <!-- Jquery JS-->
 <script src="admin/vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->
