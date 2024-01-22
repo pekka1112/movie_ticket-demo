@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "BookingTicketServlet", urlPatterns = {"/bookingTicket-servlet"})
-public class BookingTicketController extends HttpServlet {
+@WebServlet(name = "UserPageServlet", urlPatterns = {"/userpage-servlet"})
+public class UserPageController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static MovieDAO movieDAO;
     public static CinemaDAO cinemaDAO;
@@ -26,12 +26,18 @@ public class BookingTicketController extends HttpServlet {
     public static UserDAO userDAO;
     public static CustomerDAO customerDAO;
     public static PaymentDAO paymentDAO;
+    public static TransactionTicketDAO transactionTicketDAO;
     public static CinemaRoomDAO cinemaRoomDAO;
     public static List<Cinema>  allCinema;
     public static List<UserCommentDetail> comments ;
-    public BookingTicketController() {}
+    public UserPageController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         movieDAO = new MovieDAO();
         cinemaDAO = new CinemaDAO();
         showTimeDAO = new ShowTimeDAO();
@@ -40,25 +46,21 @@ public class BookingTicketController extends HttpServlet {
         userDAO = new UserDAO();
         customerDAO = new CustomerDAO();
         paymentDAO = new PaymentDAO();
+        transactionTicketDAO = new TransactionTicketDAO();
         String action = req.getParameter("action");
         if(action.equals("init")) {
             initData(req,resp);
-        } else if(action.equals("showShowTimeForCinema")) {
-            showShowTimeForCinema(req,resp);
-        } else if (action.equals("showTimeInThisDate")) {
-            showTimeInThisDate(req,resp);
-        } else if (action.equals("changeToSeatBooking")) {
-            changeToSeatBooking(req,resp);
+        } else if(action.equals("changeToProfileSetting")) {
+            changeToProfileSetting(req,resp);
+        } else if (action.equals("searchBy_transName")) {
+            searchBy_transName(req,resp);
+        } else if (action.equals("updateUser")) {
+            updateUser(req,resp);
         } else if (action.equals("changeToCheckout")) {
             changeToCheckout(req,resp);
         } else if (action.equals("changeToETicket")) {
             changeToETicket(req,resp);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
     }
     private static void initData(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -77,15 +79,20 @@ public class BookingTicketController extends HttpServlet {
         }
         req.setAttribute("cinemaListGetByMovieSize", cinemaNameList.size());
         req.setAttribute("cinemaListGetByMovie", cinemaNameList);
+        // main process :
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        List<TransactionTicket> transList = transactionTicketDAO.getTransactionTicketByUserID(user.getUserId());
+        req.setAttribute("transList",transList);
 
-        RequestDispatcher rd = req.getRequestDispatcher("/bookingTicket.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/userView/userPage.jsp");
         if (rd != null) {
             rd.forward(req, resp);
         } else {
             System.out.println("RequestDispatcher is null");
         }
     }
-    private static void showShowTimeForCinema(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static void changeToProfileSetting(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
@@ -105,8 +112,8 @@ public class BookingTicketController extends HttpServlet {
         // lấy lịch chiếu phim của rạp đó
         String cinemaName = req.getParameter("cinemaName");
         req.setAttribute("cinemaName", cinemaName);
-        Cinema cinema = cinemaDAO.getCinemaByName(cinemaName).get(0);
-        req.setAttribute("cinemaLocation",cinema.getLocation());
+//        Cinema cinema = cinemaDAO.getCinemaByName(cinemaName).get(0);
+//        req.setAttribute("cinemaLocation",cinema.getLocation());
         List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
         List<String> showtimesDate = new ArrayList<>();
         for(ShowTime st : showtimes) {
@@ -115,7 +122,113 @@ public class BookingTicketController extends HttpServlet {
         }
         req.setAttribute("showtimesDate",showtimesDate);
 
-        RequestDispatcher rd = req.getRequestDispatcher("/bookingTicket.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/userView/userPage_ProfileSetting.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
+    }
+    private static void updateUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        // process : get Movie to process
+        String movieID = req.getParameter("movieID");
+        Movie movie = movieDAO.getMovieByID(movieID);
+        req.setAttribute("movieName", movie.getMovieName());
+        req.setAttribute("movieID", movieID);
+        // lấy danh sách all rạp chiếu phim có chiếu phim này
+        List<Cinema> cinemaListGetByMovie = cinemaDAO.getCinemaByMovieID(movieID);
+        List<String> cinemaNameList = new ArrayList<>();
+        for(Cinema c : cinemaListGetByMovie) {
+            cinemaNameList.add(c.getCinemaName());
+        }
+        req.setAttribute("cinemaListGetByMovieSize", cinemaNameList.size());
+        req.setAttribute("cinemaListGetByMovie", cinemaNameList);
+        // lấy lịch chiếu phim của rạp đó
+        String cinemaName = req.getParameter("cinemaName");
+        req.setAttribute("cinemaName", cinemaName);
+        List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
+        List<String> showtimesDate = new ArrayList<>();
+        for(ShowTime st : showtimes) {
+            showtimesDate.add(st.getShowDate());
+            System.out.println(st.getShowDate());
+        }
+        req.setAttribute("showtimesDate",showtimesDate);
+        // main process : update user
+        HttpSession session = req.getSession();
+        String name = (req.getParameter("name") != null) ? req.getParameter("name") : "";
+        String gender = (req.getParameter("gender") != null) ? req.getParameter("gender") : "";
+        String email = (req.getParameter("email") != null) ? req.getParameter("email") : "";
+        String phoneNumber = (req.getParameter("phoneNumber") != null) ? req.getParameter("phoneNumber") : "";
+        String address = (req.getParameter("address") != null) ? req.getParameter("address") : "";
+        String dob = (req.getParameter("dob") != null) ? req.getParameter("dob") : "";
+        String username = (req.getParameter("username") != null) ? req.getParameter("username") : "";
+        String password = (req.getParameter("password") != null) ? req.getParameter("password") : "";
+
+        User newUser = (User) session.getAttribute("user");
+        newUser.setUserName(username);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+        boolean updateUserStatus = userDAO.updateUser(newUser);
+        User user = updateUserStatus ? newUser : (User) session.getAttribute("user") ;
+        session.setAttribute("user",user);
+
+        Customer newCustomer = (Customer) session.getAttribute("customer");
+        newCustomer.setFullName(name);
+        newCustomer.setGender(gender);
+        newCustomer.setPhoneNumber(phoneNumber);
+        newCustomer.setAddress(address);
+        newCustomer.setDob(dob);
+        boolean updateCustomerStatus = customerDAO.updateCustomer(newCustomer);
+        Customer customer = updateCustomerStatus ? newCustomer : (Customer) session.getAttribute("customer") ;
+        session.setAttribute("customer",customer);
+
+        if(updateUserStatus || updateCustomerStatus) {
+            session.setAttribute("updateStatus","1");
+        } else {
+            session.setAttribute("updateStatus","0");
+        }
+
+        RequestDispatcher rd = req.getRequestDispatcher("/userView/userPage_ProfileSetting.jsp");
+        if (rd != null) {
+            rd.forward(req, resp);
+        } else {
+            System.out.println("RequestDispatcher is null");
+        }
+    }
+    private static void searchBy_transName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        // process : get Movie to process
+        String movieID = req.getParameter("movieID");
+        Movie movie = movieDAO.getMovieByID(movieID);
+        req.setAttribute("movieName", movie.getMovieName());
+        req.setAttribute("movieID", movieID);
+        // lấy danh sách all rạp chiếu phim có chiếu phim này
+        List<Cinema> cinemaListGetByMovie = cinemaDAO.getCinemaByMovieID(movieID);
+        List<String> cinemaNameList = new ArrayList<>();
+        for(Cinema c : cinemaListGetByMovie) {
+            cinemaNameList.add(c.getCinemaName());
+        }
+        req.setAttribute("cinemaListGetByMovieSize", cinemaNameList.size());
+        req.setAttribute("cinemaListGetByMovie", cinemaNameList);
+        // main process :
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        // process : search by transID
+        String tid = req.getParameter("transName");
+        if(!tid.equals("")){
+            List<TransactionTicket> tList = transactionTicketDAO.getTransactionTicketByUserID_TID(user.getUserId(), tid);
+            req.setAttribute("transList",tList);
+        } else {
+            List<TransactionTicket> transList = transactionTicketDAO.getTransactionTicketByUserID(user.getUserId());
+            req.setAttribute("transList",transList);
+        }
+
+        RequestDispatcher rd = req.getRequestDispatcher("/userView/userPage.jsp");
         if (rd != null) {
             rd.forward(req, resp);
         } else {

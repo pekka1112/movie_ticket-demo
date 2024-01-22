@@ -8,11 +8,7 @@ public class User {
     boolean isActive;
     boolean isAdmin;
 
-    public User() {
-    }
-
-
-
+    public User() {}
     public User(String userId, String userName, String email, String password, boolean isActive, boolean isAdmin) {
         this.userId = userId;
         this.userName = userName;

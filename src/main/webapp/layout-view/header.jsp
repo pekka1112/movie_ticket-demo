@@ -37,7 +37,7 @@
                     <a class="nav-link" href="login.jsp" style="padding: 0px 0px;">
                     <ul class="navbar-nav ml-auto">
                     <% if(isLogined) { %>
-                        <li class="nav-item " ><a class="nav-link" href="login.jsp" style="padding-right: 1rem; padding-left: 1rem" >Chào, ${sessionScope.get("userName")}</a></li>
+                        <li class="nav-item " ><a class="nav-link" href="userpage-servlet?action=init" style="padding-right: 1rem; padding-left: 1rem" >Chào, ${sessionScope.get("userName")}</a></li>
                         <li class="nav-item " ><a class="nav-link" href="home-servlet?action=logout" style="padding-right: 1rem; padding-left: 1rem" >Đăng xuất</a></li>
                     <% } else { %>
                         <li class="nav-item " ><a class="nav-link" href="login.jsp" style="padding-right: 1rem; padding-left: 1rem" >Đăng nhập</a></li>

@@ -7,7 +7,7 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Đặt vé</title>
+    <title>Đặt vé : ${movieName}</title>
     <jsp:include page="layout-view/head_libraries.jsp"></jsp:include>
     <link rel="stylesheet" href="assets/css/e-ticket.css">
     <link rel="stylesheet" href="assets/css/progress.css">
@@ -50,7 +50,7 @@
                                 <ul id="selected-seats">
                                     <c:forEach var="c" items="${seats}">
                                         <li style="border-radius: 5px; padding: 0px;border: 1px groove black">
-                                            <a href="bookingTicket-servlet?action=changeToCheckout&time=${time}&cinemaRoomName=${cinemaRoomName}&date=${curDate}&cinemaName=${cinemaName}&movieID=${movieID}&seats=${c.seatName}">${c.seatName }</a>
+                                            <a href="bookingTicket-servlet?action=changeToCheckout&time=${time}&cinemaRoomName=${cinemaRoomName}&date=${curDate}&cinemaName=${cinemaName}&movieID=${movieID}&seatName=${c.seatName}">${c.seatName }</a>
                                         </li>
                                     </c:forEach>
                                 </ul>
