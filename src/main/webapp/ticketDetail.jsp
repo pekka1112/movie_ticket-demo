@@ -113,7 +113,7 @@
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li class="active has-sub" >
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
@@ -326,26 +326,73 @@
                             <div class="modal-body">
                                 <!-- Đặt nội dung form ở đây -->
                                 <form >
+                                    <div class="form-group">
+                                        <label>Id vé</label>
+                                        <input type="text" class="form-control" value="<%=ticketDetail.getTicketID()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tên phim</label>
+                                        <input type="text" class="form-control"  value="<%=ticketDetail.getMovieName()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Giá</label>
+                                        <input type="text" class="form-control"  value="<%=ticketDetail.getPrice()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Thể loại</label>
+                                        <input type="text" class="form-control"  value="<%=ticketDetail.getMovieCategory()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Đạo diễn</label>
+                                        <input type="text" class="form-control"  value="<%=ticketDetail.getDirector()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quốc gia</label>
+                                        <input type="text" class="form-control"  value="<%=ticketDetail.getCountry()%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Đánh giá</label>
+                                        <input type="text" class="form-control"  value="<%=ticketDetail.getMovieScore()%>" readonly>
+                                    </div>
 
                                     <div class="form-group">
-                                        <label>Id chi tiết</label>
-                                        <input type="text" class="form-control" name="commentID" value="<%=ticketDetail.getTicketDetailID()%>" readonly>
+                                        <label>Tên rạp chiếu</label>
+                                        <input type="text" class="form-control"  value="<%=ticketDetail.getCinemaName()%>" readonly>
                                     </div>
+
                                     <div class="form-group">
-                                        <label>Price</label>
-                                        <input type="text" class="form-control" name="movieID" value="<%=ticketDetail.getPrice()%>" readonly>
+                                        <label>Tên phòng chiếu</label>
+                                        <input type="text" class="form-control"   value="<%=ticketDetail.getRoomName()%>" readonly>
                                     </div>
+
                                     <div class="form-group">
-                                        <label>ID ghế</label>
-                                        <input type="text" class="form-control" name="customerID" value="<%=ticketDetail.getSeatID()%>" readonly>
+                                        <label>Tên ghế</label>
+                                        <input type="text" class="form-control" value="<%=ticketDetail.getSeatName()%>" readonly>
                                     </div>
+
                                     <div class="form-group">
-                                        <label>ID Phòng chiếu</label>
-                                        <input type="text" class="form-control" name="customerID" value="<%=ticketDetail.getCinemaRoomID()%>" readonly>
+                                        <label>Loại ghế</label>
+                                        <input type="text" class="form-control" value="<%=ticketDetail.getSeatType()%>" readonly>
                                     </div>
+
                                     <div class="form-group">
-                                        <label>ID vé</label>
-                                        <input type="text" class="form-control" name="customerID" value="<%=ticketDetail.getTicketID()%>" readonly>
+                                        <label>Ngày chiếu</label>
+                                        <input type="text" class="form-control" value="<%=ticketDetail.getShowDate()%>" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Thời gian bắt đầu</label>
+                                        <input type="text" class="form-control" value="<%=ticketDetail.getStartTime()%>" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Thời gian kết thúc</label>
+                                        <input type="text" class="form-control" value="<%=ticketDetail.getEndTime()%>" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Địa chỉ</label>
+                                        <input type="text" class="form-control" value="<%=ticketDetail.getLocation()%>" readonly>
                                     </div>
 
                                     <div class="modal-footer">

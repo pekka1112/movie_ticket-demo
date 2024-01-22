@@ -1,5 +1,6 @@
 package controller;
 
+import database.AdminHomeDAO;
 import database.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -24,10 +25,13 @@ public class LoginController extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
         HttpSession session = req.getSession();
-        RequestDispatcher requestDispatcher = null;
         if (user != null){
            session.setAttribute("user",user);
            if(user.isAdmin()){
+               AdminHomeDAO adminHomeDAO = new AdminHomeDAO();
+               req.setAttribute("userOnl", adminHomeDAO.getUserOnl());
+               req.setAttribute("ticketQuantity", adminHomeDAO.getTicketQuantity());
+               req.setAttribute("totalEaring", adminHomeDAO.getTotalEarning());
                req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
                return;
            }

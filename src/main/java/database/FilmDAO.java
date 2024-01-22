@@ -153,7 +153,39 @@ public class FilmDAO {
         }
         return false;
     }
+    public ArrayList<Film> getAllFilmByName(String name) {
+        Connection connection = null;
+        ArrayList<Film> filmList = new ArrayList<>();
+        try {
+            connection = JDBCUtil.getConnection();
+            String query = "select movieID,  movieName, movieCategory, releaseDate, director, duration, country, movieDescription, movieContent, isPublished, movieScore from movie where movieName =?";
+            PreparedStatement pr = connection.prepareStatement(query);
+            pr.setString(1, name);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                Film film = new Film();
+                film.setMovieID(rs.getString("movieID"));
+                film.setMovieName(rs.getString("movieName"));
+                film.setMovieCategory(rs.getString("movieCategory"));
+                film.setReleaseDate(rs.getDate("releaseDate"));
+                film.setDirector(rs.getString("director"));
+                film.setDuration(rs.getString("duration"));
+                film.setCountry(rs.getString("country"));
+                film.setMovieDescription(rs.getString("movieDescription"));
+                film.setMovieContent(rs.getString("movieContent"));
+                film.setPublished(rs.getBoolean("isPublished"));
+                film.setMovieScore(rs.getDouble("movieScore"));
+                filmList.add(film);
 
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCUtil.closeConnection(connection);
+        }
+
+        return filmList;
+    }
     public static void main(String[] args) throws ParseException {
         FilmDAO filmDAO = new FilmDAO();
 //        ArrayList<Film> list = filmDAO.getAllFilm();

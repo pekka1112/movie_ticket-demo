@@ -7,7 +7,7 @@
 <head>
 
     <!-- Title Page-->
-    <title>UPDATE FILM</title>
+    <title>UPDATE COMMENT</title>
 
     <!-- Fontfaces CSS-->
     <link href="admin/css/font-face.css" rel="stylesheet" media="all">
@@ -101,7 +101,7 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
@@ -117,7 +117,7 @@
                         </a>
 
                     </li>
-                    <li>
+                    <li class="active has-sub">
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
@@ -323,7 +323,7 @@
                             <!-- Modal Body -->
                             <div class="modal-body">
                                 <!-- Đặt nội dung form ở đây -->
-                                <form action="updateComment" method="post">
+                                <form action="update?fid=null&sid=<%=comment.getCommentID()%>" method="post">
 
                                     <div class="form-group">
                                         <label>Id Bình luận</label>

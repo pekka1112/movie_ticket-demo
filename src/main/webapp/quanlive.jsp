@@ -137,12 +137,14 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-                        <form class="form-header" action="" method="POST">
-                            <input class="au-input au-input--xl" type="text" name="search" placeholder="Tìm kiếm..."/>
+
+                        <form class="form-header" action="search?cid=0&uid=0&fid=0&tid=1" method="POST">
+                            <input class="au-input au-input--xl" type="text" name="search" placeholder="ID Rạp chiếu phim"/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
                         </form>
+
                         <div class="header-button">
                             <div class="noti-wrap">
                                 <div class="noti__item js-item-menu">
@@ -315,8 +317,8 @@
                         <table class="table table-bordered text-center mb-0">
                             <thead class="bg-secondary text-dark">
                             <tr>
-                                <th>Id Vé</th>
-                                <th>ID Rạp chiếu phim</th>
+                                <th>Id vé</th>
+                                <th>ID rạp chiếu phim</th>
                                 <th>ID thời gian chiếu</th>
                                 <th>Chi tiết</th>
                                 <th>Xóa</th>

@@ -214,18 +214,50 @@ public class UserDAO {
         return checkEmail;
     }
 
+    public ArrayList<User> getAllUserByName(String name) {
+        Connection connection = null;
+        ArrayList<User> list = new ArrayList<>();
+        ArrayList<User> userList = new ArrayList<>();
+        try {
+            connection = JDBCUtil.getConnection();
+            String query = "select * from userlogin where userName = ?";
+            PreparedStatement pr = connection.prepareStatement(query);
+            pr.setString(1, name);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getString("userId"));
+                user.setUserName(rs.getString("userName"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("userPassword"));
+                user.setActive(rs.getBoolean("isActive"));
+                user.setAdmin(rs.getBoolean("isAdmin"));
+                list.add(user);
+            }
+            for (User user : list) {
+                if (!user.isAdmin()) {
+                    userList.add(user);
+                }
+            }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCUtil.closeConnection(connection);
+        }
+        return userList;
+    }
     public static void main(String[] args) {
         UserDAO userDAO = new UserDAO();
-//        ArrayList<User> list = userDAO.getAllUser();
-//        for (User user: list) {
-//            System.out.println(user);
-//        }
+        ArrayList<User> list = userDAO.getAllUserByName("vansang");
+        for (User user: list) {
+            System.out.println(user);
+        }
 
 //        System.out.println(userDAO.deleteUser("user6"));
 //        System.out.println(userDAO.blockUser("user7", "false"));
 
-        System.out.println(userDAO.registerUser("vansang", "nguyenvansang1@email.com", "vansang"));
+//        System.out.println(userDAO.registerUser("vansang", "nguyenvansang1@email.com", "vansang"));
 
     }
 

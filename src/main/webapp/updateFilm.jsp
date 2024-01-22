@@ -100,11 +100,11 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li>
+                    <li class="active has-sub">
 
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
@@ -136,7 +136,7 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-                        <form class="form-header" action="" method="POST">
+                        <form class="form-header" action="search" method="POST">
                             <input class="au-input au-input--xl" type="text" name="search" placeholder="Tìm kiếm..."/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
@@ -322,7 +322,7 @@
                                     <!-- Modal Body -->
                                     <div class="modal-body">
                                         <!-- Đặt nội dung form ở đây -->
-                                        <form action="updateFilm" method="post">
+                                        <form action="update?sid=null&fid=<%=film.getMovieID()%>" method="post">
 
                                             <div class="form-group">
                                                 <label>Id </label>
@@ -385,7 +385,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Đánh giá</label>
-                                                <input type="number" class="form-control" name="score" value="<%=film.getMovieScore()%>">
+                                                <input type="text" class="form-control" name="score" value="<%=film.getMovieScore()%>">
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="quanliphim">

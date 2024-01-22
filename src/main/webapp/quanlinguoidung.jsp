@@ -137,12 +137,14 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-                        <form class="form-header" action="" method="POST">
-                            <input class="au-input au-input--xl" type="text" name="search" placeholder="Tìm kiếm..."/>
+
+                        <form class="form-header" action=search?cid=0&uid=1&fid=0&tid=0"" method="POST">
+                            <input class="au-input au-input--xl" type="text" name="search" placeholder="Tên người dùng"/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
                         </form>
+
                         <div class="header-button">
                             <div class="noti-wrap">
                                 <div class="noti__item js-item-menu">
@@ -317,8 +319,8 @@
                             <thead class="bg-secondary text-dark">
                             <tr>
                                 <th class="align-middle">Id</th>
-                                <th class="align-middle">Email người dùng</th>
                                 <th class="align-middle">Tên người dùng</th>
+                                <th class="align-middle">Email người dùng</th>
                                 <th class="align-middle">Trạng thái hoạt động</th>
                                 <th class="align-middle">Chặn</th>
                                 <th class="align-middle">Xóa</th>
@@ -329,9 +331,9 @@
                             <tr>
                                 <td class="align-middle"><%=user.getUserId()%>
                                 </td>
-                                <td class="align-middle"><%=user.getEmail()%>
-                                </td>
                                 <td class="align-middle"><%=user.getUserName()%>
+                                </td>
+                                <td class="align-middle"><%=user.getEmail()%>
                                 </td>
                                 <td class="align-middle">
                                     <button class="btn btn-sm btn-primary"><%=user.isActive() ? "Đang hoạt động" : "Bị chặn"%>

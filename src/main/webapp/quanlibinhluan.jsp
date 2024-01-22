@@ -39,6 +39,7 @@
 
 <body class="animsition">
 <% List<Comment> comments = (List<Comment>) request.getAttribute("commentList");%>
+<% List<Comment> commentsS = (List<Comment>) request.getAttribute("commentListS");%>
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
     <header class="header-mobile d-block d-lg-none">
@@ -132,12 +133,14 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-                        <form class="form-header" action="" method="POST">
-                            <input class="au-input au-input--xl" type="text" name="search" placeholder="Tìm kiếm..."/>
+
+                        <form class="form-header" action="search?cid=1&uid=0&fid=0&tid=0" method="POST">
+                            <input class="au-input au-input--xl" type="text" name="search" placeholder="ID phim"/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
                         </form>
+
                         <div class="header-button">
                             <div class="noti-wrap">
                                 <div class="noti__item js-item-menu">
@@ -325,20 +328,41 @@
                                         <td class="align-middle"><%=comment.getCustomerID()%></td>
                                         <td class="align-middle"><%=comment.getCommentText()%></td>
                                         <td class="align-middle">
-                                            <a href="updateComment?sid=<%=comment.getCommentID()%>">
+                                            <a href="update?fid=null&sid=<%=comment.getCommentID()%>">
                                                 <button class="btn btn-sm btn-primary">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-                                                </a>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button data-id="<%=comment.getCommentID()%>" data-toggle="modal"
-                                                        data-target="#deleteComment" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button data-id="<%=comment.getCommentID()%>" data-toggle="modal"
+                                                    data-target="#deleteComment" class="btn btn-sm btn-primary">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
 
                                     </tr><%}%>
+<%--                                <%for(Comment comment : commentsS){%>--%>
+<%--                                <tr>--%>
+<%--                                    <td class="align-middle"><%=comment.getCommentID()%></td>--%>
+<%--                                    <td class="align-middle"><%=comment.getMovieID()%></td>--%>
+<%--                                    <td class="align-middle"><%=comment.getCustomerID()%></td>--%>
+<%--                                    <td class="align-middle"><%=comment.getCommentText()%></td>--%>
+<%--                                    <td class="align-middle">--%>
+<%--                                        <a href="update?fid=null&sid=<%=comment.getCommentID()%>">--%>
+<%--                                            <button class="btn btn-sm btn-primary">--%>
+<%--                                                <i class="fa-solid fa-pen"></i>--%>
+<%--                                            </button>--%>
+<%--                                        </a>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="align-middle">--%>
+<%--                                        <button data-id="<%=comment.getCommentID()%>" data-toggle="modal"--%>
+<%--                                                data-target="#deleteComment" class="btn btn-sm btn-primary">--%>
+<%--                                            <i class="fa fa-times"></i>--%>
+<%--                                        </button>--%>
+<%--                                    </td>--%>
+
+<%--                                </tr><%}%>--%>
                             </tbody>
                         </table>
                     </div>

@@ -77,6 +77,31 @@ public class CommentDAO {
         }
         return false;
     }
+    public ArrayList<Comment> getAllCommentByMovieID(String movieID) {
+        Connection connection = null;
+        ArrayList<Comment> list = new ArrayList<>();
+
+        try {
+            connection = JDBCUtil.getConnection();
+            String query = "select * from usercomment where movieID = ?";
+            PreparedStatement pr = connection.prepareStatement(query);
+            pr.setString(1, movieID);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                Comment comment = new Comment();
+                comment.setCommentID(rs.getString("commentID"));
+                comment.setMovieID(rs.getString("movieID"));
+                comment.setCustomerID(rs.getString("customerID"));
+                comment.setCommentText(rs.getString("commentText"));
+                list.add(comment);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCUtil.closeConnection(connection);
+        }
+        return list;
+    }
     public static void main(String[] args) {
         CommentDAO commentDAO = new CommentDAO();
 //        for(Comment comment : commentDAO.getAllComment()){
