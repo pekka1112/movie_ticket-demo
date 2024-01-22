@@ -37,7 +37,7 @@ public class SearchController extends HttpServlet {
                 req.setAttribute("showAll", false);
                 req.getRequestDispatcher("quanlibinhluan.jsp").forward(req, resp);
             } else {
-                resp.sendRedirect("quanlibinhquan");
+                resp.sendRedirect("quanlibinhluan");
 
             }
         } else if (Uid.equals("1")) {

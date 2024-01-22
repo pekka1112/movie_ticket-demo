@@ -24,7 +24,7 @@ public class TicketController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
     if(user == null ){
         resp.sendRedirect("404.jsp");
     }else {
@@ -41,9 +41,8 @@ public class TicketController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         String idTicket = req.getParameter("ticketID");
-        System.out.println(idTicket);
+        System.out.println("delete" +idTicket);
         try {
-
             Connection connection = JDBCUtil.getConnection();
             String sqlDelete = "delete from ticket where ticketID= ?";
             PreparedStatement pr = connection.prepareStatement(sqlDelete);

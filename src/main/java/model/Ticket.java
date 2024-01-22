@@ -1,11 +1,7 @@
 package model;
 
 public class Ticket {
-<<<<<<< HEAD
-    private  String ticketID;
-    private  String cinemaID;
-    private  String showtimeID;
-=======
+
     String ticketID;
     String cinemaID;
     String showtimeID;
@@ -18,7 +14,7 @@ public class Ticket {
         this.cinemaID = cinemaID;
         this.showtimeID = showtimeID;
     }
->>>>>>> QUYEN
+
 
     public String getTicketID() {
         return ticketID;
@@ -44,9 +40,7 @@ public class Ticket {
         this.showtimeID = showtimeID;
     }
 
-<<<<<<< HEAD
-    public Ticket() {
-=======
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -54,6 +48,6 @@ public class Ticket {
                 ", cinemaID='" + cinemaID + '\'' +
                 ", showtimeID='" + showtimeID + '\'' +
                 '}';
->>>>>>> QUYEN
+
     }
 }

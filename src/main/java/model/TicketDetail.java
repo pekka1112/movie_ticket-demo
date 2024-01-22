@@ -1,20 +1,7 @@
 package model;
 
 public class TicketDetail {
-<<<<<<< HEAD
-    private  String ticketDetailID;
-    private  String ticketID;
-    private  double price;
-    private  String seatID;
-    private  String cinemaRoomID;
 
-    public String getTicketDetailID() {
-        return ticketDetailID;
-    }
-
-    public void setTicketDetailID(String ticketDetailID) {
-        this.ticketDetailID = ticketDetailID;
-=======
     String ticketID;
     String price;
     String seatName;
@@ -51,7 +38,7 @@ public class TicketDetail {
         this.director = director;
         this.country = country;
         this.movieScore = movieScore;
->>>>>>> QUYEN
+
     }
 
     public String getTicketID() {
@@ -62,33 +49,6 @@ public class TicketDetail {
         this.ticketID = ticketID;
     }
 
-<<<<<<< HEAD
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getSeatID() {
-        return seatID;
-    }
-
-    public void setSeatID(String seatID) {
-        this.seatID = seatID;
-    }
-
-    public String getCinemaRoomID() {
-        return cinemaRoomID;
-    }
-
-    public void setCinemaRoomID(String cinemaRoomID) {
-        this.cinemaRoomID = cinemaRoomID;
-    }
-
-    public TicketDetail() {
-=======
     public String getPrice() {
         return price;
     }
@@ -205,21 +165,20 @@ public class TicketDetail {
     public String toString() {
         return "TicketDetail{" +
                 "ticketID='" + ticketID + '\'' +
-                ", movieName='" + movieName + '\'' +
                 ", price='" + price + '\'' +
+                ", seatName='" + seatName + '\'' +
+                ", seatType='" + seatType + '\'' +
+                ", roomName='" + roomName + '\'' +
+                ", cinemaName='" + cinemaName + '\'' +
+                ", location='" + location + '\'' +
+                ", showDate='" + showDate + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", movieName='" + movieName + '\'' +
                 ", movieCategory='" + movieCategory + '\'' +
                 ", director='" + director + '\'' +
                 ", country='" + country + '\'' +
                 ", movieScore='" + movieScore + '\'' +
-                ", cinemaName='" + cinemaName + '\'' +
-                ", roomName='" + roomName + '\'' +
-                ", seatName='" + seatName + '\'' +
-                ", seatType='" + seatType + '\'' +
-                ", showDate='" + showDate + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
-                ", location='" + location + '\'' +
                 '}';
->>>>>>> QUYEN
     }
 }

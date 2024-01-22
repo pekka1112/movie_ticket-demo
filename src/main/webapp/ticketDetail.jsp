@@ -46,7 +46,7 @@
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" href="login">
+                    <a class="logo" href="adminHome">
                         <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET"
                              style="height:35px;"/>
                         PZO TICKET
@@ -63,7 +63,7 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow" href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
@@ -73,7 +73,7 @@
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li>
+                    <li class="active has-sub">
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
@@ -95,7 +95,7 @@
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
-            <a href="adminhome.jsp">
+            <a href="adminHome">
                 <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET" style="height:35px;"/>
                 PZO TICKET
             </a>
@@ -103,7 +103,7 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li >
                         <a class="js-arrow"  href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>

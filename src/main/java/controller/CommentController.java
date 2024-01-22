@@ -24,7 +24,7 @@ public class CommentController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         if (user == null) {
             resp.sendRedirect("404.jsp");
         } else {

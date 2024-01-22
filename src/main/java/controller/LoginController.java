@@ -27,23 +27,12 @@ public class LoginController extends HttpServlet {
         User user = userDAO.getUserbyEmailAndPassword(email, password);
         HttpSession session = req.getSession();
         if (user != null){
-           session.setAttribute("user",user);
            if(user.isAdmin()){
-<<<<<<< HEAD
-               System.out.println("admin");
-=======
-               AdminHomeDAO adminHomeDAO = new AdminHomeDAO();
-               req.setAttribute("userOnl", adminHomeDAO.getUserOnl());
-               req.setAttribute("ticketQuantity", adminHomeDAO.getTicketQuantity());
-               req.setAttribute("totalMovie", adminHomeDAO.gettotalMovie());
-               req.setAttribute("totalEaring", adminHomeDAO.getTotalEarning());
-               req.setAttribute("Top10MovieEaring", adminHomeDAO.getFilmEaring());
-
->>>>>>> QUYEN
-               req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
-               return;
+                session.setAttribute("admin",user);
+                resp.sendRedirect("adminHome");
            }
            else{
+               session.setAttribute("user",user);
                req.getRequestDispatcher("index.jsp").forward(req,resp);
                return;
            }

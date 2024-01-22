@@ -2,44 +2,7 @@ package database;
 
 import model.TicketDetail;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
 
-public class TicketDetailDAO implements DAOInterface<TicketDetail>{
-    @Override
-    public ArrayList<TicketDetail> selectAll() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<TicketDetail> selectById(TicketDetail object) {
-        return null;
-    }
-
-    @Override
-    public int insert(TicketDetail obj) {
-        return 0;
-    }
-
-    @Override
-    public int insertAll(ArrayList<TicketDetail> arrayList) {
-        return 0;
-    }
-
-    @Override
-    public int delete(TicketDetail obj) {
-        return 0;
-    }
-
-    @Override
-    public int deleteAll(ArrayList<TicketDetail> arrayList) {
-        return 0;
-    }
-
-    @Override
-    public int update(TicketDetail obj) {
-        return 0;
-=======
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -87,6 +50,6 @@ public class TicketDetailDAO {
     public static void main(String[] args) {
         TicketDetailDAO ticketDetailDAO = new TicketDetailDAO();
         System.out.println(ticketDetailDAO.getTicketDetailByID("tk1").toString());
->>>>>>> QUYEN
+
     }
 }

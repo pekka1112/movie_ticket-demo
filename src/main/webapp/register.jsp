@@ -17,7 +17,7 @@
 
 
 </head>
-<body style="background: url('img/pxfuel.jpg') no-repeat;"  >
+<body style="background: url('img/pxfuel.jpg') no-repeat; background-size: cover">
 <input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
 <div class="form register">
     <div class="form-box register">
