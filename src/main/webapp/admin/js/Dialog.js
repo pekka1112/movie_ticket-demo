@@ -10,7 +10,8 @@ function Dialog(idForm, idBtn, where, attribute, type) {
             const xhr = new XMLHttpRequest();
             const url = `http://localhost:8080/Movie_Ticket_Website_war/${where}?${attribute}=${id}`;
 
-            xhr.open(type === 'delete' ? 'DELETE' : 'PUT', url, true);
+
+            xhr.open(type === 'delete' ? 'DELETE' : type === 'put' ? 'PUT' : 'POST', url, true);
 
             xhr.onload = function () {
                 if (xhr.status === 200) {

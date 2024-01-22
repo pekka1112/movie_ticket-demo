@@ -1,6 +1,4 @@
-<%@page import="model.Film" %>
-<%@page import="java.util.List" %>
-<%@ page import="database.FilmDAO" %>
+<%@ page import="model.Film" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +6,7 @@
 <head>
 
     <!-- Title Page-->
-    <title>ADMIN HOME</title>
+    <title>UPDATE FILM</title>
 
     <!-- Fontfaces CSS-->
     <link href="admin/css/font-face.css" rel="stylesheet" media="all">
@@ -34,11 +32,11 @@
     <!-- new css -->
     <link rel="stylesheet" href="admin/css/style_admin.css">
 
+
 </head>
 
 <body class="animsition">
-<%List<Film> films = (List<Film>) request.getAttribute("filmList");%>
-
+<%--<%List<User> users = (List<User>) request.getAttribute("listUser");%>--%>
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
     <header class="header-mobile d-block d-lg-none">
@@ -62,26 +60,29 @@
         <nav class="navbar-mobile">
             <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                    <li >
-                        <a class="js-arrow"  href="quanlinguoidung">
+                    <li class="active has-sub">
+                        <a class="js-arrow" href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li class="active has-sub">
+                    <li>
+
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
+
+
                 </ul>
             </div>
         </nav>
@@ -104,21 +105,24 @@
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
                     <li class="active has-sub">
+
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
                     </li>
+
+
                 </ul>
             </nav>
         </div>
@@ -132,14 +136,12 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-
                         <form class="form-header" action="search?cid=0&uid=0&fid=1&tid=0" method="POST">
                             <input class="au-input au-input--xl" type="text" name="search" placeholder="Tên phim"/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
                         </form>
-
                         <div class="header-button">
                             <div class="noti-wrap">
                                 <div class="noti__item js-item-menu">
@@ -308,189 +310,98 @@
             <div>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered text-center mb-0">
-                            <thead class="bg-secondary text-dark">
-                            <tr>
-                                <th class="align-middle">ID</th>
-                                <th class="align-middle">Tên</th>
-                                <th class="align-middle">Thể loại</th>
-                                <th class="align-middle">Ngày phát hành</th>
-                                <th class="align-middle">Tác giả</th>
-                                <th class="align-middle">Thời gian</th>
-                                <th class="align-middle">Quốc gia</th>
-                                <th class="align-middle">Mô tả</th>
-                                <th class="align-middle">Nội dung</th>
-                                <th class="align-middle">Trạng thái</th>
-                                <th class="align-middle">Đánh giá</th>
-                                <th class="align-middle">Sửa</th>
-                                <th class="align-middle">Xóa</th>
-                            </tr>
-                            </thead>
-                            <tbody class="align-middle" id="renderdata-user">
-                            <%boolean showAll = (boolean) request.getAttribute("showAll");
-                            if (showAll) {
-                            for (Film film : films) {%>
-                            <tr>
-                                <td class="align-middle"><%=film.getMovieID()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieName()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieCategory()%>
-                                </td>
-                                <td class="align-middle"><%=film.getReleaseDate()%>
-                                </td>
-                                <td class="align-middle"><%=film.getDirector()%>
-                                </td>
-                                <td class="align-middle"><%=film.getDuration()%>
-                                </td>
-                                <td class="align-middle"><%=film.getCountry()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieDescription()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieContent()%>
-                                </td>
-                                <%if (film.isPublished()) {%>
-                                <td class="align-middle">Đã chiếu</td>
-                                <%} else {%>
-                                <td class="align-middle">Sắp chiếu</td>
-                                <%}%>
-                                <td class="align-middle"><%=film.getMovieScore()%>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="update?sid=null&fid=<%=film.getMovieID()%>">
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </button>
-                                    </a>
-                                </td>
-                                <td class="align-middle">
-                                    <button data-id="<%=film.getMovieID()%>" data-toggle="modal"
-                                            data-target="#deleteFilm" class="btn btn-sm btn-primary"><i
-                                            class="fa fa-times"></i></button>
-                                </td>
-                            </tr>
-                            <%}%>
-                            <%}else{
-                            List<Film> listFilmSearch = (List<Film>) request.getAttribute("filmListS");
-                            for(Film film : listFilmSearch){%>
-                            <tr>
-                                <td class="align-middle"><%=film.getMovieID()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieName()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieCategory()%>
-                                </td>
-                                <td class="align-middle"><%=film.getReleaseDate()%>
-                                </td>
-                                <td class="align-middle"><%=film.getDirector()%>
-                                </td>
-                                <td class="align-middle"><%=film.getDuration()%>
-                                </td>
-                                <td class="align-middle"><%=film.getCountry()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieDescription()%>
-                                </td>
-                                <td class="align-middle"><%=film.getMovieContent()%>
-                                </td>
-                                <%if (film.isPublished()) {%>
-                                <td class="align-middle">Đã chiếu</td>
-                                <%} else {%>
-                                <td class="align-middle">Sắp chiếu</td>
-                                <%}%>
-                                <td class="align-middle"><%=film.getMovieScore()%>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="update?sid=null&fid=<%=film.getMovieID()%>">
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </button>
-                                    </a>
-                                </td>
-                                <td class="align-middle">
-                                    <button data-id="<%=film.getMovieID()%>" data-toggle="modal"
-                                            data-target="#deleteFilm" class="btn btn-sm btn-primary"><i
-                                            class="fa fa-times"></i></button>
-                                </td>
-                            </tr>
-                            <%}%>
-                            <%}%>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="add-film" style="margin-left: 20px">
-                        <!-- Đặt nội dung form ở đây -->
-                        <div style="margin: 20px 0px 20px 0px">
-                            <h4>Thêm Phim Mới</h4>
+                        <% Film film = (Film) request.getAttribute("film");%>
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Sửa thông tin</h4>
+                                        <button type="button" class="close" data-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        <!-- Đặt nội dung form ở đây -->
+                                        <form action="update?sid=null&fid=<%=film.getMovieID()%>" method="post">
+
+                                            <div class="form-group">
+                                                <label>Id </label>
+                                                <input type="text" class="form-control" name="id" value="<%=film.getMovieID()%>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tên </label>
+                                                <input type="text" class="form-control" name="name" value="<%=film.getMovieName()%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Thể loại</label>
+                                                <input type="text" class="form-control" name="category" value="<%=film.getMovieCategory()%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Ngày phát hành</label>
+                                                <input type="text" class="form-control" name="releaseDate" placeholder="yyyy-MM-dd" value="<%=film.getReleaseDate()%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tác giả</label>
+                                                <input type="text" class="form-control" name="director" value="<%=film.getDirector()%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Thời gian</label>
+                                                <input type="text" class="form-control" name="duration" value="<%=film.getDuration()%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Quốc gia</label>
+                                                <input type="text" class="form-control" name="country" value="<%=film.getCountry()%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Mô tả</label>
+                                                <div>
+                                                    <textarea class="form-control" name="description" ><%=film.getMovieDescription()%></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nội dung</label>
+                                                <div>
+                                                    <textarea class="form-control" name="content" ><%=film.getMovieContent()%></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Trạng thái</label>
+                                                <div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="isPublished" value="true"
+                                                               id="flexRadioDefault1" <%=film.isPublished()?"checked":""%>>
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Đã chiếu
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="isPublished" value="false"
+                                                               id="flexRadioDefault2" <%=film.isPublished()?"":"checked"%>>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            Chưa chiếu
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Đánh giá</label>
+                                                <input type="text" class="form-control" name="score" value="<%=film.getMovieScore()%>">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="quanliphim">
+                                                <button type="button" class="btn btn-secondary" >Đóng</button>
+                                                </a>
+                                                <button  type="submit" class="btn btn-primary">Lưu</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
                         </div>
-                        <form action="quanliphim" method="post">
-                            <div class="form-group">
-                                <label>Tên </label>
-                                <input type="text" class="form-control" name="name">
-                            </div>
-                            <div class="form-group">
-                                <label>Thể loại</label>
-                                <input type="text" class="form-control" name="category">
-                            </div>
-                            <div class="form-group">
-                                <label>Ngày phát hành</label>
-                                <input type="text" class="form-control" name="releaseDate" placeholder="yyyy-MM-dd">
-                            </div>
-                            <div class="form-group">
-                                <label>Tác giả</label>
-                                <input type="text" class="form-control" name="director">
-                            </div>
-                            <div class="form-group">
-                                <label>Thời gian</label>
-                                <input type="text" class="form-control" name="duration">
-                            </div>
-                            <div class="form-group">
-                                <label>Quốc gia</label>
-                                <input type="text" class="form-control" name="country">
-                            </div>
-                            <div class="form-group">
-                                <label>Mô tả</label>
-                                <div>
-                                    <textarea class="form-control" name="description"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Nội dung</label>
-                                <div>
-                                    <textarea class="form-control" name="content"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Trạng thái</label>
-                                <div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="isPublished" value="true"
-                                               id="flexRadioDefault11">
-                                        <label class="form-check-label" for="flexRadioDefault11">
-                                            Đã chiếu
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="isPublished" value="false"
-                                               id="flexRadioDefault22" checked>
-                                        <label class="form-check-label" for="flexRadioDefault22">
-                                            Chưa chiếu
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Đánh giá</label>
-                                <input type="text" class="form-control" name="score">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                <button type="submit" class="btn btn-primary">Lưu</button>
-                            </div>
-                        </form>
+
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- END MAIN CONTENT-->
         <!-- END PAGE CONTAINER-->
@@ -498,33 +409,6 @@
 
 </div>
 
-
-<%--Delete--%>
-<div id="deleteFilm" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Xóa phim</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa nó không ? </p>
-            </div>
-            <div class="modal-footer">
-                <button id="btn-delete-film" type="button" class="btn btn-danger">Xóa</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script src="./admin/js/Dialog.js"></script>
-<script>
-    Dialog('#deleteFilm', '#btn-delete-film', 'quanliphim', 'movieID', 'delete')
-</script>
 <!-- Jquery JS-->
 <script src="admin/vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->

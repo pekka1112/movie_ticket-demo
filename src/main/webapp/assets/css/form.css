@@ -12,9 +12,14 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+<<<<<<< HEAD
     background: url('../../img/pxfuel.jpg') no-repeat !important;
     background-size: cover;
     background-position: center;
+=======
+    background-size: cover !important;
+    background: url('../images/bgr_login.png') no-repeat center;
+>>>>>>> QUYEN
 }
 
 header {
