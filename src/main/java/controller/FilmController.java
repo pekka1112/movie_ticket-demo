@@ -34,11 +34,7 @@ public class FilmController extends HttpServlet {
     }else {
         FilmDAO filmDAO = new FilmDAO();
         req.setAttribute("filmList", filmDAO.getAllFilm());
-//        for(Film film : filmDAO.getAllFilm()){
-//            String id = film.getMovieID();
-//       }
-//            Film film1 = filmDAO.getFilmById(id);
-//            req.setAttribute("updateFilm", film1);
+        req.setAttribute("showAll", true);
         req.getRequestDispatcher("quanliphim.jsp").forward(req,resp);
 
     }

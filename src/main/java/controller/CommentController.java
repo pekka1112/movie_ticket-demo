@@ -30,6 +30,7 @@ public class CommentController extends HttpServlet {
         } else {
             CommentDAO commentDAO = new CommentDAO();
             req.setAttribute("commentList", commentDAO.getAllComment());
+            req.setAttribute("showAll", true);
             req.getRequestDispatcher("quanlibinhluan.jsp").forward(req, resp);
 
         }

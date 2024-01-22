@@ -43,14 +43,15 @@
 </head>
 
 <body class="animsition">
-<%List<User> users = (List<User>) request.getAttribute("userList");%>
+
+
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
     <header class="header-mobile d-block d-lg-none">
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" href="adminhome.jsp">
+                    <a class="logo" href="login">
                         <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET"
                              style="height:35px;"/>
                         PZO TICKET
@@ -71,18 +72,18 @@
                         <a class="js-arrow" href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li >
+                    <li>
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
@@ -105,21 +106,21 @@
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
                     <li class="active has-sub">
-                        <a class="js-arrow"  href="quanlinguoidung">
+                        <a class="js-arrow" href="quanlinguoidung">
                             <i class="fas fa-tachometer-alt"></i>Quản Lí Người Dùng</a>
                     </li>
-                    <li >
+                    <li>
                         <a href="quanliphim">
                             <i class="fas fa-chart-bar"></i>Quản Lí Phim
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlive">
                             <i class="fas fa-table"></i>Quản Lí vé
                         </a>
 
                     </li>
-                    <li >
+                    <li>
                         <a href="quanlibinhluan">
                             <i class="far fa-check-square"></i>Quản Lí Bình Luận
                         </a>
@@ -138,8 +139,9 @@
                 <div class="container-fluid">
                     <div class="header-wrap">
 
-                        <form class="form-header" action=search?cid=0&uid=1&fid=0&tid=0"" method="POST">
-                            <input class="au-input au-input--xl" type="text" name="search" placeholder="Tên người dùng"/>
+                        <form class="form-header" action="search?cid=0&uid=1&fid=0&tid=0" method="POST">
+                            <input class="au-input au-input--xl" type="text" name="search"
+                                   placeholder="Tên người dùng"/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
@@ -152,30 +154,30 @@
                                     <span class="quantity">1</span>
                                     <div class="mess-dropdown js-dropdown">
                                         <div class="mess__title">
-                                            <p>You have 2 news message</p>
+                                            <p>Bạn có 2 tin nhắn</p>
                                         </div>
                                         <div class="mess__item">
                                             <div class="image img-cir img-40">
-                                                <img src="./assets/images/thanh_quyen_avt.png" alt="Michelle Moreno"/>
+                                                <img src="assets/images/thanh_phat_avt.png" alt="Thanh Phát"/>
                                             </div>
                                             <div class="content">
-                                                <h6>Michelle Moreno</h6>
-                                                <p>Have sent a photo</p>
-                                                <span class="time">3 min ago</span>
+                                                <h6>Thanh Phát</h6>
+                                                <p>Đã gửi một bức ảnh</p>
+                                                <span class="time">3 phút trước</span>
                                             </div>
                                         </div>
                                         <div class="mess__item">
                                             <div class="image img-cir img-40">
-                                                <img src="./assets/images/thanh_quyen_avt.png" alt="Diane Myers"/>
+                                                <img src="assets/images/thanh_phat_avt.png" alt="Thanh Phát"/>
                                             </div>
                                             <div class="content">
-                                                <h6>Diane Myers</h6>
-                                                <p>You are now connected on message</p>
-                                                <span class="time">Yesterday</span>
+                                                <h6>Thanh Phát</h6>
+                                                <p>bây giờ bạn đã kết nối qua tin nhắn</p>
+                                                <span class="time">Hôm qua</span>
                                             </div>
                                         </div>
                                         <div class="mess__footer">
-                                            <a href="#">View all messages</a>
+                                            <a href="#">Xem tất cả tin nhắn</a>
                                         </div>
                                     </div>
                                 </div>
@@ -184,37 +186,37 @@
                                     <span class="quantity">1</span>
                                     <div class="email-dropdown js-dropdown">
                                         <div class="email__title">
-                                            <p>You have 3 New Emails</p>
+                                            <p>Bạn có 3 email mới</p>
                                         </div>
                                         <div class="email__item">
                                             <div class="image img-cir img-40">
-                                                <img src="./assets/images/thanh_quyen_avt.png" alt="Cynthia Harvey"/>
+                                                <img src="assets/images/thanh_phat_avt.png" alt="Thanh Phát"/>
                                             </div>
                                             <div class="content">
-                                                <p>Meeting about new dashboard...</p>
-                                                <span>Cynthia Harvey, 3 min ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="email__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="./assets/images/thanh_quyen_avt.png" alt="Cynthia Harvey"/>
-                                            </div>
-                                            <div class="content">
-                                                <p>Meeting about new dashboard...</p>
-                                                <span>Cynthia Harvey, Yesterday</span>
+                                                <p>Cuộc họp về bảng điều khiển mới...</p>
+                                                <span>Thanh Phát, 3 phút trước</span>
                                             </div>
                                         </div>
                                         <div class="email__item">
                                             <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey"/>
+                                                <img src="assets/images/thanh_phat_avt.png" alt="Thanh Phát"/>
                                             </div>
                                             <div class="content">
-                                                <p>Meeting about new dashboard...</p>
-                                                <span>Cynthia Harvey, April 12,,2018</span>
+                                                <p>Cuộc họp về Database...</p>
+                                                <span>Thanh Phát, Hôm qua</span>
+                                            </div>
+                                        </div>
+                                        <div class="email__item">
+                                            <div class="image img-cir img-40">
+                                                <img src="assets/images/thanh_phat_avt.png" alt="Thanh Phát"/>
+                                            </div>
+                                            <div class="content">
+                                                <p>Cuộc họp về Database...</p><p>Meeting about new dashboard...</p>
+                                                <span>Thanh phát, 22-1-2024</span>
                                             </div>
                                         </div>
                                         <div class="email__footer">
-                                            <a href="#">See all emails</a>
+                                            <a href="#">Xem tất cả email</a>
                                         </div>
                                     </div>
                                 </div>
@@ -223,15 +225,15 @@
                                     <span class="quantity">3</span>
                                     <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
-                                            <p>You have 3 Notifications</p>
+                                            <p>Bạn có 3 thông báo</p>
                                         </div>
                                         <div class="notifi__item">
                                             <div class="bg-c1 img-cir img-40">
                                                 <i class="zmdi zmdi-email-open"></i>
                                             </div>
                                             <div class="content">
-                                                <p>You got a email notification</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                                <p>Bạn đã nhận được thông báo qua email</p>
+                                                <span class="date">21-01-2024, 06:50</span>
                                             </div>
                                         </div>
                                         <div class="notifi__item">
@@ -239,8 +241,8 @@
                                                 <i class="zmdi zmdi-account-box"></i>
                                             </div>
                                             <div class="content">
-                                                <p>Your account has been blocked</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                                <p>Bạn có 1 email mới</p>
+                                                <span class="date">22-01-2024, 09:30</span>
                                             </div>
                                         </div>
                                         <div class="notifi__item">
@@ -248,12 +250,12 @@
                                                 <i class="zmdi zmdi-file-text"></i>
                                             </div>
                                             <div class="content">
-                                                <p>You got a new file</p>
-                                                <span class="date">April 12, 2018 06:50</span>
+                                                <p>Bạn có một tập tin mới</p>
+                                                <span class="date">22-01-2024, 11:01</span>
                                             </div>
                                         </div>
                                         <div class="notifi__footer">
-                                            <a href="#">All notifications</a>
+                                            <a href="#">Tất cả thông báo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -283,20 +285,20 @@
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
                                                 <a href="#">
-                                                    <i class="zmdi zmdi-account"></i>Account</a>
+                                                    <i class="zmdi zmdi-account"></i>Tài khoản</a>
                                             </div>
                                             <div class="account-dropdown__item">
                                                 <a href="#">
-                                                    <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                    <i class="zmdi zmdi-settings"></i>Cài đặt</a>
                                             </div>
                                             <div class="account-dropdown__item">
                                                 <a href="#">
-                                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                                    <i class="zmdi zmdi-money-box"></i>Thanh toán</a>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <a href="login.jsp">
+                                                <i class="zmdi zmdi-power"></i>Đăng xuất</a>
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +329,11 @@
                             </tr>
                             </thead>
                             <tbody class="align-middle" id="renderdata-user">
-                            <%for (User user : users) {%>
+                            <%boolean showAll = (boolean) request.getAttribute("showAll");
+                            System.out.println(showAll);
+                                if (showAll) {
+                                List<User> users = (List<User>) request.getAttribute("userList");
+                            for (User user : users) {%>
                             <tr>
                                 <td class="align-middle"><%=user.getUserId()%>
                                 </td>
@@ -352,6 +358,36 @@
                                 </td>
 
                             </tr>
+                            <%}%>
+                            <%} else {
+                            List<User> listUserSearch = (List<User>) request.getAttribute("userListS");
+                            for(User user : listUserSearch) {%>
+                            <tr>
+                                <td class="align-middle"><%=user.getUserId()%>
+                                </td>
+                                <td class="align-middle"><%=user.getUserName()%>
+                                </td>
+                                <td class="align-middle"><%=user.getEmail()%>
+                                </td>
+                                <td class="align-middle">
+                                    <button class="btn btn-sm btn-primary"><%=user.isActive() ? "Đang hoạt động" : "Bị chặn"%>
+                                    </button>
+                                </td>
+                                <td class="align-middle">
+                                    <button id="btnBlock1" data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary"
+                                            data-toggle="modal" data-target="#blockUser"
+                                            title=<%= user.isActive() ? "Chặn" : "Mở chặn" %>><i
+                                            class="fa-solid fa-ban"></i></button>
+                                </td>
+                                <td class="align-middle">
+                                    <button data-id="<%=user.getUserId()%>" class="btn btn-sm btn-primary"
+                                            data-toggle="modal" data-target="#deleteUser" title="Xóa"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
+
+                            </tr>
+
+                            <%}%>
                             <%}%>
 
                             </tbody>

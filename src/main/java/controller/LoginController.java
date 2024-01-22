@@ -31,7 +31,10 @@ public class LoginController extends HttpServlet {
                AdminHomeDAO adminHomeDAO = new AdminHomeDAO();
                req.setAttribute("userOnl", adminHomeDAO.getUserOnl());
                req.setAttribute("ticketQuantity", adminHomeDAO.getTicketQuantity());
+               req.setAttribute("totalMovie", adminHomeDAO.gettotalMovie());
                req.setAttribute("totalEaring", adminHomeDAO.getTotalEarning());
+               req.setAttribute("Top10MovieEaring", adminHomeDAO.getFilmEaring());
+
                req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
                return;
            }

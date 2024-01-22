@@ -30,6 +30,7 @@ public class TicketController extends HttpServlet {
     }else {
         TicketDAO ticketDAO = new TicketDAO();
         req.setAttribute("tickets", ticketDAO.getAllTicket());
+        req.setAttribute("showAll", true);
         req.getRequestDispatcher("quanlive.jsp").forward(req,resp);
 
     }
