@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
+
 <head>
     <title>Đặt vé : ${movieName}</title>
     <jsp:include page="layout-view/head_libraries.jsp"></jsp:include>

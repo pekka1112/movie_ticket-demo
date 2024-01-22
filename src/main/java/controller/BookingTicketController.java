@@ -25,10 +25,13 @@ public class BookingTicketController extends HttpServlet {
     public static SeatDAO seatDAO;
     public static UserDAO userDAO;
     public static CustomerDAO customerDAO;
+    public static UserCommentDAO userCommentDAO;
     public static PaymentDAO paymentDAO;
     public static CinemaRoomDAO cinemaRoomDAO;
-    public static List<Cinema>  allCinema;
     public static List<UserCommentDetail> comments ;
+    public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies, movieListForCNameAndShowtime;
+    public static List<Cinema> top2Cinema, allCinema;
+    public static String cinemaSearchText = "";
     public BookingTicketController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -71,13 +74,45 @@ public class BookingTicketController extends HttpServlet {
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
         List<Cinema> cinemaListGetByMovie = cinemaDAO.getCinemaByMovieID(movieID);
+        HttpSession session = req.getSession();
+        session.removeAttribute("status_getCinemaListOfThisMovie");
+        if(cinemaListGetByMovie.size() == 0 || cinemaListGetByMovie == null) {
+
+            movieDAO = new MovieDAO();
+            cinemaDAO = new CinemaDAO();
+            userCommentDAO = new UserCommentDAO();
+            newestMovies = movieDAO.getNewestFilms(5);
+            publishedMovies = movieDAO.getPublishedMoive(1,5);
+            unPublishedMovies = movieDAO.getPublishedMoive(0,4);
+            popularMovies = movieDAO.getMostPopularMoive(3);
+            allCinema = cinemaDAO.getAllCinema();
+            top2Cinema = cinemaDAO.getMostPopularCinema();
+            comments = userCommentDAO.getPopularComment(3);
+            req.setAttribute("top4NewestMovies", newestMovies);
+            req.setAttribute("publishedMovies", publishedMovies);
+            req.setAttribute("unPublishedMovies", unPublishedMovies);
+            req.setAttribute("popularMovies", popularMovies);
+            req.setAttribute("top2Cinema",top2Cinema);
+            req.setAttribute("comments",comments);
+            // process : show all cinema
+            req.setAttribute("txtHistory", "");
+            cinemaSearchText = "";
+            req.setAttribute("allCinema", allCinema);
+            req.setAttribute("searchedResultCinemaList",null);
+            req.setAttribute("isShowAllCinema",true);
+            session.setAttribute("status_getCinemaListOfThisMovie", "0");
+            RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
+            rd.forward(req,resp);
+            return;
+        } else {
+            session.setAttribute("status_getCinemaListOfThisMovie", "1");
+        }
         List<String> cinemaNameList = new ArrayList<>();
         for(Cinema c : cinemaListGetByMovie) {
             cinemaNameList.add(c.getCinemaName());
         }
         req.setAttribute("cinemaListGetByMovieSize", cinemaNameList.size());
         req.setAttribute("cinemaListGetByMovie", cinemaNameList);
-
         RequestDispatcher rd = req.getRequestDispatcher("/bookingTicket.jsp");
         if (rd != null) {
             rd.forward(req, resp);

@@ -28,9 +28,7 @@ public class HomeController extends HttpServlet {
     public static List<Cinema>  allCinema, top2Cinema, searchedResultCinemaList;
     public static List<UserCommentDetail> comments ;
     public static String cinemaSearchText = "";
-    public HomeController() {
-
-    }
+    public HomeController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -129,14 +127,6 @@ public class HomeController extends HttpServlet {
         req.setAttribute("searchedResultCinemaList",null);
         req.setAttribute("isShowAllCinema",true);
         RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
-        String status = req.getParameter("status");
-        if(status != null) {
-            if(status.equals("non_cinema")){
-                req.setAttribute("status",true);
-            } else {
-                req.setAttribute("status",false);
-            }
-        }
         if (rd != null) {
             rd.forward(req, resp);
         } else {

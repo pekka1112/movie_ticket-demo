@@ -86,21 +86,21 @@
                             </div>
                         </a>
                         <a class="list-group-item active" href="userpage-servlet?action=changeToProfileSetting"><i class="fa fa-user text-muted"></i>Cài đặt tài khoản</a>
-                        <a class="list-group-item" href="#"><i class="fa fa-map-marker text-muted"></i>Addresses</a>
-                        <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-wishlist-profile-page" tagert="__blank">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div><i class="fa fa-heart mr-1 text-muted"></i>
-                                    <div class="d-inline-block font-weight-medium text-uppercase">My Wishlist</div>
-                                </div><span class="badge badge-secondary">3</span>
-                            </div>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div><i class="fa fa-tag mr-1 text-muted"></i>
-                                    <div class="d-inline-block font-weight-medium text-uppercase">My Tickets</div>
-                                </div><span class="badge badge-secondary">4</span>
-                            </div>
-                        </a>
+<%--                        <a class="list-group-item" href="#"><i class="fa fa-map-marker text-muted"></i>Addresses</a>--%>
+<%--                        <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-wishlist-profile-page" tagert="__blank">--%>
+<%--                            <div class="d-flex justify-content-between align-items-center">--%>
+<%--                                <div><i class="fa fa-heart mr-1 text-muted"></i>--%>
+<%--                                    <div class="d-inline-block font-weight-medium text-uppercase">My Wishlist</div>--%>
+<%--                                </div><span class="badge badge-secondary">3</span>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                        <a class="list-group-item" href="#">--%>
+<%--                            <div class="d-flex justify-content-between align-items-center">--%>
+<%--                                <div><i class="fa fa-tag mr-1 text-muted"></i>--%>
+<%--                                    <div class="d-inline-block font-weight-medium text-uppercase">My Tickets</div>--%>
+<%--                                </div><span class="badge badge-secondary">4</span>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
                     </nav>
                 </div>
             </div>

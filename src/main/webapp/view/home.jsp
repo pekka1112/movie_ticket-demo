@@ -22,14 +22,23 @@
 %>
 <script>
     function noteNonCinema() {
-        alert("Xin lỗi, HIỆN TẠI KHÔNG CÓ RẠP NÀO CHIẾU PHIM NÀY");
+        alert("HIỆN TẠI KHÔNG CÓ RẠP NÀO CHIẾU PHIM NÀY");
+
     }
 </script>
-<c:if test="${status != null}">
-    <c:if test="${status}">
-        <script>noteNonCinema();</script>
-    </c:if>
-</c:if>
+<%
+    String status_getCinemaListOfThisMovie = (String) session.getAttribute("status_getCinemaListOfThisMovie");
+    session.removeAttribute("status_getCinemaListOfThisMovie");
+    if(status_getCinemaListOfThisMovie != null) {
+        if(status_getCinemaListOfThisMovie.equals("0")) {
+%>
+
+<script>noteNonCinema();</script>
+<%
+        }
+    }
+%>
+
 <body>
 <jsp:include page="../layout-view/header.jsp"></jsp:include>
 
