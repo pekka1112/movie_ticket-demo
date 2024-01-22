@@ -2,6 +2,7 @@ package model;
 
 public class Ticket {
 
+
     String ticketID;
     String cinemaID;
     String showtimeID;
@@ -14,6 +15,7 @@ public class Ticket {
         this.cinemaID = cinemaID;
         this.showtimeID = showtimeID;
     }
+
 
 
     public String getTicketID() {

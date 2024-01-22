@@ -290,7 +290,7 @@
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="login.jsp">
+                                            <a href="logout">
                                                 <i class="zmdi zmdi-power"></i>Đăng xuất</a>
                                         </div>
                                     </div>

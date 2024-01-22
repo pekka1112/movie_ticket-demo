@@ -47,7 +47,8 @@ public class UserCommentDAO implements DAOInterface<UserComment>{
 
     public  static List<UserCommentDetail> getPopularComment(int num) {
         Connection c = JDBCUtil.getConnection();
-        String sql = "SELECT  * FROM UserComment uc JOIN Movie m ON uc.movieID = m.movieID LIMIT ?" ;
+        String sql = "SELECT  * FROM UserComment uc JOIN Movie m ON uc.movieID = m.movieID " +
+                " JOIN MovieMediaLink mml ON m.movieID = mml.movieID LIMIT ?" ;
         try {
             List<UserCommentDetail> list = new ArrayList<>();
             PreparedStatement statement = c.prepareStatement(sql);
@@ -58,6 +59,7 @@ public class UserCommentDAO implements DAOInterface<UserComment>{
                u.setCommentID(rs.getString("commentID"));
                u.setMovieID(rs.getString("movieID"));
                u.setMovieName(rs.getString("movieName"));
+               u.setLinkMovieImage(rs.getString("linkMovieImage"));
                u.setCommentText(rs.getString("commentText"));
                list.add(u);
             }
@@ -67,21 +69,6 @@ public class UserCommentDAO implements DAOInterface<UserComment>{
             return null;
         }
     }
-    public  static ResultSet getCommenst(int num) {
-        Connection c = JDBCUtil.getConnection();
-        String sql = "SELECT  * FROM UserComment uc JOIN Movie m ON uc.movieID = m.movieID LIMIT ?;" ;
-        try {
-            List<UserComment> list = new ArrayList<>();
-            PreparedStatement statement = c.prepareStatement(sql);
-            statement.setInt(1, num);
-            ResultSet rs = statement.executeQuery();
-            return rs;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public static void main(String[] args) {
         System.out.println(getPopularComment(3).get(0).getMovieName());
     }

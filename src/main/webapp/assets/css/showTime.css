@@ -48,3 +48,7 @@
     background: #06363f;
     padding: 15px 5px;
 }
+#movieCard {
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+}

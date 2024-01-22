@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ShowTime;
 import model.User;
 
 public class UserDAO {
@@ -214,6 +215,7 @@ public class UserDAO {
         return checkEmail;
     }
 
+
     public ArrayList<User> getAllUserByName(String name) {
         Connection connection = null;
         ArrayList<User> list = new ArrayList<>();
@@ -238,15 +240,58 @@ public class UserDAO {
                 if (!user.isAdmin()) {
                     userList.add(user);
                 }
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            JDBCUtil.closeConnection(connection);
         }
-        return userList;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                JDBCUtil.closeConnection(connection);
+            }
+            return userList;
     }
+    public static User getUSerById(String userID) {
+        Connection c = JDBCUtil.getConnection();
+        String sql ="SELECT u.* FROM customer cu JOIN userlogin u ON cu.userID = u.userID WHERE u.userID = ?";
+        try {
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setString(1, userID);
+            ResultSet rs = s.executeQuery();
+            User us = new User();
+            while(rs.next()) {
+                us.setUserId(rs.getString("userId"));
+                us.setUserName(rs.getString("userName"));
+                us.setEmail(rs.getString("email"));
+                us.setPassword(rs.getString("password"));
+                us.setActive(rs.getBoolean("isActive"));
+                us.setAdmin(rs.getBoolean("isAdmin"));
+            }
+            return us;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static boolean updateUser (User user) {
+        Connection c = JDBCUtil.getConnection();
+        String update = " UPDATE userlogin " ;
+        String set = " SET userName = ? , email = ? , userPassword = ?" ;
+        String where = " WHERE userID = ? " ;
+        String sql = update + set + where;
+        try {
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setString(1, user.getUserName());
+            s.setString(2, user.getEmail());
+            s.setString(3, user.getPassword());
+            s.setString(4, user.getUserId());
+            int rs = s.executeUpdate();
+            return (rs > 0) ? true : false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
     public static void main(String[] args) {
         UserDAO userDAO = new UserDAO();
         ArrayList<User> list = userDAO.getAllUserByName("vansang");

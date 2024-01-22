@@ -65,6 +65,7 @@ public class TransactionTicket {
         this.stateTransaction = stateTransaction;
     }
 
-    public TransactionTicket() {
-    }
+    public TransactionTicket() {}
+
+
 }

@@ -1,16 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rrioz
-  Date: 12/28/2023
-  Time: 9:34 AM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.User" %>
+<%@ page import="model.Ticket" %>
+<%@ page import="java.util.List" %>
+<%@ page import="beans.ShoppingCart" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    User user = (User) session.getAttribute("user");
+    boolean isLogined = user == null ? false : true;
+%>
+<%
+    ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
+    if(shoppingCart == null){
+        shoppingCart = new ShoppingCart();
+    }
+%>
 <header id="site-header" class="w3l-header fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <a class="navbar-brand" href="index.jsp">
+            <a class="navbar-brand" href= " index.jsp " >
                 <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET" style="height:35px;"/>PZO TICKET</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,15 +27,33 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="movie-servlet?action=init">Phim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="showtimes-servlet?action=init">Lịch chiếu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.jsp">Thông tin</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
+                    <li class="nav-item"  ><a class="nav-link" href="index.jsp">Trang chủ</a></li>
+                    <li class="nav-item"  ><a class="nav-link" href="movie-servlet?action=init">Phim</a></li>
+                    <li class="nav-item"  ><a class="nav-link" href="showtimes-servlet?action=init">Lịch chiếu</a></li>
+                    <li class="nav-item"  ><a class="nav-link" href="about.jsp">Thông tin</a></li>
+                    <li class="nav-item"  ><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
                 </ul>
-
+                <div class="Login_SignUp" id="login" style="font-size: 2rem ; display: inline-block; position: relative;border-radius: 5px; ">
+                    <a class="nav-link" href="login.jsp" style="padding: 0px 0px;">
+                    <ul class="navbar-nav ml-auto">
+                    <% if(isLogined) { %>
+                        <li class="nav-item " ><a class="nav-link" href="userpage-servlet?action=init" style="padding-right: 1rem; padding-left: 1rem" >Chào, ${sessionScope.get("userName")}</a></li>
+                        <li class="nav-item " ><a class="nav-link" href="home-servlet?action=logout" style="padding-right: 1rem; padding-left: 1rem" >Đăng xuất</a></li>
+                    <% } else { %>
+                        <li class="nav-item " ><a class="nav-link" href="login.jsp" style="padding-right: 1rem; padding-left: 1rem" >Đăng nhập</a></li>
+                    <% } %>
+                    </ul>
+                    </a>
+                </div>
+                <%--  shopping cart icon --%>
                 <div class="search-right">
-                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Tìm phim
+                    <a href="shoppingCart-servlet?action=view" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">
+                        <i class="fa-solid fa-cart-shopping "></i> ( <%= shoppingCart.getSize() %>)
+                    </a>
+                </div>
+                <%--  search movie btn --%>
+                <div class="search-right">
+                    <a href="movie-servlet?action=init" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
                     <!-- search popup -->
@@ -66,10 +91,6 @@
                         <a class="close" href="#close">×</a>
                     </div>
 
-                </div>
-                <div class="Login_SignUp" id="login"
-                     style="font-size: 2rem ; display: inline-block; position: relative;">
-                    <a class="nav-link" href="login.jsp"><i class="fa fa-user-circle-o"></i></a>
                 </div>
             </div>
             <div class="mobile-position">
