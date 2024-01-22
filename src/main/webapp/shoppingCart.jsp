@@ -16,6 +16,7 @@
         shoppingCart = new ShoppingCart();
         List<CartItem> cartItem = shoppingCart.getCartItem();
     }
+    List<CartItem> cartItem = shoppingCart.getCartItem();
 %>
 <html>
 <head>

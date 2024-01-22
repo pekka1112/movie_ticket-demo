@@ -321,6 +321,7 @@ public class BookingTicketController extends HttpServlet {
         req.setAttribute("seatName",seatName);
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
+        // xử lí khi người dùng đặt vé mà không đăng nhập
         if(user == null) {
             RequestDispatcher rd = req.getRequestDispatcher("/login.jsp");
             rd.forward(req, resp);
