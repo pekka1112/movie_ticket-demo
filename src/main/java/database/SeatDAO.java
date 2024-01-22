@@ -1,8 +1,13 @@
 package database;
 
 import model.Seat;
+import model.ShowTime;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SeatDAO implements DAOInterface<Seat>{
     @Override
@@ -38,5 +43,36 @@ public class SeatDAO implements DAOInterface<Seat>{
     @Override
     public int update(Seat obj) {
         return 0;
+    }
+    public static List<Seat> getSeatByMID_CNAME_DATE_RNAME_TIME(String movieID, String cinemaID, String date, String roomName, String time){
+        Connection c = JDBCUtil.getConnection();
+        String sql ="SELECT se.* FROM showtime st JOIN contain c ON st.showtimeID = c.showtimeID \n" +
+                "\t\t\t\t\t\t\t\t\tJOIN cinema ci ON c.cinemaID = ci.cinemaID\n" +
+                "\t\t\t\t\t\t\t\t\tJOIN movie m ON st.movieID = m.movieID\t \n" +
+                "\t\t\t\t\t\t\t\t\tJOIN cinemaroom cr ON cr.cinemaRoomID = ci.cinemaRoomID\n" +
+                "\t\t\t\t\t\t\t\t\tJOIN seat se ON se.cinemaRoomID = cr.cinemaRoomID\n" +
+                "WHERE m.movieID = ? AND ci.cinemaName = ? AND st.showDate = ? AND cr.roomName = ? AND st.startTime = ? ";
+        try {
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setString(1, movieID);
+            s.setString(2, cinemaID);
+            s.setString(3, date);
+            s.setString(4, roomName);
+            s.setString(5, time);
+            ResultSet rs = s.executeQuery();
+            List<Seat> list = new ArrayList<>();
+            while(rs.next()) {
+                Seat se = new Seat();
+                se.setSeatID(rs.getString("seatID"));
+                se.setSeatName(rs.getString("seatName"));
+                se.setSeatType(rs.getString("seatType"));
+                se.setCinemaRoomID(rs.getString("cinemaRoomID"));
+                list.add(se);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

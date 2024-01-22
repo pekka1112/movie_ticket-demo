@@ -5,11 +5,20 @@ public class Customer {
     private String userID;
     private String fullName;
     private String gender;
+    private String address;
     private String phoneNumber;
     private String dob;
 
     public String getCustomerID() {
         return customerID;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setCustomerID(String customerID) {

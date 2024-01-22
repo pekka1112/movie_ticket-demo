@@ -69,7 +69,8 @@ public class CinemaDAO implements DAOInterface<Cinema>{
             e.printStackTrace();
             return null;
         }
-    } public  static Cinema getCinemaByID (String cid) {
+    }
+    public  static Cinema getCinemaByID (String cid) {
         Connection c = JDBCUtil.getConnection();
         String sql = "SELECT  * FROM cinema WHERE cinemaID = ?" ;
         try {
@@ -85,6 +86,31 @@ public class CinemaDAO implements DAOInterface<Cinema>{
                 cinema.setCinemaRoomID(rs.getString("cinemaRoomID"));
             }
             return cinema;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public  static List<Cinema> getCinemaByMovieID (String mid) {
+        Connection c = JDBCUtil.getConnection();
+        String sql = "SELECT ci.* FROM showtime st JOIN contain c ON st.showtimeID = c.showtimeID \n" +
+                "\t\t\t\t\t\t\t\t\tJOIN cinema ci ON c.cinemaID = ci.cinemaID\n" +
+                "\t\t\t\t\t\t\t\t\tJOIN movie m ON st.movieID = m.movieID\t \n" +
+                "WHERE m.movieID = ?" ;
+        try {
+            PreparedStatement statement = c.prepareStatement(sql);
+            statement.setString(1, mid);
+            ResultSet rs = statement.executeQuery();
+            List<Cinema> list = new ArrayList<>();
+            while (rs.next()) {
+                Cinema cinema = new Cinema();
+                cinema.setCinemaID(rs.getString("cinemaID"));
+                cinema.setCinemaName(rs.getString("cinemaName"));
+                cinema.setLocation(rs.getString("location"));
+                cinema.setCinemaRoomID(rs.getString("cinemaRoomID"));
+                list.add(cinema);
+            }
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

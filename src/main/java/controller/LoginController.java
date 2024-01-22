@@ -1,5 +1,6 @@
 package controller;
 
+import database.CustomerDAO;
 import database.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Customer;
 import model.User;
 
 import java.io.IOException;
@@ -24,10 +26,14 @@ public class LoginController extends HttpServlet {
         System.out.println(email + password);
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
+        CustomerDAO customerDAO = new CustomerDAO();
+        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
         HttpSession session = req.getSession();
         RequestDispatcher requestDispatcher = null;
         if (user != null){
            session.setAttribute("user",user);
+           session.setAttribute("customer",customer);
+           session.setAttribute("userName",user.getUserName());
            if(user.isAdmin()){
                System.out.println("admin");
                req.getRequestDispatcher("adminhome.jsp").forward(req,resp);

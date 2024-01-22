@@ -1,4 +1,4 @@
-
+<%@ page import="beans.ShoppingCart" %>
 <%--<%--%>
 <%--    if (session.getAttribute("name") == null){--%>
 <%--        response.sendRedirect("login.jsp");--%>
@@ -14,8 +14,33 @@
     <title>MovieBooking - PZO</title>
     <jsp:include page="../layout-view/head_libraries.jsp"></jsp:include>
 </head>
+<%
+    ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
+    if(shoppingCart == null) {
+        shoppingCart = new ShoppingCart();
+    }
+%>
+<script>
+    function noteNonCinema() {
+        alert("HIỆN TẠI KHÔNG CÓ RẠP NÀO CHIẾU PHIM NÀY");
+
+    }
+</script>
+<%
+    String status_getCinemaListOfThisMovie = (String) session.getAttribute("status_getCinemaListOfThisMovie");
+    session.removeAttribute("status_getCinemaListOfThisMovie");
+    if(status_getCinemaListOfThisMovie != null) {
+        if(status_getCinemaListOfThisMovie.equals("0")) {
+%>
+
+<script>noteNonCinema();</script>
+<%
+        }
+    }
+%>
+
 <body>
-    <jsp:include page="../layout-view/header.jsp"></jsp:include>
+<jsp:include page="../layout-view/header.jsp"></jsp:include>
 
 <%-- Section Trailer Phim--%>
 <section class="w3l-main-slider position-relative" id="home">
@@ -48,7 +73,7 @@
 
 <%--Section PHIM ĐANG CHIẾU --%>
 <section class="w3l-grids">
-        <div class="grids-main py-5">
+        <div class="grids-main py-5" style="padding-bottom: 0px !important;">
             <div class="container py-lg-3">
                 <div class="headerhny-title">
                     <div class="w3l-title-grids">
@@ -76,10 +101,19 @@
                                     <span class="fa fa-play-circle video-icon" aria-hidden="true"></span>
                                 </a>
                             </div>
-                            <h3><a class="title-gd" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a> </h3>
-                            <p> ${m.movieDescription} </p>
-                            <div class="button-center text-center mt-4">
-                                <a href="bookingTicket-servlet?action=init" class="btn watch-button">Đặt vé ngay</a>
+                            <h3><a class="title-gd" style="height: 3rem; font-size: 15px" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a> </h3>
+                            <p style="height: 2rem" > ${m.movieDescription} </p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="button-center text-center mt-4" style="text-align: center">
+                                        <a href="bookingTicket-servlet?action=init&movieID=${m.movieID}" class="btn watch-button" style="padding: 0px 0px !important;"><i class="fa fa-cart-plus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="button-right text-center mt-4" style="text-align: right">
+                                        <a href="bookingTicket-servlet?action=init" class="btn watch-button" style="padding: 0px 0px !important;">Đặt vé</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
@@ -90,7 +124,7 @@
 
 <%--Section PHIM SẮP CHIẾU --%>
 <section class="w3l-grids">
-    <div class="grids-main py-5">
+    <div class="grids-main py-5" style="padding-top: 0px !important;">
         <div class="container py-lg-3">
             <div class="headerhny-title">
                 <div class="w3l-title-grids">
@@ -152,34 +186,58 @@
 </section><br>
 
 <%--Section hiển thị lịch chiếu phim --%>
-<section class="showtimes-section">
+<section class="showtimes-section" id="showtimeSection" >
         <div class="showtimes-title" style="padding : 20px 0px 30px 0px;"> LỊCH CHIẾU PHIM </div>
         <div class="border-div-1">
             <div class="container">
                 <div class="row">
                     <div class="col-5">
-                        <%-- truyen du lieu - ten rap chieu phim can tim den HomeController servlet --%>
+                        <%-- thực hiện tìm kiếm tên rạp - ten rap chieu phim can tim den HomeController servlet --%>
                         <form action="home-servlet" method="post">
                             <input type="hidden" name="action" value="cinemaSearch">
-                            <input class="form-control" type="text" name="cinemaName" placeholder="Tìm theo tên rạp" aria-label="search">
+                            <input type="hidden" name="cid" value="${cinemaDetail.cinemaID}">
+                            <input class="form-control" type="text" name="cinemaName" placeholder="Nhập tên rạp để tìm kiếm" aria-label="search" value="${txtHistory}">
                         </form> <br>
-                        <div id= "showtimes-list_cinema">
+                        <div id= "showtimes-list_cinema" style="padding-bottom: 30px">
                         <%-- hien thi toan bo danh sach cinema, click 1 cinema thuc hien truyen cid toi servlet home --%>
-                            <c:forEach items="${allCinema}" var="cinema" >
-                                <div class="row_cinemaName">
-                                    <i class="fa-solid fa-film"> </i>
-                                    <a href="home-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
-<%--                                    <a style="color: whitesmoke"  onclick="showCinemaName(${cinema.cinemaName})">${cinema.cinemaName}</a>--%>
-                                </div>
-                            </c:forEach>
+                            <c:if test="${(allCinema != null) && (searchedResultCinemaListSize == 0) }" >
+                                <c:forEach items="${allCinema}" var="cinema">
+                                    <div class="row_cinemaName">
+                                        <i class="fa-solid fa-film"> </i>
+                                        <a href="home-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${isShowAllCinema}" >
+                                <c:forEach items="${allCinema}" var="cinema">
+                                    <div class="row_cinemaName">
+                                        <i class="fa-solid fa-film"> </i>
+                                        <a href="home-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${searchedResultCinemaListSize > 0}">
+                                <c:forEach items="${searchedResultCinemaList}" var="cinema">
+                                    <div class="row_cinemaName">
+                                        <i class="fa-solid fa-film"> </i>
+                                        <a href="home-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
                         </div>
                     </div>
                     <div class="col-7">
                         <div id="showtimes-rightBox">
                             <%-- hien thi noi dung cinema lay duoc tu home-servlet --%>
                             <div class="showtimes-cinema_title" id="cinemaTitle">
-                                <h2 style="font-size: 25px;padding-bottom: 5px"><i class="fa-solid fa-film"> </i> ${cinemaDetail.cinemaName}</h2>
-                                <h4 style="font-size: 17px; font-weight: lighter;padding-bottom: 10px"> ${cinemaDetail.location}</h4>
+                                <c:if test="${(cinemaDetail == null) && (searchedResultCinemaListSize == 0)}">
+                                    <h2 style="font-size: 25px;padding-bottom: 5px"><i class="fa-solid fa-film"> </i> Bạn chưa chọn rạp phim</h2>
+                                    <h4 style="font-size: 17px; font-weight: lighter;padding-bottom: 10px"></h4>
+                                </c:if>
+                                <c:if test="${cinemaDetail != null}">
+                                    <h2 style="font-size: 25px;padding-bottom: 5px"><i class="fa-solid fa-film"> </i> ${cinemaDetail.cinemaName}</h2>
+                                    <h4 style="font-size: 17px; font-weight: lighter;padding-bottom: 10px"> ${cinemaDetail.location}</h4>
+                                </c:if>
                             </div>
                             <div class="showtimes-calendar">
                                 <div class="showtimes-btn_group">
@@ -187,24 +245,40 @@
                                     <div class="showtimes-calenderBox" style="text-align: center">
                                         <%--  dùng javaBean để lấy ngày tháng và hiển thị ngày hôm nay--%>
                                         <jsp:useBean id="date" class="beans.DateBean" scope="session"/>
-                                        <a class="showtimes-dateItem" href="home-servlet?action=showShowTime?date=${date.currentDate}?cid=${cinemaDetail.cinemaID}"><fmt:formatDate value="${date.currentDate}" pattern="dd/MM"/></a>
+                                        <a class="showtimes-dateItem" href="home-servlet?action=showShowTime&date=${date.formatDate(date.currentDate)}&cid=${cinemaDetail.cinemaID}&cinemaName=">
+                                            <fmt:formatDate value="${date.currentDate}" pattern="dd/MM"/>
+                                        </a>
                                         <c:forEach var="i" begin="1" end="6" >
                                             <%-- hien thi 6 ngay bat dau tu ngay chieu phim dang duoc chon --%>
-                                            <a class="showtimes-dateItem" href="home-servlet?action=showShowTime?date=${date.currentDate}?cid=${cinemaDetail.cinemaID}"><fmt:formatDate value="${date.addDate(i)}" pattern="dd/MM"/></a>
+                                            <a class="showtimes-dateItem" href="home-servlet?action=showShowTime&date=${date.formatDate(date.addDate(i))}&cid=${cinemaDetail.cinemaID}">
+                                                <fmt:formatDate value="${date.addDate(i)}" pattern="dd/MM"/>
+                                            </a>
                                         </c:forEach>
                                     </div>
                                 </div> <br>
                                 <div class="showtimes-show">
-                                    <c:forEach var="i" begin="1" end="3" >
-                                        <%-- hien thi cac phim trong ngay duoc chon --%>
+                                    <%-- neu user chua chon ten rap phim va thoi gian --%>
+                                    <c:if test="${movieListForCNameAndShowtime == null}" >
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                <a href="#" class="btn btn-primary">ĐẶT VÉ NGAY</a>
+                                                <h5 class="card-title" style="color: whitesmoke;font-weight: bolder; margin-bottom: 5px; background-color: rgba(121,177,187,0.35); border-radius: 5px">Chưa có Phim để hiển thị</h5>
+                                                <p class="card-text" style="color: whitesmoke;"></p>
                                             </div>
                                         </div>
-                                    </c:forEach>
+                                    </c:if>
+                                    <c:if test="${movieListForCNameAndShowtime != null}" >
+                                        <c:forEach items="${movieListForCNameAndShowtime}" var="m">
+                                            <%-- hien thi cac phim trong ngay duoc chon --%>
+                                            <div class="card">
+                                                <div class="card-body"
+                                                     style="background: url(../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}) no-repeat center; background-size: cover;  margin: 5px 0px 0px 0px;border-radius: 5px;">
+                                                    <h5 class="card-title" style="color: whitesmoke;font-weight: bolder; margin-bottom: 5px; background-color: rgba(121,177,187,0.35); border-radius: 5px">${m.movieName}</h5>
+                                                    <p class="card-text" style="color: whitesmoke;">${m.movieDescription}</p>
+                                                    <a href="movieDetail-servlet?action=init&movieID=${m.movieID}" class="btn btn-primary" style="margin-top: 5px">Đặt vé ngày ${wantedBookDate}</a>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -219,13 +293,16 @@
     <div class="comments-title">BÌNH LUẬN NỔI BẬT</div>
     <div class="border-div-2">
         <div class="container">
-            <div class="row align-items">
+            <div class="row align-items" >
                 <c:forEach items="${comments}" var="c" >
                     <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">${c.movieName}</h5>
-                                <p class="card-text">Ẩn Danh : " ${c.commentText} " </p>
+                        <div class="card" style="width: 18rem; height: 10rem;background-color: rgba(108,117,125,0.65) ">
+                            <div class="card-body"
+                                 style="background: url(../Movie_Ticket_Website/assets/movie-image/${c.linkMovieImage}) no-repeat center; background-size: cover;border-radius: 5px;">
+                                <h5 class="card-title" style="color: #ffffff;height: 3rem;border-radius: 5px;background-color: rgba(108,117,125,0.3)">
+                                    <a href="movieDetail-servlet?action=init&movieID=${c.movieID}">${c.movieName}</a>
+                                </h5>
+                                <p class="card-text" style=" color:white;border-radius: 5px;background-color: rgba(108,117,125,0.3)">Ẩn Danh : " ${c.commentText} " </p>
                             </div>
                         </div>
                     </div>
@@ -244,7 +321,7 @@
         <div class="headerhny-left text-lg-left">
         </div>
         <div class="headerhny-right text-lg-right">
-            <h4><a class="show-title" href="../Movie_Ticket_Website/theaters.jsp">XEM TẤT CẢ</a></h4>
+            <h4><a class="show-title" href="#">XEM TẤT CẢ</a></h4>
         </div>
     </div>
     <div class="border-div-2">
@@ -257,7 +334,7 @@
                         <div class="card-body">
                             <h5 class="card-title" style="font-size: 20px">${c2.cinemaName}</h5>
                             <p class="card-text">${c2.location}</p><br>
-                            <a href="../Movie_Ticket_Website/theaters.jsp" class="btn btn-primary">Xem Chi Tiết</a>
+                            <a href="#" class="btn btn-primary">Xem Chi Tiết</a>
                         </div>
                     </div>
                 </div>
