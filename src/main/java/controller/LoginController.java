@@ -30,11 +30,11 @@ public class LoginController extends HttpServlet {
         System.out.println(email + password);
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
-        CustomerDAO customerDAO = new CustomerDAO();
-        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
         HttpSession session = req.getSession();
         if (user != null){
 
+        CustomerDAO customerDAO = new CustomerDAO();
+        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
            session.setAttribute("user",user);
            session.setAttribute("customer",customer);
            session.setAttribute("userName",user.getUserName());
