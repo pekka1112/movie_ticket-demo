@@ -7,8 +7,11 @@ import model.ShowTime;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.oracle.wls.shaded.org.apache.xalan.xsltc.compiler.sym.error;
 
 public class ShowTimeDAO implements DAOInterface<ShowTime>{
     @Override
@@ -105,5 +108,47 @@ public class ShowTimeDAO implements DAOInterface<ShowTime>{
     }
     public static void main(String[] args) {
         System.out.println(getShowtimeByCinemaIDAndMovieID("Mv5","CGV CT Plaza").get(1).getShowDate());
+        System.out.println(countRow());
     }
+
+    public ShowTime getBy_movieID_showDate_startTime(String movieID, String curDate, String time) {
+        Connection c = JDBCUtil.getConnection();
+        String sql ="SELECT * FROM showtime WHERE startTime = ? AND movieID = ? AND showDate = ? ";
+        try {
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setString(1, time);
+            s.setString(2, movieID);
+            s.setString(3, curDate);
+            ResultSet rs = s.executeQuery();
+            ShowTime st = new ShowTime();
+            while(rs.next()) {
+                st.setMovieID(rs.getString("movieID"));
+                st.setShowtimeID(rs.getString("showtimeID"));
+                st.setShowDate(rs.getString("showDate"));
+                st.setStartTime(rs.getString("startTime"));
+                st.setEndTime(rs.getString("endTime"));
+            }
+            return st;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static  int countRow() {
+        Connection c = JDBCUtil.getConnection();
+        String sql ="SELECT COUNT(*) c FROM ticket";
+        try {
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            rs.next();
+            String r = rs.getString("c");
+            int res = Integer.parseInt(r);
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }

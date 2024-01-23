@@ -42,6 +42,7 @@
                                     <form action="bookingTicket-servlet" method="get">
                                         <input type="hidden" name="action" value="showShowTimeForCinema">
                                         <input type="hidden" name="movieID" value="${movieID}">
+                                        <input type="hidden" name="addToCart" value="${addToCart}">
                                         <input style="border-radius: 10px; margin-bottom: 20px; width: 630px" type="text" name="cinemaName" placeholder="Chọn rạp chiếu phim bạn muốn đặt vé" list="cinemaListGetByMovie">
                                         <datalist id="cinemaListGetByMovie">
                                             <c:forEach items="${cinemaListGetByMovie}" var="c">
@@ -58,7 +59,7 @@
                                 </c:if>
                                 <div class="carousel carousel-nav" data-flickity='{"contain": true, "pageDots": false }'>
                                     <jsp:useBean id="date" class="beans.DateBean" scope="session"/>
-                                    <a class="carousel-cell" id="1" onclick="myFunction(1)" href="bookingTicket-servlet?action=showTimeInThisDate&date=${date.formatDate(date.currentDate)}&cinemaName=${cinemaName}&movieID=${movieID}">
+                                    <a class="carousel-cell" id="1" onclick="myFunction(1)" href="bookingTicket-servlet?action=showTimeInThisDate&addToCart=${addToCart}&date=${date.formatDate(date.currentDate)}&cinemaName=${cinemaName}&movieID=${movieID}">
                                         <div class="date-numeric"><fmt:formatDate value="${date.currentDate}" pattern="dd/MM"/></div>
                                         <div class="date-day">Hôm nay</div>
                                         <c:forEach items="${showtimesDate}" var="std">
@@ -69,7 +70,7 @@
                                     </a>
                                     <c:forEach var="i" begin="2" end="7" >
                                         <%-- hien thi 6 ngay bat dau tu ngay chieu phim dang duoc chon --%>
-                                        <a class="carousel-cell" id="${i}" onclick="myFunction(${i})" href="bookingTicket-servlet?action=showTimeInThisDate&date=${date.formatDate(date.addDate(i-1))}&cinemaName=${cinemaName}&movieID=${movieID}">
+                                        <a class="carousel-cell" id="${i}" onclick="myFunction(${i})" href="bookingTicket-servlet?action=showTimeInThisDate&addToCart=${addToCart}&date=${date.formatDate(date.addDate(i-1))}&cinemaName=${cinemaName}&movieID=${movieID}">
                                             <div class="date-numeric"><fmt:formatDate value="${date.addDate(i-1)}" pattern="dd/MM"/></div>
                                             <div class="date-day"></div>
                                             <c:forEach items="${showtimesDate}" var="std">
@@ -92,7 +93,7 @@
                                         <div class="screens">Tên phòng chiếu : <%= key %></div>
                                         <div class="time-btn">
                                             <c:forEach items="<%= value %>" var="time">
-                                                <a href="bookingTicket-servlet?action=changeToSeatBooking&time=${time}&cinemaRoomName=<%=key%>&date=${curDate}&cinemaName=${cinemaName}&movieID=${movieID}" style="border-radius: 5px; background-color: #0f6674; padding: 10px ;color: white;margin: 10px 5px">${time}</a>
+                                                <a href="bookingTicket-servlet?action=changeToSeatBooking&addToCart=${addToCart}&time=${time}&cinemaRoomName=<%=key%>&date=${curDate}&cinemaName=${cinemaName}&movieID=${movieID}" style="border-radius: 5px; background-color: #0f6674; padding: 10px ;color: white;margin: 10px 5px">${time}</a>
                                             </c:forEach>
                                         </div>
                                     <%    } %>

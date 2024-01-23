@@ -187,16 +187,16 @@
 
                                     <hr class="my-4">
 
-                                    <h4 class="mb-3">Phương thức thanh toán</h4>
+<%--                                    <h4 class="mb-3">Phương thức thanh toán</h4>--%>
 
-                                    <div class="my-3">
-                                        <c:forEach items="${payments}" var="p">
-                                            <div class="form-check">
-                                                <input id="${p.paymentTypeName}" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                                                <label class="form-check-label" for="${p.paymentTypeName}">${p.paymentTypeName}</label>
-                                            </div>
-                                        </c:forEach>
-                                    </div>
+<%--                                    <div class="my-3">--%>
+<%--                                        <c:forEach items="${payments}" var="p">--%>
+<%--                                            <div class="form-check">--%>
+<%--                                                <input id="${p.paymentTypeName}" name="paymentMethod" type="radio" class="form-check-input" checked required>--%>
+<%--                                                <label class="form-check-label" for="${p.paymentTypeName}">${p.paymentTypeName}</label>--%>
+<%--                                            </div>--%>
+<%--                                        </c:forEach>--%>
+<%--                                    </div>--%>
 
 <%--                                    <div class="row gy-3">--%>
 <%--                                        <div class="col-md-6">--%>
@@ -235,7 +235,7 @@
 
 <%--                                    <hr class="my-4">--%>
 
-                                    <button class="w-100 btn btn-danger btn-lg" type="submit">Continue to checkout</button>
+<%--                                    <button class="w-100 btn btn-danger btn-lg" type="submit">Continue to checkout</button>--%>
                                 </form>
                             </div>
                         </div>

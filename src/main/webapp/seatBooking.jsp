@@ -50,7 +50,7 @@
                                 <ul id="selected-seats">
                                     <c:forEach var="c" items="${seats}">
                                         <li style="border-radius: 5px; padding: 0px;border: 1px groove black">
-                                            <a href="bookingTicket-servlet?action=changeToCheckout&time=${time}&cinemaRoomName=${cinemaRoomName}&date=${curDate}&cinemaName=${cinemaName}&movieID=${movieID}&seatName=${c.seatName}">${c.seatName }</a>
+                                            <a href="bookingTicket-servlet?action=changeToCheckout&addToCart=${addToCart}&time=${time}&cinemaRoomName=${cinemaRoomName}&date=${curDate}&cinemaName=${cinemaName}&movieID=${movieID}&seatName=${c.seatName}">${c.seatName }</a>
                                         </li>
                                     </c:forEach>
                                 </ul>

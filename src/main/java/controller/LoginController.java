@@ -26,23 +26,23 @@ public class LoginController extends HttpServlet {
         System.out.println(email + password);
         UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserbyEmailAndPassword(email, password);
-        CustomerDAO customerDAO = new CustomerDAO();
-        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
         HttpSession session = req.getSession();
-        RequestDispatcher requestDispatcher = null;
         if (user != null){
-           session.setAttribute("user",user);
-           session.setAttribute("customer",customer);
-           session.setAttribute("userName",user.getUserName());
-           if(user.isAdmin()){
-               System.out.println("admin");
-               req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
-               return;
-           }
-           else{
-               req.getRequestDispatcher("index.jsp").forward(req,resp);
-               return;
-           }
+            CustomerDAO customerDAO = new CustomerDAO();
+            Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
+//            RequestDispatcher requestDispatcher = null;
+            session.setAttribute("user",user);
+            session.setAttribute("customer",customer);
+            session.setAttribute("userName",user.getUserName());
+            if(user.isAdmin()){
+                System.out.println("admin");
+                req.getRequestDispatcher("adminhome.jsp").forward(req,resp);
+                return;
+            }
+            else{
+                req.getRequestDispatcher("index.jsp").forward(req,resp);
+                return;
+            }
 
         }else{
             System.out.println("user null");

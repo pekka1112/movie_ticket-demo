@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     User user = (User) session.getAttribute("user");
-    boolean isLogined = user == null ? false : true;
+    boolean isLogined = (user == null) ? false : true;
 %>
 <%
     ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
@@ -48,7 +48,7 @@
                 <%--  shopping cart icon --%>
                 <div class="search-right">
                     <a href="shoppingCart-servlet?action=view" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">
-                        <i class="fa-solid fa-cart-shopping "></i> ( <%= shoppingCart.getSize() %>)
+                        <i class="fa-solid fa-cart-shopping "></i> (<%= shoppingCart.getSize() %>)
                     </a>
                 </div>
                 <%--  search movie btn --%>

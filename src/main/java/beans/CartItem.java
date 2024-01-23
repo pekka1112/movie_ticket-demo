@@ -1,9 +1,6 @@
 package beans;
 
-import model.Movie;
-import model.MovieMediaLink;
-import model.Ticket;
-import model.TicketData;
+import model.*;
 
 public class CartItem {
     private TicketData ticketData;
@@ -11,6 +8,12 @@ public class CartItem {
     private double price;
 
     public CartItem() {
+    }
+
+    public CartItem(TicketData ticketData, int quanlity, double price) {
+        this.ticketData = ticketData;
+        this.quanlity = quanlity;
+        this.price = price;
     }
 
     public TicketData getTicketData() {
@@ -39,5 +42,8 @@ public class CartItem {
     public boolean add(int quanlity) {
         this.quanlity += quanlity;
         return true;
+    }
+    public double getTotalPrice() {
+        return this.quanlity * this.price;
     }
 }

@@ -67,6 +67,9 @@ public class BookingTicketController extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
+        // get action is addToCart or not
+        String addToCart = req.getParameter("addToCart"); // neu dang add to cart thi addToCart = 1 (True)
+        req.setAttribute("addToCart",addToCart);
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
         Movie movie = movieDAO.getMovieByID(movieID);
@@ -101,6 +104,7 @@ public class BookingTicketController extends HttpServlet {
             req.setAttribute("searchedResultCinemaList",null);
             req.setAttribute("isShowAllCinema",true);
             session.setAttribute("status_getCinemaListOfThisMovie", "0");
+            req.removeAttribute("addToCart"); // huy hanh dong add to cart
             RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
             rd.forward(req,resp);
             return;
@@ -124,6 +128,9 @@ public class BookingTicketController extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
+        // get action is addToCart or not
+        String addToCart = req.getParameter("addToCart"); // neu dang add to cart thi addToCart = 1 (True)
+        req.setAttribute("addToCart",addToCart);
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
         Movie movie = movieDAO.getMovieByID(movieID);
@@ -161,6 +168,9 @@ public class BookingTicketController extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
+        // get action is addToCart or not
+        String addToCart = req.getParameter("addToCart"); // neu dang add to cart thi addToCart = 1 (True)
+        req.setAttribute("addToCart",addToCart);
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
         Movie movie = movieDAO.getMovieByID(movieID);
@@ -212,6 +222,9 @@ public class BookingTicketController extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
+        // get action is addToCart or not
+        String addToCart = req.getParameter("addToCart"); // neu dang add to cart thi addToCart = 1 (True)
+        req.setAttribute("addToCart",addToCart);
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
         Movie movie = movieDAO.getMovieByID(movieID);
@@ -270,10 +283,14 @@ public class BookingTicketController extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
+        // get action is addToCart or not
+        String addToCart = req.getParameter("addToCart"); // neu dang add to cart thi addToCart = 1 (True)
+        req.setAttribute("addToCart",addToCart);
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        MovieMediaLink movie = movieDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
+        req.setAttribute("movieLinkImage", movie.getLinkMovieImage());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
         List<Cinema> cinemaListGetByMovie = cinemaDAO.getCinemaByMovieID(movieID);
@@ -292,6 +309,7 @@ public class BookingTicketController extends HttpServlet {
         List<String> showtimesDate = new ArrayList<>();
         for(ShowTime st : showtimes) {
             showtimesDate.add(st.getShowDate());
+
             System.out.println(st.getShowDate());
         }
         req.setAttribute("showtimesDate",showtimesDate);
@@ -321,16 +339,84 @@ public class BookingTicketController extends HttpServlet {
         req.setAttribute("seatName",seatName);
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-        if(user == null) {
-            RequestDispatcher rd = req.getRequestDispatcher("/login.jsp");
-            rd.forward(req, resp);
-        }
-        session.setAttribute("userEmail",user.getEmail());
-        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
-        session.setAttribute("customer",customer);
-        List<Payment> payments = paymentDAO.getAllPaymentType();
-        req.setAttribute("payments",payments);
+        // tạo vé mới
+        ShowTime showTime = showTimeDAO.getBy_movieID_showDate_startTime(movieID, curDate, time);
+        String rowNumDataInTicket = String.valueOf(showTimeDAO.countRow()) ;
+        Ticket ticket = new Ticket("tk"+rowNumDataInTicket,cinema.getCinemaID(),showTime.getShowtimeID());
+        Seat seat = SeatDAO.getBy_sName_crName(seatName,cinemaRoomName);
+        String rowNumDataInTicketDetail = String.valueOf(TicketDetailDAO.countRow()) ;
+        TicketDetail ticketDetail = new TicketDetail("tkdl" + rowNumDataInTicketDetail,ticket.getTicketID(),50000,seat.getSeatID(), cinema.getCinemaRoomID());
+        String numRowBooking = String.valueOf(BookingDAO.countRow()) ;
+        String numRowBookingDetail = String.valueOf(BookingDetailDAO.countRow()) ;
+        User curUser = (User) session.getAttribute("user");
+        // tao Booking
+        if(curUser != null) { // login roi
+            Booking booking = new Booking("bk"+ numRowBooking, ticket.getTicketID(), curUser.getUserId());
+            BookingDetail bookingDetail = new BookingDetail("bkdt"+numRowBookingDetail, booking.getBookingID(), curDate ,  50000 );
+            if(addToCart.equals("1")){ // them vao gio hang
+                System.out.println("add to cart - booking");
+                req.setAttribute("action","add");
+                req.setAttribute("ticket",ticket);
+                req.setAttribute("ticketDetail",ticketDetail);
+                req.setAttribute("booking",booking);
+                req.setAttribute("bookingDetail",bookingDetail);
+                RequestDispatcher rd = req.getRequestDispatcher("/shoppingCart-servlet");
+                rd.forward(req, resp);
+                return;
+            } else if(addToCart.equals("0")) {
+                session.setAttribute("userEmail",user.getEmail());
+                Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
+                session.setAttribute("customer",customer);
+                List<Payment> payments = paymentDAO.getAllPaymentType();
+                req.setAttribute("payments",payments);
 
+                RequestDispatcher rd = req.getRequestDispatcher("/checkoutTicket.jsp");
+                if (rd != null) {
+                    rd.forward(req, resp);
+                } else {
+                    System.out.println("RequestDispatcher is null");
+                }
+            }
+        } else if(curUser == null) { // chua login
+            Booking booking = new Booking("bk"+ numRowBooking, ticket.getTicketID(), null);
+            BookingDetail bookingDetail = new BookingDetail("bkdt"+numRowBookingDetail, booking.getBookingID(), curDate ,  50000 );
+            if(addToCart.equals("1")){ // them vao gio hang
+                // action add to cart
+                System.out.println("add to cart - booking");
+                req.setAttribute("action","add");
+                req.setAttribute("ticket",ticket);
+                req.setAttribute("ticketDetail",ticketDetail);
+                req.setAttribute("booking",booking);
+                req.setAttribute("bookingDetail",bookingDetail);
+                RequestDispatcher rd = req.getRequestDispatcher("/shoppingCart-servlet");
+                rd.forward(req, resp);
+                return;
+            } else if(addToCart.equals("0")) {
+                session.setAttribute("userEmail",user.getEmail());
+                Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
+                session.setAttribute("customer",customer);
+                List<Payment> payments = paymentDAO.getAllPaymentType();
+                req.setAttribute("payments",payments);
+
+                RequestDispatcher rd = req.getRequestDispatcher("/checkoutTicket.jsp");
+                if (rd != null) {
+                    rd.forward(req, resp);
+                } else {
+                    System.out.println("RequestDispatcher is null");
+                }
+            }
+        }
+        TicketData ticketData = new TicketData();
+
+//        if(user == null) {
+//            RequestDispatcher rd = req.getRequestDispatcher("/login.jsp");
+//            rd.forward(req, resp);
+//        }
+//        session.setAttribute("userEmail",user.getEmail());
+//        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
+//        session.setAttribute("customer",customer);
+//        List<Payment> payments = paymentDAO.getAllPaymentType();
+//        req.setAttribute("payments",payments);
 
         RequestDispatcher rd = req.getRequestDispatcher("/checkoutTicket.jsp");
         if (rd != null) {
@@ -404,7 +490,6 @@ public class BookingTicketController extends HttpServlet {
         session.setAttribute("customer",customer);
         List<Payment> payments = paymentDAO.getAllPaymentType();
         req.setAttribute("payments",payments);
-
 
         RequestDispatcher rd = req.getRequestDispatcher("/showETicket.jsp");
         if (rd != null) {

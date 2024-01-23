@@ -32,4 +32,10 @@ public class Ticket {
 
     public Ticket() {
     }
+
+    public Ticket(String ticketID, String cinemaID, String showtimeID) {
+        this.ticketID = ticketID;
+        this.cinemaID = cinemaID;
+        this.showtimeID = showtimeID;
+    }
 }

@@ -40,4 +40,11 @@ public class BookingDetail {
 
     public BookingDetail() {
     }
+
+    public BookingDetail(String bookingDetailID, String bookingID, String bookingDate, int totalTicket) {
+        this.bookingDetailID = bookingDetailID;
+        this.bookingID = bookingID;
+        this.bookingDate = bookingDate;
+        this.totalTicket = totalTicket;
+    }
 }

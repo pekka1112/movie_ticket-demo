@@ -8,6 +8,12 @@ public class Booking {
     public Booking() {
     }
 
+    public Booking(String bookingID, String ticketID, String userID) {
+        this.bookingID = bookingID;
+        this.ticketID = ticketID;
+        this.userID = userID;
+    }
+
     public String getBookingID() {
         return bookingID;
     }
