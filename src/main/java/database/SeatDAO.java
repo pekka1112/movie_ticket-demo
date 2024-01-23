@@ -10,6 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeatDAO implements DAOInterface<Seat>{
+    public static  Seat getBy_sName_crName(String seatName, String cinemaRoomName) {
+        Connection c = JDBCUtil.getConnection();
+        String sql ="SELECT * FROM seat s JOIN cinemaroom cr ON s.cinemaRoomID = cr.cinemaRoomID WHERE cr.roomName = ? AND s.seatName = ? ";
+        try {
+            PreparedStatement s = c.prepareStatement(sql);
+            s.setString(1, cinemaRoomName);
+            s.setString(2, seatName);
+            ResultSet rs = s.executeQuery();
+            Seat se = new Seat();
+            while(rs.next()) {
+                se.setSeatID(rs.getString("seatID"));
+                se.setSeatName(rs.getString("seatName"));
+                se.setSeatType(rs.getString("seatType"));
+                se.setCinemaRoomID(rs.getString("cinemaRoomID"));
+            }
+            return se;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     @Override
     public ArrayList<Seat> selectAll() {
         return null;

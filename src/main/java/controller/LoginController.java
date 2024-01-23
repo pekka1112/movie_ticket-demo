@@ -32,7 +32,6 @@ public class LoginController extends HttpServlet {
         User user = userDAO.getUserbyEmailAndPassword(email, password);
         HttpSession session = req.getSession();
         if (user != null){
-
         CustomerDAO customerDAO = new CustomerDAO();
         Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
            session.setAttribute("user",user);
@@ -47,6 +46,7 @@ public class LoginController extends HttpServlet {
                req.getRequestDispatcher("index.jsp").forward(req,resp);
                return;
            }
+
 
         }else{
             System.out.println("user null");

@@ -3,13 +3,11 @@ package database;
 import model.TicketDetail;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class TicketDetailDAO {
-    public TicketDetail getTicketDetailByID(String ticketID){
+    public TicketDetail getTicketDetailByID(String ticketID) {
         Connection connection = null;
         TicketDetail ticketDetail = null;
         try {
@@ -18,7 +16,7 @@ public class TicketDetailDAO {
             PreparedStatement pr = connection.prepareStatement(query);
             pr.setString(1, ticketID);
             ResultSet rs = pr.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ticketDetail = new TicketDetail();
                 ticketDetail.setTicketID(rs.getString("ticketID"));
                 ticketDetail.setPrice(rs.getString("price"));
@@ -45,6 +43,25 @@ public class TicketDetailDAO {
         }
 
         return ticketDetail;
+    }
+    public static int countRow() {
+            Connection c = JDBCUtil.getConnection();
+            String sql ="SELECT COUNT(*) c FROM ticketdetail";
+            try {
+                Statement s = c.createStatement();
+                ResultSet rs = s.executeQuery(sql);
+                rs.next();
+                return rs.getInt("c");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return 0;
+        }
+    }
+
+
+    public ArrayList<TicketDetail> selectAll() {
+        return null;
+
     }
 
     public static void main(String[] args) {

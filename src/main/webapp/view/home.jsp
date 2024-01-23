@@ -32,7 +32,6 @@
     if(status_getCinemaListOfThisMovie != null) {
         if(status_getCinemaListOfThisMovie.equals("0")) {
 %>
-
 <script>noteNonCinema();</script>
 <%
         }
@@ -106,12 +105,12 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="button-center text-center mt-4" style="text-align: center">
-                                        <a href="bookingTicket-servlet?action=init&movieID=${m.movieID}" class="btn watch-button" style="padding: 0px 0px !important;"><i class="fa fa-cart-plus"></i></a>
+                                        <a href="bookingTicket-servlet?action=init&addToCart=1&movieID=${m.movieID}" class="btn watch-button" style="padding: 0px 0px !important;"><i class="fa fa-cart-plus"></i></a>
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="button-right text-center mt-4" style="text-align: right">
-                                        <a href="bookingTicket-servlet?action=init" class="btn watch-button" style="padding: 0px 0px !important;">Đặt vé</a>
+                                        <a href="bookingTicket-servlet?action=init&addToCart=0&movieID=${m.movieID}" class="btn watch-button" style="padding: 0px 0px !important;">Đặt vé</a>
                                     </div>
                                 </div>
                             </div>

@@ -10,11 +10,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<script>
+    function noteNonCinema() {
+        alert("GIỎ HÀNG TRỐNG");
+    }
+</script>
 <%
     ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
+    List<CartItem> cartItem ;
     if(shoppingCart == null) {
+%>
+<script>noteNonCinema();</script>
+<%
+        response.sendRedirect("/index.jsp");
         shoppingCart = new ShoppingCart();
-        List<CartItem> cartItem = shoppingCart.getCartItem();
+         cartItem = shoppingCart.getCartItem();
+    } else {
+        cartItem = shoppingCart.getCartItem();
     }
     List<CartItem> cartItem = shoppingCart.getCartItem();
 %>
@@ -54,63 +66,33 @@
                                 <tr>
                                 <td class="p-4">
                                     <div class="media align-items-center">
-                                        <img src="../Movie_Ticket_Website/assets/movie-image/<%= ci %>" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                        <img src="../Movie_Ticket_Website/assets/movie-image/<%= ci.getTicketData().getLinkMovieImage() %>" class="d-block ui-w-40 ui-bordered mr-4" alt="">
                                         <div class="media-body">
-                                            <a href="#" class="d-block text-dark"><%= ci %></a>
+                                            <a href="#" class="d-block text-dark" style="font-style: italic">Tên phim : <%= ci.getTicketData().getMovieName() %><p><%= ci.getTicketData().getCinemaName() %> (<%= ci.getTicketData().getLocation() %>)</p></a>
                                             <small>
-                                                <span class="text-muted">Color:</span>
-                                                <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#e81e2c;"></span> &nbsp;
-                                                <span class="text-muted">Size: </span> EU 37 &nbsp;
-                                                <span class="text-muted">Ships from: </span> China
+                                                <span class="text-muted">Chưa thanh toán</span>
+                                                <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#58bd37;"></span> &nbsp;
+                                                <span class="text-muted">Phòng chiếu : </span> <%= ci.getTicketData().getRoomName() %>
+                                                <span class="text-muted">Thời gian : </span> <%= ci.getTicketData().getShowDate() %> * <%= ci.getTicketData().getStartTime() %> * Ghế : <%= ci.getTicketData().getSeatName() %>
                                             </small>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$57.55</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="2"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
+                                <td class="text-right font-weight-semibold align-middle p-4"><%= ci.getPrice()%></td>
+                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="<%= ci.getQuanlity()%>"></td>
+                                <td class="text-right font-weight-semibold align-middle p-4"><%= ci.getTotalPrice()%> VNĐ</td>
+                                <td class="text-center align-middle px-0"><a href="/Movie_Ticket_Website/shoppingCart-servlet?action=delete&ticketID=<%=ci.getTicketData().getTicketID()%>" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">x</a></td>
                             </tr>
-                            <% } %>
-
-                            <tr>
-                                <td class="p-4">
-                                    <div class="media align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                        <div class="media-body">
-                                            <a href="#" class="d-block text-dark">Product 2</a>
-                                            <small>
-                                                <span class="text-muted">Color:</span>
-                                                <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#000;"></span> &nbsp;
-                                                <span class="text-muted">Storage: </span> 32GB &nbsp;
-                                                <span class="text-muted">Warranty: </span> Standard - 1 year &nbsp;
-                                                <span class="text-muted">Ships from: </span> China
-                                            </small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                            </tr>
-                            <tr>
-                                <td class="p-4">
-                                    <div class="media align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                        <div class="media-body">
-                                            <a href="#" class="d-block text-dark">Product 3</a>
-                                            <small>
-                                                <span class="text-muted">Ships from: </span> Germany
-                                            </small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                            </tr>
+<%--                            <a class="btn btn-lg btn-primary mt-2"--%>
+<%--                               href="/Movie_Ticket_Website/bookingTicket-servlet?action=changeToCheckout&--%>
+<%--                               addToCart=0&time=<%= ci.getTicketData().getStartTime() %>&--%>
+<%--                               cinemaRoomName=<%= ci.getTicketData().getRoomName() %>&--%>
+<%--                               date=<%= ci.getTicketData().getShowDate() %>&--%>
+<%--                               cinemaName=<%= ci.getTicketData().getCinemaName() %> &movieID=${movieID}&--%>
+<%--                               seatName=<%= ci.getTicketData().getSeatName() %>">Thanh toán</a>--%>
+                            <%
+                                }
+                            %>
                         </tbody>
                     </table>
                 </div>
@@ -121,19 +103,21 @@
                     </div>
                     <div class="d-flex">
                         <div class="text-right mt-4 mr-5">
-                            <label class="text-muted font-weight-normal m-0">Khuyến mãi</label>
-                            <div class="text-large"><strong>$20</strong></div>
+                            <label class="text-muted font-weight-normal m-0">Khuyến mãi cực sốc</label>
+                            <div class="text-large"><strong>- 0 VNĐ</strong></div>
                         </div>
                         <div class="text-right mt-4">
                             <label class="text-muted font-weight-normal m-0">Tổng thanh toán</label>
-                            <div class="text-large"><strong>$1164.65</strong></div>
+                            <div class="text-large"><strong><%= shoppingCart.totalPriceItem()%> VNĐ</strong></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="float-right">
-                    <button href="home-servlet?action=direct" type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" >Quay lại</button>
-                    <button type="button" class="btn btn-lg btn-primary mt-2">Thanh toán</button>
+<%--                    <button href="/home-servlet?action=direct" type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" >Quay lại</button>--%>
+    <a href="/Movie_Ticket_Website/home-servlet?action=direct" type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" >Quay lại</a>
+<%--    <a class="btn btn-lg btn-primary mt-2"  href="">${c.seatName }</a> type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" >Thanh toán</a>--%>
+                        <button type="button" class="btn btn-lg btn-primary mt-2">Thanh toán</button>
                 </div>
             </div>
         </div>

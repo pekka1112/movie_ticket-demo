@@ -26,6 +26,39 @@ public class TicketData {
 
     public TicketData() {}
 
+    public TicketData(String ticketID, String cinemaID, String showtimeID, String ticketDetailID, String seatID, String cinemaRoomID, double price, String movieID, String showDate, String startTime, String endTime, String movieName, String movieCategory, String releaseDate, String director, String duration, String country, String movieDescription, String movieContent, int isPublished, double movieScore, String movieMediaLinkID, String linkMovieTrailer, String linkMovieImage, String cinemaName, String location, String roomName, String seatName, String seatType, String serviceDescription) {
+        this.ticketID = ticketID;
+        this.cinemaID = cinemaID;
+        this.showtimeID = showtimeID;
+        this.ticketDetailID = ticketDetailID;
+        this.seatID = seatID;
+        this.cinemaRoomID = cinemaRoomID;
+        this.price = price;
+        this.movieID = movieID;
+        this.showDate = showDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.movieName = movieName;
+        this.movieCategory = movieCategory;
+        this.releaseDate = releaseDate;
+        this.director = director;
+        this.duration = duration;
+        this.country = country;
+        this.movieDescription = movieDescription;
+        this.movieContent = movieContent;
+        this.isPublished = isPublished;
+        this.movieScore = movieScore;
+        this.movieMediaLinkID = movieMediaLinkID;
+        this.linkMovieTrailer = linkMovieTrailer;
+        this.linkMovieImage = linkMovieImage;
+        this.cinemaName = cinemaName;
+        this.location = location;
+        this.roomName = roomName;
+        this.seatName = seatName;
+        this.seatType = seatType;
+        this.serviceDescription = serviceDescription;
+    }
+
     public String getServiceDescription() {
         return serviceDescription;
     }

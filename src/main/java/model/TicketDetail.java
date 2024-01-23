@@ -181,4 +181,12 @@ public class TicketDetail {
                 ", movieScore='" + movieScore + '\'' +
                 '}';
     }
+
+    public TicketDetail(String ticketDetailID, String ticketID, double price, String seatID, String cinemaRoomID) {
+        this.ticketDetailID = ticketDetailID;
+        this.ticketID = ticketID;
+        this.price = price;
+        this.seatID = seatID;
+        this.cinemaRoomID = cinemaRoomID;
+    }
 }

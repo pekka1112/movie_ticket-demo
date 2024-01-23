@@ -2,9 +2,26 @@ package database;
 
 import model.BookingDetail;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BookingDetailDAO implements DAOInterface<BookingDetail>{
+
+    public static int countRow() {
+        Connection c = JDBCUtil.getConnection();
+        String sql ="SELECT COUNT(*) c FROM bookingdetail";
+        try {
+            Statement s = c.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            rs.next();
+            return rs.getInt("c");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
     @Override
     public ArrayList<BookingDetail> selectAll() {

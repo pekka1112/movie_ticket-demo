@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "shoppingCart", urlPatterns = {"/shoppingCart-servlet"})
+@WebServlet(name = "ShoppingCart", urlPatterns = {"/shoppingCart-servlet"})
 public class ShoppingCartController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static MovieDAO movieDAO;
@@ -38,30 +38,61 @@ public class ShoppingCartController extends HttpServlet {
             cart = new ShoppingCart();
         }
         session.setAttribute("cart",cart);
-        String action = req.getParameter("action");
+        String action = (req.getParameter("action") == null) ? req.getParameter("action") : (String) req.getAttribute("action");
+        if(action == null ) {
+            action = req.getParameter("action");
+        }
+        System.out.println(action);
         if(action.equals("view")) {
             viewCart(req,resp);
         } else if(action.equals("add")) {
-            doPost(req,resp);
+            add(req,resp);
         } else if(action.equals("update")) {
             updateCart(req,resp);
-        } else if(action.equals("remove")) {
-            removeMovie(req,resp);
+        } else if(action.equals("delete")) {
+            delete(req,resp);
         }
     }
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        // lấy ra để tạo TicketData
+        Ticket ticket = (Ticket) req.getAttribute("ticket");
+        TicketDetail ticketDetail = (TicketDetail) req.getAttribute("ticketDetail");
+        Booking booking = (Booking) req.getAttribute("booking");
+        BookingDetail bookingDetail = (BookingDetail) req.getAttribute("bookingDetail");
+        String movieName = (String) req.getAttribute("movieName");
+        String cinemaName = (String) req.getAttribute("cinemaName");
+        String cinemaLocation = (String) req.getAttribute("cinemaLocation");
+        String time = (String) req.getAttribute("time");
+        String seatName = (String) req.getAttribute("seatName");
+        String cinemaRoomName = (String) req.getAttribute("cinemaRoomName");
+        String curDate = (String) req.getAttribute("curDate");
+        String movieLinkImage = (String) req.getAttribute("movieLinkImage");
+        // lấy ra movieName
+        TicketData ticketData = new TicketData();
+        ticketData.setTicketID(ticket.getTicketID());
+        ticketData.setMovieName(movieName);
+        ticketData.setCinemaName(cinemaName);
+        ticketData.setLocation(cinemaLocation);
+        ticketData.setStartTime(time);
+        ticketData.setSeatName(seatName);
+        ticketData.setRoomName(cinemaRoomName);
+        ticketData.setShowDate(curDate);
+        ticketData.setLinkMovieImage(movieLinkImage);
 
-        String mid = req.getParameter("movieID");
-        MovieMediaLink movie = movieDAO.getMovieByID(mid);
-
-        CartItem item = new CartItem();
-//        item.setMovie(movie);
-        item.setQuanlity(1);
-        item.setPrice(50000);
+        CartItem item = new CartItem(ticketData,1,50000);
         cart.add(item);
+        session.setAttribute("cart",cart);
+        RequestDispatcher rd = req.getRequestDispatcher("/shoppingCart.jsp");
+        rd.forward(req,resp);
+    }
+
+    protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        String ticketID = req.getParameter("ticketID");
+        cart.remove(ticketID);
         session.setAttribute("cart",cart);
         RequestDispatcher rd = req.getRequestDispatcher("/shoppingCart.jsp");
         rd.forward(req,resp);
