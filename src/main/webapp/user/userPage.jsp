@@ -12,6 +12,11 @@
 <html>
 <%
     User user = (User) session.getAttribute("user");
+    if(user == null) {
+%>
+    <c:redirect url="/home-servlet?action=direct"></c:redirect>
+<%
+    }
     boolean isLogined = user == null ? false : true;
 %>
 <%

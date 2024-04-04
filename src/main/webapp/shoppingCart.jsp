@@ -81,6 +81,7 @@
                                 <td class="text-right font-weight-semibold align-middle p-4"><%= ci.getPrice()%></td>
                                 <td class="align-middle p-4"><input type="text" class="form-control text-center" value="<%= ci.getQuanlity()%>"></td>
                                 <td class="text-right font-weight-semibold align-middle p-4"><%= ci.getTotalPrice()%> VNĐ</td>
+                                    <c:url value="" var="deleteLink"></c:url>
                                 <td class="text-center align-middle px-0"><a href="/Movie_Ticket_Website/shoppingCart-servlet?action=delete&ticketID=<%=ci.getTicketData().getTicketID()%>" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">x</a></td>
                             </tr>
 <%--                            <a class="btn btn-lg btn-primary mt-2"--%>
