@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Cinema;
-import model.MovieMediaLink;
 import model.UserCommentDetail;
 
 import java.io.IOException;

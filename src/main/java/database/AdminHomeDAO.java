@@ -1,8 +1,5 @@
 package database;
 
-import com.mysql.cj.jdbc.CallableStatement;
-import model.Comment;
-import model.FilmEaring;
 import model.User;
 
 import java.sql.Connection;
@@ -10,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class AdminHomeDAO {
     public int getUserOnl(){

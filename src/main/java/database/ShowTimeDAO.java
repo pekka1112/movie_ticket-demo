@@ -1,7 +1,5 @@
 package database;
 
-import model.CinemaRoomAndTime;
-import model.MovieMediaLink;
 import model.ShowTime;
 
 import java.sql.Connection;

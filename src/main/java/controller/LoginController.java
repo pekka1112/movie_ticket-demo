@@ -1,19 +1,16 @@
 package controller;
 
 
-import database.AdminHomeDAO;
-
 import database.CustomerDAO;
 
 import database.UserDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Customer;
+import model.UserDetail;
 import model.User;
 
 import java.io.IOException;
@@ -33,7 +30,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = req.getSession();
         if (user != null){
         CustomerDAO customerDAO = new CustomerDAO();
-        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
+        UserDetail customer = customerDAO.getCustomerByUserId(user.getUserId());
            session.setAttribute("user",user);
            session.setAttribute("customer",customer);
            session.setAttribute("userName",user.getUserName());

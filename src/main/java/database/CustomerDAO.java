@@ -1,7 +1,6 @@
 package database;
 
-import model.Customer;
-import model.User;
+import model.UserDetail;
 
 
 import java.sql.Connection;
@@ -9,50 +8,50 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class CustomerDAO implements DAOInterface<Customer>{
+public class CustomerDAO implements DAOInterface<UserDetail>{
     @Override
-    public ArrayList<Customer> selectAll() {
+    public ArrayList<UserDetail> selectAll() {
         return null;
     }
 
     @Override
-    public ArrayList<Customer> selectById(Customer object) {
+    public ArrayList<UserDetail> selectById(UserDetail object) {
         return null;
     }
 
     @Override
-    public int insert(Customer obj) {
+    public int insert(UserDetail obj) {
         return 0;
     }
 
     @Override
-    public int insertAll(ArrayList<Customer> arrayList) {
+    public int insertAll(ArrayList<UserDetail> arrayList) {
         return 0;
     }
 
     @Override
-    public int delete(Customer obj) {
+    public int delete(UserDetail obj) {
         return 0;
     }
 
     @Override
-    public int deleteAll(ArrayList<Customer> arrayList) {
+    public int deleteAll(ArrayList<UserDetail> arrayList) {
         return 0;
     }
 
     @Override
-    public int update(Customer obj) {
+    public int update(UserDetail obj) {
         return 0;
     }
 
-    public static Customer getCustomerByUserId(String userID) {
+    public static UserDetail getCustomerByUserId(String userID) {
         Connection c = JDBCUtil.getConnection();
         String sql ="SELECT cu.* FROM customer cu JOIN userlogin u ON cu.userID = u.userID WHERE u.userID = ?";
         try {
             PreparedStatement s = c.prepareStatement(sql);
             s.setString(1, userID);
             ResultSet rs = s.executeQuery();
-            Customer us = new Customer();
+            UserDetail us = new UserDetail();
             while(rs.next()) {
                 us.setCustomerID(rs.getString("customerID"));
                 us.setUserID(rs.getString("userID"));
@@ -68,7 +67,7 @@ public class CustomerDAO implements DAOInterface<Customer>{
             return null;
         }
     }
-    public static boolean updateCustomer (Customer customer) {
+    public static boolean updateCustomer (UserDetail customer) {
         Connection c = JDBCUtil.getConnection();
         String update = " UPDATE customer " ;
         String set = " SET fullName = ? , gender = ? , phoneNumber = ? , address = ? , dob = ?" ;
