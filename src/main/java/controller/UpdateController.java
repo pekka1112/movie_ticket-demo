@@ -1,7 +1,6 @@
 package controller;
 
 import database.CommentDAO;
-import database.FilmDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -1,7 +1,6 @@
 package controller;
 
 import database.CommentDAO;
-import database.FilmDAO;
 import database.TicketDAO;
 import database.UserDAO;
 import jakarta.servlet.ServletException;

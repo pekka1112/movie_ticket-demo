@@ -1,7 +1,6 @@
 package model;
 
-public class Customer {
-    private String customerID;
+public class UserDetail {
     private String userID;
     private String fullName;
     private String gender;
@@ -9,9 +8,6 @@ public class Customer {
     private String phoneNumber;
     private String dob;
 
-    public String getCustomerID() {
-        return customerID;
-    }
 
     public String getAddress() {
         return address;
@@ -21,9 +17,6 @@ public class Customer {
         this.address = address;
     }
 
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
-    }
 
     public String getUserID() {
         return userID;
@@ -65,6 +58,6 @@ public class Customer {
         this.dob = dob;
     }
 
-    public Customer() {
+    public UserDetail() {
     }
 }

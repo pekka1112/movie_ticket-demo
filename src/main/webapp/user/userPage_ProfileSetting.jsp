@@ -1,6 +1,6 @@
 <%@ page import="model.User" %>
 <%@ page import="beans.ShoppingCart" %>
-<%@ page import="model.Customer" %>
+<%@ page import="model.UserDetail" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -15,7 +15,7 @@
 </script>
 <%
     User user = (User) session.getAttribute("user");
-    Customer customer = (Customer) session.getAttribute("customer");
+    UserDetail customer = (UserDetail) session.getAttribute("customer");
     boolean isLogined = user == null ? false : true;
 %>
 <%

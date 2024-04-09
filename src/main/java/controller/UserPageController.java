@@ -175,14 +175,14 @@ public class UserPageController extends HttpServlet {
         User user = updateUserStatus ? newUser : (User) session.getAttribute("user") ;
         session.setAttribute("user",user);
 
-        Customer newCustomer = (Customer) session.getAttribute("customer");
+        UserDetail newCustomer = (UserDetail) session.getAttribute("customer");
         newCustomer.setFullName(name);
         newCustomer.setGender(gender);
         newCustomer.setPhoneNumber(phoneNumber);
         newCustomer.setAddress(address);
         newCustomer.setDob(dob);
         boolean updateCustomerStatus = customerDAO.updateCustomer(newCustomer);
-        Customer customer = updateCustomerStatus ? newCustomer : (Customer) session.getAttribute("customer") ;
+        UserDetail customer = updateCustomerStatus ? newCustomer : (UserDetail) session.getAttribute("customer") ;
         session.setAttribute("customer",customer);
 
         if(updateUserStatus || updateCustomerStatus) {
@@ -404,7 +404,7 @@ public class UserPageController extends HttpServlet {
             rd.forward(req, resp);
         }
         session.setAttribute("userEmail",user.getEmail());
-        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
+        UserDetail customer = customerDAO.getCustomerByUserId(user.getUserId());
         session.setAttribute("customer",customer);
         List<Payment> payments = paymentDAO.getAllPaymentType();
         req.setAttribute("payments",payments);
@@ -478,7 +478,7 @@ public class UserPageController extends HttpServlet {
             rd.forward(req, resp);
         }
         session.setAttribute("userEmail",user.getEmail());
-        Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
+        UserDetail customer = customerDAO.getCustomerByUserId(user.getUserId());
         session.setAttribute("customer",customer);
         List<Payment> payments = paymentDAO.getAllPaymentType();
         req.setAttribute("payments",payments);
