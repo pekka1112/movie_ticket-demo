@@ -180,3 +180,14 @@ header {
     color: #df0e62;
 }
 
+.error-message {
+    color: red;
+    background-color: #df0e62;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid red;
+    border-radius: 5px;
+    font-style: italic;
+    text-align: center;
+}
+

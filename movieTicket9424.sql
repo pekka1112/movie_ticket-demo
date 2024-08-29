@@ -576,18 +576,18 @@ INSERT INTO `ticketdetail` (`ticketDetailID`, `price`, `seatID`, `cinemaRoomID`,
 
 CREATE TABLE `user` (
   `userID` varchar(20) NOT NULL,
-  `userName` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `userPassword` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `isActive` tinyint(1) DEFAULT NULL,
-  `roles` tinyint(1) NOT NULL
+  `role` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`userID`, `userName`, `email`, `userPassword`, `isActive`, `roles`) VALUES
+INSERT INTO `user` (`userID`, `username`, `email`, `password`, `isActive`, `role`) VALUES
 ('user1', 'nguyenthanhquyen', 'nguyenthanhquyen@email.com', 'thanhquyen', 1, 0),
 ('user10', 'vansang', 'nguyenvansang@email.com', 'vansang', 1, 0),
 ('user11', 'vansang', 'nguyenvansang@email.com', 'vansang', 0, 0),
@@ -639,7 +639,7 @@ CREATE TABLE `userdetail` (
   `gender` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `phoneNumber` varchar(255) DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `dob` date DEFAULT NULL
+  `dob` date DEFAULT NULLuserdetail
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

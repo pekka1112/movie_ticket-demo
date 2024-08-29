@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import model.User;
 
-public class UserLoginDAO {
+public class UserDAO {
     public boolean checkEmailExits(String email) {
         Connection connection = null;
         boolean checkEmail = false;
@@ -30,7 +30,7 @@ public class UserLoginDAO {
         return checkEmail;
     }
 
-    public User getUserbyEmailAndPassword(String email, String password) {
+    public User getUserbyEmailAndPassword (String email, String password) {
         Connection connection = null;
         try {
             connection = JDBCUtil.getConnection();
@@ -41,11 +41,12 @@ public class UserLoginDAO {
             ResultSet rs = pr.executeQuery();
             if (rs.next()) {
                 User user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("userName"));
+                user.setUserID(rs.getString("userID"));
+                user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
-                user.setAdmin(rs.getBoolean("isAdmin"));
+                user.setIsActive(rs.getInt("isActive"));
+                user.setRole(rs.getInt("role"));
                 return user;
             }
         } catch (SQLException e) {
@@ -102,15 +103,16 @@ public class UserLoginDAO {
             ResultSet rs = pr.executeQuery();
             while (rs.next()){
                 User user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("userName"));
+                user.setUserID(rs.getString("userID"));
+                user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
-                user.setAdmin(rs.getBoolean("isAdmin"));
+                user.setIsActive(rs.getInt("isActive"));
+                user.setRole(rs.getInt("role"));
                 list.add(user);
             }
             for (User user: list){
-                if (!user.isAdmin()){
+                if (user.getRole() != 0) {
                     userList.add(user);
                 }
             }
