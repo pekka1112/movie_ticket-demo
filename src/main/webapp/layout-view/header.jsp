@@ -11,7 +11,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">
-                <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET" style="height:35px;"/>PZO TICKET</a>
+                <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET" style="height:35px;"/> PONZO TICKET</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -28,18 +28,18 @@
                 </ul>
 
                 <div class="search-right">
-                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Tìm phim
+                    <a href="#open_popupSearch" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="Tìm kiếm tên phim, rạp, diễn viên, đạo diễn, chức năng.">Tìm kiếm
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
-                    <!-- search popup -->
-                    <div id="search" class="pop-overlay">
+                    <div id="open_popupSearch" class="pop-overlay">
                         <div class="popup">
-                            <form action="home-page" method="get" class="search-box">
+                            <form action="#" method="get" class="search-box">
                                 <input type="hidden" name="action" value="search-bar">
-                                <input type="search" placeholder="Search your Keyword" name="search"
+                                <input type="search" placeholder="Nhập từ khóa để tìm kiếm" name="search"
                                        required="required" autofocus="" style="color: black">
-                                <button type="submit" class="btn"><span class="fa fa-search"
-                                                                        aria-hidden="true"></span></button>
+                                <button type="submit" class="btn">
+                                    <span class="fa fa-search" aria-hidden="true"></span>
+                                </button>
                             </form>
                             <div class="browse-items">
                                 <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
@@ -65,12 +65,13 @@
                         </div>
                         <a class="close" href="#close">×</a>
                     </div>
-
                 </div>
+
                 <div class="Login_SignUp" id="login"
                      style="font-size: 2rem ; display: inline-block; position: relative;">
-                    <a class="nav-link" href="login.jsp"><i class="fa fa-user-circle-o"></i></a>
+                    <a class="open_loginPage" href="login.jsp"><i class="fa fa-user-circle-o"></i></a>
                 </div>
+
             </div>
             <div class="mobile-position">
                 <nav class="navigation">
@@ -88,6 +89,7 @@
         </div>
     </nav>
 </header>
+
 <script>
     var btns = document.getElementsByClassName("nav-item");
     console.log(btns);

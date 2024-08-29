@@ -10,9 +10,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>MovieBooking - PZO</title>
+    <title>PONZO - Đặt vé xem phim ngay trên Ponzo</title>
     <jsp:include page="../layout-view/head_libraries.jsp"></jsp:include>
-
 </head>
 <body>
     <jsp:include page="../layout-view/header.jsp"></jsp:include>
