@@ -12,7 +12,7 @@ import model.User;
 
 import java.io.IOException;
 
-@WebServlet(name = "Login" , value = "/login")
+@WebServlet(name = "Login" , urlPatterns = {"/login-servlet"})
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,10 +27,10 @@ public class Login extends HttpServlet {
         RequestDispatcher requestDispatcher = null;
         if (user != null){
             session.setAttribute("name", user.getUserName());
-            requestDispatcher = req.getRequestDispatcher("index.jsp");
+            requestDispatcher = req.getRequestDispatcher("/index.jsp");
         }else {
            req.setAttribute("status", "failed");
-           requestDispatcher = req.getRequestDispatcher("login.jsp");
+           requestDispatcher = req.getRequestDispatcher("/login.jsp");
         }
         requestDispatcher.forward(req, resp);
     }

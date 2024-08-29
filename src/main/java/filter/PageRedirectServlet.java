@@ -1,0 +1,49 @@
+package filter;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(urlPatterns = {"/home", "/movie", "/showtime", "/contact", "/about", "/login"})
+public class PageRedirectServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String path = request.getServletPath();
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/home-servlet?action=direct");
+        switch (path) {
+            case "/home":
+                break;
+            case "/movie":
+                dispatcher = request.getRequestDispatcher("/movie-servlet?action=init");
+                break;
+            case "/showtime":
+                dispatcher = request.getRequestDispatcher("/showtimes-servlet?action=init");
+                break;
+            case "/about":
+                dispatcher = request.getRequestDispatcher("/about.jsp");
+                break;
+            case "/contact":
+                dispatcher = request.getRequestDispatcher("/contact.jsp");
+                break;
+            case "/login":
+                dispatcher = request.getRequestDispatcher("/login.jsp");
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                break;
+        }
+        dispatcher.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+}

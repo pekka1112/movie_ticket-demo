@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 @WebServlet(name = "HomeServlet", urlPatterns = {"/home-servlet"})
-public class HomeController extends HttpServlet {
+public class  HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static MovieDAO movieDAO;
     public static CinemaDAO cinemaDAO;
