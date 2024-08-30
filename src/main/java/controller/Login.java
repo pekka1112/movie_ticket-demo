@@ -30,6 +30,7 @@ public class Login extends HttpServlet {
         RequestDispatcher requestDispatcher = null;
         if (user != null){
             session.setAttribute("curUser", user);
+            session.setAttribute("curUsername", user.getUsername());
             requestDispatcher = req.getRequestDispatcher("/index.jsp");
         }else {
            req.setAttribute("login-status", "failed");

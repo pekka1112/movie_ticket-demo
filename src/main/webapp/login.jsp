@@ -14,7 +14,7 @@
     <title>PONZO - Đăng kí thành viên</title>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/login-page.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
@@ -46,7 +46,7 @@
                 </div>
                 <c:if test="${requestScope['login-status'] == 'failed'}">
                     <div class="error-message">
-                        <p>Đăng nhập thất bại. Vui lòng kiểm tra lại email hoặc mật khẩu.</p>
+                        <p>Tài khoản sai, đăng nhập thất bại !</p>
                     </div>
                 </c:if>
             </form>

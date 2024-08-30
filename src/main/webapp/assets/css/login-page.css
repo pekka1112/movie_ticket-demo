@@ -182,12 +182,42 @@ header {
 
 .error-message {
     color: red;
-    background-color: #df0e62;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid red;
     border-radius: 5px;
     font-style: italic;
+    font-weight: bolder;
     text-align: center;
 }
 
+.popup-content {
+    position: absolute;
+    top: 100%; /* Show just below the link */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+    width: 200px; /* Adjust width as needed */
+}
+
+.popup-content ul {
+    margin: 0;
+    padding: 0;
+}
+
+.popup-content li {
+    padding: 10px;
+    text-align: left;
+}
+
+.popup-content li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.popup-content li a:hover {
+    background-color: #f1f1f1;
+}
