@@ -1,6 +1,7 @@
 package database;
 
 import model.Customer;
+import model.UserDetail;
 
 
 import java.util.ArrayList;
@@ -39,5 +40,13 @@ public class CustomerDAO implements DAOInterface<Customer>{
     @Override
     public int update(Customer obj) {
         return 0;
+    }
+
+    public boolean updateCustomer(UserDetail newCustomer) {
+        return  false;
+    }
+
+    public UserDetail getCustomerByUserId(String userID) {
+        return  null;
     }
 }

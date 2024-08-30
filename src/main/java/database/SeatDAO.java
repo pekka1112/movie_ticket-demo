@@ -3,6 +3,7 @@ package database;
 import model.Seat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SeatDAO implements DAOInterface<Seat>{
     @Override
@@ -38,5 +39,9 @@ public class SeatDAO implements DAOInterface<Seat>{
     @Override
     public int update(Seat obj) {
         return 0;
+    }
+
+    public List<Seat> getSeatByMID_CNAME_DATE_RNAME_TIME(String movieID, String cinemaName, String curDate, String cinemaRoomName, String time) {
+        return  null;
     }
 }

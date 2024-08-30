@@ -3,6 +3,7 @@ package database;
 import model.ShowTime;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShowTimeDAO implements DAOInterface<ShowTime>{
     @Override
@@ -38,5 +39,13 @@ public class ShowTimeDAO implements DAOInterface<ShowTime>{
     @Override
     public int update(ShowTime obj) {
         return 0;
+    }
+
+    public List<ShowTime> getShowtimeByCinemaIDAndMovieID(String movieID, String cinemaName) {
+        return  null;
+    }
+
+    public List<ShowTime> getShowtimeByMID_CNAME_DATE_RNAME(String movieID, String cinemaName, String curDate, String roomName) {
+        return null;
     }
 }

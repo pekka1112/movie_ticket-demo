@@ -3,6 +3,7 @@ package database;
 import model.TransactionTicket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionTicketDAO implements DAOInterface<TransactionTicket>{
     @Override
@@ -38,5 +39,9 @@ public class TransactionTicketDAO implements DAOInterface<TransactionTicket>{
     @Override
     public int update(TransactionTicket obj) {
         return 0;
+    }
+
+    public List<TransactionTicket> getTransactionTicketByUserID(String userID, String tid) {
+        return null;
     }
 }

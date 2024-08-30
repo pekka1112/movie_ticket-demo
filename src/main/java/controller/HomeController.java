@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.*;
 
 import java.io.IOException;
@@ -24,9 +25,7 @@ public class  HomeController extends HttpServlet {
     public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies;
     public static List<Cinema>  allCinema, top2Cinema;
     public static List<UserCommentDetail> comments ;
-    public HomeController() {
-
-    }
+    public HomeController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -36,7 +35,21 @@ public class  HomeController extends HttpServlet {
             showCinemaDetail(req,resp);
         } else if (action.equals("show-cinemaDetail")) {
             searchCinemaAction(req,resp);
+        } else if (action.equals("logout")) {
+            logout(req,resp);
         }
+    }
+
+    private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+
+        HttpSession session = req.getSession();
+        session.removeAttribute("curUser");
+        session.removeAttribute("curUsername");
+        session.invalidate();
+
+        redirectToHomePage(req,resp);
     }
 
     @Override

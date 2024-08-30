@@ -3,6 +3,7 @@ package database;
 import model.Payment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentDAO implements DAOInterface<Payment>{
     @Override
@@ -38,5 +39,9 @@ public class PaymentDAO implements DAOInterface<Payment>{
     @Override
     public int update(Payment obj) {
         return 0;
+    }
+
+    public List<Payment> getAllPaymentType() {
+        return  null;
     }
 }

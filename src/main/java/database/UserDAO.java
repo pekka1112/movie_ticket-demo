@@ -124,4 +124,8 @@ public class UserDAO {
         }
         return userList;
     }
+
+    public boolean updateUser(User newUser) {
+        return false;
+    }
 }

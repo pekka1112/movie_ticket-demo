@@ -37,10 +37,10 @@
                 </ul>
 
                 <div class="Login_SignUp" id="login" style="font-size: 2rem ; display: inline-block; position: relative;border-radius: 5px; ">
-                    <a class="nav-link" href="javascript:void(0)" style="padding: 0px 0px;" onclick="togglePopup()">
-                        <ul class="navbar-nav ml-auto" onclick="togglePopup()">
+                    <a class="nav-link" href="javascript:void(0)" style="padding: 0px 0px;" >
+                        <ul class="navbar-nav ml-auto" >
                             <% if(isLogined) { %>
-                                <li class="nav-item" onclick="togglePopup()">
+                                <li class="nav-item" >
                                     <a class="nav-link" href="userpage-servlet?action=init" style="padding-right: 1rem; padding-left: 1rem">
                                         Chào, ${sessionScope.get("curUsername")}
                                     </a>
@@ -57,16 +57,16 @@
 
                 <%--  shopping cart icon : chưa xử lí --%>
                 <div class="search-right">
-                    <a href="shoppingCart-servlet?action=view" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">
+                    <a href="shoppingCart-servlet?action=view" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="Giỏ hàng">
                         <i class="fa-solid fa-cart-shopping "></i>
                     </a>
                 </div>
 
                 <div class="search-right">
-                    <a href="#open_popupSearch" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="Tìm kiếm tên phim, rạp, diễn viên, đạo diễn, chức năng.">
+                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="Tìm kiếm tên phim, rạp, diễn viên, đạo diễn, chức năng.">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
-                    <div id="open_popupSearch" class="pop-overlay">
+                    <div id="search" class="pop-overlay">
                         <div class="popup">
                             <form action="#" method="get" class="search-box">
                                 <input type="hidden" name="action" value="search-bar">
@@ -129,21 +129,5 @@
             console.log("check");
             this.className += " active";
         });
-    }
-    function togglePopup() {
-        var popup = document.getElementById("userPopup");
-        if (popup.style.display === "none" || popup.style.display === "") {
-            popup.style.display = "block";
-        } else {
-            popup.style.display = "none";
-        }
-    }
-    window.onclick = function(event) {
-        var popup = document.getElementById("userPopup");
-        if (!event.target.matches('.nav-link')) {
-            if (popup.style.display === "block") {
-                popup.style.display = "none";
-            }
-        }
     }
 </script>

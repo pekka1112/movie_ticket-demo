@@ -135,4 +135,8 @@ public class CinemaDAO implements DAOInterface<Cinema>{
     public static void main(String[] args) {
         System.out.println(getCinemaByID("cnm1"));
     }
+
+    public List<Cinema> getCinemaByMovieID(String movieID) {
+        return  null;
+    }
 }
