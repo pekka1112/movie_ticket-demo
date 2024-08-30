@@ -639,7 +639,7 @@ CREATE TABLE `userdetail` (
   `gender` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `phoneNumber` varchar(255) DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `dob` date DEFAULT NULLuserdetail
+  `dob` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
