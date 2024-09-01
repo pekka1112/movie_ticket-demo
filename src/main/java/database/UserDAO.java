@@ -41,12 +41,12 @@ public class UserDAO {
             ResultSet rs = pr.executeQuery();
             if (rs.next()) {
                 User user = new User();
-                user.setUserID(rs.getString("userID"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setIsActive(rs.getInt("isActive"));
-                user.setRole(rs.getInt("role"));
+                    user.setUserID(rs.getInt("userID"));
+                    user.setUsername(rs.getString("username"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    user.setActive(rs.getBoolean("isActive"));
+                    user.setRole(rs.getInt("role"));
                 return user;
             }
         } catch (SQLException e) {
@@ -103,11 +103,11 @@ public class UserDAO {
             ResultSet rs = pr.executeQuery();
             while (rs.next()){
                 User user = new User();
-                user.setUserID(rs.getString("userID"));
+                user.setUserID(rs.getInt("userID"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
-                user.setIsActive(rs.getInt("isActive"));
+                user.setActive(rs.getBoolean("isActive"));
                 user.setRole(rs.getInt("role"));
                 list.add(user);
             }
