@@ -1,7 +1,5 @@
 package database;
 
-import model.BookingDetail;
-
 import java.util.ArrayList;
 
 public class BookingDetailDAO implements DAOInterface<BookingDetail>{

@@ -155,7 +155,7 @@ INSERT INTO `booking` (`userID`, `ticketID`, `status`) VALUES
 	(1, 4, 'Đã hủy'),
 	(2, 5, 'Đã thanh toán');
 
-CREATE TABLE `booking_ticket` (
+CREATE TABLE `bookingticket` (
   `bookingID` INT NOT NULL,
   `ticketID` INT NOT NULL,
   PRIMARY KEY (`bookingID`, `ticketID`),
@@ -163,7 +163,7 @@ CREATE TABLE `booking_ticket` (
   FOREIGN KEY (`ticketID`) REFERENCES `ticket`(`ticketID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
 
-INSERT INTO `booking_ticket` (`bookingID`, `ticketID`) VALUES
+INSERT INTO `bookingticket` (`bookingID`, `ticketID`) VALUES
 	(1, 1), 
 	(1, 2), 
 	(2, 3), 
@@ -194,8 +194,7 @@ CREATE TABLE `movie` (
   `country` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `movieDescription` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `movieContent` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `movieScore` DOUBLE DEFAULT NULL,
-  FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`) ON DELETE CASCADE,
+  `movieScore` DOUBLE DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `directorName`, `duration`, `country`, `movieDescription`, `movieContent`, `movieScore`) VALUES
@@ -308,7 +307,7 @@ INSERT INTO `roles` (`roleID`, `roleName`) VALUES
 CREATE TABLE `userdetail` (
   `userID` int PRIMARY KEY,
   `fullName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `gender` TINYINT(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `gender` ENUM('Nam', 'Nu', 'Khac') DEFAULT NULL,
   `phoneNumber` VARCHAR(30) DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
@@ -319,8 +318,8 @@ CREATE TABLE `userdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `userdetail` (`userID`, `fullName`, `gender`, `phoneNumber`, `address`, `dob`, `profilePictureURL`) VALUES
-(1, 'Nguyen Thanh Quyen', 0, '0123456789', 'Hà Nội', '1990-01-01', ''),
-(2, 'Nguyen Do Thanh Phat', 1, '0987654321', 'Hồ Chí Minh', '2003-12-11', '');
+(1, 'Nguyen Thanh Quyen', 'Nam', '0123456789', 'Hà Nội', '1990-01-01', ''),
+(2, 'Nguyen Do Thanh Phat', 'Nu', '0987654321', 'Hồ Chí Minh', '2003-12-11', '');
 
 -- note : 1 user có thể cmt trên nhiều movie, 1 user có thể cmt nhiều lần trên 1 movie
 CREATE TABLE `usercomment` (
@@ -343,178 +342,6 @@ INSERT INTO `usercomment` (`movieID`, `userID`, `commentText`) VALUES
 (2, 2, 'The plot was a bit predictable.'),
 (3, 3, 'Fantastic visuals and storyline.');
 
-ALTER TABLE `actor`
-  ADD PRIMARY KEY (`actorID`),
-  ADD KEY `movieID` (`movieID`);
-
---
--- Chỉ mục cho bảng `booking`
---
-ALTER TABLE `booking`
-  ADD PRIMARY KEY (`bookingID`),
-  ADD KEY `ticketID` (`ticketID`),
-  ADD KEY `userID` (`userID`);
-
---
--- Chỉ mục cho bảng `bookingdetail`
---
-ALTER TABLE `bookingdetail`
-  ADD PRIMARY KEY (`bookingDetailID`),
-  ADD KEY `bookingID` (`bookingID`);
-
---
--- Chỉ mục cho bảng `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cartID`);
-
---
--- Chỉ mục cho bảng `cinema`
---
-ALTER TABLE `cinema`
-  ADD PRIMARY KEY (`cinemaID`),
-  ADD KEY `cinemaRoomID` (`cinemaRoomID`);
-
---
--- Chỉ mục cho bảng `cinemaroom`
---
-ALTER TABLE `cinemaroom`
-  ADD PRIMARY KEY (`cinemaRoomID`);
-
---
--- Chỉ mục cho bảng `contain`
---
-ALTER TABLE `contain`
-  ADD PRIMARY KEY (`cinemaID`,`showtimeID`),
-  ADD KEY `showtimeID` (`showtimeID`);
-
---
--- Chỉ mục cho bảng `movie`
---
-ALTER TABLE `movie`
-  ADD PRIMARY KEY (`movieID`);
-
---
--- Chỉ mục cho bảng `movieimage`
---
-ALTER TABLE `movieimage`
-  ADD PRIMARY KEY (`movieImageID`,`movieID`);
-
---
--- Chỉ mục cho bảng `movietrailer`
---
-ALTER TABLE `movietrailer`
-  ADD PRIMARY KEY (`movieTrailerID`,`movieID`);
-
---
--- Chỉ mục cho bảng `payment`
---
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`paymentTypeID`);
-
-
---
--- Chỉ mục cho bảng `seat`
---
-ALTER TABLE `seat`
-  ADD PRIMARY KEY (`seatID`),
-  ADD KEY `cinemaRoomID` (`cinemaRoomID`);
-
---
--- Chỉ mục cho bảng `showtime`
---
-ALTER TABLE `showtime`
-  ADD PRIMARY KEY (`showtimeID`),
-  ADD KEY `movieID` (`movieID`);
-
---
--- Chỉ mục cho bảng `ticket`
---
-ALTER TABLE `ticket`
-  ADD PRIMARY KEY (`ticketID`),
-  ADD KEY `cinemaID` (`cinemaID`),
-  ADD KEY `showtimeID` (`showtimeID`);
-
---
--- Chỉ mục cho bảng `ticketdetail`
---
-ALTER TABLE `ticketdetail`
-  ADD PRIMARY KEY (`ticketDetailID`),
-  ADD KEY `seatID` (`seatID`),
-  ADD KEY `cinemaRoomID` (`cinemaRoomID`),
-  ADD KEY `ticketID` (`ticketID`);
-
---
--- Các ràng buộc cho bảng `actor`
---
-ALTER TABLE `actor`
-  ADD CONSTRAINT `actor_ibfk_1` FOREIGN KEY (`movieID`) REFERENCES `movie` (`movieID`);
-
---
--- Các ràng buộc cho bảng `booking`
---
-ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`ticketID`) REFERENCES `ticket` (`ticketID`),
-  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`);
-
---
--- Các ràng buộc cho bảng `bookingdetail`
---
-ALTER TABLE `bookingdetail`
-  ADD CONSTRAINT `bookingdetail_ibfk_1` FOREIGN KEY (`bookingID`) REFERENCES `booking` (`bookingID`);
-
---
--- Các ràng buộc cho bảng `cinema`
---
-ALTER TABLE `cinema`
-  ADD CONSTRAINT `cinema_ibfk_1` FOREIGN KEY (`cinemaRoomID`) REFERENCES `cinemaroom` (`cinemaRoomID`);
-
---
--- Các ràng buộc cho bảng `contain`
---
-ALTER TABLE `contain`
-  ADD CONSTRAINT `contain_ibfk_1` FOREIGN KEY (`cinemaID`) REFERENCES `cinema` (`cinemaID`),
-  ADD CONSTRAINT `contain_ibfk_2` FOREIGN KEY (`showtimeID`) REFERENCES `showtime` (`showtimeID`);
-
---
--- Các ràng buộc cho bảng `seat`
---
-ALTER TABLE `seat`
-  ADD CONSTRAINT `seat_ibfk_1` FOREIGN KEY (`cinemaRoomID`) REFERENCES `cinemaroom` (`cinemaRoomID`);
-
---
--- Các ràng buộc cho bảng `showtime`
---
-ALTER TABLE `showtime`
-  ADD CONSTRAINT `showtime_ibfk_1` FOREIGN KEY (`movieID`) REFERENCES `movie` (`movieID`);
-
---
--- Các ràng buộc cho bảng `ticket`
---
-ALTER TABLE `ticket`
-  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`cinemaID`) REFERENCES `cinema` (`cinemaID`),
-  ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`showtimeID`) REFERENCES `showtime` (`showtimeID`);
-
---
--- Các ràng buộc cho bảng `ticketdetail`
---
-ALTER TABLE `ticketdetail`
-  ADD CONSTRAINT `ticketdetail_ibfk_1` FOREIGN KEY (`seatID`) REFERENCES `seat` (`seatID`),
-  ADD CONSTRAINT `ticketdetail_ibfk_2` FOREIGN KEY (`cinemaRoomID`) REFERENCES `cinemaroom` (`cinemaRoomID`),
-  ADD CONSTRAINT `ticketdetail_ibfk_3` FOREIGN KEY (`ticketID`) REFERENCES `ticket` (`ticketID`);
-
---
--- Các ràng buộc cho bảng `usercomment`
---
-ALTER TABLE `usercomment`
-  ADD CONSTRAINT `usercomment_ibfk_1` FOREIGN KEY (`movieID`) REFERENCES `movie` (`movieID`),
-  ADD CONSTRAINT `usercomment_ibfk_2` FOREIGN KEY (`UserDetailID`) REFERENCES `userdetail` (`UserDetailID`);
-
---
--- Các ràng buộc cho bảng `userdetail`
---
-ALTER TABLE `userdetail`
-  ADD CONSTRAINT `userdetail_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

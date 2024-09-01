@@ -1,6 +1,5 @@
 package database;
 
-import model.Customer;
 import model.UserDetail;
 
 

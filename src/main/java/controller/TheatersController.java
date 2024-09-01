@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Cinema;
 import model.MovieMediaLink;
-import model.UserCommentDetail;
 
 import java.io.IOException;
 import java.util.List;

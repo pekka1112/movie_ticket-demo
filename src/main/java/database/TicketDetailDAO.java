@@ -1,7 +1,5 @@
 package database;
 
-import model.TicketDetail;
-
 import java.util.ArrayList;
 
 public class TicketDetailDAO implements DAOInterface<TicketDetail>{

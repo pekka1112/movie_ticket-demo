@@ -1,7 +1,6 @@
 package database;
 
 import model.UserComment;
-import model.UserCommentDetail;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

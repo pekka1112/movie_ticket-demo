@@ -1,7 +1,5 @@
 package database;
 
-import model.Payment;
-
 import java.util.ArrayList;
 import java.util.List;
 

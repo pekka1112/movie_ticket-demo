@@ -1,7 +1,5 @@
 package database;
 
-import model.Seat;
-
 import java.util.ArrayList;
 import java.util.List;
 

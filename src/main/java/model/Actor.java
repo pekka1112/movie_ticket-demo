@@ -4,9 +4,8 @@ import lombok.Data;
 
 @Data
 public class Actor {
-    private String actorID;
-    private String movieID;
-    private String actorName;
-    private String dob;
-    private String gender;
+     int actorID;
+     int movieID;
+     String actorName;
+     String gender;
 }

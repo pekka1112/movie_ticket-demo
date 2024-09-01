@@ -1,7 +1,5 @@
 package database;
 
-import model.Service;
-
 import java.util.ArrayList;
 
 public class ServiceDAO implements DAOInterface<Service>{
