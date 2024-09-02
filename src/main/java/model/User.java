@@ -9,5 +9,5 @@ public class User {
     String email;
     String password;
     boolean isActive ;
-    int role;
+    int roleID;
 }

@@ -4,24 +4,41 @@ SET time_zone = "+00:00";
 DROP DATABASE IF EXISTS movie_ticket;
 
 CREATE DATABASE movie_ticket
-		CHARACTER SET "utf8mb4"
-		COLLATE "utf8mb4_general_ci";
+	CHARACTER SET "utf8mb4"
+	COLLATE "utf8mb4_general_ci";
 USE movie_ticket;
+
+CREATE TABLE `roles` (
+  `roleID` tinyint(1) PRIMARY KEY,
+  `roleName` VARCHAR(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+INSERT INTO `roles` (`roleID`, `roleName`) VALUES 
+	(0, 'USER_ROLE'),
+	(1, 'ADMIN_ROLE');
+
+CREATE TABLE `user` (
+  `userID` INT AUTO_INCREMENT PRIMARY KEY,
+  `username` VARCHAR(20) NOT NULL,
+  `email` varchar(255) NOT NULL UNIQUE,
+  `password` VARCHAR(20) NOT NULL,
+  `isActive` BOOL NOT NULL DEFAULT TRUE,
+  `roleID` tinyint(1) NOT NULL DEFAULT 0,
+  FOREIGN KEY (`roleID`) REFERENCES `roles`(`roleID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `user` (`username`, `email`, `password`, `isActive`, `roleID`) VALUES
+	('nguyenthanhquyen', 'nguyenthanhquyen@email.com', 'thanhquyen', 1, 0),
+	('pzo', 'pzo@gmail.com', 'pzo', 1, 0),
+	('admin', 'admin@gmail.com', 'admin', 1, 1),
+	('nguyenthanhquy', 'nguyenthanhquy@email.com', 'thanhquy', 1, 0),
+	('nguyendothanhphat', 'nguyendothanhphat@email.com', 'thanhphat', 1, 0),
+	('vansang', 'nguyenvansang@email.com', 'vansang', 0, 0);
 
 CREATE TABLE `cart` (
   `cartID` INT AUTO_INCREMENT PRIMARY KEY,
   `userID` INT NOT NULL,
   FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- note : cartItem là từng bookingID cụ thể
-CREATE TABLE `cartItem` (
-  `cartItemID` INT AUTO_INCREMENT PRIMARY KEY,
-  `cartID` INT NOT NULL,
-  `bookingID` INT NOT NULL,
-  `quantity` INT NOT NULL,
-  FOREIGN KEY (`cartID`) REFERENCES `cart`(`cartID`) ON DELETE CASCADE,
-  FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `cinema` (
@@ -60,129 +77,7 @@ INSERT INTO `cinemaroom` (`cinemaID`, `roomName`) VALUES
 	('3', 'Phòng 1'), ('3', 'Phòng 2'), ('3', 'Phòng 3'), ('3', 'Phòng 4'),
 	('4', 'Phòng 1');
 
--- note : lưu lại những ghế được 1 user bất kì đặt cho 1 showtime nào đó; có lưu lại roomID của ghế được đặt
-CREATE TABLE `bookedSeat` (
-  `bookedSeatID` INT AUTO_INCREMENT PRIMARY KEY,
-  `seatNumber` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `seatType` ENUM('Thường', 'VIP', 'Ghế đôi') DEFAULT 'Thường',
-  `roomID` INT NOT NULL,
-  `showtimeID` INT NOT NULL,
-  `userID` INT NOT NULL,
-  `bookingTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`roomID`) REFERENCES `cinemaRoom`(`roomID`) ON DELETE CASCADE,
-  FOREIGN KEY (`showtimeID`) REFERENCES `showtime`(`showtimeID`) ON DELETE CASCADE,
-  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `bookedSeat` (`seatNumber`, `seatType`, `roomID`, `showtimeID`, `userID`) VALUES
-	('a1', 'Thường', 1, 1, 1),
-	('a2', 'Thường', 3, 2, 2),
-	('a3', 'Thường', 3, 3, 3),
-	('a4', 'Thường', 3, 4, 4),
-	('a1', 'Thường', 4, 5, 5),
-	('a2', 'Thường', 4, 6, 6),
-	('a3', 'Thường', 4, 7, 7),
-	('a4', 'Thường', 4, 8, 8);
-
--- note : 1 lịch chiếu phim cụ thể, lưu rõ 1 bộ phim sẽ được chiếu vào thời gian nào của rạp nào và phòng nào của rạp đó
-CREATE TABLE `showtime` (
-  `showtimeID` INT AUTO_INCREMENT PRIMARY KEY,
-  `movieID` INT NOT NULL,
-  `cinemaID` INT NOT NULL,
-  `roomID` INT NOT NULL,
-  `startTime` DATETIME NOT NULL,
-  `endTime` DATETIME NOT NULL,
-  FOREIGN KEY (`movieID`) REFERENCES `movie`(`movieID`) ON DELETE CASCADE,
-  FOREIGN KEY (`cinemaID`) REFERENCES `cinema`(`cinemaID`) ON DELETE CASCADE,
-  FOREIGN KEY (`roomID`) REFERENCES `cinemaRoom`(`roomID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `showtime` (`movieID`, `cinemaID`, `roomID`, `startTime`, `endTime`) VALUES
-    (1, 1, 1, '2024-09-01 14:00:00', '2024-09-01 16:30:00'),
-    (2, 1, 1, '2024-09-01 17:00:00', '2024-09-01 19:30:00'),
-    (3, 2, 2, '2024-09-02 13:00:00', '2024-09-02 15:30:00'),
-    (4, 2, 2, '2024-09-02 16:00:00', '2024-09-02 18:30:00'),
-    (5, 3, 3, '2024-09-03 11:00:00', '2024-09-03 13:30:00'),
-    (6, 3, 3, '2024-09-03 14:00:00', '2024-09-03 16:30:00'),
-    (7, 4, 4, '2024-09-04 20:00:00', '2024-09-04 22:30:00'),
-    (8, 4, 4, '2024-09-04 23:00:00', '2024-09-05 01:30:00');
-
--- note : ticket được tạo trong khi user chọn các thông tin để chuẩn bị đặt vé
--- note : sau đó ticket sẽ được thêm vào booking để chuẩn bị thanh toán
--- note : giá vé đồng giá 50k / vé
-CREATE TABLE `ticket` (
-  `ticketID` INT AUTO_INCREMENT PRIMARY KEY,
-  `showtimeID` INT NOT NULL,
-  `bookedSeatID` INT NOT NULL,
-  `price` double NOT NULL
-  FOREIGN KEY (`showtimeID`) REFERENCES `showtime`(`showtimeID`) ON DELETE CASCADE,
-  FOREIGN KEY (`bookedSeatID`) REFERENCES `bookedSeat`(`bookedSeatID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `ticket` (`showtimeID`, `bookedSeatID`, `price`) VALUES
-    (1, 1, 50000),
-    (1, 2, 50000),
-    (2, 3, 50000),
-    (2, 4, 50000),
-    (3, 5, 50000),
-    (3, 6, 50000),
-    (4, 7, 50000),
-    (4, 8, 50000),
-    (5, 9, 50000),
-    (5, 10, 50000),
-    (6, 11, 50000),
-    (6, 12, 50000),
-    (7, 13, 50000),
-    (7, 14, 50000),
-    (8, 15, 50000),
-    (8, 16, 50000);
-
--- note : ticket user đặt sẽ có thể thanh toán ngay hoặc cho vào giỏ hàng, xử lí 1 lần đặt nhiều `ticket ` bằng `booking`
-CREATE TABLE `booking` (
-  `bookingID` INT AUTO_INCREMENT PRIMARY KEY,
-  `userID` INT NOT NULL,
-  `ticketID` varchar(20) NOT NULL,
-  `status` ENUM('Đã thanh toán', 'Chưa thanh toán', 'Đã hủy') DEFAULT 'Chưa thanh toán',
-  `bookingTime` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
-  FOREIGN KEY (`ticketID`) REFERENCES `ticket`(`ticketID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-INSERT INTO `booking` (`userID`, `ticketID`, `status`) VALUES
-	(1, 1, 'Đã thanh toán'),
-	(2, 2, 'Chưa thanh toán'),
-	(3, 3, 'Đã thanh toán'),
-	(1, 4, 'Đã hủy'),
-	(2, 5, 'Đã thanh toán');
-
-CREATE TABLE `bookingticket` (
-  `bookingID` INT NOT NULL,
-  `ticketID` INT NOT NULL,
-  PRIMARY KEY (`bookingID`, `ticketID`),
-  FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`),
-  FOREIGN KEY (`ticketID`) REFERENCES `ticket`(`ticketID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
-
-INSERT INTO `bookingticket` (`bookingID`, `ticketID`) VALUES
-	(1, 1), 
-	(1, 2), 
-	(2, 3), 
-	(2, 4), 
-	(3, 5), 
-	(3, 6), 
-	(4, 7), 
-	(4, 8); 
-
-CREATE TABLE `transaction` (
-  `transactionID` INT AUTO_INCREMENT PRIMARY KEY,
-  `userID` INT NOT NULL,
-  `bookingID` INT NOT NULL,
-  `transactionAmount` DOUBLE NOT NULL,
-  `paymentMethod` ENUM('Credit Card', 'Debit Card', 'PayPal', 'Momo', 'ZaloPay', 'Cash') NOT NULL,
-  `transactionStatus` ENUM('Thành công', 'Thất bại', 'Đang xử lý') DEFAULT 'Đang xử lý',
-  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
-  FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `movie` (
   `movieID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -197,7 +92,7 @@ CREATE TABLE `movie` (
   `movieScore` DOUBLE DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `directorName`, `duration`, `country`, `movieDescription`, `movieContent`, `movieScore`) VALUES
+INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `director`, `duration`, `country`, `movieDescription`, `movieContent`, `movieScore`) VALUES
 	('Kẻ Ăn Hồn', 'Kinh dị, Gay Cấn', '2024-01-15', 'Trần Hữu Tấn', '01:53:00', 'Việt Nam', 'Có một kẻ luyện Rượu Sọ Người trong làng Địa Ngục.', 'Kẻ Ăn Hồn - phim về hàng loạt cái chết bí ẩn ở Làng Địa Ngục, nơi có ma thuật cổ xưa: 5 mạng đổi bình Rượu Sọ Người. Thập Nương - cô gái áo đỏ là kẻ nắm giữ bí thuật luyện nên loại rượu mạnh nhất!', 9.1),
 	('Aquaman: Vương Quốc Thất Lạc', 'Hành động, Phiêu lưu, Viễn tưởng, Siêu anh hùng', '2024-01-22', 'James Wan', '01:23:00', 'Mỹ', 'Dòng nước đã đổi chiều!', 'Black Manta khao khát trả thù cái chết của cha mình và giờ đây hắn cầm trong tay sức mạnh của cây Đinh Ba Đen huyền thoại, hắn sẽ không dừng lại trước khi hạ gục Aquaman một lần và mãi mãi. Để đánh bại Black Manta, Aquaman phải nhờ sự trợ giúp của người a', 9.6),	
 	('Thiếu Niên và Chim Diệc', 'Chính kịch, Phiêu lưu, Hoạt hình, Viễn tưởng', '2024-01-15', 'Miyazaki Hayao', '01:36:00', 'Nhật Bản', 'Nơi cái chết kết thúc. Cuộc sống tìm thấy một khởi đầu mới.', 'Trong khi Thế chiến thứ hai đang diễn ra, cậu thiếu niên Mahito, bị ám ảnh bởi cái chết bi thảm của mẹ, được chuyển từ Tokyo đến ngôi nhà nông thôn yên bình của mẹ kế mới Natsuko, một người phụ nữ có nét tương đồng nổi bật với mẹ của cậu. Khi cậu cố gắng ',8.8),
@@ -276,31 +171,28 @@ INSERT INTO `actor` (`movieID`, `actorName`, `gender`) VALUES
 	(8, 'Sally Cecilia Hawkins', 'Nu'),
 	(9, 'Shunsuke Sakuya', 'Nam');
 
-CREATE TABLE `user` (
-  `userID` INT AUTO_INCREMENT PRIMARY KEY,
-  `username` VARCHAR(20) NOT NULL,
-  `email` varchar(255) NOT NULL UNIQUE,
-  `password` VARCHAR(20) NOT NULL,
-  `isActive` BOOL NOT NULL DEFAULT TRUE,
-  `role` tinyint(1) NOT NULL DEFAULT 0
+-- note : 1 lịch chiếu phim cụ thể, lưu rõ 1 bộ phim sẽ được chiếu vào thời gian nào của rạp nào và phòng nào của rạp đó
+CREATE TABLE `showtime` (
+  `showtimeID` INT AUTO_INCREMENT PRIMARY KEY,
+  `movieID` INT NOT NULL,
+  `cinemaID` INT NOT NULL,
+  `roomID` INT NOT NULL,
+  `startTime` DATETIME NOT NULL,
+  `endTime` DATETIME NOT NULL,
+  FOREIGN KEY (`movieID`) REFERENCES `movie`(`movieID`) ON DELETE CASCADE,
+  FOREIGN KEY (`cinemaID`) REFERENCES `cinema`(`cinemaID`) ON DELETE CASCADE,
+  FOREIGN KEY (`roomID`) REFERENCES `cinemaRoom`(`roomID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `user` (`username`, `email`, `password`, `isActive`, `role`) VALUES
-('nguyenthanhquyen', 'nguyenthanhquyen@email.com', 'thanhquyen', 1, 0),
-('pzo', 'pzo@gmail.com', 'pzo', 1, 0),
-('admin', 'admin@gmail.com', 'admin', 1, 1),
-('nguyenthanhquy', 'nguyenthanhquy@email.com', 'thanhquy', 1, 0),
-('nguyendothanhphat', 'nguyendothanhphat@email.com', 'thanhphat', 1, 0),
-('vansang', 'nguyenvansang@email.com', 'vansang', 0, 0);
-
-CREATE TABLE `roles` (
-  `roleID` tinyint(1) PRIMARY KEY,
-  `roleName` VARCHAR(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
-
-INSERT INTO `roles` (`roleID`, `roleName`) VALUES 
-(0, 'USER_ROLE'),
-(1, 'ADMIN_ROLE');
+INSERT INTO `showtime` (`movieID`, `cinemaID`, `roomID`, `startTime`, `endTime`) VALUES
+    (1, 1, 1, '2024-09-01 14:00:00', '2024-09-01 16:30:00'),
+    (2, 1, 1, '2024-09-01 17:00:00', '2024-09-01 19:30:00'),
+    (3, 2, 2, '2024-09-02 13:00:00', '2024-09-02 15:30:00'),
+    (4, 2, 2, '2024-09-02 16:00:00', '2024-09-02 18:30:00'),
+    (5, 3, 3, '2024-09-03 11:00:00', '2024-09-03 13:30:00'),
+    (6, 3, 3, '2024-09-03 14:00:00', '2024-09-03 16:30:00'),
+    (7, 4, 4, '2024-09-04 20:00:00', '2024-09-04 22:30:00'),
+    (8, 4, 4, '2024-09-04 23:00:00', '2024-09-05 01:30:00');
 
 -- note : 1 user sẽ có 1 detail duy nhất
 -- alt : thêm link ảnh cho user, nếu không có link thì sẽ dùng default url
@@ -318,8 +210,8 @@ CREATE TABLE `userdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `userdetail` (`userID`, `fullName`, `gender`, `phoneNumber`, `address`, `dob`, `profilePictureURL`) VALUES
-(1, 'Nguyen Thanh Quyen', 'Nam', '0123456789', 'Hà Nội', '1990-01-01', ''),
-(2, 'Nguyen Do Thanh Phat', 'Nu', '0987654321', 'Hồ Chí Minh', '2003-12-11', '');
+	(1, 'Nguyen Thanh Quyen', 'Nam', '0123456789', 'Hà Nội', '1990-01-01', ''),
+	(2, 'Nguyen Do Thanh Phat', 'Nu', '0987654321', 'Hồ Chí Minh', '2003-12-11', '');
 
 -- note : 1 user có thể cmt trên nhiều movie, 1 user có thể cmt nhiều lần trên 1 movie
 CREATE TABLE `usercomment` (
@@ -337,10 +229,119 @@ CREATE TABLE `usercomment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `usercomment` (`movieID`, `userID`, `commentText`) VALUES
-(1, 1, 'Great movie! I really enjoyed it.'),
-(1, 1, 'Looking forward to the sequel.'),
-(2, 2, 'The plot was a bit predictable.'),
-(3, 3, 'Fantastic visuals and storyline.');
+	(1, 1, 'Great movie! I really enjoyed it.'),
+	(1, 1, 'Looking forward to the sequel.'),
+	(2, 2, 'The plot was a bit predictable.'),
+	(3, 3, 'Fantastic visuals and storyline.');
+
+-- note : lưu lại những ghế được 1 user bất kì đặt cho 1 showtime nào đó; có lưu lại roomID của ghế được đặt
+CREATE TABLE `bookedSeat` (
+  `bookedSeatID` INT AUTO_INCREMENT PRIMARY KEY,
+  `seatNumber` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `seatType` ENUM('Thường', 'VIP', 'Ghế đôi') DEFAULT 'Thường',
+  `roomID` INT NOT NULL,
+  `showtimeID` INT NOT NULL,
+  `userID` INT NOT NULL,
+  `bookingTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`roomID`) REFERENCES `cinemaRoom`(`roomID`) ON DELETE CASCADE,
+  FOREIGN KEY (`showtimeID`) REFERENCES `showtime`(`showtimeID`) ON DELETE CASCADE,
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `bookedSeat` (`seatNumber`, `seatType`, `roomID`, `showtimeID`, `userID`) VALUES
+	('a1', 'Thường', 1, 1, 1),
+	('a2', 'Thường', 3, 2, 2),
+	('a3', 'Thường', 3, 3, 3),
+	('a4', 'Thường', 3, 4, 4),
+	('a1', 'Thường', 4, 5, 5),
+	('a2', 'Thường', 4, 6, 6),
+	('a3', 'Thường', 4, 7, 1),
+	('a4', 'Thường', 4, 8, 2);
+
+-- note : ticket được tạo trong khi user chọn các thông tin để chuẩn bị đặt vé
+-- note : sau đó ticket sẽ được thêm vào booking để chuẩn bị thanh toán
+-- note : giá vé đồng giá 50k / vé
+CREATE TABLE `ticket` (
+  `ticketID` INT AUTO_INCREMENT PRIMARY KEY,
+  `showtimeID` INT NOT NULL,
+  `bookedSeatID` INT NOT NULL,
+  `price` double NOT NULL,
+  FOREIGN KEY (`showtimeID`) REFERENCES `showtime`(`showtimeID`) ON DELETE CASCADE,
+  FOREIGN KEY (`bookedSeatID`) REFERENCES `bookedSeat`(`bookedSeatID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+INSERT INTO `ticket` (`showtimeID`, `bookedSeatID`, `price`) VALUES
+	(1, 1, 50000),
+	(1, 2, 50000),
+	(2, 3, 50000),
+	(2, 4, 50000),
+	(3, 5, 50000),
+	(3, 6, 50000),
+	(4, 7, 50000),
+	(4, 8, 50000),
+	(5, 1, 50000),
+	(5, 2, 50000),
+	(6, 3, 50000),
+	(6, 4, 50000),
+	(7, 5, 50000),
+	(7, 6, 50000);
+	
+-- note : ticket user đặt sẽ có thể thanh toán ngay hoặc cho vào giỏ hàng, xử lí 1 lần đặt nhiều `ticket ` bằng `booking`
+CREATE TABLE `booking` (
+  `bookingID` INT AUTO_INCREMENT PRIMARY KEY,
+  `userID` INT NOT NULL,
+  `ticketID` varchar(20) NOT NULL,
+  `status` ENUM('Đã thanh toán', 'Chưa thanh toán', 'Đã hủy') DEFAULT 'Chưa thanh toán',
+  `bookingTime` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
+  FOREIGN KEY (`ticketID`) REFERENCES `ticket`(`ticketID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `booking` (`userID`, `ticketID`, `status`) VALUES
+	(1, 1, 'Đã thanh toán'),
+	(2, 2, 'Chưa thanh toán'),
+	(3, 3, 'Đã thanh toán'),
+	(1, 4, 'Đã hủy'),
+	(2, 5, 'Đã thanh toán');
+	
+-- note : cartItem là từng bookingID cụ thể
+CREATE TABLE `cartItem` (
+  `cartItemID` INT AUTO_INCREMENT PRIMARY KEY,
+  `cartID` INT NOT NULL,
+  `bookingID` INT NOT NULL,
+  `quantity` INT NOT NULL,
+  FOREIGN KEY (`cartID`) REFERENCES `cart`(`cartID`) ON DELETE CASCADE,
+  FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+	
+CREATE TABLE `bookingticket` (
+  `bookingID` INT NOT NULL,
+  `ticketID` INT NOT NULL,
+  PRIMARY KEY (`bookingID`, `ticketID`),
+  FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`),
+  FOREIGN KEY (`ticketID`) REFERENCES `ticket`(`ticketID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+INSERT INTO `bookingticket` (`bookingID`, `ticketID`) VALUES
+	(1, 1), 
+	(1, 2), 
+	(2, 3), 
+	(2, 4), 
+	(3, 5), 
+	(3, 6), 
+	(4, 7), 
+	(4, 8); 
+	
+CREATE TABLE `transaction` (
+  `transactionID` INT AUTO_INCREMENT PRIMARY KEY,
+  `userID` INT NOT NULL,
+  `bookingID` INT NOT NULL,
+  `transactionAmount` DOUBLE NOT NULL,
+  `paymentMethod` ENUM('Credit Card', 'Debit Card', 'PayPal', 'Momo', 'ZaloPay', 'Cash') NOT NULL,
+  `transactionStatus` ENUM('Thành công', 'Thất bại', 'Đang xử lý') DEFAULT 'Đang xử lý',
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
+  FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 COMMIT;
 

@@ -46,7 +46,7 @@ public class UserDAO {
                     user.setEmail(rs.getString("email"));
                     user.setPassword(rs.getString("password"));
                     user.setActive(rs.getBoolean("isActive"));
-                    user.setRole(rs.getInt("role"));
+                    user.setRoleID(rs.getInt("role"));
                 return user;
             }
         } catch (SQLException e) {
@@ -108,14 +108,14 @@ public class UserDAO {
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setActive(rs.getBoolean("isActive"));
-                user.setRole(rs.getInt("role"));
+                user.setRoleID(rs.getInt("role"));
                 list.add(user);
             }
-            for (User user: list){
-                if (user.getRole() != 0) {
-                    userList.add(user);
-                }
-            }
+//            for (User user: list){
+//                if (user.setRoleID() != 0) {
+//                    userList.add(user);
+//                }
+//            }
 
         }catch (SQLException e){
             throw new RuntimeException(e);
