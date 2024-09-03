@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.User;
 
@@ -46,7 +47,7 @@ public class UserDAO {
                     user.setEmail(rs.getString("email"));
                     user.setPassword(rs.getString("password"));
                     user.setActive(rs.getBoolean("isActive"));
-                    user.setRoleID(rs.getInt("role"));
+                    user.setRoleID(rs.getInt("roleID"));
                 return user;
             }
         } catch (SQLException e) {
@@ -92,37 +93,11 @@ public class UserDAO {
             }
         }
     }
-    public ArrayList<User> getAllUser(){
-        Connection connection = null;
-        ArrayList<User> list = new ArrayList<>();
-        ArrayList<User>  userList = new ArrayList<>();
-        try {
-            connection = JDBCUtil.getConnection();
-            String query = "select * from user";
-            PreparedStatement pr = connection.prepareStatement(query);
-            ResultSet rs = pr.executeQuery();
-            while (rs.next()){
-                User user = new User();
-                user.setUserID(rs.getInt("userID"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setActive(rs.getBoolean("isActive"));
-                user.setRoleID(rs.getInt("role"));
-                list.add(user);
-            }
-//            for (User user: list){
-//                if (user.setRoleID() != 0) {
-//                    userList.add(user);
-//                }
-//            }
-
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }finally {
-            JDBCUtil.closeConnection(connection);
-        }
-        return userList;
+    public List<User> getAllUser(){
+        List<User> users = JDBIUtil.getJdbi().withHandle(h -> {
+            return h.createQuery("select * from user where roleID = 0").mapToBean(User.class).list();
+        });
+        return users;
     }
 
     public boolean updateUser(User newUser) {
