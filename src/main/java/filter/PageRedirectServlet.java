@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/home", "/movie", "/showtime", "/contact", "/about", "/login"})
+@WebServlet(urlPatterns = {"/home", "/movie", "/showtime",
+                           "/contact", "/about", "/login",
+                           "/register"})
 public class PageRedirectServlet extends HttpServlet {
 
     @Override
@@ -32,7 +34,12 @@ public class PageRedirectServlet extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/contact.jsp");
                 break;
             case "/login":
+            case "/login-servlet":
                 dispatcher = request.getRequestDispatcher("/login.jsp");
+                break;
+            case "/register":
+            case "/register-servlet":
+                dispatcher = request.getRequestDispatcher("/register.jsp");
                 break;
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);

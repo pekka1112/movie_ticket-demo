@@ -8,27 +8,21 @@
     form.addEventListener('submit', (e) =>{
         e.preventDefault();
         checkInput();
-
     });
 
     function checkInput(){
         const passwordValue = password.value.trim();
         const retypePasswordValue = retypePassword.value.trim();
-
-
         if (passwordValue.length < 6){
-            setErrorFor(password, 'Password must be at least 6 characters');
+            setErrorFor(password, 'Mật khẩu phải có sit nhất 6 kí tự');
         }
-
         if(passwordValue !== retypePasswordValue) {
-            setErrorFor(retypePassword, 'Passwords does not match');
-
+            setErrorFor(retypePassword, 'Nhập lại mật khẩu không trùng khớp');
         }
         if (passwordValue.length >= 6 && passwordValue === retypePasswordValue) {
             document.getElementById('status').value = 'success';
             form.submit();
         }
-
     }
 
     function setErrorFor(input, message) {

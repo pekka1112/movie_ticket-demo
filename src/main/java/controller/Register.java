@@ -12,8 +12,9 @@ import service.UserService;
 import java.io.IOException;
 import java.sql.Connection;
 
-@WebServlet(name = "Register", value = "/register")
+@WebServlet(name = "Register", urlPatterns = {"/register-servlet"})
 public class Register extends HttpServlet {
+    UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -22,21 +23,19 @@ public class Register extends HttpServlet {
         String userName = req.getParameter("userName");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String retypePassword = req.getParameter("retypePassword");
-        Connection connection = null;
+
         RequestDispatcher requestDispatcher =  null;
 
-            UserDAO userDAO = new UserDAO();
-            boolean check = userDAO.registerUser(userName, email, password);
-            requestDispatcher = req.getRequestDispatcher("register.jsp");
+        boolean check = userService.registerUser(userName, email, password);
+        requestDispatcher = req.getRequestDispatcher("register.jsp");
 
-            if (check){
-                req.setAttribute("status", "success");
-            }else{
-                req.setAttribute("status", "failed");
-            }
-            requestDispatcher.forward(req,resp);
-            System.out.println(req.getAttribute("status"));
-
+        if (check){
+            System.out.println("register-success");
+            req.setAttribute("status", "success");
+        }else{
+            System.out.println("register-failed");
+            req.setAttribute("status", "failed");
+        }
+        requestDispatcher.forward(req,resp);
     }
 }
