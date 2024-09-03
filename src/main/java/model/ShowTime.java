@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class ShowTime {
-    private  String showtimeID;
-    private  String movieID;
-    private  String showDate;
-    private  String startTime;
-    private  String endTime;
+      int showtimeID;
+      int movieID;
+      int cinemaID;
+      int roomID;
+      String startTime;
+      String endTime;
 }

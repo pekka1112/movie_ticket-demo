@@ -20,7 +20,7 @@
 <section class="w3l-main-slider position-relative" id="home">
     <div class="companies20-content">
         <div class="owl-one owl-carousel owl-theme">
-            <c:forEach items="${top4NewestMovies}" var="newestMovie" >
+            <c:forEach items="${newestMovies}" var="newestMovie" >
                 <div class="item">
                     <li>
                         <div class="slider-info banner-view"  style="background: url(../Movie_Ticket_Website/assets/movie-image/${newestMovie.linkMovieImage}) no-repeat center; background-size: cover; " >

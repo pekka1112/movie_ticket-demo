@@ -9,21 +9,21 @@ public class ShoppingCart {
     public ShoppingCart() {
         this.cartItem = new ArrayList<>();
     }
-    public void add(CartItem item) {
-        for(CartItem c : cartItem){
-            if(c.getTicketData().getTicketID().equals(item.getTicketData().getTicketID())){
-                c.add(1);
-                return;
-            }
-        }
-        this.cartItem.add(item);
-    }
+//    public void add(CartItem item) {
+//        for(CartItem c : cartItem){
+//            if(c.getTicketData().getTicketID().equals(item.getTicketData().getTicketID())){
+//                c.add(1);
+//                return;
+//            }
+//        }
+//        this.cartItem.add(item);
+//    }
     public void remove(String ticketID) {
         for(CartItem c : cartItem){
-            if(c.getTicketData().getTicketID().equals(ticketID)){
-                cartItem.remove(c);
-                return;
-            }
+//            if(c.getTicketData().getTicketID().equals(ticketID)){
+//                cartItem.remove(c);
+//                return;
+//            }
         }
     }
     public int getSize(){

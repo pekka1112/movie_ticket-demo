@@ -10,45 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static controller.HomeController.cinemaDAO;
-
-public class CinemaDAO implements DAOInterface<Cinema>{
-    @Override
-    public ArrayList<Cinema> selectAll() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Cinema> selectById(Cinema object) {
-        return null;
-    }
-
-    @Override
-    public int insert(Cinema obj) {
-        return 0;
-    }
-
-    @Override
-    public int insertAll(ArrayList<Cinema> arrayList) {
-        return 0;
-    }
-
-    @Override
-    public int delete(Cinema obj) {
-        return 0;
-    }
-
-    @Override
-    public int deleteAll(ArrayList<Cinema> arrayList) {
-        return 0;
-    }
-
-    @Override
-    public int update(Cinema obj) {
-        return 0;
-    }
-
-    public  static List<Cinema> getCinemaByName (String cName) {
+public class CinemaDAO {
+    public static List<Cinema> getCinemaByName (String cName) {
         Connection c = JDBCUtil.getConnection();
         String sql = "SELECT  * FROM cinema WHERE cinemaName like ?" ;
         try {
@@ -58,35 +21,33 @@ public class CinemaDAO implements DAOInterface<Cinema>{
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Cinema cinema = new Cinema();
-                cinema.setCinemaID(rs.getString("cinemaID"));
-                cinema.setCinemaName(rs.getString("cinemaName"));
-                cinema.setLocation(rs.getString("location"));
-                cinema.setCinemaRoomID(rs.getString("cinemaRoomID"));
+                    cinema.setCinemaID(rs.getInt("cinemaID"));
+                    cinema.setCinemaName(rs.getString("cinemaName"));
+                    cinema.setLocation(rs.getString("location"));
+                    cinema.setCinemaImageURL(rs.getString("cinemaImageURL"));
                 cList.add(cinema);
             }
             return cList;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
-    } public  static Cinema getCinemaByID (String cid) {
+    }
+    public static Cinema getCinemaByID (int cid) {
         Connection c = JDBCUtil.getConnection();
         String sql = "SELECT  * FROM cinema WHERE cinemaID = ?" ;
         try {
-
             PreparedStatement statement = c.prepareStatement(sql);
-            statement.setString(1, cid);
+            statement.setInt(1, cid);
             ResultSet rs = statement.executeQuery();
             Cinema cinema = new Cinema();
             while (rs.next()) {
-                cinema.setCinemaID(rs.getString("cinemaID"));
+                cinema.setCinemaID(rs.getInt("cinemaID"));
                 cinema.setCinemaName(rs.getString("cinemaName"));
                 cinema.setLocation(rs.getString("location"));
-                cinema.setCinemaRoomID(rs.getString("cinemaRoomID"));
+                cinema.setCinemaImageURL(rs.getString("cinemaImageURL"));
             }
             return cinema;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -99,43 +60,39 @@ public class CinemaDAO implements DAOInterface<Cinema>{
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 Cinema cinema = new Cinema();
-                cinema.setCinemaID(rs.getString("cinemaID"));
-                cinema.setCinemaName(rs.getString("cinemaName"));
-                cinema.setLocation(rs.getString("location"));
-                cinema.setCinemaRoomID(rs.getString("cinemaRoomID"));
+                    cinema.setCinemaID(rs.getInt("cinemaID"));
+                    cinema.setCinemaName(rs.getString("cinemaName"));
+                    cinema.setLocation(rs.getString("location"));
+                    cinema.setCinemaImageURL(rs.getString("cinemaImageURL"));
                 cList.add(cinema);
             }
             return cList;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
-    public static List<Cinema> getMostPopularCinema() {
+    public static List<Cinema> getMostPopularCinema(int num) {
         Connection c = JDBCUtil.getConnection();
-        String sql = "SELECT  * FROM cinema LIMIT 2" ;
+        // alt : sửa lại câu sql để lấy ra các rạp phổ bien nhat
+        String sql = "SELECT * FROM cinema LIMIT ?" ;
         try {
             List<Cinema> cList = new ArrayList<>();
-            Statement statement = c.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            PreparedStatement stat = c.prepareStatement(sql);
+            stat.setInt(1, num);
+            ResultSet rs = stat.executeQuery();
             while (rs.next()) {
                 Cinema cinema = new Cinema();
-                cinema.setCinemaID(rs.getString("cinemaID"));
-                cinema.setCinemaName(rs.getString("cinemaName"));
-                cinema.setLocation(rs.getString("location"));
-                cinema.setCinemaRoomID(rs.getString("cinemaRoomID"));
+                    cinema.setCinemaID(rs.getInt("cinemaID"));
+                    cinema.setCinemaName(rs.getString("cinemaName"));
+                    cinema.setLocation(rs.getString("location"));
+                    cinema.setCinemaImageURL(rs.getString("cinemaImageURL"));
                 cList.add(cinema);
             }
             return cList;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
-    public static void main(String[] args) {
-        System.out.println(getCinemaByID("cnm1"));
-    }
-
     public List<Cinema> getCinemaByMovieID(String movieID) {
         return  null;
     }

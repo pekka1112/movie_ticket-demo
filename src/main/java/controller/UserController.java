@@ -19,17 +19,12 @@ import java.util.Map;
 @WebServlet(name = "UserPageServlet", urlPatterns = {"/userpage-servlet"})
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static MovieDAO movieDAO;
+    public static MovieMediaLinkDAO movieMediaLinkDAO;
     public static CinemaDAO cinemaDAO;
     public static ShowTimeDAO showTimeDAO;
-    public static SeatDAO seatDAO;
     public static UserDAO userDAO;
-    public static CustomerDAO customerDAO;
-    public static PaymentDAO paymentDAO;
-    public static TransactionTicketDAO transactionTicketDAO;
     public static CinemaRoomDAO cinemaRoomDAO;
     public static List<Cinema>  allCinema;
-    public static List<UserCommentDetail> comments ;
     public UserController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,15 +33,11 @@ public class UserController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        movieDAO = new MovieDAO();
+        movieMediaLinkDAO = new MovieMediaLinkDAO();
         cinemaDAO = new CinemaDAO();
         showTimeDAO = new ShowTimeDAO();
         cinemaRoomDAO = new CinemaRoomDAO();
-        seatDAO = new SeatDAO();
         userDAO = new UserDAO();
-        customerDAO = new CustomerDAO();
-        paymentDAO = new PaymentDAO();
-        transactionTicketDAO = new TransactionTicketDAO();
         String action = req.getParameter("action");
         if(action.equals("init")) {
             initData(req,resp);
@@ -68,7 +59,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        Movie movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -98,7 +89,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        Movie movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -117,8 +108,6 @@ public class UserController extends HttpServlet {
         List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
         List<String> showtimesDate = new ArrayList<>();
         for(ShowTime st : showtimes) {
-            showtimesDate.add(st.getShowDate());
-            System.out.println(st.getShowDate());
         }
         req.setAttribute("showtimesDate",showtimesDate);
 
@@ -135,7 +124,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        Movie movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -152,8 +141,6 @@ public class UserController extends HttpServlet {
         List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
         List<String> showtimesDate = new ArrayList<>();
         for(ShowTime st : showtimes) {
-            showtimesDate.add(st.getShowDate());
-            System.out.println(st.getShowDate());
         }
         req.setAttribute("showtimesDate",showtimesDate);
         // main process : update user
@@ -181,11 +168,10 @@ public class UserController extends HttpServlet {
         newCustomer.setPhoneNumber(phoneNumber);
         newCustomer.setAddress(address);
         newCustomer.setDob(dob);
-        boolean updateCustomerStatus = customerDAO.updateCustomer(newCustomer);
-        UserDetail customer = updateCustomerStatus ? newCustomer : (UserDetail) session.getAttribute("customer") ;
-        session.setAttribute("customer",customer);
+//        UserDetail customer = updateCustomerStatus ? newCustomer : (UserDetail) session.getAttribute("customer") ;
+//        session.setAttribute("customer",customer);
 
-        if(updateUserStatus || updateCustomerStatus) {
+        if(updateUserStatus) {
             session.setAttribute("updateStatus","1");
         } else {
             session.setAttribute("updateStatus","0");
@@ -204,7 +190,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        Movie movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -220,13 +206,13 @@ public class UserController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         // process : search by transID
         String tid = req.getParameter("transName");
-        if(!tid.equals("")){
-            List<TransactionTicket> tList = transactionTicketDAO.getTransactionTicketByUserID(user.getUserID(), tid);
-            req.setAttribute("transList",tList);
-        } else {
-            List<TransactionTicket> transList = transactionTicketDAO.getTransactionTicketByUserID(user.getUserID(),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              tid);
-            req.setAttribute("transList",transList);
-        }
+//        if(!tid.equals("")){
+//            List<TransactionTicket> tList = transactionTicketDAO.getTransactionTicketByUserID(user.getUserID(), tid);
+//            req.setAttribute("transList",tList);
+//        } else {
+//            List<TransactionTicket> transList = transactionTicketDAO.getTransactionTicketByUserID(user.getUserID(),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              tid);
+//            req.setAttribute("transList",transList);
+//        }
 
         RequestDispatcher rd = req.getRequestDispatcher("/userView/userPage.jsp");
         if (rd != null) {
@@ -241,7 +227,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        Movie movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -259,10 +245,10 @@ public class UserController extends HttpServlet {
         req.setAttribute("cinemaLocation",cinema.getLocation());
         List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
         List<String> showtimesDate = new ArrayList<>();
-        for(ShowTime st : showtimes) {
-            showtimesDate.add(st.getShowDate());
-            System.out.println(st.getShowDate());
-        }
+//        for(ShowTime st : showtimes) {
+//            showtimesDate.add(st.getShowDate());
+//            System.out.println(st.getShowDate());
+//        }
         req.setAttribute("showtimesDate",showtimesDate);
         // lấy ra thời gian chiếu và tên phòng rạp trong ngày đó
         String curDate = req.getParameter("date");
@@ -292,7 +278,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        Movie movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -310,10 +296,10 @@ public class UserController extends HttpServlet {
         req.setAttribute("cinemaLocation",cinema.getLocation());
         List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
         List<String> showtimesDate = new ArrayList<>();
-        for(ShowTime st : showtimes) {
-            showtimesDate.add(st.getShowDate());
-            System.out.println(st.getShowDate());
-        }
+//        for(ShowTime st : showtimes) {
+//            showtimesDate.add(st.getShowDate());
+//            System.out.println(st.getShowDate());
+//        }
         req.setAttribute("showtimesDate",showtimesDate);
         // lấy ra thời gian chiếu và tên phòng rạp trong ngày đó
         String curDate = req.getParameter("date");
@@ -334,8 +320,8 @@ public class UserController extends HttpServlet {
         req.setAttribute("time",time);
         String cinemaRoomName = req.getParameter("cinemaRoomName");
         req.setAttribute("cinemaRoomName",cinemaRoomName);
-        List<Seat> seats = seatDAO.getSeatByMID_CNAME_DATE_RNAME_TIME(movieID,cinemaName,curDate,cinemaRoomName,time);
-        req.setAttribute("seats",seats);
+//        List<Seat> seats = seatDAO.getSeatByMID_CNAME_DATE_RNAME_TIME(movieID,cinemaName,curDate,cinemaRoomName,time);
+//        req.setAttribute("seats",seats);
 
         RequestDispatcher rd = req.getRequestDispatcher("/seatBooking.jsp");
         if (rd != null) {
@@ -350,7 +336,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        Movie movie = movieDAO.getMovieByID(movieID);
+        Movie movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -368,10 +354,10 @@ public class UserController extends HttpServlet {
         req.setAttribute("cinemaLocation",cinema.getLocation());
         List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
         List<String> showtimesDate = new ArrayList<>();
-        for(ShowTime st : showtimes) {
-            showtimesDate.add(st.getShowDate());
-            System.out.println(st.getShowDate());
-        }
+//        for(ShowTime st : showtimes) {
+//            showtimesDate.add(st.getShowDate());
+//            System.out.println(st.getShowDate());
+//        }
         req.setAttribute("showtimesDate",showtimesDate);
         // lấy ra thời gian chiếu và tên phòng rạp trong ngày đó
         String curDate = req.getParameter("date");
@@ -392,8 +378,8 @@ public class UserController extends HttpServlet {
         req.setAttribute("time",time);
         String cinemaRoomName = req.getParameter("cinemaRoomName");
         req.setAttribute("cinemaRoomName",cinemaRoomName);
-        List<Seat> seats = seatDAO.getSeatByMID_CNAME_DATE_RNAME_TIME(movieID,cinemaName,curDate,cinemaRoomName,time);
-        req.setAttribute("seats",seats);
+//        List<Seat> seats = seatDAO.getSeatByMID_CNAME_DATE_RNAME_TIME(movieID,cinemaName,curDate,cinemaRoomName,time);
+//        req.setAttribute("seats",seats);
         // thực hiện thanh toán
         String seatName = req.getParameter("seatName");
         req.setAttribute("seatName",seatName);
@@ -404,10 +390,10 @@ public class UserController extends HttpServlet {
             rd.forward(req, resp);
         }
         session.setAttribute("userEmail",user.getEmail());
-        UserDetail customer = customerDAO.getCustomerByUserId(user.getUserID());
-        session.setAttribute("customer",customer);
-        List<Payment> payments = paymentDAO.getAllPaymentType();
-        req.setAttribute("payments",payments);
+//        UserDetail customer = customerDAO.getCustomerByUserId(user.getUserID());
+//        session.setAttribute("customer",customer);
+//        List<Payment> payments = paymentDAO.getAllPaymentType();
+//        req.setAttribute("payments",payments);
 
 
         RequestDispatcher rd = req.getRequestDispatcher("/checkoutTicket.jsp");
@@ -423,7 +409,7 @@ public class UserController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // process : get Movie to process
         String movieID = req.getParameter("movieID");
-        MovieMediaLink movie = movieDAO.getMovieByID(movieID);
+        MovieMediaLink movie = movieMediaLinkDAO.getMovieByID(movieID);
         req.setAttribute("movieName", movie.getMovieName());
         req.setAttribute("movieID", movieID);
         // lấy danh sách all rạp chiếu phim có chiếu phim này
@@ -441,10 +427,10 @@ public class UserController extends HttpServlet {
         req.setAttribute("cinemaLocation",cinema.getLocation());
         List<ShowTime> showtimes = showTimeDAO.getShowtimeByCinemaIDAndMovieID(movieID,cinemaName);
         List<String> showtimesDate = new ArrayList<>();
-        for(ShowTime st : showtimes) {
-            showtimesDate.add(st.getShowDate());
-            System.out.println(st.getShowDate());
-        }
+//        for(ShowTime st : showtimes) {
+//            showtimesDate.add(st.getShowDate());
+//            System.out.println(st.getShowDate());
+//        }
         req.setAttribute("showtimesDate",showtimesDate);
         // lấy ra thời gian chiếu và tên phòng rạp trong ngày đó
         String curDate = req.getParameter("date");
@@ -465,8 +451,8 @@ public class UserController extends HttpServlet {
         req.setAttribute("time",time);
         String cinemaRoomName = req.getParameter("cinemaRoomName");
         req.setAttribute("cinemaRoomName",cinemaRoomName);
-        List<Seat> seats = seatDAO.getSeatByMID_CNAME_DATE_RNAME_TIME(movieID,cinemaName,curDate,cinemaRoomName,time);
-        req.setAttribute("seats",seats);
+//        List<Seat> seats = seatDAO.getSeatByMID_CNAME_DATE_RNAME_TIME(movieID,cinemaName,curDate,cinemaRoomName,time);
+//        req.setAttribute("seats",seats);
         // thực hiện thanh toán
         String seatName = req.getParameter("seatName");
         req.setAttribute("seatName",seatName);
@@ -478,10 +464,10 @@ public class UserController extends HttpServlet {
             rd.forward(req, resp);
         }
         session.setAttribute("userEmail",user.getEmail());
-        UserDetail customer = customerDAO.getCustomerByUserId(user.getUserID());
-        session.setAttribute("customer",customer);
-        List<Payment> payments = paymentDAO.getAllPaymentType();
-        req.setAttribute("payments",payments);
+//        UserDetail customer = customerDAO.getCustomerByUserId(user.getUserID());
+//        session.setAttribute("customer",customer);
+//        List<Payment> payments = paymentDAO.getAllPaymentType();
+//        req.setAttribute("payments",payments);
 
 
         RequestDispatcher rd = req.getRequestDispatcher("/showETicket.jsp");

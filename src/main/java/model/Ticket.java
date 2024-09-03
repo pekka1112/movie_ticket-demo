@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class Ticket {
-    private  String ticketID;
-    private  String cinemaID;
-    private  String showtimeID;
+    int ticketID;
+    int showtimeID;
+    int bookedSeatID;
+    double price;
 }

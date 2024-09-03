@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class UserComment {
-    private String commentID;
-    private String movieID;
-    private String customerID;
-    private String commentText;
+    int commentID;
+    int movieID;
+    int userID;
+    String commentText;
+    String commentTime;
 }
