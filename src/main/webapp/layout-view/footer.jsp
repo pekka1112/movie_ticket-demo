@@ -27,15 +27,13 @@
                 <h6>Đặt vé xem phim</h6>
                 <ul>
                   <li><a href="#">Trang chủ</a></li>
-                  <li><a href="movie-servlet?action=init">Phim</a></li>
-                  <li><a href="https://www.dienanh.net/blog-phim-11">Blog phim</a></li>
+                  <li><a href="movie-servlet?action=init">Đặt vé xem phim</a></li>
                   <li><a href="https://www.youtube.com/@VuaPhimReview1">Review phim</a></li>
-                  <li><a href="showtimes-servlet?action=init">Lịch chiếu</a></li>
-                  <li><a href="contact.jsp">Liên hệ</a></li>
+                  <li><a href="https://www.dienanh.net/blog-phim-11">Hỗ trợ</a></li>
                 </ul>
               </div>
               <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                <h6>Thông tin</h6>
+                <h6>Nổi bật</h6>
                 <ul>
                   <li><a href="#">Hài Việt Nam</a></li>
                   <li><a href="#">Drama</a></li>
@@ -46,7 +44,7 @@
                 </ul>
               </div>
               <div class="col-md-3 col-sm-6 sub-two-right mt-5">
-                <h6>Xem rạp phim gần bạn</h6>
+                <h6>Rạp gần đây</h6>
                 <ul>
                   <li><a href="showtimes-servlet?action=init">TP.HCM</a></li>
                   <li><a href="showtimes-servlet?action=init">Bình Định</a></li>

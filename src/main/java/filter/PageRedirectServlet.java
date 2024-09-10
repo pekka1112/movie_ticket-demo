@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/home", "/movie", "/showtime",
-                           "/contact", "/about", "/login",
+                           "/news", "/about", "/login",
                            "/register"})
 public class PageRedirectServlet extends HttpServlet {
 
@@ -30,8 +30,8 @@ public class PageRedirectServlet extends HttpServlet {
             case "/about":
                 dispatcher = request.getRequestDispatcher("/about.jsp");
                 break;
-            case "/contact":
-                dispatcher = request.getRequestDispatcher("/contact.jsp");
+            case "/news":
+                dispatcher = request.getRequestDispatcher("/news.jsp");
                 break;
             case "/login":
             case "/login-servlet":
