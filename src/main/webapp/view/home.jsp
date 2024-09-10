@@ -49,7 +49,7 @@
 
 <%--Section PHIM ĐANG CHIẾU --%>
 <section class="w3l-grids">
-        <div class="grids-main py-5" style="padding-bottom: 0rem !important">
+        <div class="grids-main py-5" style="padding-bottom: 0rem !important; padding-top: 1.5rem !important;">
             <div class="container py-lg-3">
                 <div class="headerhny-title">
                     <div class="w3l-title-grids">
@@ -94,7 +94,7 @@
 
 <%--Section PHIM SẮP CHIẾU --%>
 <section class="w3l-grids">
-    <div class="grids-main py-5" style="padding-bottom: 0rem !important">
+    <div class="grids-main py-5" style="padding-bottom: 0rem !important; padding-top: 0rem !important;">
         <div class="container py-lg-3">
             <div class="headerhny-title">
                 <div class="w3l-title-grids">
@@ -129,31 +129,6 @@
         </div>
     </div>
 </section>
-
-<%--Section chứa Slider hiển thị các bộ phim đang hot gần đây --%>
-<section class="w3l-mid-slider position-relative">
-    <div class="companies20-content">
-        <div class="owl-mid owl-carousel owl-theme">
-            <c:forEach items="${popularMovies}" var="m">
-                <div class="item">
-                    <li>
-                        <div class="slider-info mid-view"
-                             style = "background: url(../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}) no-repeat center; background-size: cover; ">
-                            <div class="container">
-                                <div class="mid-info">
-                                    <span class="sub-text"> ${m.movieCategory} </span>
-                                    <h3> ${m.movieName}</h3>
-                                    <p>${m.releaseDate} ‧ ${m.country} ‧ ${m.duration}</p>
-                                    <a class="watch" href="../Movie_Ticket_Website/movies.jsp"><span class="fa fa-play" aria-hidden="true"></span>Watch Trailer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-</section><br>
 
 <%--Section hiển thị lịch chiếu phim --%>
 <%--<section class="showtimes-section">--%>

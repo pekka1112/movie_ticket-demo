@@ -19,8 +19,7 @@
 <header id="site-header" class="w3l-header fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <a class="navbar-brand" href="index.jsp">
-                <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET" style="height:35px;"/> PONZO TICKET</a>
+            <a class="navbar-brand" id="title-web" href="index.jsp">just ponzo!</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
