@@ -79,12 +79,9 @@
                                 </a>
                             </div>
                             <h3>
-                                <a class="title-gd movie-title" href="movieDetail-servlet?action=init&movieID=${m.movieID}"> ${m.movieName} </a>
+                                <a class="title-gd movie-title" href="movieDetail?movieID=${m.movieID}"> ${m.movieName} </a>
                             </h3>
                             <p class="movie-des"> ${m.movieDescription} </p>
-<%--                            <div class="button-center text-center mt-4">--%>
-<%--                                <a href="#" class="btn watch-button">Đặt vé ngay</a>--%>
-<%--                            </div>--%>
                         </div>
                     </c:forEach>
                 </div>

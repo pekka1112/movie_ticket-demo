@@ -88,6 +88,13 @@
             <version>1.6.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.tuckey/urlrewritefilter -->
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>5.1.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
