@@ -2,12 +2,29 @@
     height: 500px;
     background-color: cornflowerblue;
 }
+
 #film-detail__poster {
     display: flex;
-    text-align: right;
     justify-content: left;
+    text-align: right;
     height: 500px;
     padding: 25px 10px;
+}
+
+#poster {
+    height: 450px;
+    width: 300px;
+}
+
+.file-detail__txt {
+    margin:  5px 0px;
+    text-align: justify;
+    color : whitesmoke;
+}
+
+.film-detail {
+    height: 500px;
+    background-color: cornflowerblue;
 }
 #poster {
     height: 450px;

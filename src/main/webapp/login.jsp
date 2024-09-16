@@ -11,7 +11,7 @@
 <html>
 <link rel="icon" type="image/x-icon" href="assets/images/x-icon.png">
 <head>
-    <title>PONZO - Đăng kí thành viên</title>
+    <title>PONZO - Đăng nhập tài khoản</title>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="assets/css/login-page.css">

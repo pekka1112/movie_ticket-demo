@@ -77,8 +77,6 @@ INSERT INTO `cinemaroom` (`cinemaID`, `roomName`) VALUES
 	('3', 'Phòng 1'), ('3', 'Phòng 2'), ('3', 'Phòng 3'), ('3', 'Phòng 4'),
 	('4', 'Phòng 1');
 
-
-
 CREATE TABLE `movie` (
   `movieID` INT AUTO_INCREMENT PRIMARY KEY,
   `movieName` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -290,7 +288,7 @@ INSERT INTO `ticket` (`showtimeID`, `bookedSeatID`, `price`) VALUES
 CREATE TABLE `booking` (
   `bookingID` INT AUTO_INCREMENT PRIMARY KEY,
   `userID` INT NOT NULL,
-  `ticketID` varchar(20) NOT NULL,
+  `ticketID` INT NOT NULL,
   `status` ENUM('Đã thanh toán', 'Chưa thanh toán', 'Đã hủy') DEFAULT 'Chưa thanh toán',
   `bookingTime` DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
@@ -344,7 +342,3 @@ CREATE TABLE `transaction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

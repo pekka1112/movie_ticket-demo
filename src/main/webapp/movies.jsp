@@ -62,7 +62,7 @@
                   <figure>
                     <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style="height: 350px">
                   </figure>
-                  <a href="movieDetail.jsp" data-toggle="modal">
+                  <a href="view/movieDetail.jsp" data-toggle="modal">
                     <div class="box-content">
                       <h3 class="title">${m.movieName}</h3>
                       <h4> <span class="post"><span class="fa fa-clock-o"> </span>Thời lượng : ${m.duration}</span>
@@ -88,7 +88,7 @@
                   <figure>
                     <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style="height: 350px">
                   </figure>
-                  <a href="movieDetail.jsp" data-toggle="modal">
+                  <a href="view/movieDetail.jsp" data-toggle="modal">
                     <div class="box-content">
                       <h3 class="title">${m.movieName}</h3>
                       <h4> <span class="post"><span class="fa fa-clock-o"> </span>Thời lượng : ${m.duration}</span>
@@ -114,7 +114,7 @@
                   <figure>
                     <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style="height: 350px">
                   </figure>
-                  <a href="movieDetail.jsp" data-toggle="modal">
+                  <a href="view/movieDetail.jsp" data-toggle="modal">
                     <div class="box-content">
                       <h3 class="title">${m.movieName}</h3>
                       <h4> <span class="post"><span class="fa fa-clock-o"> </span>Thời lượng : ${m.duration}</span>

@@ -30,16 +30,17 @@ public class UrlRewriteFilter implements Filter {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/showtime");
         } else if(curUriRequest.endsWith("/about.jsp")){
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/about");
-        } else if(curUriRequest.endsWith("/contact.jsp")){
-            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/contact");
+        } else if(curUriRequest.endsWith("/news.jsp")){
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/news");
         } else if(curUriRequest.endsWith("/login.jsp")){
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
+        } else if(curUriRequest.endsWith("/register.jsp")){
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/register");
         } else {
             // xử lí các request không cần rewriting
             chain.doFilter(request, response);
         }
     }
-
     @Override
     public void destroy() {
         Filter.super.destroy();

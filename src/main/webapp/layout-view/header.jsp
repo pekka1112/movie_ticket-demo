@@ -19,8 +19,7 @@
 <header id="site-header" class="w3l-header fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <a class="navbar-brand" href="index.jsp">
-                <img src="assets/images/icon_banner.jpg" alt="PZO TICKET" title="PZO TICKET" style="height:35px;"/> PONZO TICKET</a>
+            <a class="navbar-brand" id="title-web" href="index.jsp">just ponzo!</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -32,8 +31,8 @@
                     <li class="nav-item"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="movie-servlet?action=init">Phim</a></li>
                     <li class="nav-item"><a class="nav-link" href="showtimes-servlet?action=init">Lịch chiếu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.jsp">Thông tin</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.jsp">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.jsp">Tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.jsp">Liên hệ</a></li>
                 </ul>
 
                 <div class="Login_SignUp" id="login" style="font-size: 2rem ; display: inline-block; position: relative;border-radius: 5px; ">

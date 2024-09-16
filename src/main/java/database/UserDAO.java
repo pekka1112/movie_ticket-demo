@@ -10,27 +10,6 @@ import java.util.List;
 import model.User;
 
 public class UserDAO {
-    public boolean checkEmailExits(String email) {
-        Connection connection = null;
-        boolean checkEmail = false;
-        try {
-            connection = JDBCUtil.getConnection();
-            String checkEmailQuery = "select email from user where email = ?";
-            PreparedStatement pr = connection.prepareStatement(checkEmailQuery);
-            pr.setString(1, email);
-            ResultSet rs = pr.executeQuery();
-            if (rs.next()) {
-                checkEmail = true;
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            JDBCUtil.closeConnection(connection);
-        }
-        return checkEmail;
-    }
-
     public User getUserbyEmailAndPassword (String email, String password) {
         Connection connection = null;
         try {
@@ -57,41 +36,18 @@ public class UserDAO {
         }
         return null;
     }
-
-    public boolean registerUser(String userName, String email, String password) {
-        Connection connection = null;
-        if (checkEmailExits(email)) {
-            return false;
-        } else {
-            try {
-                connection = JDBCUtil.getConnection();
-                String maxIdQuery = "select MAX(userId) as maxId from user";
-                PreparedStatement idPr = connection.prepareStatement(maxIdQuery);
-                ResultSet rsId = idPr.executeQuery();
-                if (rsId.next()){
-                    int maxId = rsId.getInt("maxId");
-                    String insertQuery = "insert into user values (?, ?, ? , ?, ?) ";
-                    PreparedStatement insertPr = connection.prepareStatement(insertQuery);
-                    insertPr.setInt(1, maxId+1);
-                    insertPr.setString(2, userName);
-                    insertPr.setString(3, email);
-                    insertPr.setString(4, password);
-                    insertPr.setInt(5, 0);
-                    int insertRs =insertPr.executeUpdate();
-                    if (insertRs >0){
-                        return true;
-                    }else {
-                        return false;
-                    }
-                }else {
-                    return false;
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } finally {
-                JDBCUtil.closeConnection(connection);
-            }
-        }
+    public boolean insertUser(String userName, String email, String password, boolean isActive, int roleID) {
+        return JDBIUtil.getJdbi().withHandle(handle -> {
+            String sql = "INSERT INTO user (username, email, password, isActive, roleID) VALUES (?, ?, ?, ?, ?)";
+            int rowsAffected = handle.createUpdate(sql)
+                    .bind(0, userName)
+                    .bind(1, email)
+                    .bind(2, password)
+                    .bind(3, isActive)
+                    .bind(4, roleID)
+                    .execute();
+            return rowsAffected > 0;
+        });
     }
     public List<User> getAllUser(){
         List<User> users = JDBIUtil.getJdbi().withHandle(h -> {
@@ -99,7 +55,15 @@ public class UserDAO {
         });
         return users;
     }
-
+    public boolean checkEmailExits(String email) {
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(1) FROM user WHERE email = :email")
+                        .bind("email", email)
+                        .mapTo(int.class)
+                        .findOne()
+                        .orElse(0) > 0
+        );
+    }
     public boolean updateUser(User newUser) {
         return false;
     }

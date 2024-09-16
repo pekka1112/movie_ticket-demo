@@ -24,11 +24,10 @@ public class Login extends HttpServlet {
         HttpSession session = req.getSession();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-
         User user = userService.loginByEmailAndPassword(email, password);
 
         RequestDispatcher requestDispatcher = null;
-        if (user != null){
+         if (user != null){
             session.setAttribute("curUser", user);
             session.setAttribute("curUsername", user.getUsername());
             requestDispatcher = req.getRequestDispatcher("/index.jsp");

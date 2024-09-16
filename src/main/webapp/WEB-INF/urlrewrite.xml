@@ -1,0 +1,6 @@
+<urlrewrite>
+    <rule>
+        <from>/Movie_Ticket_Website/movieDetail/([a-zA-Z0-9-]+)</from>
+        <to>/Movie_Ticket_Website/movieDetail?movieID=${mapSlugToID($1)}</to>
+    </rule>
+</urlrewrite>

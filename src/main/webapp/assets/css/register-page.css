@@ -1,5 +1,3 @@
-
-
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +10,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('../../assets/background-img/deadpool.png') no-repeat ;
+    background: url('../../assets/background-img/register-bg.png') no-repeat ;
     background-size: cover;
     background-position: center;
 }
@@ -27,7 +25,6 @@ header {
     justify-content: space-between;
     align-items: center;
     z-index: 99;
-
 }
 
 .form {
@@ -42,25 +39,20 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*overflow: hidden;*/
-
-
 }
 
 .form.register{
     height: 550px;
-
 }
 
 .form .form-box{
     width: 100%;
     padding: 40px;
-
 }
 
 .form-box h2{
-    font-size: 3em;
-    color: #df0e62;
+    font-size: 2em;
+    color: #fff;
     text-align: center;
 }
 
@@ -74,17 +66,16 @@ header {
 
 .input-box label{
     position: absolute;
-    bottom: 70%;
+    bottom: 60%;
     left: 5px;
     transform: translateY(-50%);
-    font-size: 1em;
+    font-size: 1.1em;
     color: #fff;
     font-weight: 500;
-    font-style: italic;
     pointer-events: none;
     transition: .5s;
+    font-style: italic;
 }
-
 
 .input-box input {
     width: 100%;
@@ -92,8 +83,8 @@ header {
     background: transparent;
     border: none;
     outline: none;
-    font-size: 1.2em;
-    color: #df0e62;
+    font-size: 1em;
+    color: #fff;
     font-weight: 600;
     padding: 0 35px 0 5px;
 }
@@ -101,7 +92,7 @@ header {
 .input-box .icon {
     position: absolute;
     right: 8px;
-    font-size: 2em;
+    font-size: 1.2em;
     color: #fff;
     line-height: 57px;
 
@@ -135,15 +126,11 @@ header {
 
 }
 .remenber-forgot a {
-    color: #fff;
+    color: red;
     text-decoration: none;
-    font-weight: 300;
-    font-style: italic;
-    font-size: 1.1rem;
 }
 .remenber-forgot a:hover {
     text-decoration: underline;
-    color: #df0e62;
 }
 
 .btn {
@@ -154,7 +141,7 @@ header {
     outline: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.2em;
     color: #fff;
     font-weight: 500;
 }
@@ -168,56 +155,13 @@ header {
 }
 
 .login-register p a {
-    color: #fff;
+    color: #df0e62;
     text-decoration: none;
     font-weight: 600;
-    font-style: italic;
-    font-size: 1.1rem;
+    font-size: larger;
 }
 
 .login-register p a:hover {
     text-decoration: underline;
-    color: #df0e62;
 }
 
-.error-message {
-    color: red;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    font-style: italic;
-    font-weight: bolder;
-    text-align: center;
-}
-
-.popup-content {
-    position: absolute;
-    top: 100%; /* Show just below the link */
-    left: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    z-index: 1;
-    width: 200px; /* Adjust width as needed */
-}
-
-.popup-content ul {
-    margin: 0;
-    padding: 0;
-}
-
-.popup-content li {
-    padding: 10px;
-    text-align: left;
-}
-
-.popup-content li a {
-    text-decoration: none;
-    color: black;
-    display: block;
-}
-
-.popup-content li a:hover {
-    background-color: #f1f1f1;
-}

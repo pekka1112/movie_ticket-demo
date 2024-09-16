@@ -4,17 +4,16 @@
 <html>
 <head>
     <title>Chi Tiết Phim - ${movie.movieName}</title>
-    <jsp:include page="layout-view/head_libraries.jsp"></jsp:include>
+    <jsp:include page="../layout-view/head_libraries.jsp"></jsp:include>
 </head>
 <body>
-    <jsp:include page="layout-view/header.jsp"></jsp:include>
-    <link rel="stylesheet" href="assets/css/movie_detail.css">
+    <jsp:include page="../layout-view/header.jsp"></jsp:include>
     <link rel="stylesheet" href="assets/css/movieDetail.css">
 <%-- BREADCRUMBS --%>
 <div class="w3l-breadcrumbs">
     <nav id="breadcrumbs" class="breadcrumbs">
         <div class="container page-wrapper">
-            <a href="index.jsp">Trang Chủ</a> » <span class="breadcrumb_last" aria-current="page">${movie.movieName}</span>
+            <a href="../index.jsp">Trang Chủ</a> » <span class="breadcrumb_last" aria-current="page">${movie.movieName}</span>
         </div>
     </nav>
 </div>
@@ -23,7 +22,7 @@
 <section class="film-detail" style="background: url(../Movie_Ticket_Website/assets/movie-image/${movie.linkMovieImage}) no-repeat center ; background-size: cover; position: relative;overflow: hidden">
     <div class="container" id="film-detailBackground">
         <div class="row">
-            <div class="col-4" id="film-detail__poster" >
+            <div class="col-4" id="film-detail__poster">
                 <img src="../Movie_Ticket_Website/assets/movie-image/${movie.linkMovieImage}" id="poster" alt="" style="border: 2px groove whitesmoke;">
             </div>
             <div class="col-8" id="film-detail__context" style="; margin: 25px 0px ; padding-left: 0px" >
@@ -104,15 +103,15 @@
         </div>
     </section>
 
-<jsp:include page="layout-view/footer.jsp"></jsp:include>
-<jsp:include page="layout-view/js-function-slider.jsp"></jsp:include>
-<jsp:include page="layout-view/script-libraries.jsp"></jsp:include>
+<jsp:include page="../layout-view/footer.jsp"></jsp:include>
+<jsp:include page="../layout-view/js-function-slider.jsp"></jsp:include>
+<jsp:include page="../layout-view/script-libraries.jsp"></jsp:include>
 </body>
 </html>
 <!-- responsive tabs -->
 <script src="assets/js/jquery-1.9.1.min.js"></script>
 <script src="assets/js/easyResponsiveTabs.js"></script>
 <!--/theme-change-->
-<script src="assets/js/theme-change.js"></script>
+<script src="../assets/js/theme-change.js"></script>
 <script src="assets/js/owl.carousel.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="../assets/js/main.js"></script>
