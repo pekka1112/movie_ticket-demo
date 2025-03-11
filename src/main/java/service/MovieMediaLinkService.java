@@ -4,6 +4,7 @@ import database.MovieMediaLinkDAO;
 import model.MovieMediaLink;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MovieMediaLinkService {
     MovieMediaLinkDAO movieMediaLinkDAO = new MovieMediaLinkDAO();
@@ -16,6 +17,9 @@ public class MovieMediaLinkService {
     public List<MovieMediaLink> get5ReleasedMoive() {
         return movieMediaLinkDAO.getReleasedMovies(5);
     }
+    public List<MovieMediaLink> get4ReleasedMoive() {
+        return movieMediaLinkDAO.getReleasedMovies(4);
+    }
     public List<MovieMediaLink> get5UnReleasedMoive() {
         return movieMediaLinkDAO.getUnReleasedMovies(5);
     }
@@ -27,5 +31,18 @@ public class MovieMediaLinkService {
     }
     public MovieMediaLink getMovieByID(String mid) {
         return movieMediaLinkDAO.getMovieByID(mid);
+    }
+
+    public List<String> getAllCategory() {
+        // chuyển Set extractorMovieCategory thành List bằng stream
+        return movieMediaLinkDAO.extractorMovieCategory().stream().sorted().collect(Collectors.toList());
+    }
+
+    public List<String> getAllCountry() {
+        return movieMediaLinkDAO.extractorMovieCountry().stream().sorted().collect(Collectors.toList());
+    }
+
+    public List<MovieMediaLink> getMovieByName(String keyWord) {
+        return movieMediaLinkDAO.getMovieByName(keyWord);
     }
 }

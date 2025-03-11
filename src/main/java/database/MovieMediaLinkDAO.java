@@ -1,13 +1,10 @@
 package database;
 
+import controller.HomeController;
 import model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class MovieMediaLinkDAO {
 
@@ -193,5 +190,56 @@ public class MovieMediaLinkDAO {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public Set<String> extractorMovieCategory() {
+        Connection c = JDBCUtil.getConnection();
+        Set<String> categories = new HashSet<>();
+        try {
+            String query = "SELECT movieCategory FROM movie";
+            PreparedStatement stmt = c.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String[] categoryArray = rs.getString("movieCategory").split(",\\s*"); // Tách bằng dấu phẩy
+                categories.addAll(Arrays.asList(categoryArray));
+            }
+        return categories;
+        } catch (SQLException e) {
+                throw new RuntimeException(e);
+        }
+    }
+
+    public Set<String> extractorMovieCountry() {
+        Connection c = JDBCUtil.getConnection();
+        Set<String> categories = new HashSet<>();
+        try {
+            String query = "SELECT country FROM movie";
+            PreparedStatement stmt = c.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String[] categoryArray = rs.getString("country").split(",\\s*"); // Tách bằng dấu phẩy
+                categories.addAll(Arrays.asList(categoryArray));
+            }
+            return categories;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<MovieMediaLink> getMovieByName(String keyWord) {
+        if (keyWord == null || keyWord.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieName LIKE :keyWord")
+                        .bind("keyWord", "%" + keyWord + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
+    public static void main(String[] args) {
+        MovieMediaLinkDAO c = new MovieMediaLinkDAO();
+        System.out.println(c.getMovieByName("Nhà"));
     }
 }
