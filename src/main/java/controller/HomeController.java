@@ -46,7 +46,7 @@ public class  HomeController extends HttpServlet {
 
         newestMovies = movieService.get5NewestMovie();
         session.setAttribute("newestMovies", newestMovies);
-        publishedMovies = movieService.get5ReleasedMoive();
+        publishedMovies = movieService.get8ReleasedMoive();
         req.setAttribute("publishedMovies", publishedMovies);
         unPublishedMovies = movieService.get5UnReleasedMoive();
         req.setAttribute("unPublishedMovies", unPublishedMovies);
