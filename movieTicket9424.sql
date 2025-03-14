@@ -112,11 +112,14 @@ INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `director`, `d
 	('Spider-Man: No Way Home', 'Hành động, Phiêu lưu, Viễn tưởng, Siêu anh hùng', '2022-09-01', 'Marvel', '01:46:00', 'Mỹ', 'Phiên bản nhiều sự thú vị hơn của 3 Nhện!', 'Phần 3: Nhện Nhọ không có đường về nhà! Peter Parker đã bị lộ mặt và không còn có thể tách biệt cuộc sống bình thường của mình với những yêu cầu cao của việc trở thành một Siêu anh hùng. Khi anh ta yêu cầu sự giúp đỡ từ Doctor Strange, mọi thứ càng trở nê', 8.2),
 	('Chú Thuật Hồi Chiến: 0', 'Hành động, Phiêu lưu, Hoạt hình, Viễn tưởng', '2022-04-14', 'Mappa', '01:46:00', 'Nhật Bản', 'Chú thuật sư đời đầu.', 'Yuta Okkotsu là một học sinh trung học đang gặp phải một vấn đề nghiêm trọng - người bạn thời thơ ấu của anh là Rika, đã biến thành một Chú Linh và sẽ không để anh yên. Vì Rika không phải là một Chú Linh bình thường, nên đã được Satoru Gojo xử lí, một giá',  9),
 	('Nhà Gia Tiên', 'Gia đình, Tâm Linh, Hài', '2025-02-21', 'Huỳnh Lập', '01:57:00', 'Việt Nam', 'Có thờ có thiêng, có Gia Tiên có tiền!', 'Nhà Gia Tiên xoay quanh câu chuyện đa góc nhìn về các thế hệ khác nhau trong một gia đình, có hai nhân vật chính là Gia Minh (Huỳnh Lập) và Mỹ Tiên (Phương Mỹ Chi). Trở về căn nhà gia tiên để quay các video “triệu view” trên mạng xã hội, Mỹ Tiên - một nhà sáng tạo nội dung thuộc thế hệ Z vốn không tin vào chuyện tâm linh, hoàn toàn mất kết nối với gia đình, bất ngờ nhìn thấy Gia Minh - người anh trai đã mất từ lâu. Để hồn ma của Gia Minh có thể siêu thoát và không tiếp tục làm phiền mình, Mỹ Tiên bắt tay cùng Gia Minh lên kế hoạch giữ lấy căn nhà gia tiên đang bị họ hàng tranh chấp, đòi ông nội chia tài sản. Đứng trước hàng loạt bí mật động trời trong căn nhà gia tiên, liệu Mỹ Tiên có vượt qua được tất cả để hoàn thành di nguyện của Gia Minh?',  9.5),
-	('Chú Thuật Hồi Chiến: 0', 'Hành động, Phiêu lưu, Hoạt hình, Viễn tưởng', '2022-04-14', 'Mappa', '01:46:00', 'Nhật Bản', 'Chú thuật sư đời đầu.', 'Yuta Okkotsu là một học sinh trung học đang gặp phải một vấn đề nghiêm trọng - người bạn thời thơ ấu của anh là Rika, đã biến thành một Chú Linh và sẽ không để anh yên. Vì Rika không phải là một Chú Linh bình thường, nên đã được Satoru Gojo xử lí, một giá',  9);
-
+   ('Quỷ Nhập Tràng', 'Kinh dị', '2025-03-07', 'Đạo diễn A', '01:45:00', 'Việt Nam', 'Một bộ phim kinh dị về hiện tượng quỷ nhập tràng tại một ngôi làng nhỏ.', 'Câu chuyện xoay quanh những sự kiện bí ẩn xảy ra sau khi một người chết bất ngờ sống lại.', 7.0),
+   ('Sát Thủ Vô Cùng Cực Hài', 'Hành động, Hài', '2025-03-14', 'Đạo diễn B', '02:00:00', 'Mỹ', 'Một sát thủ chuyên nghiệp gặp phải những tình huống dở khóc dở cười trong nhiệm vụ cuối cùng.', 'Phim kết hợp giữa hành động kịch tính và những tình huống hài hước.', 8.5),
+   ('Nhà Gia Tiên', 'Kinh dị, Tâm lý', '2025-02-21', 'Đạo diễn C', '01:50:00', 'Việt Nam', 'Câu chuyện về một gia đình đối mặt với những hiện tượng siêu nhiên trong ngôi nhà tổ tiên.', 'Phim khai thác mối quan hệ gia đình và những bí mật được chôn giấu.', 9.6),
+   ('Mickey 17', 'Khoa học viễn tưởng', '2025-03-14', 'Đạo diễn D', '02:10:00', 'Mỹ', 'Một nhân bản được tạo ra để thực hiện nhiệm vụ nguy hiểm trên hành tinh xa lạ.', 'Phim khám phá những câu hỏi về bản chất con người và đạo đức khoa học.', 8.8),
+   ('Lạc Trôi', 'Phiêu lưu, Tình cảm', '2025-03-07', 'Đạo diễn E', '01:55:00', 'Việt Nam', 'Hành trình phiêu lưu của một chàng trai trẻ tìm kiếm tình yêu và ý nghĩa cuộc sống.', 'Phim kết hợp giữa cảnh quay đẹp và câu chuyện cảm động.', 8.8);
 
 CREATE TABLE `moviemedialink` (
-  `movieID` varchar(20) PRIMARY KEY,
+  `movieID` int PRIMARY KEY,
   `linkMovieImage` VARCHAR(255) DEFAULT NULL,
   `linkMovieTrailer` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -142,7 +145,12 @@ INSERT INTO `moviemedialink` (`movieID`, `linkMovieImage`, `linkMovieTrailer`) V
 	(18, 'khoa-chat-cua-nao-suzume.png', 'https://www.youtube.com/embed/xQ4_c8JfuzI'),
 	(19, 'spiderman-no-way-home.png', 'https://www.youtube.com/embed/OB3g37GTALc'),
 	(20, 'chu-thuat-hoi-chien-0.png', 'https://www.youtube.com/embed/ceqa2pIN9ng'),
-	(21, 'nha-gia-tien.png', 'https://www.youtube.com/watch?v=wfPTz0A23ns');
+	(21, 'nha-gia-tien.png', 'https://www.youtube.com/watch?v=wfPTz0A23ns'),
+	(22, 'quy-nhap-trang.png', 'https://www.youtube.com/embed/trailer_quy_nhap_trang'),
+	(23, 'sat-thu-vo-cung-cuc-hai.png', 'https://www.youtube.com/embed/trailer_sat_thu_vo_cung_cuc_hai'),
+	(24, 'nha-gia-tien.png', 'https://www.youtube.com/embed/trailer_nha_gia_tien'),
+	(25, 'mikey-17.png', 'https://www.youtube.com/embed/trailer_mickey_17'),
+	(26, 'lac-troi.png', 'https://www.youtube.com/embed/trailer_lac_troi');
 
 CREATE TABLE `actor` (
   `actorID` INT AUTO_INCREMENT PRIMARY KEY,
@@ -196,7 +204,8 @@ INSERT INTO `showtime` (`movieID`, `cinemaID`, `roomID`, `startTime`, `endTime`)
     (5, 3, 3, '2024-09-03 11:00:00', '2024-09-03 13:30:00'),
     (6, 3, 3, '2024-09-03 14:00:00', '2024-09-03 16:30:00'),
     (7, 4, 4, '2024-09-04 20:00:00', '2024-09-04 22:30:00'),
-    (8, 4, 4, '2024-09-04 23:00:00', '2024-09-05 01:30:00');
+    (8, 4, 4, '2024-09-04 23:00:00', '2024-09-05 01:30:00')
+    ;
 
 -- note : 1 user sẽ có 1 detail duy nhất
 -- alt : thêm link ảnh cho user, nếu không có link thì sẽ dùng default url
@@ -294,19 +303,17 @@ INSERT INTO `ticket` (`showtimeID`, `bookedSeatID`, `price`) VALUES
 CREATE TABLE `booking` (
   `bookingID` INT AUTO_INCREMENT PRIMARY KEY,
   `userID` INT NOT NULL,
-  `ticketID` INT NOT NULL,
   `status` ENUM('Đã thanh toán', 'Chưa thanh toán', 'Đã hủy') DEFAULT 'Chưa thanh toán',
   `bookingTime` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
-  FOREIGN KEY (`ticketID`) REFERENCES `ticket`(`ticketID`)
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `booking` (`userID`, `ticketID`, `status`) VALUES
-	(1, 1, 'Đã thanh toán'),
-	(2, 2, 'Chưa thanh toán'),
-	(3, 3, 'Đã thanh toán'),
-	(1, 4, 'Đã hủy'),
-	(2, 5, 'Đã thanh toán');
+INSERT INTO `booking` (`userID`, `status`) VALUES
+	(1, 'Đã thanh toán'),
+	(2, 'Chưa thanh toán'),
+	(3, 'Đã thanh toán'),
+	(1, 'Đã hủy'),
+	(2, 'Đã thanh toán');
 	
 -- note : cartItem là từng bookingID cụ thể
 CREATE TABLE `cartItem` (
@@ -347,4 +354,9 @@ CREATE TABLE `transaction` (
   FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 COMMIT;
+
+# hiển thị movie dc dat ve
+# select DISTINCT mml.* from ( select st.movieID from ( select t.showtimeID from ( SELECT bt.bookingID, bt.ticketID FROM `booking` as b JOIN bookingticket as bt ON b.bookingID = bt.bookingID WHERE b.status = 'Đã thanh toán' ) as a join ticket as t on a.ticketID = t.ticketID ) as r join showtime as st on r.showtimeID = st.showtimeID ) as ppm join moviemedialink mml join movie m on ppm.movieID = mml.movieID = m.movieID

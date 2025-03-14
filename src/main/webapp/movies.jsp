@@ -77,9 +77,7 @@
               </div>
             </c:forEach>
           </div>
-
         </div>
-
       </div>
     </section>
 
@@ -97,13 +95,13 @@
                   <option value="popular" style="text-align: left">Phim mới nhất</option>
                   <option value="popular" style="text-align: left">Phim sắp chiếu</option>
                 </select>
-                <select id="categorySelect" class="resp-tabs-list hor_1"  onchange="updatePlaceholder()" style="padding : 5px 25px; text-align: left">
+                <select id="categorySelect" class="resp-tabs-list hor_1"  onchange="updatePlaceholder(); updateFilmByCategory();" style="padding : 5px 25px; text-align: left">
                   <option value="all" selected style="text-align: left">Thể loại</option>
                   <c:forEach var="c" items="${movieCategoryList}">
                     <option value="${c}" style="text-align: left">${c}</option>
                   </c:forEach>
                 </select>
-                <select id="countrySelect" class="resp-tabs-list hor_1" onchange="updatePlaceholder()" style="padding : 5px 30px">
+                <select id="countrySelect" class="resp-tabs-list hor_1" onchange="updatePlaceholder(); updateFilmByCountry()" style="padding : 5px 30px">
                   <option value="all" selected style="text-align: left">Quốc gia</option>
                   <c:forEach var="c" items="${movieCountryList}">
                     <option value="${c}" style="text-align: left">${c}</option>
@@ -197,6 +195,19 @@
           country_select.options[0].text = "Quốc gia";
         } else {
           country_select.options[0].text = "Tất cả";
+        }
+
+      }
+      function updateFilmByCategory() {
+        const select = document.getElementById("categorySelect");
+        if (select !== "all") {
+          window.location.href = "movie-servlet?action=findByCategory&category=" + select.value;
+        }
+      }
+      function updateFilmByCountry() {
+        const select = document.getElementById("countrySelect");
+        if (select !== "all") {
+          window.location.href = "movie-servlet?action=findByCountry&country=" + select.value;
         }
       }
     </script>

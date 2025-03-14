@@ -17,6 +17,9 @@ public class MovieMediaLinkService {
     public List<MovieMediaLink> get5ReleasedMoive() {
         return movieMediaLinkDAO.getReleasedMovies(5);
     }
+    public List<MovieMediaLink> get8ReleasedMoive() {
+        return movieMediaLinkDAO.getReleasedMovies(8);
+    }
     public List<MovieMediaLink> get4ReleasedMoive() {
         return movieMediaLinkDAO.getReleasedMovies(4);
     }
@@ -24,7 +27,7 @@ public class MovieMediaLinkService {
         return movieMediaLinkDAO.getUnReleasedMovies(5);
     }
     public List<MovieMediaLink> getMostPopularMoive() {
-        return movieMediaLinkDAO.getMostPopularMoive(3);
+        return movieMediaLinkDAO.getMostPopularMovies(4);
     }
     public List<MovieMediaLink> getAllMovie() {
         return movieMediaLinkDAO.getAllMovie();
@@ -43,6 +46,15 @@ public class MovieMediaLinkService {
     }
 
     public List<MovieMediaLink> getMovieByName(String keyWord) {
+
         return movieMediaLinkDAO.getMovieByName(keyWord);
+    }
+
+    public List<MovieMediaLink> getMovieByCategory(String keyWord) {
+        return movieMediaLinkDAO.getMovieByCategory(keyWord);
+    }
+
+    public List<MovieMediaLink> getMovieByCountry(String keyWord) {
+        return movieMediaLinkDAO.getMovieByCountry(keyWord);
     }
 }

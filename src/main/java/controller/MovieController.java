@@ -32,6 +32,19 @@ public class MovieController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
 
+        // init data for film page
+        allMovies = movieMediaLinkService.getAllMovie();
+        req.setAttribute("allMovies", allMovies);
+        publishedMovies = movieMediaLinkService.getMostPopularMoive();
+        req.setAttribute("publishedMovies", publishedMovies);
+        unPublishedMovies = movieMediaLinkService.get5UnReleasedMoive();
+        req.setAttribute("unPublishedMovies", unPublishedMovies);
+        // init data for category & country
+        movieCategoryList = movieMediaLinkService.getAllCategory();
+        req.setAttribute("movieCategoryList", movieCategoryList);
+        movieCountryList = movieMediaLinkService.getAllCountry();
+        req.setAttribute("movieCountryList", movieCountryList);
+
         String action = req.getParameter("action");
         if(action.equals("init")) {
             initData(req,resp);
@@ -41,6 +54,10 @@ public class MovieController extends HttpServlet {
             searchCinemaAction(req,resp);
         } else if (action.equals("findByName")) {
             findMoviesByNameAction(req,resp); // tìm kiếm theo tên phim nhập từ ô search
+        } else if (action.equals("findByCategory")) {
+            findMoviesByCategoryAction(req,resp);
+        } else if (action.equals("findByCountry")) {
+            findMoviesByCountryAction(req,resp);
         }
     }
 
@@ -50,17 +67,6 @@ public class MovieController extends HttpServlet {
     }
 
     private static void initData(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        allMovies = movieMediaLinkService.getAllMovie();
-        req.setAttribute("allMovies", allMovies);
-        publishedMovies = movieMediaLinkService.get4ReleasedMoive();
-        req.setAttribute("publishedMovies", publishedMovies);
-        unPublishedMovies = movieMediaLinkService.get5UnReleasedMoive();
-        req.setAttribute("unPublishedMovies", unPublishedMovies);
-        movieCategoryList = movieMediaLinkService.getAllCategory();
-        req.setAttribute("movieCategoryList", movieCategoryList);
-        movieCountryList = movieMediaLinkService.getAllCountry();
-        req.setAttribute("movieCountryList", movieCountryList);
-
         RequestDispatcher rd = req.getRequestDispatcher("/movies.jsp");
         if (rd != null) {
             rd.forward(req, resp);
@@ -85,6 +91,28 @@ public class MovieController extends HttpServlet {
             String keyWord = req.getParameter("txtSearch");
             mmlService = new MovieMediaLinkService();
             moviesByName = mmlService.getMovieByName(keyWord);
+            req.setAttribute("moviesByName", moviesByName);
+            req.getRequestDispatcher("movies.jsp").forward(req,resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private static void findMoviesByCategoryAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String keyWord = req.getParameter("category");
+            mmlService = new MovieMediaLinkService();
+            moviesByName = mmlService.getMovieByCategory(keyWord);
+            req.setAttribute("moviesByName", moviesByName);
+            req.getRequestDispatcher("movies.jsp").forward(req,resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private static void findMoviesByCountryAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String keyWord = req.getParameter("country");
+            mmlService = new MovieMediaLinkService();
+            moviesByName = mmlService.getMovieByCountry(keyWord);
             req.setAttribute("moviesByName", moviesByName);
             req.getRequestDispatcher("movies.jsp").forward(req,resp);
         } catch (Exception e) {

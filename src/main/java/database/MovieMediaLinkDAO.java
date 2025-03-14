@@ -67,7 +67,7 @@ public class MovieMediaLinkDAO {
     }
     public static List<MovieMediaLink> getReleasedMovies(int num) {
         Connection c = JDBCUtil.getConnection();
-        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID WHERE DATE(m.`releaseDate`) <= CURDATE() LIMIT ?";
+        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID WHERE DATE(m.`releaseDate`) <= CURDATE() ORDER BY m.releaseDate DESC LIMIT ?";
         try {
             List<MovieMediaLink> list = new ArrayList<>();
             PreparedStatement s = c.prepareStatement(sql);
@@ -153,17 +153,19 @@ public class MovieMediaLinkDAO {
             return null;
         }
     }
-    public static List<MovieMediaLink> getMostPopularMoive (int numMovie) {
+    public static List<MovieMediaLink> getMostPopularMovies (int numMovie) {
         Connection c = JDBCUtil.getConnection();
-        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID WHERE m.movieID IN\n" +
-                " ( SELECT m.movieID FROM movie m JOIN showtime st ON m.movieID = st.movieID  \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t JOIN ticket t ON t.showtimeID = st.showtimeID \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t JOIN transactionticket tt ON tt.ticketID = t.ticketID\n" +
-                "\tGROUP BY m.movieID\n" +
-                "\tHAVING COUNT(m.movieID) >= ALL (SELECT COUNT(m.movieID) AS c FROM movie m JOIN showtime st ON m.movieID = st.movieID  \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  JOIN ticket t ON t.showtimeID = st.showtimeID \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  JOIN transactionticket tt ON tt.ticketID = t.ticketID\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t  GROUP BY m.movieID, m.movieName ) ) LIMIT ?" ;
+        String sql = "SELECT m.*, mml.*, COUNT(bt.ticketID) AS total_tickets_sold\n" +
+                "FROM booking AS b\n" +
+                "JOIN bookingticket AS bt ON b.bookingID = bt.bookingID\n" +
+                "JOIN ticket AS t ON bt.ticketID = t.ticketID\n" +
+                "JOIN showtime AS st ON t.showtimeID = st.showtimeID\n" +
+                "JOIN movie AS m ON st.movieID = m.movieID\n" +
+                "join moviemedialink mml on mml.movieID = m.movieID\n" +
+                "WHERE b.status = 'Đã thanh toán'\n" +
+                "GROUP BY m.movieID, m.movieName\n" +
+                "ORDER BY total_tickets_sold DESC\n" +
+                "LIMIT ?;" ;
 
         try {
             List<MovieMediaLink> list = new ArrayList<>();
@@ -238,8 +240,33 @@ public class MovieMediaLinkDAO {
         );
     }
 
+    public List<MovieMediaLink> getMovieByCategory(String keyWord) {
+        if (keyWord == null || keyWord.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieCategory LIKE :keyWord")
+                        .bind("keyWord", "%" + keyWord + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
+    public List<MovieMediaLink> getMovieByCountry(String keyWord) {
+        if (keyWord == null || keyWord.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.country LIKE :keyWord")
+                        .bind("keyWord", "%" + keyWord + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
     public static void main(String[] args) {
         MovieMediaLinkDAO c = new MovieMediaLinkDAO();
-        System.out.println(c.getMovieByName("Nhà"));
+        System.out.println(c.getMostPopularMovies(4).size()
+        );
     }
 }
