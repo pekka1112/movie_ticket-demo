@@ -1,13 +1,10 @@
 package database;
 
+import controller.HomeController;
 import model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class MovieMediaLinkDAO {
 
@@ -70,7 +67,7 @@ public class MovieMediaLinkDAO {
     }
     public static List<MovieMediaLink> getReleasedMovies(int num) {
         Connection c = JDBCUtil.getConnection();
-        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID WHERE DATE(m.`releaseDate`) <= CURDATE() LIMIT ?";
+        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID WHERE DATE(m.`releaseDate`) <= CURDATE() ORDER BY m.releaseDate DESC LIMIT ?";
         try {
             List<MovieMediaLink> list = new ArrayList<>();
             PreparedStatement s = c.prepareStatement(sql);
@@ -156,17 +153,19 @@ public class MovieMediaLinkDAO {
             return null;
         }
     }
-    public static List<MovieMediaLink> getMostPopularMoive (int numMovie) {
+    public static List<MovieMediaLink> getMostPopularMovies (int numMovie) {
         Connection c = JDBCUtil.getConnection();
-        String sql = "SELECT * FROM movie m JOIN moviemedialink mml ON m.movieID = mml.movieID WHERE m.movieID IN\n" +
-                " ( SELECT m.movieID FROM movie m JOIN showtime st ON m.movieID = st.movieID  \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t JOIN ticket t ON t.showtimeID = st.showtimeID \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t JOIN transactionticket tt ON tt.ticketID = t.ticketID\n" +
-                "\tGROUP BY m.movieID\n" +
-                "\tHAVING COUNT(m.movieID) >= ALL (SELECT COUNT(m.movieID) AS c FROM movie m JOIN showtime st ON m.movieID = st.movieID  \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  JOIN ticket t ON t.showtimeID = st.showtimeID \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  JOIN transactionticket tt ON tt.ticketID = t.ticketID\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t  GROUP BY m.movieID, m.movieName ) ) LIMIT ?" ;
+        String sql = "SELECT m.*, mml.*, COUNT(bt.ticketID) AS total_tickets_sold\n" +
+                "FROM booking AS b\n" +
+                "JOIN bookingticket AS bt ON b.bookingID = bt.bookingID\n" +
+                "JOIN ticket AS t ON bt.ticketID = t.ticketID\n" +
+                "JOIN showtime AS st ON t.showtimeID = st.showtimeID\n" +
+                "JOIN movie AS m ON st.movieID = m.movieID\n" +
+                "join moviemedialink mml on mml.movieID = m.movieID\n" +
+                "WHERE b.status = 'Đã thanh toán'\n" +
+                "GROUP BY m.movieID, m.movieName\n" +
+                "ORDER BY total_tickets_sold DESC\n" +
+                "LIMIT ?;" ;
 
         try {
             List<MovieMediaLink> list = new ArrayList<>();
@@ -193,5 +192,109 @@ public class MovieMediaLinkDAO {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public Set<String> extractorMovieCategory() {
+        Connection c = JDBCUtil.getConnection();
+        Set<String> categories = new HashSet<>();
+        try {
+            String query = "SELECT movieCategory FROM movie";
+            PreparedStatement stmt = c.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String[] categoryArray = rs.getString("movieCategory").split(",\\s*"); // Tách bằng dấu phẩy
+                categories.addAll(Arrays.asList(categoryArray));
+            }
+        return categories;
+        } catch (SQLException e) {
+                throw new RuntimeException(e);
+        }
+    }
+
+    public Set<String> extractorMovieCountry() {
+        Connection c = JDBCUtil.getConnection();
+        Set<String> categories = new HashSet<>();
+        try {
+            String query = "SELECT country FROM movie";
+            PreparedStatement stmt = c.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String[] categoryArray = rs.getString("country").split(",\\s*"); // Tách bằng dấu phẩy
+                categories.addAll(Arrays.asList(categoryArray));
+            }
+            return categories;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<MovieMediaLink> getMovieByName(String keyWord) {
+        if (keyWord == null || keyWord.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieName LIKE :keyWord")
+                        .bind("keyWord", "%" + keyWord + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
+    public List<MovieMediaLink> getMovieBy(String name, String cate, String country, int timeCode) {
+        String query = "SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage, COUNT(bt.ticketID) AS total_tickets_sold\n" +
+                "FROM booking AS b\n" +
+                "JOIN bookingticket AS bt ON b.bookingID = bt.bookingID\n" +
+                "JOIN ticket AS t ON bt.ticketID = t.ticketID\n" +
+                "JOIN showtime AS st ON t.showtimeID = st.showtimeID\n" +
+                "JOIN movie AS m ON st.movieID = m.movieID\n" +
+                "join moviemedialink mml on mml.movieID = m.movieID\n" +
+                "WHERE b.status = 'Đã thanh toán' AND m.movieName LIKE :name AND m.movieCategory LIKE :cate AND m.country LIKE :country" +
+                " GROUP BY m.movieID, m.movieName\n" +
+                "ORDER BY total_tickets_sold DESC\n" ;
+        if(timeCode == -1) {
+            query = "SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieName LIKE :name AND m.movieCategory LIKE :cate AND m.country LIKE :country AND DATE(m.`releaseDate`) > CURDATE()";
+        }
+        if(timeCode == 0) {
+            query = "SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieName LIKE :name AND m.movieCategory LIKE :cate AND m.country LIKE :country AND DATE(m.`releaseDate`) <= CURDATE() ORDER BY m.releaseDate DESC";
+        }
+        String finalQuery = query;
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery(finalQuery)
+                        .bind("name", "%" + name + "%")
+                        .bind("cate", "%" + cate + "%")
+                        .bind("country", "%" + country + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
+    public List<MovieMediaLink> getMovieByCategory(String keyWord) {
+        if (keyWord == null || keyWord.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieCategory LIKE :keyWord")
+                        .bind("keyWord", "%" + keyWord + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
+    public List<MovieMediaLink> getMovieByCountry(String keyWord) {
+        if (keyWord == null || keyWord.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery("SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.country LIKE :keyWord")
+                        .bind("keyWord", "%" + keyWord + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
+    public static void main(String[] args) {
+        MovieMediaLinkDAO c = new MovieMediaLinkDAO();
+        System.out.println(c.getMovieBy("Nhà", "Gia đình", "Việt", 0).size()
+        );
     }
 }

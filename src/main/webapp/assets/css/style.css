@@ -16095,6 +16095,21 @@ ul.resp-tabs-list {
     border-bottom: none;
     border-radius: 6px;
 }
+.resp-tabs-list option {
+    font-weight: 700;
+    font-size: 18px;
+    padding: 10px;
+    margin: 0 2% 0 0%;
+    list-style: none;
+    cursor: pointer;
+    float: left;
+    width: 31%;
+    text-align: center;
+    /* color: var(--theme-title) ; */
+    background-color: var(--theme-lite);
+    border-bottom: none;
+    border-radius: 6px;
+}
 
 .resp-tabs-list li img {
     margin-right: 30px;

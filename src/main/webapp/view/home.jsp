@@ -57,7 +57,7 @@
                             <h3 class="hny-title">PHIM ĐANG CHIẾU</h3>
                         </div>
                         <div class="headerhny-right text-lg-right">
-                            <h4><a class="show-title" href="../Movie_Ticket_Website/movies.jsp">XEM TẤT CẢ</a></h4>
+                            <h4><a class="show-title" href="movie-servlet?action=init">XEM TẤT CẢ</a></h4>
                         </div>
                     </div>
                 </div>

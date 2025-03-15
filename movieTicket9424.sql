@@ -91,16 +91,16 @@ CREATE TABLE `movie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `director`, `duration`, `country`, `movieDescription`, `movieContent`, `movieScore`) VALUES
-	('Kẻ Ăn Hồn', 'Kinh dị, Gay Cấn', '2024-01-15', 'Trần Hữu Tấn', '01:53:00', 'Việt Nam', 'Có một kẻ luyện Rượu Sọ Người trong làng Địa Ngục.', 'Kẻ Ăn Hồn - phim về hàng loạt cái chết bí ẩn ở Làng Địa Ngục, nơi có ma thuật cổ xưa: 5 mạng đổi bình Rượu Sọ Người. Thập Nương - cô gái áo đỏ là kẻ nắm giữ bí thuật luyện nên loại rượu mạnh nhất!', 9.1),
+	('Kẻ Ăn Hồn', 'Kinh dị, Gay cấn', '2024-01-15', 'Trần Hữu Tấn', '01:53:00', 'Việt Nam', 'Có một kẻ luyện Rượu Sọ Người trong làng Địa Ngục.', 'Kẻ Ăn Hồn - phim về hàng loạt cái chết bí ẩn ở Làng Địa Ngục, nơi có ma thuật cổ xưa: 5 mạng đổi bình Rượu Sọ Người. Thập Nương - cô gái áo đỏ là kẻ nắm giữ bí thuật luyện nên loại rượu mạnh nhất!', 9.1),
 	('Aquaman: Vương Quốc Thất Lạc', 'Hành động, Phiêu lưu, Viễn tưởng, Siêu anh hùng', '2024-01-22', 'James Wan', '01:23:00', 'Mỹ', 'Dòng nước đã đổi chiều!', 'Black Manta khao khát trả thù cái chết của cha mình và giờ đây hắn cầm trong tay sức mạnh của cây Đinh Ba Đen huyền thoại, hắn sẽ không dừng lại trước khi hạ gục Aquaman một lần và mãi mãi. Để đánh bại Black Manta, Aquaman phải nhờ sự trợ giúp của người a', 9.6),	
 	('Thiếu Niên và Chim Diệc', 'Chính kịch, Phiêu lưu, Hoạt hình, Viễn tưởng', '2024-01-15', 'Miyazaki Hayao', '01:36:00', 'Nhật Bản', 'Nơi cái chết kết thúc. Cuộc sống tìm thấy một khởi đầu mới.', 'Trong khi Thế chiến thứ hai đang diễn ra, cậu thiếu niên Mahito, bị ám ảnh bởi cái chết bi thảm của mẹ, được chuyển từ Tokyo đến ngôi nhà nông thôn yên bình của mẹ kế mới Natsuko, một người phụ nữ có nét tương đồng nổi bật với mẹ của cậu. Khi cậu cố gắng ',8.8),
 	('Wonka', 'Gia đình, Hài, Viễn tưởng', '2024-01-08', 'Paul King', '01:31:00', 'Mỹ', 'Mọi điều tốt đẹp trên thế giới này đều bắt đầu từ một giấc mơ.', 'Dựa trên nhân vật từ quyến sách gối đầu giường của các em nhỏ trên toàn thế giới \"Charlie và Nhà Máy Sôcôla\" và phiên bản phim điện ảnh cùng tên vào năm 2005, WONKA kể câu chuyện kỳ diệu về hành trình của nhà phát minh, ảo thuật gia và nhà sản xuất sôcôla',8.8),
-	('NCT NATION: Vươn Tầm Thế Giới', 'Tài liệu, Âm Nhạc', '2024-01-06', 'Yoon Dong Oh', '01:02:00', 'Hàn Quốc', 'Lời cảm ơn chân thành tới tất cả NCTzens trong lòng có anh.', '\"NCT NATION: To The World in Cinemas\" đánh dấu sự khởi đầu thú vị của NCT và chuyến hành trình chia sẻ các bản nhạc độc đáo cùng những màn trình diễn ngoạn mục, khẳng định vị thế tiên phong của NCT NATION trong thể loại K-Pop. Bộ concert movie hoàn toàn m', 9.9),
+	('NCT NATION: Vươn Tầm Thế Giới', 'Tài liệu, Âm nhạc', '2024-01-06', 'Yoon Dong Oh', '01:02:00', 'Hàn Quốc', 'Lời cảm ơn chân thành tới tất cả NCTzens trong lòng có anh.', '\"NCT NATION: To The World in Cinemas\" đánh dấu sự khởi đầu thú vị của NCT và chuyến hành trình chia sẻ các bản nhạc độc đáo cùng những màn trình diễn ngoạn mục, khẳng định vị thế tiên phong của NCT NATION trong thể loại K-Pop. Bộ concert movie hoàn toàn m', 9.9),
 	('Người Mặt Trời', 'Kinh dị', '2024-01-08', 'Timothy Linh Bùi', '01:15:00', 'Việt Nam', 'Chung dòng máu,hai số phận!', '400 năm qua, loài Ma Cà Rồng đã bí mật sống giữa loài người trong hòa bình, nhưng hiểm họa bỗng ập đến khi một cô gái loài người phát hiện được thân phận của hai anh em Ma Cà Rồng. Người anh khát máu quyết săn lùng cô để bảo vệ bí mật giống loài, trong kh', 7.8),
 	('Đường Hầm Tới Mùa Hạ, Lối Thoát Của Biệt Ly', 'Chính kịch, Hoạt hình, Viễn tưởng, Tình cảm', '2024-01-01', 'Taguchi Tomohisa', '01:04:00', 'Nhật Bản', 'Một đường hầm bí ẩn có thể thực hiện điều ước trong lòng bạn… nhưng bạn sẽ phải trả một cái giá.', 'TDựa trên cuốn tiểu thuyết đạt giải thưởng. Bộ phim chuyển thể giành giải thưởng Paul Grimault tại Liên hoan phim hoạt hình quốc tế Annecy 2023. Một đường hầm bí ẩn tên Urashima có thể thực hiện bất kỳ điều ước nào…nhưng bạn sẽ phải đánh đổi bằng thời gia',8.7),
 	('Bỗng Dưng Trúng Mánh', 'Chính kịch, Hành động', '2024-01-01', 'Hwang Dong-seok', '01:05:00', 'Hàn Quốc', 'Từ đáy xã hội tôi trở thành sói đầu đàn.', 'Bỗng Dưng Trúng Mánh là câu chuyện từ cá biệt toàn trường hoá tài phiệt học đường của Lee Kang-jin (Yoo Seon-ho) - một nam sinh thường xuyên bị bạn học bắt nạt. Tình cờ nhặt được chiếc phong bì chứa đầy tiền mặt của ông trùm cho vay nặng lãi Rang (Yoon By', 4.7),
 	('Xin Chào Jadoo', 'Hoạt hình', '2024-01-15', 'Son Seok-woo', '00:55:00', 'Hàn Quốc', 'NHóa thân thành nhân vật chính thôi!', 'Bộ phim Hello Jadoo nổi bật với cốt truyện vô cùng khác biệt, đưa nhân vật Jadoo bước đến cuộc hành trình phiêu lưu vào một thế giới cổ tích tuyệt vời thông qua cuốn sách ma thuật mà Jadoo phát hiện ra trong chuyến thăm công viên giải trí.', 10),
-	('Kỷ Nguyên của TaylorSwift', 'Âm Nhạc', '2024-01-13', 'Sam Wrench', '02:31:00', 'Mỹ', 'Đến lúc ra rạp tận hưởng show của chị đẹp rồi!', 'Hiện tượng văn hóa tiếp tục trên màn ảnh lớn! Đắm chìm trong trải nghiệm xem phim hòa nhạc độc nhất vô nhị với góc nhìn ngoạn mục, đậm chất điện ảnh về chuyến lưu diễn mang tính lịch sử. Khuyến khích khán giả đeo vòng tay tình bạn và mặc trang phục Taylor', 9.9),
+	('Kỷ Nguyên của TaylorSwift', 'Âm nhạc', '2024-01-13', 'Sam Wrench', '02:31:00', 'Mỹ', 'Đến lúc ra rạp tận hưởng show của chị đẹp rồi!', 'Hiện tượng văn hóa tiếp tục trên màn ảnh lớn! Đắm chìm trong trải nghiệm xem phim hòa nhạc độc nhất vô nhị với góc nhìn ngoạn mục, đậm chất điện ảnh về chuyến lưu diễn mang tính lịch sử. Khuyến khích khán giả đeo vòng tay tình bạn và mặc trang phục Taylor', 9.9),
 	('Argylle: Siêu Điệp Viên', 'Gay cấn, Hành động, Phiêu lưu', '2024-02-10', 'Elly Conway', '01:30:00', 'Mỹ', 'Một khi đã biết bí mật, đừng làm con mèo lẻo mép', 'Argylle là ai? Duy nhất 1 cách có thể tìm ra câu trả lời.”.',  7.5),
 	('MAI', 'Lãng mạn, Tình cảm, Tâm lý', '2024-02-10', 'Trấn Thành', '01:30:00', 'Việt Nam', 'Quá khứ chưa ngủ yên, ngày mai liệu sẽ đến?', 'MAI xoay quanh câu chuyện về cuộc đời của một người phụ nữ cùng tên với bộ phim. Trên First-look Poster, Phương Anh Đào tạo ấn tượng mạnh với cái nhìn tĩnh lặng, xuyên thấu, đặc biệt, trên bờ môi nữ diễn viên là hình ảnh cô đang nằm nghiêng trên mặt nước.',  7.6),
 	('Godzilla x Kong: Đế Chế Mới', 'Hành động, Phiêu lưu, Viễn tưởng', '2024-05-17', 'Terry Rossio, Jeremy Slater và Simon Barrett', '01:30:00', 'Mỹ', 'Cúi đầu trước vị vua mới.', 'Sau cuộc đối đầu nổ lực, Godzilla và Kong phải hợp tác chống lại một mối đe dọa khổng lồ chưa được khám phá ẩn sâu trong thế giới của chúng ta, thách thức sự tồn tại của chính chúng – và của chúng ta.',  8.7),
@@ -110,10 +110,16 @@ INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `director`, `d
 	('Lật Mặt 6: Tấm Vé Định Mệnh', 'Bí ẩn, Chính kịch, Hài, Hành động', '2024-04-28', 'Lý Hải ', '01:46:00', 'Việt Nam', 'Tri kỷ hay trăm tỷ?.', 'Nội dung phim kể về tấm vé có mệnh giá 10 ngàn đồng và sở hữu những con số \"định mệnh\" gồm 10, 16, 18, 20, 27, 28 - đây là tập hợp những con số ngày sinh của hội bạn thân gồm 6 người. Câu chuyện bắt đầu khi cả 6 người bạn thân quyết định mua một tấm vé số',  9),
 	('Khóa Chặt Cửa Nào Suzume', 'Chính kịch, Phiêu lưu, Hoạt hình, Viễn tưởng', '2024-10-03', 'Shinkai Makoto', '01:46:00', 'Nhật Bản', 'Ở bên kia cánh cửa có phải tất cả thời gian sẽ ở trong đó?', 'Suzume, 17 tuổi, mồ côi mẹ từ nhỏ. Trên đường đến trường, cô gặp một chàng trai bí ẩn. Nhưng sự tò mò của cô ấy đã gây ra một tai họa gây nguy hiểm cho toàn bộ người dân Nhật Bản, vì vậy Suzume bắt đầu cuộc hành trình để giải quyết mọi việc.',9.3),
 	('Spider-Man: No Way Home', 'Hành động, Phiêu lưu, Viễn tưởng, Siêu anh hùng', '2022-09-01', 'Marvel', '01:46:00', 'Mỹ', 'Phiên bản nhiều sự thú vị hơn của 3 Nhện!', 'Phần 3: Nhện Nhọ không có đường về nhà! Peter Parker đã bị lộ mặt và không còn có thể tách biệt cuộc sống bình thường của mình với những yêu cầu cao của việc trở thành một Siêu anh hùng. Khi anh ta yêu cầu sự giúp đỡ từ Doctor Strange, mọi thứ càng trở nê', 8.2),
-	('Chú Thuật Hồi Chiến: 0', 'Hành động, Phiêu lưu, Hoạt hình, Viễn tưởng', '2022-04-14', 'Mappa', '01:46:00', 'Nhật Bản', 'Chú thuật sư đời đầu.', 'Yuta Okkotsu là một học sinh trung học đang gặp phải một vấn đề nghiêm trọng - người bạn thời thơ ấu của anh là Rika, đã biến thành một Chú Linh và sẽ không để anh yên. Vì Rika không phải là một Chú Linh bình thường, nên đã được Satoru Gojo xử lí, một giá',  9);
+	('Chú Thuật Hồi Chiến: 0', 'Hành động, Phiêu lưu, Hoạt hình, Viễn tưởng', '2022-04-14', 'Mappa', '01:46:00', 'Nhật Bản', 'Chú thuật sư đời đầu.', 'Yuta Okkotsu là một học sinh trung học đang gặp phải một vấn đề nghiêm trọng - người bạn thời thơ ấu của anh là Rika, đã biến thành một Chú Linh và sẽ không để anh yên. Vì Rika không phải là một Chú Linh bình thường, nên đã được Satoru Gojo xử lí, một giá',  9),
+	('Nhà Gia Tiên', 'Gia đình, Tâm Linh, Hài', '2025-02-21', 'Huỳnh Lập', '01:57:00', 'Việt Nam', 'Có thờ có thiêng, có Gia Tiên có tiền!', 'Nhà Gia Tiên xoay quanh câu chuyện đa góc nhìn về các thế hệ khác nhau trong một gia đình, có hai nhân vật chính là Gia Minh (Huỳnh Lập) và Mỹ Tiên (Phương Mỹ Chi). Trở về căn nhà gia tiên để quay các video “triệu view” trên mạng xã hội, Mỹ Tiên - một nhà sáng tạo nội dung thuộc thế hệ Z vốn không tin vào chuyện tâm linh, hoàn toàn mất kết nối với gia đình, bất ngờ nhìn thấy Gia Minh - người anh trai đã mất từ lâu. Để hồn ma của Gia Minh có thể siêu thoát và không tiếp tục làm phiền mình, Mỹ Tiên bắt tay cùng Gia Minh lên kế hoạch giữ lấy căn nhà gia tiên đang bị họ hàng tranh chấp, đòi ông nội chia tài sản. Đứng trước hàng loạt bí mật động trời trong căn nhà gia tiên, liệu Mỹ Tiên có vượt qua được tất cả để hoàn thành di nguyện của Gia Minh?',  9.5),
+   ('Quỷ Nhập Tràng', 'Kinh dị', '2025-03-07', 'Đạo diễn A', '01:45:00', 'Việt Nam', 'Một bộ phim kinh dị về hiện tượng quỷ nhập tràng tại một ngôi làng nhỏ.', 'Câu chuyện xoay quanh những sự kiện bí ẩn xảy ra sau khi một người chết bất ngờ sống lại.', 7.0),
+   ('Sát Thủ Vô Cùng Cực Hài', 'Hành động, Hài', '2025-03-14', 'Đạo diễn B', '02:00:00', 'Mỹ', 'Một sát thủ chuyên nghiệp gặp phải những tình huống dở khóc dở cười trong nhiệm vụ cuối cùng.', 'Phim kết hợp giữa hành động kịch tính và những tình huống hài hước.', 8.5),
+   ('Nhà Gia Tiên', 'Kinh dị, Tâm lý', '2025-02-21', 'Đạo diễn C', '01:50:00', 'Việt Nam', 'Câu chuyện về một gia đình đối mặt với những hiện tượng siêu nhiên trong ngôi nhà tổ tiên.', 'Phim khai thác mối quan hệ gia đình và những bí mật được chôn giấu.', 9.6),
+   ('Mickey 17', 'Khoa học, Viễn tưởng', '2025-03-14', 'Đạo diễn D', '02:10:00', 'Mỹ', 'Một nhân bản được tạo ra để thực hiện nhiệm vụ nguy hiểm trên hành tinh xa lạ.', 'Phim khám phá những câu hỏi về bản chất con người và đạo đức khoa học.', 8.8),
+   ('Lạc Trôi', 'Phiêu lưu, Tình cảm', '2025-03-07', 'Đạo diễn E', '01:55:00', 'Việt Nam', 'Hành trình phiêu lưu của một chàng trai trẻ tìm kiếm tình yêu và ý nghĩa cuộc sống.', 'Phim kết hợp giữa cảnh quay đẹp và câu chuyện cảm động.', 8.8);
 
 CREATE TABLE `moviemedialink` (
-  `movieID` varchar(20) PRIMARY KEY,
+  `movieID` int PRIMARY KEY,
   `linkMovieImage` VARCHAR(255) DEFAULT NULL,
   `linkMovieTrailer` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -138,8 +144,14 @@ INSERT INTO `moviemedialink` (`movieID`, `linkMovieImage`, `linkMovieTrailer`) V
 	(17, 'lat-mat-6.png', 'https://www.youtube.com/embed/o3FoowSoNr4'),
 	(18, 'khoa-chat-cua-nao-suzume.png', 'https://www.youtube.com/embed/xQ4_c8JfuzI'),
 	(19, 'spiderman-no-way-home.png', 'https://www.youtube.com/embed/OB3g37GTALc'),
-	(20, 'chu-thuat-hoi-chien-0.png', 'https://www.youtube.com/embed/ceqa2pIN9ng');
-	
+	(20, 'chu-thuat-hoi-chien-0.png', 'https://www.youtube.com/embed/ceqa2pIN9ng'),
+	(21, 'nha-gia-tien.png', 'https://www.youtube.com/watch?v=wfPTz0A23ns'),
+	(22, 'quy-nhap-trang.png', 'https://www.youtube.com/embed/trailer_quy_nhap_trang'),
+	(23, 'sat-thu-vo-cung-cuc-hai.png', 'https://www.youtube.com/embed/trailer_sat_thu_vo_cung_cuc_hai'),
+	(24, 'nha-gia-tien.png', 'https://www.youtube.com/embed/trailer_nha_gia_tien'),
+	(25, 'mikey-17.png', 'https://www.youtube.com/embed/trailer_mickey_17'),
+	(26, 'lac-troi.png', 'https://www.youtube.com/embed/trailer_lac_troi');
+
 CREATE TABLE `actor` (
   `actorID` INT AUTO_INCREMENT PRIMARY KEY,
   `movieID` INT NOT NULL,
@@ -167,6 +179,8 @@ INSERT INTO `actor` (`movieID`, `actorName`, `gender`) VALUES
 	(6, 'Aimyon', 'Nu'),
 	(7, 'Timothée Hal Chalamet', 'Nam'),
 	(8, 'Sally Cecilia Hawkins', 'Nu'),
+	(21, 'Huỳnh Lập', 'Nam'),
+	(21, 'Phương Mỹ Chi', 'Nu'),
 	(9, 'Shunsuke Sakuya', 'Nam');
 
 -- note : 1 lịch chiếu phim cụ thể, lưu rõ 1 bộ phim sẽ được chiếu vào thời gian nào của rạp nào và phòng nào của rạp đó
@@ -190,7 +204,8 @@ INSERT INTO `showtime` (`movieID`, `cinemaID`, `roomID`, `startTime`, `endTime`)
     (5, 3, 3, '2024-09-03 11:00:00', '2024-09-03 13:30:00'),
     (6, 3, 3, '2024-09-03 14:00:00', '2024-09-03 16:30:00'),
     (7, 4, 4, '2024-09-04 20:00:00', '2024-09-04 22:30:00'),
-    (8, 4, 4, '2024-09-04 23:00:00', '2024-09-05 01:30:00');
+    (8, 4, 4, '2024-09-04 23:00:00', '2024-09-05 01:30:00')
+    ;
 
 -- note : 1 user sẽ có 1 detail duy nhất
 -- alt : thêm link ảnh cho user, nếu không có link thì sẽ dùng default url
@@ -288,19 +303,17 @@ INSERT INTO `ticket` (`showtimeID`, `bookedSeatID`, `price`) VALUES
 CREATE TABLE `booking` (
   `bookingID` INT AUTO_INCREMENT PRIMARY KEY,
   `userID` INT NOT NULL,
-  `ticketID` INT NOT NULL,
   `status` ENUM('Đã thanh toán', 'Chưa thanh toán', 'Đã hủy') DEFAULT 'Chưa thanh toán',
   `bookingTime` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
-  FOREIGN KEY (`ticketID`) REFERENCES `ticket`(`ticketID`)
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `booking` (`userID`, `ticketID`, `status`) VALUES
-	(1, 1, 'Đã thanh toán'),
-	(2, 2, 'Chưa thanh toán'),
-	(3, 3, 'Đã thanh toán'),
-	(1, 4, 'Đã hủy'),
-	(2, 5, 'Đã thanh toán');
+INSERT INTO `booking` (`userID`, `status`) VALUES
+	(1, 'Đã thanh toán'),
+	(2, 'Chưa thanh toán'),
+	(3, 'Đã thanh toán'),
+	(1, 'Đã hủy'),
+	(2, 'Đã thanh toán');
 	
 -- note : cartItem là từng bookingID cụ thể
 CREATE TABLE `cartItem` (
@@ -341,4 +354,9 @@ CREATE TABLE `transaction` (
   FOREIGN KEY (`bookingID`) REFERENCES `booking`(`bookingID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 COMMIT;
+
+# hiển thị movie dc dat ve
+# select DISTINCT mml.* from ( select st.movieID from ( select t.showtimeID from ( SELECT bt.bookingID, bt.ticketID FROM `booking` as b JOIN bookingticket as bt ON b.bookingID = bt.bookingID WHERE b.status = 'Đã thanh toán' ) as a join ticket as t on a.ticketID = t.ticketID ) as r join showtime as st on r.showtimeID = st.showtimeID ) as ppm join moviemedialink mml join movie m on ppm.movieID = mml.movieID = m.movieID
