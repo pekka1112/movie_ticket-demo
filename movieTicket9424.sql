@@ -115,7 +115,7 @@ INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `director`, `d
    ('Quỷ Nhập Tràng', 'Kinh dị', '2025-03-07', 'Đạo diễn A', '01:45:00', 'Việt Nam', 'Một bộ phim kinh dị về hiện tượng quỷ nhập tràng tại một ngôi làng nhỏ.', 'Câu chuyện xoay quanh những sự kiện bí ẩn xảy ra sau khi một người chết bất ngờ sống lại.', 7.0),
    ('Sát Thủ Vô Cùng Cực Hài', 'Hành động, Hài', '2025-03-14', 'Đạo diễn B', '02:00:00', 'Mỹ', 'Một sát thủ chuyên nghiệp gặp phải những tình huống dở khóc dở cười trong nhiệm vụ cuối cùng.', 'Phim kết hợp giữa hành động kịch tính và những tình huống hài hước.', 8.5),
    ('Nhà Gia Tiên', 'Kinh dị, Tâm lý', '2025-02-21', 'Đạo diễn C', '01:50:00', 'Việt Nam', 'Câu chuyện về một gia đình đối mặt với những hiện tượng siêu nhiên trong ngôi nhà tổ tiên.', 'Phim khai thác mối quan hệ gia đình và những bí mật được chôn giấu.', 9.6),
-   ('Mickey 17', 'Khoa học viễn tưởng', '2025-03-14', 'Đạo diễn D', '02:10:00', 'Mỹ', 'Một nhân bản được tạo ra để thực hiện nhiệm vụ nguy hiểm trên hành tinh xa lạ.', 'Phim khám phá những câu hỏi về bản chất con người và đạo đức khoa học.', 8.8),
+   ('Mickey 17', 'Khoa học, Viễn tưởng', '2025-03-14', 'Đạo diễn D', '02:10:00', 'Mỹ', 'Một nhân bản được tạo ra để thực hiện nhiệm vụ nguy hiểm trên hành tinh xa lạ.', 'Phim khám phá những câu hỏi về bản chất con người và đạo đức khoa học.', 8.8),
    ('Lạc Trôi', 'Phiêu lưu, Tình cảm', '2025-03-07', 'Đạo diễn E', '01:55:00', 'Việt Nam', 'Hành trình phiêu lưu của một chàng trai trẻ tìm kiếm tình yêu và ý nghĩa cuộc sống.', 'Phim kết hợp giữa cảnh quay đẹp và câu chuyện cảm động.', 8.8);
 
 CREATE TABLE `moviemedialink` (

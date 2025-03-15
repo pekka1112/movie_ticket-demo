@@ -90,26 +90,30 @@
             <div id="parentHorizontalTab">
               <%-- todo : thêm các Btn để filter movie theo các tiêu chí - áp dụng ajax --%>
               <%-- các option cho user thực hiện filter trên movie --%>
-                <select class="resp-tabs-list hor_1" style="padding: 5px 30px; text-align: left">
-                  <option value="recent" style="text-align: left">Phim phổ biến</option>
-                  <option value="popular" style="text-align: left">Phim mới nhất</option>
-                  <option value="popular" style="text-align: left">Phim sắp chiếu</option>
+                <select id="timeSelect" class="resp-tabs-list hor_1" style="padding: 5px 30px; text-align: left">
+                  <option value="popular" ${param.time == 'popular' ? 'selected' : ''}>Phim phổ biến</option>
+                  <option value="newest" ${param.time == 'newest' ? 'selected' : ''}>Phim mới nhất</option>
+                  <option value="recent" ${param.time == 'recent' ? 'selected' : ''}>Phim sắp chiếu</option>
                 </select>
-                <select id="categorySelect" class="resp-tabs-list hor_1"  onchange="updatePlaceholder(); updateFilmByCategory();" style="padding : 5px 25px; text-align: left">
-                  <option value="all" selected style="text-align: left">Thể loại</option>
+                <select id="categorySelect" class="resp-tabs-list hor_1" style="padding: 5px 25px; text-align: left">
+                  <option value="all" ${param.category == 'all' ? 'selected' : ''}>Thể loại</option>
                   <c:forEach var="c" items="${movieCategoryList}">
-                    <option value="${c}" style="text-align: left">${c}</option>
+                    <option value="${c}" ${param.category == c ? 'selected' : ''}>${c}</option>
                   </c:forEach>
                 </select>
-                <select id="countrySelect" class="resp-tabs-list hor_1" onchange="updatePlaceholder(); updateFilmByCountry()" style="padding : 5px 30px">
-                  <option value="all" selected style="text-align: left">Quốc gia</option>
+                <select id="countrySelect" class="resp-tabs-list hor_1" style="padding: 5px 30px;">
+                  <option value="all" ${param.country == 'all' ? 'selected' : ''}>Quốc gia</option>
                   <c:forEach var="c" items="${movieCountryList}">
-                    <option value="${c}" style="text-align: left">${c}</option>
+                    <option value="${c}" ${param.country == c ? 'selected' : ''}>${c}</option>
                   </c:forEach>
                 </select>
-              <form action="movie-servlet" style="display: flex; align-items: center; margin: 0px 0px; ">
+              <form action="movie-servlet" onsubmit="updateFormInputs()" style="display: flex; align-items: center; margin: 0px 0px; ">
                 <input type="hidden" name="action" value="findByName"/>
-                <input type="text" name="txtSearch" placeholder="Nhập từ khóa tìm kiếm..."
+                <%-- note : send 2 param là category và country kèm theo      --%>
+                <input type="hidden" name="category" id="categoryInput"/>
+                <input type="hidden" name="country" id="countryInput"/>
+                <input type="hidden" name="time" id="timeInput"/>
+                <input type="text" name="txtSearch" oninput="searchAJAX(this)"  value="${txtSearch}" placeholder="Nhập từ khóa tìm kiếm..."
                         style="flex: 1; padding: 6px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px 0 0 6px; outline: none;"/>
                 <button type="submit" style="margin-left: 20px; padding: 6px 20px; font-size: 16px; font-weight: bold; color: #fff; background-color: #007bff; border: none; border-radius: 0 6px 6px 0; cursor: pointer;">
                   Tìm kiếm
@@ -118,7 +122,7 @@
 
                 <div class="resp-tabs-container hor_1">
                 <div class="albums-content">
-                  <div class="row">
+                  <div class="row" id="movie-content">
                     <c:choose>
                       <c:when test="${not empty moviesByName}">
                         <!-- Nếu danh sách moviesByName không rỗng -->
@@ -144,6 +148,11 @@
                       </c:when>
                       <c:otherwise>
                         <!-- Nếu danh sách moviesByName rỗng -->
+                        <c:if test="${searchNoResult == 1}">
+                          <div class="alert alert-warning text-center" style="margin: 15px 0; padding: 10px; font-size: 16px; color: red;">
+                            Không tìm thấy kết quả nào phù hợp với tìm kiếm của bạn!
+                          </div>
+                        </c:if>
                         <c:forEach items="${allMovies}" var="m">
                           <div class="col-lg-3 new-relise-gd mt-lg-0 mt-0">
                             <div class="slider-info" >
@@ -180,6 +189,7 @@
     <jsp:include page="layout-view/js-function-slider.jsp" ></jsp:include>
 
     <script src="assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
       function updatePlaceholder() {
         const select = document.getElementById("categorySelect");
@@ -209,6 +219,30 @@
         if (select !== "all") {
           window.location.href = "movie-servlet?action=findByCountry&country=" + select.value;
         }
+      }
+
+      function searchAJAX(input) {
+        var txtSearch = input.value;
+        $.ajax({
+          url: "/Movie_Ticket_Website/movie-servlet?action=searchAJAX",
+          type : "get",
+          data : {
+            txtSearch : txtSearch
+          },
+          success: function(data){
+            var row = document.getElementById('movie-content');
+            row.innerHTML = data;
+          },
+          error : function (xhr) {
+
+          }
+        });
+      }
+      function updateFormInputs() {
+        document.getElementById("categoryInput").value = document.getElementById("categorySelect").value;
+        console.log('hello' + document.getElementById("categoryInput").value);
+        document.getElementById("countryInput").value = document.getElementById("countrySelect").value;
+        document.getElementById("timeInput").value = document.getElementById("timeSelect").value;
       }
     </script>
 </body>

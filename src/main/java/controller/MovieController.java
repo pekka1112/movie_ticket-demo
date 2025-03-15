@@ -12,6 +12,7 @@ import model.*;
 import service.MovieMediaLinkService;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,8 @@ public class MovieController extends HttpServlet {
             findMoviesByCategoryAction(req,resp);
         } else if (action.equals("findByCountry")) {
             findMoviesByCountryAction(req,resp);
+        } else if (action.equals("searchAJAX")) {
+            findMoviesByNameAJAXAction(req,resp);
         }
     }
 
@@ -88,15 +91,73 @@ public class MovieController extends HttpServlet {
 
     private static void findMoviesByNameAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            String keyWord = req.getParameter("txtSearch");
+            // todo : thêm find theo category + country + sort by releaseTime
+            String name = req.getParameter("txtSearch");
+            String category = req.getParameter("category");
+            String country = req.getParameter("country");
+            String time = req.getParameter("time");
+            int timeCode = 0;
+            if(time.equalsIgnoreCase("popular")) {
+                timeCode = 1;
+            } else if(time.equalsIgnoreCase("newest")) {
+                timeCode = 0;
+            } else if(time.equalsIgnoreCase("recent")) {
+                timeCode = -1;
+            }
             mmlService = new MovieMediaLinkService();
-            moviesByName = mmlService.getMovieByName(keyWord);
+//            moviesByName = mmlService.getMovieByName(keyWord);
+            moviesByName = mmlService.getMovieBy(name, category, country, timeCode);
+            if(moviesByName.isEmpty()) {
+                req.setAttribute("searchNoResult", 1);
+            }
             req.setAttribute("moviesByName", moviesByName);
+            req.setAttribute("txtSearch", name);
+            req.setAttribute("category", category);
+            req.setAttribute("country", country);
+            req.setAttribute("time", time);
             req.getRequestDispatcher("movies.jsp").forward(req,resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private static void findMoviesByNameAJAXAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String keyWord = req.getParameter("txtSearch");
+            mmlService = new MovieMediaLinkService();
+            moviesByName = mmlService.getMovieByName(keyWord);
+
+            PrintWriter pw = resp.getWriter();
+            // note : in ra cấu trc từng ô sản phẩm
+            for(MovieMediaLink mml : moviesByName) {
+                pw.println("<div class=\"col-lg-3 new-relise-gd mt-lg-0 mt-0\">\n" +
+                        "    <div class=\"slider-info\" >\n" +
+                        "        <div class=\"img-circle\" >\n" +
+                        "            <a href=\"" + mml.getLinkMovieTrailer() + "\" target=\"_blank\">\n" +
+                        "                <img class=\"img-fluid\" src=\"../Movie_Ticket_Website/assets/movie-image/" + mml.getLinkMovieImage() +
+                        "\" alt=\"\" style=\"height: 200px; border-radius: unset; width: 300px\">\n" +
+                        "                <div class=\"overlay-icon\"><span class=\"fa fa-play video-icon\" aria-hidden=\"true\"></span></div>\n" +
+                        "            </a>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"message\" >\n" +
+                        "            <a class=\"author-book-title\" href=\"movieDetail?movieID=" + mml.getMovieID() +
+                        "\" style=\"padding-bottom: 25px\">" + mml.getMovieName() + "</a>\n" +
+                        "            <p style=\"font-weight: lighter\">" + mml.getDirector() + " - " + mml.getCountry() + "</p>\n" +
+                        "            <h4>\n" +
+                        "                <span class=\"post\"><span class=\"fa fa-calendar-days\"></span>  " + mml.getReleaseDate() + "</span>\n" +
+                        "                <span class=\"post fa fa-heart text-right\">  " + mml.getMovieScore() + "</span>\n" +
+                        "            </h4>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "</div>");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     private static void findMoviesByCategoryAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String keyWord = req.getParameter("category");

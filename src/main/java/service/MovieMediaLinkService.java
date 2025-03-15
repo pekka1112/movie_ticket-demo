@@ -46,7 +46,6 @@ public class MovieMediaLinkService {
     }
 
     public List<MovieMediaLink> getMovieByName(String keyWord) {
-
         return movieMediaLinkDAO.getMovieByName(keyWord);
     }
 
@@ -57,4 +56,10 @@ public class MovieMediaLinkService {
     public List<MovieMediaLink> getMovieByCountry(String keyWord) {
         return movieMediaLinkDAO.getMovieByCountry(keyWord);
     }
+
+    public List<MovieMediaLink> getMovieBy(String name, String category, String country, int time) {
+        return movieMediaLinkDAO.getMovieBy(name, category, country, time);
+    }
+
+
 }

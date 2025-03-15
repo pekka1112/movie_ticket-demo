@@ -240,6 +240,34 @@ public class MovieMediaLinkDAO {
         );
     }
 
+    public List<MovieMediaLink> getMovieBy(String name, String cate, String country, int timeCode) {
+        String query = "SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage, COUNT(bt.ticketID) AS total_tickets_sold\n" +
+                "FROM booking AS b\n" +
+                "JOIN bookingticket AS bt ON b.bookingID = bt.bookingID\n" +
+                "JOIN ticket AS t ON bt.ticketID = t.ticketID\n" +
+                "JOIN showtime AS st ON t.showtimeID = st.showtimeID\n" +
+                "JOIN movie AS m ON st.movieID = m.movieID\n" +
+                "join moviemedialink mml on mml.movieID = m.movieID\n" +
+                "WHERE b.status = 'Đã thanh toán' AND m.movieName LIKE :name AND m.movieCategory LIKE :cate AND m.country LIKE :country" +
+                " GROUP BY m.movieID, m.movieName\n" +
+                "ORDER BY total_tickets_sold DESC\n" ;
+        if(timeCode == -1) {
+            query = "SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieName LIKE :name AND m.movieCategory LIKE :cate AND m.country LIKE :country AND DATE(m.`releaseDate`) > CURDATE()";
+        }
+        if(timeCode == 0) {
+            query = "SELECT m.*, mml.linkMovieTrailer, mml.linkMovieImage FROM `moviemedialink` as mml JOIN `movie` as m ON mml.movieId = m.movieId WHERE m.movieName LIKE :name AND m.movieCategory LIKE :cate AND m.country LIKE :country AND DATE(m.`releaseDate`) <= CURDATE() ORDER BY m.releaseDate DESC";
+        }
+        String finalQuery = query;
+        return JDBIUtil.getJdbi().withHandle(handle ->
+                handle.createQuery(finalQuery)
+                        .bind("name", "%" + name + "%")
+                        .bind("cate", "%" + cate + "%")
+                        .bind("country", "%" + country + "%")
+                        .mapToBean(MovieMediaLink.class)
+                        .list()
+        );
+    }
+
     public List<MovieMediaLink> getMovieByCategory(String keyWord) {
         if (keyWord == null || keyWord.trim().isEmpty()) {
             return Collections.emptyList();
@@ -266,7 +294,7 @@ public class MovieMediaLinkDAO {
 
     public static void main(String[] args) {
         MovieMediaLinkDAO c = new MovieMediaLinkDAO();
-        System.out.println(c.getMostPopularMovies(4).size()
+        System.out.println(c.getMovieBy("Nhà", "Gia đình", "Việt", 0).size()
         );
     }
 }
