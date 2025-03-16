@@ -1,8 +1,10 @@
 package model;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDetail {
     int userID;
     String fullName;
