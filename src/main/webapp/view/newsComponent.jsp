@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html class="no-js">
 <head>
     <meta charset="utf-8">
@@ -15,124 +17,40 @@
 <section class = "banner">
     <div class = "banner-main-content">
         <div class = "current-news-head">
-            <h3>The Leopard : Cái đẹp khó cưỡng lại của sự điêu tàn <span>by linhhuy0257</span></h3>
-            <h3>What's it's like to have Elon Musk's old phone number <span>by abrar al-heeti</span></h3>
-            <h3>Watch the exact moment Chris Pratt accidentally deletes 51, 000 emials <span>by goel fashingbauer</span></h3>
+            <c:forEach items="${movieNews3}" var="n3" >
+                <h3>${n3.title}<span>${n3.author}</span></h3>
+            </c:forEach>
         </div>
     </div>
-
     <div class = "banner-sub-content">
-
-        <div class = "hot-topic">
-            <img src = "assets/images/banner-news-1.jpg" alt = "">
-
-            <div class = "hot-topic-content">
-                <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-
-                <h3>New Topic 1</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                <a href = "#">Read More</a>
+        <c:forEach items="${movieNews4}" var="n4" >
+            <div class = "hot-topic">
+                <img src = "${n4.imgUrl}" alt = "">
+                <div class = "hot-topic-content">
+                    <h2>${n4.title}</h2>
+                    <h3>${n4.author}</h3>
+                    <p>${n4.summary}</p>
+                    <a href = "${n4.link}">Đọc thêm</a>
+                </div>
             </div>
-        </div>
-
-        <div class = "hot-topic">
-            <img src = "assets/images/banner-news-2.jpg" alt = "">
-
-            <div class = "hot-topic-content">
-                <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-
-                <h3>New Topic 1</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                <a href = "#">Read More</a>
-            </div>
-        </div>
-
-        <div class = "hot-topic">
-            <img src = "assets/images/banner-news-3.jpg" alt = "">
-
-            <div class = "hot-topic-content">
-                <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-
-                <h3>New Topic 1</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                <a href = "#">Read More</a>
-            </div>
-        </div>
-
-        <div class = "hot-topic">
-            <img src = "assets/images/banner-news-4.jpg" alt = "">
-
-            <div class = "hot-topic-content">
-                <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-
-                <h3>New Topic 1</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                <a href = "#">Read More</a>
-            </div>
-        </div>
-
+        </c:forEach>
     </div>
 </section>
     <main>
         <section class = "main-container-right">
-            <article>
-                <h4>just in </h4>
-                <div>
-                    <h2>Here's how to track your stimulus check with the IRS Get My Payment Portal</h2>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-
-                    <a href = "#">Read More <span>>></span></a>
-                </div>
-                <img src = "assets/images/right-1.jpg">
-            </article>
-            <article>
-                <h4>just in </h4>
-                <div>
-                    <h2>The best outdoor games to play with your family</h2>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-
-                    <a href = "#">Read More <span>>></span></a>
-                </div>
-                <img src = "assets/images/right-2.jpg">
-            </article>
-            <article>
-                <h4>just in </h4>
-                <div>
-                    <h2>Why walk? Check out the best electric scooters and e-bikes for 2020</h2>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-
-                    <a href = "#">Read More <span>>></span></a>
-                </div>
-                <img src = "assets/images/right-3.jpg">
-            </article>
-            <article>
-                <h4>just in </h4>
-                <div>
-                    <h2>Disneyland Paris will stream its Lion King stage show Friday night</h2>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-
-                    <a href = "#">Read More <span>>></span></a>
-                </div>
-                <img src = "assets/images/right-4.jpg">
-            </article>
-            <article>
-                <h4>just in </h4>
-                <div>
-                    <h2>Looking at a phone's lock screen also requries a warrant, judge rules</h2>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-
-                    <a href = "#">Read More <span>>></span></a>
-                </div>
-                <img src = "assets/images/right-5.jpg">
-            </article>
+            <c:forEach items="${movieNews5}" var="n5" >
+                <article>
+                    <h4>TIM PHIM - ${n5.time}</h4>
+                    <div>
+                        <h2>${n5.title}</h2>
+                        <p>${n5.summary}</p>
+                        <a href = "${n5.link}">Đọc thêm<span>>></span></a>
+                    </div>
+                    <img src = "${n5.imgUrl}">
+                </article>
+            </c:forEach>
         </section>
     </main>
-
 <script async defer>
 
     const btnHam = document.querySelector('.ham-btn');

@@ -2,12 +2,15 @@ package service;
 
 import database.MovieMediaLinkDAO;
 import model.MovieMediaLink;
+import model.MovieNews;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import scrapper.MovieNewsScraper;
 
 public class MovieMediaLinkService {
     MovieMediaLinkDAO movieMediaLinkDAO = new MovieMediaLinkDAO();
+    MovieNewsScraper scraper = new MovieNewsScraper();
     public List<MovieMediaLink> get5NewestMovie() {
         return movieMediaLinkDAO.getMovieSortedByReleaseDate(5);
     }
@@ -34,6 +37,10 @@ public class MovieMediaLinkService {
     }
     public MovieMediaLink getMovieByID(String mid) {
         return movieMediaLinkDAO.getMovieByID(mid);
+    }
+
+    public List<MovieNews> getMovieNews(int n) {
+        return scraper.getNews(n);
     }
 
     public List<String> getAllCategory() {

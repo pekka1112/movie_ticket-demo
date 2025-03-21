@@ -137,22 +137,6 @@
     <%-- Section : Hiển thị tin tức phim --%>
     <section class="comments-section">
         <h3 class="hny-title" style="color: #c94c7a; text-align: center" >TIN TỨC PHIM</h3>
-<%--        <div class="border-div-2">--%>
-<%--            <div class="container">--%>
-<%--                <div class="row align-items">--%>
-<%--                    <c:forEach items="${comments}" var="c" >--%>
-<%--                        <div class="col">--%>
-<%--                            <div class="card" style="width: 18rem;">--%>
-<%--                                <div class="card-body">--%>
-<%--                                    <h5 class="card-title">${c.movieName}</h5>--%>
-<%--                                    <p class="card-text">Ẩn Danh : " ${c.commentText} " </p>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </c:forEach>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
         <jsp:include page="newsComponent.jsp" ></jsp:include>
     </section>
 
