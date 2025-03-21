@@ -11,7 +11,7 @@ import java.util.List;
 public class MovieNewsScraper {
     public static void main(String[] args) {
         MovieNewsScraper s = new MovieNewsScraper();
-        s.getNews(3);
+        System.out.println(s.getNewsReverse());
     }
 
     public List<MovieNews> getNews(int numNews) {
@@ -38,12 +38,12 @@ public class MovieNewsScraper {
                 Element summaryElement = article.selectFirst("p.text-muted.mt-2.mb-0.small.d-none.d-sm-block");
                 String summary = summaryElement != null ? summaryElement.text() : "Không có tóm tắt.";
 
-                System.out.println("Title: " + title);
-                System.out.println("Link: " + link);
-                System.out.println("Author: " + author);
-                System.out.println("Time: " + time);
-                System.out.println("Summary: " + summary);
-                System.out.println("Image: " + imageUrl);
+//                System.out.println("Title: " + title);
+//                System.out.println("Link: " + link);
+//                System.out.println("Author: " + author);
+//                System.out.println("Time: " + time);
+//                System.out.println("Summary: " + summary);
+//                System.out.println("Image: " + imageUrl);
                 newsList.add(new MovieNews(title, link, author, time, summary, imageUrl));
                 if((newsList.size() >= numNews) && (numNews != 0)) {
                     return newsList;
@@ -53,5 +53,14 @@ public class MovieNewsScraper {
             e.printStackTrace();
         }
         return newsList;
+    }
+
+    public List<MovieNews> getNewsReverse() {
+        List<MovieNews> origin = getNews(10);
+        List<MovieNews> reverse = new ArrayList<>();
+        for(int i = 9 ; i >= 5 ; i -- ){
+            reverse.add(origin.get(i));
+        }
+        return reverse;
     }
 }

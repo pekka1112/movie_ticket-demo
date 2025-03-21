@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="assets/css/page/news.css">
+    <link rel="stylesheet" href="assets/css/page/newsComponents.css">
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- fontawesome -->
@@ -17,8 +17,8 @@
 <section class = "banner">
     <div class = "banner-main-content">
         <div class = "current-news-head">
-            <c:forEach items="${movieNews3}" var="n3" >
-                <h3>${n3.title}<span>${n3.author}</span></h3>
+            <c:forEach items="${movieNews6}" var="n3" >
+                <a href="${n3.link}"><h3>📰  ${n3.title}</h3></a>
             </c:forEach>
         </div>
     </div>
@@ -27,8 +27,6 @@
             <div class = "hot-topic">
                 <img src = "${n4.imgUrl}" alt = "">
                 <div class = "hot-topic-content">
-                    <h2>${n4.title}</h2>
-                    <h3>${n4.author}</h3>
                     <p>${n4.summary}</p>
                     <a href = "${n4.link}">Đọc thêm</a>
                 </div>
@@ -38,15 +36,15 @@
 </section>
     <main>
         <section class = "main-container-right">
-            <c:forEach items="${movieNews5}" var="n5" >
+            <c:forEach items="${movieNews4_reverse}" var="n5" >
                 <article>
-                    <h4>TIM PHIM - ${n5.time}</h4>
+                    <h4><img width="50px" height="50px" src = "${n5.imgUrl}"></h4>
                     <div>
                         <h2>${n5.title}</h2>
                         <p>${n5.summary}</p>
                         <a href = "${n5.link}">Đọc thêm<span>>></span></a>
                     </div>
-                    <img src = "${n5.imgUrl}">
+                    <h4>ĐĂNG VÀO : ${n5.time}</h4>
                 </article>
             </c:forEach>
         </section>

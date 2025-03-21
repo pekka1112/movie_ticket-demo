@@ -24,7 +24,7 @@ public class  HomeController extends HttpServlet {
     public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies;
     public static CinemaService cinemaService = new CinemaService();
     public static List<Cinema>  allCinema, top2Cinema;
-    public static List<MovieNews> movieNews3, movieNews5, movieNews4;
+    public static List<MovieNews> movieNews3, movieNews5, movieNews4, movieNews6, movieNews4_reverse;
     public static MovieNewsScraper scraper = new MovieNewsScraper();
     public HomeController() {}
     @Override
@@ -59,8 +59,12 @@ public class  HomeController extends HttpServlet {
         req.setAttribute("movieNews3", movieNews3);
         movieNews4 = scraper.getNews(4);
         req.setAttribute("movieNews4", movieNews4);
+        movieNews4_reverse = scraper.getNewsReverse();
+        req.setAttribute("movieNews4_reverse", movieNews4_reverse);
         movieNews5 = scraper.getNews(5);
         req.setAttribute("movieNews5", movieNews5);
+        movieNews6 = scraper.getNews(6);
+        req.setAttribute("movieNews6", movieNews6);
 
         allCinema = cinemaService.getAllCinema();
         req.setAttribute("allCinema", allCinema);
