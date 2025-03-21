@@ -56,6 +56,7 @@ public class  HomeController extends HttpServlet {
         popularMovies = movieService.getMostPopularMoive();
         req.setAttribute("popularMovies", popularMovies);
         movieNews3 = scraper.getNews(3);
+
         req.setAttribute("movieNews3", movieNews3);
         movieNews4 = scraper.getNews(4);
         req.setAttribute("movieNews4", movieNews4);
