@@ -31,7 +31,7 @@ public class PageRedirectServlet extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/about.jsp");
                 break;
             case "/news":
-                dispatcher = request.getRequestDispatcher("/news.jsp");
+                dispatcher = request.getRequestDispatcher("/newsComponent.jsp");
                 break;
             case "/login":
             case "/login-servlet":
