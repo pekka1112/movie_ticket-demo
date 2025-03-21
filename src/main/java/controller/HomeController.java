@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.*;
+import scrapper.MovieNewsScraper;
 import service.CinemaService;
 import service.MovieMediaLinkService;
 
@@ -23,6 +24,8 @@ public class  HomeController extends HttpServlet {
     public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies;
     public static CinemaService cinemaService = new CinemaService();
     public static List<Cinema>  allCinema, top2Cinema;
+    public static List<MovieNews> movieNews3, movieNews5, movieNews4;
+    public static MovieNewsScraper scraper = new MovieNewsScraper();
     public HomeController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,6 +55,12 @@ public class  HomeController extends HttpServlet {
         req.setAttribute("unPublishedMovies", unPublishedMovies);
         popularMovies = movieService.getMostPopularMoive();
         req.setAttribute("popularMovies", popularMovies);
+        movieNews3 = scraper.getNews(3);
+        req.setAttribute("movieNews3", movieNews3);
+        movieNews4 = scraper.getNews(4);
+        req.setAttribute("movieNews4", movieNews4);
+        movieNews5 = scraper.getNews(5);
+        req.setAttribute("movieNews5", movieNews5);
 
         allCinema = cinemaService.getAllCinema();
         req.setAttribute("allCinema", allCinema);

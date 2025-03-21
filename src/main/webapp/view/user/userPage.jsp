@@ -45,11 +45,11 @@
                     <div class="author-card-avatar"><img src="../Movie_Ticket_Website/assets/images/obitoAVATAR.png" alt="Daniel Adams">
                     </div>
                     <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">${sessionScope.get("curUser").username} #${sessionScope.get("curUser").userId}</h5>
+                        <h5 class="author-card-name text-lg">${sessionScope.get("curUser").username} #${sessionScope.get("curUser").userID}</h5>
                         <span class="author-card-position">Email : ${sessionScope.get("curUser").email}
                                 <%
                                     User u = (User) session.getAttribute("user");
-                                    if(u.getIsActive() == 0) {
+                                    if(user.isActive()) {
                                 %>
                                     ✅
                                 <%
