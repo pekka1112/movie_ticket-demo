@@ -20,14 +20,31 @@
 
 <%-- Section thể hiện chi tiết phim--%>
 <section class="film-detail" style="background: url(../Movie_Ticket_Website/assets/movie-image/${movie.linkMovieImage}) no-repeat center ; background-size: cover; position: relative;overflow: hidden">
-    <div class="container" id="film-detailBackground">
-        <div class="row">
+    <div class="container" id="film-detailBackground" style="display: flex; flex-direction: column; justify-content: space-between; height: auto; min-height: 300px;">
+        <div class="row" >
             <div class="col-4" id="film-detail__poster">
-                <img src="../Movie_Ticket_Website/assets/movie-image/${movie.linkMovieImage}" id="poster" alt="" style="border: 2px groove whitesmoke;">
+                <img src="../Movie_Ticket_Website/assets/movie-image/${movie.linkMovieImage}" id="poster" data-bs-toggle="modal" data-bs-target="#trailerModal" alt="" style="border: 2px groove whitesmoke; cursor: pointer">
             </div>
-            <div class="col-8" id="film-detail__context" style="; margin: 25px 0px ; padding-left: 0px" >
+            <div class="col-8" id="film-detail__context" style=" margin: 25px 0px ; padding-left: 0px" >
                 <div class="film-detail__txt" id="filmCategory-detail">Thể loại : ${movie.movieCategory}</div>
-                <div class="film-detail__txt" id="filmName-detail"><i class="fa-solid fa-film"></i> ${movie.movieName}</div>
+                <div class="film-detail__txt" id="filmName-detail">
+                    <i class="fa-solid fa-film"></i>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#trailerModal">${movie.movieName}</a>
+                </div>
+                <!-- Modal để hiển thị Trailer Phim-->
+                <div class="modal fade" id="trailerModal" tabindex="-1" aria-labelledby="trailerModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="trailerModalLabel">${movie.movieName} - Trailer</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe id="trailerFrame" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="film-detail__txt" id="filmDes-detail"> ' ${movie.movieDescription} ' </div>
                 <div class="film-detail__txt" id="filmDirector-detail">Từ đạo diễn ${movie.director} - ${movie.country}</div>
                 <div class="film-detail__txt" id="filmDuration-detail">Thời lượng - <i class="fa-solid fa-clock"></i> : ${movie.duration}</div>
@@ -36,9 +53,23 @@
                 <div class="film-detail__txt" >Nội dung : </div>
                 <div class="film-detail__txt" id="filmDescription-detail">${movie.movieContent}</div>
                 <%-- btn để thực hiện đặt vé cho bộ phim đang hiển thị                --%>
-                <div class="button-center text-center mt-4" style="margin-top: 0px">
-                    <a href="#" class="btn watch-button" style="color: white;  font-size: 25px">Đặt vé ngay</a>
-                </div> <br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="button-center text-center mt-4" style="margin-top: 0px">
+                            <a href="bookingTicket-servlet?action=init" class="btn watch-button" style="color: white;  font-size: 25px">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="button-center text-center mt-4" style="margin-top: 0px">
+                            <a href="#" class="btn watch-button" style="color: white;  font-size: 25px"><i class="fa fa-cart-plus" style="padding-top: 10px"></i> Trả sau</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="button-center text-center mt-4" style="margin-top: 0px">
+                            <a href="#" class="btn watch-button" style="color: white;  font-size: 25px">Lưu phim</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -108,6 +139,26 @@
 <jsp:include page="../layout-view/script-libraries.jsp"></jsp:include>
 </body>
 </html>
+<script>
+    // xử lí hiển thị Frame Trailer
+    document.addEventListener("DOMContentLoaded", function () {
+        const movieNameLink = document.querySelector("#filmName-detail a");
+        const poster = document.querySelector("#poster");
+        const trailerFrame = document.querySelector("#trailerFrame");
+        movieNameLink.addEventListener("click", function () {
+            const trailerUrl = "${movie.linkMovieTrailer}"; // Giả định biến này chứa URL trailer từ backend
+            trailerFrame.src = trailerUrl;
+        });
+        poster.addEventListener("click", function () {
+            const trailerUrl = "${movie.linkMovieTrailer}"; // Giả định biến này chứa URL trailer từ backend
+            trailerFrame.src = trailerUrl;
+        });
+        // Reset trailer khi đóng modal để tránh tiếp tục chạy
+        document.getElementById("trailerModal").addEventListener("hidden.bs.modal", function () {
+            trailerFrame.src = "";
+        });
+    });
+</script>
 <!-- responsive tabs -->
 <script src="assets/js/jquery-1.9.1.min.js"></script>
 <script src="assets/js/easyResponsiveTabs.js"></script>

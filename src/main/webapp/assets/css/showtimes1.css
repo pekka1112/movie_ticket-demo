@@ -1,0 +1,149 @@
+.row_cinemaName {
+    text-align: left;
+    color : #0c5460;
+    background-color: #c94c7a;
+    font-family: 'Open Sans', sans-serif;
+    margin : 5px;
+    padding: 5px ;
+    border-radius: 5px;
+    border: 1px groove grey ;
+
+}
+.cinema_img {
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+}
+#showtimes-list_cinema {
+    border: 1.5px groove ;
+    border-radius: 10px;
+    padding: 5px;
+}
+#showtimes-rightBox {
+    border-radius: 10px;
+}
+#showtimes-rightBox .showtimes-cinema_title {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #0f6674;
+    margin: 10px 5px;
+    border-radius: 10px;
+}
+.showtimes-calenderBox {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+.showtimes-calenderItem {
+    margin: 10px 10px;
+    color : #0c5460;
+    background-color: #c94c7a;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px groove grey;
+}
+#showtimes-bottom {
+    padding: 0px 20px;
+}
+.location-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.location-group select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+.btn-location {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e91e63;
+    background: white;
+    color: #e91e63;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.btn-location:hover, .btn-location.active {
+    background: #e91e63;
+    color: white;
+}
+.showtimes-cinema_title {
+    text-align: left !important;
+}
+.row_cinemaName {
+    text-align: left;
+    color : #0c5460;
+    background-color: #c94c7a;
+    font-family: 'Open Sans', sans-serif;
+    margin : 5px;
+    padding: 5px ;
+    border-radius: 5px;
+    border: 1px groove grey ;
+
+}
+.cinema_img {
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+}
+#showtimes-list_cinema {
+    border: 1.5px groove ;
+    border-radius: 10px;
+    padding: 5px;
+}
+#showtimes-rightBox {
+    border-radius: 10px;
+}
+#showtimes-rightBox .showtimes-cinema_title {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #0f6674;
+    margin: 10px 5px;
+    border-radius: 10px;
+}
+.showtimes-calenderBox {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+.showtimes-calenderItem {
+    margin: 10px 10px;
+    color : #0c5460;
+    background-color: #c94c7a;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px groove grey;
+}
+#showtimes-bottom {
+    padding: 0px 20px;
+}
+.location-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.location-group select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+.btn-location {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e91e63;
+    background: white;
+    color: #e91e63;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.btn-location:hover, .btn-location.active {
+    background: #e91e63;
+    color: white;
+}
+.showtimes-cinema_title {
+    text-align: left !important;
+}
+.showtimes-dateItem {
+    border: 1px groove black;
+}

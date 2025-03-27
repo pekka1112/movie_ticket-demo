@@ -105,7 +105,6 @@ public class MovieController extends HttpServlet {
                 timeCode = -1;
             }
             mmlService = new MovieMediaLinkService();
-//            moviesByName = mmlService.getMovieByName(keyWord);
             moviesByName = mmlService.getMovieBy(name, category, country, timeCode);
             if(moviesByName.isEmpty()) {
                 req.setAttribute("searchNoResult", 1);

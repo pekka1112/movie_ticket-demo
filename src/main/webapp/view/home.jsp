@@ -73,7 +73,7 @@
                                             <h4>
                                                 <span class="post"><span class="fa fa-calendar-days"></span> ${m.releaseDate}</span>
                                                 <span class="post" style="font-size: larger"><span class="fa fa-check-circle-o"></span> ${m.movieScore}</span>
-                                                <a href="" class="post fa-regular " style="font-size: 10px">
+                                                <a href="bookingTicket-servlet?action=init" class="post fa-regular " style="font-size: 10px">
                                                     <div class="watch-button" style="padding : 5px 5px 5px 5px; height : 55px !important; width : 80px!important;color : whitesmoke; font-size: 17px; border: 1px groove whitesmoke; border-radius: 5px; font-family: SansSerif">
                                                         ĐẶT VÉ
                                                     </div>
@@ -106,7 +106,7 @@
                             <h3 class="hny-title">PHIM SẮP CHIẾU</h3>
                         </div>
                         <div class="headerhny-right text-lg-right">
-                            <h4><a class="show-title" href="../Movie_Ticket_Website/movies.jsp">XEM TẤT CẢ</a></h4>
+                            <h4><a class="show-title" href="movie-servlet?action=init">XEM TẤT CẢ</a></h4>
                         </div>
                     </div>
                 </div>
@@ -114,14 +114,16 @@
                     <c:forEach items="${unPublishedMovies}" var="m" >
                         <div class="item vhny-grid">
                             <div class="box16">
-                                    <a href="../movies.jsp">
+                                    <a href="">
                                         <figure>
                                             <img class="img-fluid" src="../Movie_Ticket_Website/assets/movie-image/${m.linkMovieImage}" alt="" style=" height:  350px">
                                         </figure>
                                         <div class="box-content">
                                             <h2 class="title" style="" >${m.movieName}</h2>
-                                            <h4> <span class="post"><span class="fa fa-clock-o"> </span> ${m.duration} </span>
-                                                <span class="post fa fa-heart text-right"></span>
+                                            <h2 class="title" style="" >Khởi chiếu : ${m.releaseDate}</h2>
+                                            <h4>
+                                                <span class="post"><span class="fa fa-clock-o"> </span> ${m.duration} - ${m.movieCategory}</span>
+                                                <span class="post fa fa-heart text-right" style="font-size: larger " ></span>
                                             </h4>
                                         </div>
                                         <span class="fa fa-play-circle video-icon" aria-hidden="true"></span>
