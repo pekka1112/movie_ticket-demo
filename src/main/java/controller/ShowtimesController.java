@@ -22,10 +22,8 @@ public class ShowtimesController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static MovieMediaLinkDAO movieDAO;
     public static CinemaService cinemaService;
-//    public static UserCommentDAO userCommentDAO;
     public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies, movieListForCNameAndShowtime;
-    public static List<Cinema>  allCinema, top2Cinema, searchedResultCinemaList;
-//    public static List<UserCommentDetail> comments ;
+    public static List<Cinema>  curListCinema, top2Cinema, searchedResultCinemaList;
     public static String cinemaSearchText = "";
     public ShowtimesController() {
 
@@ -44,9 +42,9 @@ public class ShowtimesController extends HttpServlet {
             session.setAttribute("pageName", "showtime");
         }
         if(action.equals("init")) {
-            redirectToHomePage(req,resp); }
-//        } else if(action.equals("show-cinemaShowtime")) {
-//            showCinemaName(req,resp);
+            redirectToHomePage(req,resp);
+        } else if(action.equals("search_by_name")) {
+            cinemaSearchByNameAction(req,resp);
 //        } else if (action.equals("show-cinemaDetail")) {
 //            showCinemaDetail(req,resp);
 //        } else if (action.equals("showCinemaNameAjax")) {
@@ -56,7 +54,7 @@ public class ShowtimesController extends HttpServlet {
 //        }else if (action.equals("cinemaSearch")) {
 //            cinemaSearchAction(req,resp);
 //        }
-    }
+    } }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,8 +68,8 @@ public class ShowtimesController extends HttpServlet {
         HttpSession session = req.getSession();
 
         cinemaService = new CinemaService();
-        allCinema = cinemaService.getAllCinema();
-        session.setAttribute("curListCinema", allCinema);
+        curListCinema = cinemaService.getAllCinema();
+        session.setAttribute("curListCinema", curListCinema);
 //        movieDAO = new MovieDAO();
 //        cinemaDAO = new CinemaDAO();
 //        userCommentDAO = new UserCommentDAO();
@@ -90,7 +88,7 @@ public class ShowtimesController extends HttpServlet {
         // process : show all cinema
         req.setAttribute("txtHistory", "");
         cinemaSearchText = "";
-        req.setAttribute("allCinema", allCinema);
+        req.setAttribute("allCinema", curListCinema);
         req.setAttribute("searchedResultCinemaList",null);
         req.setAttribute("isShowAllCinema",true);
         RequestDispatcher rd = req.getRequestDispatcher("/showtimes.jsp");
@@ -135,63 +133,19 @@ public class ShowtimesController extends HttpServlet {
             System.out.println("RequestDispatcher is null");
         }
     }
-//    private static void cinemaSearchAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setContentType("text/html");
-//        resp.setCharacterEncoding("UTF-8");
-//        req.setCharacterEncoding("UTF-8");
-////        movieDAO = new MovieDAO();
-////        cinemaDAO = new CinemaDAO();
-////        userCommentDAO = new UserCommentDAO();
-////        newestMovies = movieDAO.getNewestFilms(5);
-////        publishedMovies = movieDAO.getPublishedMoive(1,5);
-////        unPublishedMovies = movieDAO.getPublishedMoive(0,4);
-////        popularMovies = movieDAO.getMostPopularMoive(3);
-////        allCinema = cinemaDAO.getAllCinema();
-////        top2Cinema = cinemaDAO.getMostPopularCinema();
-////        comments = userCommentDAO.getPopularComment(3);
-//        req.setAttribute("top4NewestMovies", newestMovies);
-//        req.setAttribute("publishedMovies", publishedMovies);
-//        req.setAttribute("unPublishedMovies", unPublishedMovies);
-//        req.setAttribute("popularMovies", popularMovies);
-//        req.setAttribute("allCinema", allCinema);
-//        req.setAttribute("top2Cinema",top2Cinema);
-//
-//        // process right box data
-//        String cid = req.getParameter("cid"); // lay ra id phim duoc gui cung
-//        Cinema cinemaDetail = cinemaDAO.getCinemaByID(Integer.parseInt(cid));
-//        req.setAttribute("cinemaDetail",cinemaDetail);
-//        String date = req.getParameter("date"); // lấy ra ngày cần xem lich chieu
-//        req.setAttribute("wantedBookDate", date);
-////        movieListForCNameAndShowtime = movieDAO.getMovieForCinemaAndShowtime(cid,date); // danh sach cac phim cua cinema co cid trong thoi gian date
-//        if(movieListForCNameAndShowtime.size() != 0) {
-//            req.setAttribute("movieListForCNameAndShowtime",movieListForCNameAndShowtime);
-//        }
-//        // main process : show detail cinema
-//        req.setAttribute("cinemaDetail",cinemaDetail);
-//        req.setAttribute("cinemaDetail",cinemaDetail);
-//
-//        // main process : show showtime of detail cinema
-//        HttpSession session = req.getSession();
-//        req.setAttribute("cinemaDetail",cinemaDetail);
-//        req.setAttribute("movieListForCNameAndShowtime",session.getAttribute("movieListForCNameAndShowtime"));
-//
-//        // main process : search cinema by name
-//        String txt = req.getParameter("cinemaName");
-//        cinemaSearchText = txt;
-//        req.setAttribute("txtHistory", txt);
-//        searchedResultCinemaList = cinemaDAO.getCinemaByName(txt);
-//        int searchedResultCinemaListSize = searchedResultCinemaList.size();
-//        req.setAttribute("searchedResultCinemaList", searchedResultCinemaList);
-//        session.setAttribute("searchedResultCinemaList", searchedResultCinemaList);
-//        req.setAttribute("searchedResultCinemaListSize", searchedResultCinemaListSize);
-//
-//        RequestDispatcher rd = req.getRequestDispatcher("/showtimes.jsp");
-//        if (rd != null) {
-//            rd.forward(req, resp);
-//        } else {
-//            System.out.println("RequestDispatcher is null");
-//        }
-//    }
+    private static void cinemaSearchByNameAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // process search with AJAX
+        String txtSearch = req.getParameter("txtSearch"); // get Cinema Search from input
+        curListCinema = cinemaService.getCinemaByName(txtSearch); // lấy được list Cinema cần Search
+        PrintWriter pw = resp.getWriter();
+        for(Cinema c : curListCinema) {
+            pw.println("<div class=\"row_cinemaName\">\n" +
+                    "                                    <img class=\"cinema_img\" src=\"assets/images/obitoAVATAR.png\">\n" +
+                    "                                    <a href=\"showtimes-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}\" style=\"color: whitesmoke\" >" + c.getCinemaName() + "</a>\n" +
+                    "                                </div>");
+        }
+    }
+
 //    private static void showCinemaDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        resp.setContentType("text/html");
 //        resp.setCharacterEncoding("UTF-8");

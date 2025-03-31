@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>ShowTimes - PZO</title>
     <jsp:include page="layout-view/head_libraries.jsp"></jsp:include>
-    <link rel="stylesheet" href="assets/css/showtime.css">
+    <link rel="stylesheet" href="assets/css/showtimes.css">
 </head>
 <body>
     <%-- Header --%>
@@ -33,9 +33,9 @@
                         <div class="location-group">
                             <%-- thực hiện tìm kiếm tên rạp - ten rap chieu phim can tim den HomeController servlet --%>
                             <form action="showtimes-servlet" method="post" style="width: 500px; padding-top: 20px">
-                                <input type="hidden" name="action" value="cinemaSearch">
+                                <input type="hidden" name="action" value="search_by_name">
                                 <input type="hidden" name="cid" value="${cinemaDetail.cinemaID}">
-                                <input class="form-control" type="text" name="cinemaName" placeholder="Tìm theo tên rạp" aria-label="search" value="${txtHistory}">
+                                <input class="form-control" type="text" name="txtSearch" oninput="searchAJAX(this)"  value="${txtSearch}" placeholder="Tìm theo tên rạp" aria-label="search" value="${txtHistory}">
                             </form>
                             <%-- filter tên cinema theo Loại Rạp --%>
                             <select id="cinema-name" class="form-select" style="width: 150px;">
@@ -56,30 +56,12 @@
                 <div class="row">
                     <div class="col-4">
                         <div id= "showtimes-list_cinema" style="padding-bottom: 30px">
-                            <%-- hien thi toan bo danh sach cinema, click 1 cinema thuc hien truyen cid toi servlet home --%>
-                            <c:if test="${(curCinemaList != null) && (searchedResultCinemaListSize == 0) }" >
-                                <c:forEach items="${curCinemaList}" var="cinema">
-                                    <div class="row_cinemaName" style="">
-                                        <a href="showtimes-servlet?action=show-cinemasShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
-                                    </div>
-                                </c:forEach>
-                            </c:if>
-                            <c:if test="${isShowAllCinema}" >
-                                <c:forEach items="${allCinema}" var="cinema">
-                                    <div class="row_cinemaName">
-                                        <img class="cinema_img" src="assets/images/obitoAVATAR.png">
-                                        <a href="showtimes-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
-                                    </div>
-                                </c:forEach>
-                            </c:if>
-                            <c:if test="${searchedResultCinemaListSize > 0}">
-                                <c:forEach items="${searchedResultCinemaList}" var="cinema">
-                                    <div class="row_cinemaName">
-                                        <i class="fa-solid fa-film"> </i>
-                                        <a href="showtimes-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
-                                    </div>
-                                </c:forEach>
-                            </c:if>
+                            <c:forEach items="${curListCinema}" var="cinema">
+                                <div class="row_cinemaName">
+                                    <img class="cinema_img" src="assets/images/obitoAVATAR.png">
+                                    <a href="showtimes-servlet?action=show-cinemaShowtime&cid=${cinema.cinemaID}" style="color: whitesmoke" >${cinema.cinemaName}</a>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <div class="col-8">
@@ -225,6 +207,25 @@
     <script src="assets/js/theme-change.js"></script>
     <script src="assets/js/owl.carousel.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        function searchAJAX(input) {
+            var txtSearch = input.value;
+            $.ajax({
+                url: "/Movie_Ticket_Website/showtimes-servlet?action=search_by_name",
+                type : "get",
+                data : {
+                    txtSearch : txtSearch
+                },
+                success: function(data){
+                    var row = document.getElementById('showtimes-list_cinema');
+                    row.innerHTML = data;
+                },
+                error : function (xhr) {
+
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
