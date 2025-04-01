@@ -114,9 +114,14 @@ INSERT INTO `movie` (`movieName`, `movieCategory`, `releaseDate`, `director`, `d
 	('Nhà Gia Tiên', 'Gia đình, Tâm Linh, Hài', '2025-02-21', 'Huỳnh Lập', '01:57:00', 'Việt Nam', 'Có thờ có thiêng, có Gia Tiên có tiền!', 'Nhà Gia Tiên xoay quanh câu chuyện đa góc nhìn về các thế hệ khác nhau trong một gia đình, có hai nhân vật chính là Gia Minh (Huỳnh Lập) và Mỹ Tiên (Phương Mỹ Chi). Trở về căn nhà gia tiên để quay các video “triệu view” trên mạng xã hội, Mỹ Tiên - một nhà sáng tạo nội dung thuộc thế hệ Z vốn không tin vào chuyện tâm linh, hoàn toàn mất kết nối với gia đình, bất ngờ nhìn thấy Gia Minh - người anh trai đã mất từ lâu. Để hồn ma của Gia Minh có thể siêu thoát và không tiếp tục làm phiền mình, Mỹ Tiên bắt tay cùng Gia Minh lên kế hoạch giữ lấy căn nhà gia tiên đang bị họ hàng tranh chấp, đòi ông nội chia tài sản. Đứng trước hàng loạt bí mật động trời trong căn nhà gia tiên, liệu Mỹ Tiên có vượt qua được tất cả để hoàn thành di nguyện của Gia Minh?',  9.5),
    ('Quỷ Nhập Tràng', 'Kinh dị', '2025-03-07', 'Đạo diễn A', '01:45:00', 'Việt Nam', 'Một bộ phim kinh dị về hiện tượng quỷ nhập tràng tại một ngôi làng nhỏ.', 'Câu chuyện xoay quanh những sự kiện bí ẩn xảy ra sau khi một người chết bất ngờ sống lại.', 7.0),
    ('Sát Thủ Vô Cùng Cực Hài', 'Hành động, Hài', '2025-03-14', 'Đạo diễn B', '02:00:00', 'Mỹ', 'Một sát thủ chuyên nghiệp gặp phải những tình huống dở khóc dở cười trong nhiệm vụ cuối cùng.', 'Phim kết hợp giữa hành động kịch tính và những tình huống hài hước.', 8.5),
-   ('Nhà Gia Tiên', 'Kinh dị, Tâm lý', '2025-02-21', 'Đạo diễn C', '01:50:00', 'Việt Nam', 'Câu chuyện về một gia đình đối mặt với những hiện tượng siêu nhiên trong ngôi nhà tổ tiên.', 'Phim khai thác mối quan hệ gia đình và những bí mật được chôn giấu.', 9.6),
+   ('Địa Đạo: Mặt Trời Trong Bóng Tối', 'Chiến tranh, Tình cảm', '2025-04-04', 'Bùi Thạc Chuyên', '01:50:00', 'Việt Nam', 'Địa Đạo: Mặt Trời Trong Bóng Tối - Phim điện ảnh kỷ niệm 50 năm hoà bình thống nhất đất nước.', 'Vào năm 1967, chiến tranh Việt Nam ngày càng khốc liệt. Đội du kích 21 người do Bảy Theo chỉ huy tại căn cứ Bình An Đông trở thành mục tiêu tìm và diệt số 1 của quân đội Mỹ khi nhận nhiệm vụ bằng mọi giá phải bảo vệ một nhóm thông tin tình báo chiến lược mới đến ẩn náu tại căn cứ. Các cuộc liên lạc vô tuyến điện từ với nhóm tình báo bị quân đội Mỹ phát hiện và định vị, lấy đi lợi thế duy nhất của đội du kích là sự vô hình trong hệ thống địa đạo rộng khắp, phức tạp và bí ẩn. Bộ phim là những câu chuyện đan xen giữa tình đồng đội, tình yêu và khát khao sống của những người lính, nhưng trên hết vẫn là nghĩa vụ và sự hi sinh vì Tổ Quốc.', 9.6),
    ('Mickey 17', 'Khoa học, Viễn tưởng', '2025-03-14', 'Đạo diễn D', '02:10:00', 'Mỹ', 'Một nhân bản được tạo ra để thực hiện nhiệm vụ nguy hiểm trên hành tinh xa lạ.', 'Phim khám phá những câu hỏi về bản chất con người và đạo đức khoa học.', 8.8),
-   ('Lạc Trôi', 'Phiêu lưu, Tình cảm', '2025-03-07', 'Đạo diễn E', '01:55:00', 'Việt Nam', 'Hành trình phiêu lưu của một chàng trai trẻ tìm kiếm tình yêu và ý nghĩa cuộc sống.', 'Phim kết hợp giữa cảnh quay đẹp và câu chuyện cảm động.', 8.8);
+   ('Lạc Trôi', 'Phiêu lưu, Tình cảm', '2025-03-07', 'Đạo diễn E', '01:55:00', 'Việt Nam', 'Hành trình phiêu lưu của một chàng trai trẻ tìm kiếm tình yêu và ý nghĩa cuộc sống.', 'Phim kết hợp giữa cảnh quay đẹp và câu chuyện cảm động.', 8.8),
+    ('The Future War', 'Sci-Fi', '2025-01-01', 'James Cameron', '01:55:00', 'USA', 'Cuộc chiến ngoài hành tinh để bảo vệ Trái Đất.', 'Một trận chiến khốc liệt diễn ra giữa loài người và người ngoài hành tinh.', 8.5),
+    ('Shadow City', 'Action', '2026-01-01', 'Christopher Nolan', '01:55:00', 'UK', 'Một thành phố bị thống trị bởi thế lực ngầm.', 'Một thám tử bí ẩn phải chiến đấu để giành lại công lý.', 8.2),
+    ('Haunted Mansion', 'Horror', '2026-01-01', 'Jordan Peele', '01:55:00', 'USA', 'Một ngôi nhà ma ám với những bí ẩn khủng khiếp.', 'Những sự kiện kỳ quái xảy ra khi một gia đình chuyển đến.', 7.9),
+    ('Time Loop', 'Thriller', '2026-01-01', 'Denis Villeneuve', '01:55:00', 'Canada', 'Một vòng lặp thời gian thay đổi số phận con người.', 'Nhân vật chính bị mắc kẹt trong vòng lặp và phải tìm cách thoát ra.', 8.0),
+    ('The Last Samurai 2', 'Drama', '2026-01-01', 'Edward Zwick', '01:55:00', 'Japan', 'Phần tiếp theo của huyền thoại Samurai.', 'Câu chuyện tiếp tục với một samurai cuối cùng bảo vệ danh dự của mình.', 8.7);
 
 CREATE TABLE `moviemedialink` (
   `movieID` int PRIMARY KEY,
@@ -148,9 +153,14 @@ INSERT INTO `moviemedialink` (`movieID`, `linkMovieImage`, `linkMovieTrailer`) V
 	(21, 'nha-gia-tien.png', 'https://www.youtube.com/watch?v=wfPTz0A23ns'),
 	(22, 'quy-nhap-trang.png', 'https://www.youtube.com/embed/trailer_quy_nhap_trang'),
 	(23, 'sat-thu-vo-cung-cuc-hai.png', 'https://www.youtube.com/embed/trailer_sat_thu_vo_cung_cuc_hai'),
-	(24, 'nha-gia-tien.png', 'https://www.youtube.com/embed/trailer_nha_gia_tien'),
+	(24, 'dia-dao.png', 'https://www.youtube.com/watch?v=0Max1fYvNP4'),
 	(25, 'mikey-17.png', 'https://www.youtube.com/embed/trailer_mickey_17'),
-	(26, 'lac-troi.png', 'https://www.youtube.com/embed/trailer_lac_troi');
+	(26, 'lac-troi.png', 'https://www.youtube.com/embed/trailer_lac_troi'),
+    (27, 'future-war.png', 'https://www.youtube.com/watch?v=trailer1'),
+    (28, 'shadow-city.png', 'https://www.youtube.com/watch?v=trailer2'),
+    (29, 'haunted-mansion.png', 'https://www.youtube.com/watch?v=trailer3'),
+    (30, 'time-loop.png', 'https://www.youtube.com/watch?v=trailer4'),
+    (31, 'last-samurai-2.png', 'https://www.youtube.com/watch?v=trailer5');
 
 CREATE TABLE `actor` (
   `actorID` INT AUTO_INCREMENT PRIMARY KEY,

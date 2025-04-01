@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/home", "/movie", "/showtime",
                            "/news", "/about", "/login",
-                           "/register"})
+                           "/register", "/logout", "/admin/home"})
 public class PageRedirectServlet extends HttpServlet {
 
     @Override
@@ -20,6 +20,9 @@ public class PageRedirectServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/home-servlet?action=direct");
         switch (path) {
             case "/home":
+                break;
+            case "/logout":
+                dispatcher = request.getRequestDispatcher("/home-servlet?action=logout");
                 break;
             case "/movie":
                 dispatcher = request.getRequestDispatcher("/movie-servlet?action=init");
@@ -40,6 +43,9 @@ public class PageRedirectServlet extends HttpServlet {
             case "/register":
             case "/register-servlet":
                 dispatcher = request.getRequestDispatcher("/register.jsp");
+                break;
+            case "/admin/home":
+                dispatcher = request.getRequestDispatcher("/admin-servlet?action=home");
                 break;
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);

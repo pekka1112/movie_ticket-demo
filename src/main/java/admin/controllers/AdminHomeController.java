@@ -17,8 +17,8 @@ import service.MovieMediaLinkService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home-servlet"})
-public class  HomeController extends HttpServlet {
+@WebServlet(name = "AdminServlet", urlPatterns = {"/admin-servlet"})
+public class  AdminHomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static MovieMediaLinkService movieService = new MovieMediaLinkService();
     public static List<MovieMediaLink> newestMovies, publishedMovies, unPublishedMovies, popularMovies;
@@ -26,7 +26,7 @@ public class  HomeController extends HttpServlet {
     public static List<Cinema>  allCinema, top2Cinema;
     public static List<MovieNews> movieNews3, movieNews5, movieNews4, movieNews6, movieNews4_reverse;
     public static MovieNewsScraper scraper = new MovieNewsScraper();
-    public HomeController() {}
+    public AdminHomeController() {}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
@@ -34,58 +34,29 @@ public class  HomeController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String action = req.getParameter("action");
-        if(action.equals("direct")) {
-            initHomePage(req,resp);
-        } else if(action.equals("show-cinemaShowtime")) {
-            showCinemaDetail(req,resp);
+        if(action.equals("home")) {
+            init(req,resp);
+        } else if(action.equals("logout")) {
+            logout(req,resp);
         } else if (action.equals("show-cinemaDetail")) {
             searchCinemaAction(req,resp);
-        } else if (action.equals("logout")) {
-            logout(req,resp);
         }
     }
-    private static void initHomePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-
-        newestMovies = movieService.get5NewestMovie();
-        session.setAttribute("newestMovies", newestMovies);
-        publishedMovies = movieService.get8ReleasedMoive();
-        req.setAttribute("publishedMovies", publishedMovies);
-        unPublishedMovies = movieService.get5UnReleasedMoive();
-        req.setAttribute("unPublishedMovies", unPublishedMovies);
-        popularMovies = movieService.getMostPopularMoive();
-        req.setAttribute("popularMovies", popularMovies);
-        movieNews3 = scraper.getNews(3);
-
-        req.setAttribute("movieNews3", movieNews3);
-        movieNews4 = scraper.getNews(4);
-        req.setAttribute("movieNews4", movieNews4);
-        movieNews4_reverse = scraper.getNewsReverse();
-        req.setAttribute("movieNews4_reverse", movieNews4_reverse);
-        movieNews5 = scraper.getNews(5);
-        req.setAttribute("movieNews5", movieNews5);
-        movieNews6 = scraper.getNews(6);
-        req.setAttribute("movieNews6", movieNews6);
-
-        allCinema = cinemaService.getAllCinema();
-        req.setAttribute("allCinema", allCinema);
-        top2Cinema = cinemaService.getMostPopularCinema();
-        req.setAttribute("top2Cinema",top2Cinema);
-
-        RequestDispatcher rd = req.getRequestDispatcher("/view/home.jsp");
+    private static void init(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher rd = req.getRequestDispatcher("/admin/index.jsp");
         if (rd != null) {
             rd.forward(req, resp);
         }
     }
     private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         session.removeAttribute("curUser");
         session.removeAttribute("curUsername");
-        session.removeAttribute("role");
         session.invalidate();
-        initHomePage(req,resp);
+        RequestDispatcher rd = req.getRequestDispatcher("/home-servlet?action=direct");
+        if (rd != null) {
+            rd.forward(req, resp);
+        }
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
