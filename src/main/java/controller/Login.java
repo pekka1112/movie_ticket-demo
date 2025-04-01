@@ -31,10 +31,9 @@ public class Login extends HttpServlet {
             session.setAttribute("curUser", user);
             session.setAttribute("curUsername", user.getUsername());
             session.setAttribute("role", user.getRoleID());
-             System.out.println(user.getRoleID());
-
+            System.out.println(user.getRoleID());
              if (1 == user.getRoleID()){
-                 resp.sendRedirect(req.getContextPath() + "/admin/view/index.html");
+                 resp.sendRedirect(req.getContextPath() + "/admin-servlet?action=home");
                  return;
              } else {
                  requestDispatcher = req.getRequestDispatcher("/index.jsp");

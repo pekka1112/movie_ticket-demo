@@ -24,6 +24,8 @@ public class UrlRewriteFilter implements Filter {
 
         if(curUriRequest.endsWith("/home-servlet") && curUriParam.equals("direct")){
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/home");
+        } else if(curUriRequest.endsWith("/home-servlet") && curUriParam.equals("logout")){
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/logout");
         } else if(curUriRequest.endsWith("/movie-servlet") && curUriParam.equals("init")){
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/movie");
         } else if(curUriRequest.endsWith("/showtimes-servlet") && curUriParam.equals("init")){
@@ -36,6 +38,8 @@ public class UrlRewriteFilter implements Filter {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
         } else if(curUriRequest.endsWith("/register.jsp")){
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/register");
+        } else if(curUriRequest.endsWith("/admin-servlet")&& curUriParam.equals("home")){
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/admin/home");
         } else {
             // xử lí các request không cần rewriting
             chain.doFilter(request, response);
